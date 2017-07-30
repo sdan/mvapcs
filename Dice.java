@@ -10,5 +10,15 @@
 
 public class Dice
 {
+  //Number of sides of the Dice
+  private int sides;
+  //Number of times the Dice has been rolled
+  private int rollCount;
+  //Last rolled value of the Die
+  private int faceValue;
+  
+  public Dice()
+  {
 
+  }
 }
