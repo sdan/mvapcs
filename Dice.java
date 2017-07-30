@@ -1,5 +1,5 @@
-//  Your Name Here
-//  8/20/2015
+//  Surya Dantuluri
+//  8/16/2017
 //  Dice.java
 //  Simulates a single die.  The die
 //  has a number of sides, and it
@@ -16,9 +16,12 @@ public class Dice
   private int rollCount;
   //Last rolled value of the Die
   private int faceValue;
-  
+
+  //Establishes Dice object with 6 sides, roll count and value set to 0
   public Dice()
   {
-
+    sides = 6;
+    rollCount = 0;
+    faceValue = 0;
   }
 }
