@@ -24,4 +24,8 @@ public class Dice
     rollCount = 0;
     faceValue = 0;
   }
+  public Dice()
+  {
+
+  }
 }
