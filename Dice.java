@@ -24,8 +24,34 @@ public class Dice
     rollCount = 0;
     faceValue = 0;
   }
-  public Dice()
+  //Overoading constructor
+  public Dice(int sideValue)
   {
-
+    sides = n;
+		rollCount = 0;
+		faceValue = 0;
   }
+//Simulates rolling die (the dice object) adds 1 to the roll count and the faceValue is set to some random number from 1 to the number of sides the dice have
+public int roll()
+{
+  rollCount++;
+  faceValue = (int)(Math.random()*sides)+1;
+  return faceValue;
+}
+//Fetches roll count
+//@return           Current roll count;
+public int getRollCount()
+{
+  return rollCount;
+}
+//Fetches face value
+//@return           Face value
+public int getFaceValue()
+{
+  return faceValue;
+}
+
+
+
+
 }
