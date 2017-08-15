@@ -13,5 +13,8 @@
 
 public class Jackpot
 {
-
+public static void main(String [] args)
+{
+  
+}
 }
