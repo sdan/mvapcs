@@ -126,9 +126,18 @@ public class Stones
      */
     public void playerMakeChoice()
     {
+      int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
+      //JEREMIAH, please enter the number of stones to remove in pile 2 (from 1 to 8): 2
+      switch(pileSelect)
+      {
+        case 1:  int removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1,1,pile1);
+                 break;
+                 case 2:  int removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1,1,pile1);
+                          break;
+                          case 3:  int removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1,1,pile1);
+                                   break;
 
-      int pileSelect = Prompt.getInt(", please enter a pile number (1, 2, or 3): ",1,3);
-
+      }
     }
 
     /** The "computer" chooses a row and removes stones from this chosen row.  This can be a simple, "dumb"
