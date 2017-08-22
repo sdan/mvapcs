@@ -30,15 +30,14 @@ public class Stones
   */
   public Stones ( )
   {
-    piles = new Dice(10);
     do {
-      pile1 = piles.roll();
+      pile1 = Dice.roll();
     }while(!(pile1>=3&&pile1<=10));
     do {
-      pile2 = piles.roll();
+      pile2 = Dice.roll();
     }while(!(pile2>=3&&pile2<=10));
     do {
-      pile3 = piles.roll();
+      pile3 = Dice.roll();
     }while(!(pile3>=3&&pile3<=10));
     playerTurn = true;
     done = false;
@@ -127,20 +126,20 @@ public class Stones
   public void playerMakeChoice()
   {
     int removeFromPile = 0;
-    int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
+    int pileSelect = Prompt.getInt("\n\n"+name+", please enter a pile number (1, 2, or 3): ",1,3);
     switch(pileSelect)
     {
-      case 1:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1,1,pile1);
+      case 1:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
                pile1 = pile1-removeFromPile;
       break;
-      case 2:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2,1,pile2);
+      case 2:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
                pile2 = pile2-removeFromPile;
       break;
-      case 3:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3,1,pile3);
+      case 3:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
                pile3 = pile3-removeFromPile;
       break;
     }
-    System.out.print(name+" removed" + removeFromPile + " stone\\(s\\) from Pile "+pileSelect);
+    System.out.print("\n"+name+" removed" + removeFromPile + " stone\\(s\\) from Pile "+pileSelect);
   }
 
   /** The "computer" chooses a row and removes stones from this chosen row.  This can be a simple, "dumb"
