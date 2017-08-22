@@ -126,7 +126,8 @@ public class Stones
      */
     public void playerMakeChoice()
     {
-      int pileSelect = Prompt.getString(name+", please enter a pile number (1, 2, or 3): ",1,3)
+
+      int pileSelect = Prompt.getInt(", please enter a pile number (1, 2, or 3): ",1,3);
 
     }
 
