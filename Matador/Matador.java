@@ -23,7 +23,7 @@ public class Matador
 {
 	/**    Declare fields here.    */
 	private int money;
-	private Dice die1, die2, die3, randomInt;
+	private Dice die1, die2, die3, wagerValue, possibleChoice;
 	/**
 	 *  Creates a Matador object, with three six-sided Dice, one
 	 *  ten-sided die for the money bet, and a four-sided die
@@ -32,7 +32,12 @@ public class Matador
 	public Matador ( )
 	{
 		money = 200;
-		die1,die2,die3,randomInt=new Dice();
+		die1 = new Dice(6);//1-6
+		die2 = new Dice(6);//1-6
+		die3 = new Dice(6);//1-6
+		wagerValue = new Dice(10);//1-10
+		possibleChoice = new Dice(4);//1-4
+
 
 	}
 
@@ -54,6 +59,7 @@ public class Matador
 		System.out.println("\n\n\n");
 		do
 		{
+			int roundNumber = die1.getRollCount();
 			System.out.println("+----------------------------------------------------------------+");
 			System.out.printf("|  ROUND %5d                                                   |%n",roundNumber);
 			playASingleGame();
@@ -68,19 +74,24 @@ public class Matador
 	 */
 	public void playASingleGame ( )
 	{
-		private int wagerValue=0;
 		/** Prints out how much money user currently has */
 		System.out.printf("|  Your money total:  $%4d                                      |%n",money);
-		/** Calls wagerCalculate() to simulate user wager value */
-		wagerCalculate()
 		/** Prints out how much the user wagers (random int)*/
-
-		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue);
+		wagerValue.roll();
+		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue.getValue());
 		System.out.print("|  Your choice     :  ");
-		System.out.println("Any Triple (30 to 1)                       |");
-			//System.out.println("Go Big (sum >= 11, not a triple, 1 to 1)   |");
-			//System.out.println("Go Small (sum <= 10, not a triple, 1 to 1) |");
-			//System.out.println("Go Extreme (sum < 8 or sum > 12, 1 to 1)   |");
+		System.out.println(possibleChoice.roll());
+		switch (possibleChoice.roll())
+		{
+			case 1:	System.out.println("Any Triple (30 to 1)                       |");
+			break;
+			case 2: System.out.println("Go Big (sum >= 11, not a triple, 1 to 1)   |");
+			break;
+			case 3: System.out.println("Go Small (sum <= 10, not a triple, 1 to 1) |");
+			break;
+			case 4: System.out.println("Go Extreme (sum < 8 or sum > 12, 1 to 1)   |");
+		}
+
 		System.out.printf("|  Roll            :%3d%3d%3d                                    |%n",money,money,money);
 		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",money);
 		System.out.print("|  A Triple        :  ");
