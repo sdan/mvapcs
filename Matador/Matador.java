@@ -83,41 +83,49 @@ public class Matador
 		/** Prints out how much the user wagers (random int)*/
 		wagerValue.roll();
 		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue.getValue());
-		System.out.print("|  Your choice     :  ", );
-		boolean wagerLoss = findChoice();
+		System.out.print("|  Your choice     :  " );
+		boolean wagerLoss = findChoice(die1RollValue,die2RollValue,die3RollValue);
 		System.out.printf("|  Roll            :%3d%3d%3d                                    |%n",die1RollValue,die2RollValue,die3RollValue);
-		int money = currentBalance(money,wagerValue.getValue(),wagerLoss);
-		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",money);
+		money = currentBalance(money,wagerValue.getValue(),wagerLoss);
+		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",sum);
 		System.out.print("|  A Triple        :  ");
+		boolean triple = triplet(die1RollValue,die2RollValue,die3RollValue);
+		if(triple)
 		System.out.print("YES            ");
-		//System.out.print("NO             ");
+		else
+		System.out.print("NO             ");
+		if(wagerLoss)
 		System.out.println("|   YOU WIN!    |           |");
-		//System.out.println("|   YOU LOSE!   |           |");
+		else
+		System.out.println("|   YOU LOSE!   |           |");
 		System.out.printf("|  New money total :  $%4d          +---------------+           |%n",money);
 	}
 
 	public int currentBalance(int money, int wager, boolean loss)
 	{
-
+		if(loss)
+		return (money-wager);
+		else
+		return (money+wager);
 	}
 
 
-	public boolean findChoice()
+	public boolean findChoice(int a, int b, int c)
 	{
 		boolean possibleChoiceValid = false;
 		switch (possibleChoice.roll())
 		{
 			case 1:	System.out.println("Any Triple (30 to 1)                       |");
-							possibleChoiceValid = possibleChoiceCalculate(1);
+							possibleChoiceValid = possibleChoiceCalculate(1,a,b,c);
 			break;
 			case 2: System.out.println("Go Big (sum >= 11, not a triple, 1 to 1)   |");
-							possibleChoiceValid = possibleChoiceCalculate(2);
+							possibleChoiceValid = possibleChoiceCalculate(2,a,b,c);
 			break;
 			case 3: System.out.println("Go Small (sum <= 10, not a triple, 1 to 1) |");
-							possibleChoiceValid = possibleChoiceCalculate(3);
+							possibleChoiceValid = possibleChoiceCalculate(3,a,b,c);
 			break;
 			case 4: System.out.println("Go Extreme (sum < 8 or sum > 12, 1 to 1)   |");
-							possibleChoiceValid = possibleChoiceCalculate(4);
+							possibleChoiceValid = possibleChoiceCalculate(4,a,b,c);
 		}
 		if(possibleChoiceValid)
 		{
@@ -129,23 +137,23 @@ public class Matador
 		}
 	}
 
-	public boolean possibleChoiceCalculate(int choice)
+	public boolean possibleChoiceCalculate(int choice, int die1Value, int die2Value, int die3Value)
 	{
-		boolean tripleTrue = (die1RollValue==die2RollValue)&&(die2RollValue==die3RollValue));
-		int sumOfDiceRollValue = die1RollValue+die2RollValue+die3RollValue;
-		if(choice==1 && tripleTrue)
+		boolean triple = triplet(die1Value,die2Value,die3Value);
+		int sumOfDiceRollValue = die1Value+die2Value+die3Value;
+		if(choice==1 && triple)
 		{
 			return true;
 		}
-		else if(choice==2 && sumOfDiceRollValue>=11)
+		else if(choice==2 && sumOfDiceRollValue>=11 && !triple)
 		{
 			return true;
 		}
-		else if(choice==3 && sumOfDiceRollValue<=10)
+		else if(choice==3 && sumOfDiceRollValue<=10 && !triple)
 		{
 			return true;
 		}
-		else if(choice==4 && (sumOfDiceRollValue<8&&sumOfDiceRollValue>12))
+		else if(choice==4 && (sumOfDiceRollValue<8&&sumOfDiceRollValue>12) && !triple)
 		{
 			return true;
 		}
@@ -153,6 +161,15 @@ public class Matador
 		{
 			return false;
 		}
+	}
+
+	public boolean triplet(int a, int b, int c)
+	{
+		if((a==b)&&(b==c))
+		return true;
+		else
+		return false;
+
 	}
 
 }
