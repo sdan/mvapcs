@@ -30,12 +30,10 @@ public class Stones
      */
     public Stones ( )
     {
-        pile = new Dice(10);
-        pile.roll();
-        pile.getRollCount();
-        pile1 = Dice.roll();
-        pile2 = Dice.roll();
-        pile3 = Dice.roll();
+        piles = new Dice(10);
+        pile1 = piles.roll();
+        pile2 = piles.roll();
+        pile3 = piles.roll();
         input = new Prompt();
         playerTurn = true;
         done = false;
