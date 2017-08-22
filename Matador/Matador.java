@@ -78,15 +78,15 @@ public class Matador
 		int die1RollValue = die1.getValue();
 		int die2RollValue = die2.getValue();
 		int die3RollValue = die3.getValue();
-		boolean wagerLoss = false;
 		/** Prints out how much money user currently has */
 		System.out.printf("|  Your money total:  $%4d                                      |%n",money);
 		/** Prints out how much the user wagers (random int)*/
 		wagerValue.roll();
 		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue.getValue());
-		wagerLoss = findChoice();
 		System.out.print("|  Your choice     :  ", );
+		boolean wagerLoss = findChoice();
 		System.out.printf("|  Roll            :%3d%3d%3d                                    |%n",die1RollValue,die2RollValue,die3RollValue);
+		int money = currentBalance(money,wagerValue.getValue(),wagerLoss);
 		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",money);
 		System.out.print("|  A Triple        :  ");
 		System.out.print("YES            ");
@@ -95,6 +95,12 @@ public class Matador
 		//System.out.println("|   YOU LOSE!   |           |");
 		System.out.printf("|  New money total :  $%4d          +---------------+           |%n",money);
 	}
+
+	public int currentBalance(int money, int wager, boolean loss)
+	{
+
+	}
+
 
 	public boolean findChoice()
 	{
