@@ -126,6 +126,8 @@ public class Stones
      */
     public void playerMakeChoice()
     {
+      int pileSelect = Prompt.getString(name+", please enter a pile number (1, 2, or 3): ",1,3)
+
     }
 
     /** The "computer" chooses a row and removes stones from this chosen row.  This can be a simple, "dumb"
