@@ -78,13 +78,27 @@ public class Matador
 		int die1RollValue = die1.getValue();
 		int die2RollValue = die2.getValue();
 		int die3RollValue = die3.getValue();
-		boolean possibleChoiceValid = false;
+		boolean wagerLoss = false;
 		/** Prints out how much money user currently has */
 		System.out.printf("|  Your money total:  $%4d                                      |%n",money);
 		/** Prints out how much the user wagers (random int)*/
 		wagerValue.roll();
 		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue.getValue());
-		System.out.print("|  Your choice     :  ");
+		wagerLoss = findChoice();
+		System.out.print("|  Your choice     :  ", );
+		System.out.printf("|  Roll            :%3d%3d%3d                                    |%n",die1RollValue,die2RollValue,die3RollValue);
+		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",money);
+		System.out.print("|  A Triple        :  ");
+		System.out.print("YES            ");
+		//System.out.print("NO             ");
+		System.out.println("|   YOU WIN!    |           |");
+		//System.out.println("|   YOU LOSE!   |           |");
+		System.out.printf("|  New money total :  $%4d          +---------------+           |%n",money);
+	}
+
+	public boolean findChoice()
+	{
+		boolean possibleChoiceValid = false;
 		switch (possibleChoice.roll())
 		{
 			case 1:	System.out.println("Any Triple (30 to 1)                       |");
@@ -99,14 +113,14 @@ public class Matador
 			case 4: System.out.println("Go Extreme (sum < 8 or sum > 12, 1 to 1)   |");
 							possibleChoiceValid = possibleChoiceCalculate(4);
 		}
-		System.out.printf("|  Roll            :%3d%3d%3d                                    |%n",die1RollValue,die2RollValue,die3RollValue);
-		System.out.printf("|  Sum             :  %-2d             +---------------+           |%n",money);
-		System.out.print("|  A Triple        :  ");
-		System.out.print("YES            ");
-		//System.out.print("NO             ");
-		System.out.println("|   YOU WIN!    |           |");
-		//System.out.println("|   YOU LOSE!   |           |");
-		System.out.printf("|  New money total :  $%4d          +---------------+           |%n",money);
+		if(possibleChoiceValid)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public boolean possibleChoiceCalculate(int choice)
