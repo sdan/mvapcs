@@ -8,7 +8,7 @@
  * @version 1.0
  * @since 8/17/2017
  */
- 
+
  public class Dice
  {
 	 /** The number of sided for the dice. */
@@ -17,7 +17,7 @@
 	 private int rollCount;
 	 /** The last rolled value for the die */
 	 private int value;
-	 
+
 	 /** Create a Duce object, with 6 sides, roll count
 	  * set to 0, value set to -1.
 	  */
@@ -27,18 +27,18 @@
 		  rollCount = 0;
 		  value = -1;
 	  }
-	  
+
 	  /** Create a Duce object, with n sides, roll count
 	  * set to 0, value set to -1.
 	  * @param n The number of sides for the Dice object constructed.
 	  */
 	  public Dice(int n)
 	  {
-		  numSides = 6;
+		  numSides = n;
 		  rollCount = 0;
 		  value = -1;
 	  }
-	  
+
 	  /** Roll the die. The roll count will be increased by
 	   *  one every time this method is called, and the roll
 	   *  value is set equal to a random integer from 1 to
@@ -51,7 +51,7 @@
 			value = (int)(Math.random()*numSides)+1;
 			return value;
 	   }
-	   
+
 	   /**Get the roll count.
 	    * @return The current roll count.
 	    */
@@ -59,7 +59,7 @@
 	    {
 			return rollCount;
 		}
-		
+
 		/** Gets the value of the die.
 		 *  @return The current value of the die.
 		 */
@@ -68,4 +68,3 @@
 			 return value;
 		 }
  }
- 

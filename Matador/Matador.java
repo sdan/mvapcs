@@ -23,7 +23,7 @@ public class Matador
 {
 	/**    Declare fields here.    */
 	private int money;
-
+	private Dice die1, die2, die3, randomInt;
 	/**
 	 *  Creates a Matador object, with three six-sided Dice, one
 	 *  ten-sided die for the money bet, and a four-sided die
@@ -31,7 +31,9 @@ public class Matador
 	 */
 	public Matador ( )
 	{
-		money = 1;
+		money = 200;
+		die1,die2,die3,randomInt=new Dice();
+
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class Matador
 		do
 		{
 			System.out.println("+----------------------------------------------------------------+");
-			System.out.printf("|  ROUND %5d                                                   |%n",money);
+			System.out.printf("|  ROUND %5d                                                   |%n",roundNumber);
 			playASingleGame();
 		}
 		while(money > 0);
@@ -66,8 +68,14 @@ public class Matador
 	 */
 	public void playASingleGame ( )
 	{
+		private int wagerValue=0;
+		/** Prints out how much money user currently has */
 		System.out.printf("|  Your money total:  $%4d                                      |%n",money);
-		System.out.printf("|  Your wager      :  $%4d                                      |%n",money);
+		/** Calls wagerCalculate() to simulate user wager value */
+		wagerCalculate()
+		/** Prints out how much the user wagers (random int)*/
+
+		System.out.printf("|  Your wager      :  $%4d                                      |%n",wagerValue);
 		System.out.print("|  Your choice     :  ");
 		System.out.println("Any Triple (30 to 1)                       |");
 			//System.out.println("Go Big (sum >= 11, not a triple, 1 to 1)   |");
@@ -83,8 +91,9 @@ public class Matador
 		System.out.printf("|  New money total :  $%4d          +---------------+           |%n",money);
 	}
 
-	/**
-	 *  Split the work up into smaller methods.  Don't write all of your code in
-	 *  playASingleGame if you are looking to earn full credit.
-	 */
+	public void wagerCalculate()
+	{
+
+	}
+
 }
