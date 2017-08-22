@@ -31,10 +31,15 @@ public class Stones
     public Stones ( )
     {
         piles = new Dice(10);
-        pile1 = piles.roll();
-        pile2 = piles.roll();
-        pile3 = piles.roll();
-        input = new Prompt();
+        do {
+          pile1 = piles.roll();
+        }while(!(pile1>=3&&pile1<=10));
+        do {
+          pile2 = piles.roll();
+        }while(!(pile2>=3&&pile2<=10));
+        do {
+          pile3 = piles.roll();
+        }while(!(pile3>=3&&pile3<=10));
         playerTurn = true;
         done = false;
     }
