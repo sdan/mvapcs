@@ -30,14 +30,15 @@ public class Stones
   */
   public Stones ( )
   {
+    piles = new Dice(10);
     do {
-      pile1 = Dice.roll();
+      pile1 = piles.roll();
     }while(!(pile1>=3&&pile1<=10));
     do {
-      pile2 = Dice.roll();
+      pile2 = piles.roll();
     }while(!(pile2>=3&&pile2<=10));
     do {
-      pile3 = Dice.roll();
+      pile3 = piles.roll();
     }while(!(pile3>=3&&pile3<=10));
     playerTurn = true;
     done = false;
@@ -139,7 +140,7 @@ public class Stones
                pile3 = pile3-removeFromPile;
       break;
     }
-    System.out.print("\n"+name+" removed" + removeFromPile + " stone\\(s\\) from Pile "+pileSelect);
+    System.out.print("\n"+name+" removed " + removeFromPile + " stone\(s\) from Pile "+pileSelect);
   }
 
   /** The "computer" chooses a row and removes stones from this chosen row.  This can be a simple, "dumb"
@@ -148,6 +149,7 @@ public class Stones
   */
   public void computerMakeChoice()
   {
+    
 
   }
 
