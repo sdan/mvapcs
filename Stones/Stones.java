@@ -149,7 +149,8 @@ public class Stones
   */
   public void computerMakeChoice()
   {
-    
+    //using optimized greedy algorithms
+    int computerChoice;
 
   }
 
