@@ -11,18 +11,13 @@ public class Stones
 {
   /** Number of stones in each pile.  */
   private int pile1, pile2, pile3;
-
   /** Toggle for player's turn (playing against the computer).  */
   private boolean playerTurn;
-
   /** Boolean to determine if game is done (no stones left).  */
   private boolean done;
-
   /** Name of player.  */
   private String name;
-
   private Dice piles;
-  private Prompt input;
   /** Setup field variables, placing from 3 to 10 stones (at random)
   *  in each pile.  Have the user (player) go first against the
   *  computer, and assume that the game has not ended yet (done set
@@ -30,16 +25,11 @@ public class Stones
   */
   public Stones ( )
   {
-    piles = new Dice(10);
-    do {
-      pile1 = piles.roll();
-    }while(!(pile1>=3&&pile1<=10));
-    do {
-      pile2 = piles.roll();
-    }while(!(pile2>=3&&pile2<=10));
-    do {
-      pile3 = piles.roll();
-    }while(!(pile3>=3&&pile3<=10));
+    piles = new Dice(8);
+    pile1 = piles.roll() +2;
+    pile2 = piles.roll() +2;
+    pile3 = piles.roll() +2;
+
     playerTurn = true;
     done = false;
   }
@@ -51,7 +41,6 @@ public class Stones
     game.play();
     game.printWinner();
   }
-
   /** Introduction, providing the rules, and prompting the player (user) to enter his/her name.  */
   public void intro ( )
   {
@@ -77,7 +66,6 @@ public class Stones
     }
     while(name.equals(""));
   }
-
   /** Plays the game, alternating between the user and the "computer".  When all of the
   *  "rows" have zero stones, the boolean done should be set to true, and the loop will
   *  come to an end.
@@ -100,7 +88,6 @@ public class Stones
       }
     }
   }
-
   /**  Uses printf to print the stones (represented by O's) in the three rows.  */
   public void showTable()
   {
@@ -119,8 +106,8 @@ public class Stones
     {
       System.out.print("O ");
     }
-  }
 
+  }
   /** The player chooses the pile number, and then the number of stones to remove from
   *  the chosen row.  The input from the user should be checked.
   */
@@ -140,26 +127,42 @@ public class Stones
                pile3 = pile3-removeFromPile;
       break;
     }
-    System.out.print("\n"+name+" removed " + removeFromPile + " stone\(s\) from Pile "+pileSelect);
+    System.out.print("\n"+name+" removed " + removeFromPile + " stone(s) from Pile "+pileSelect);
+    if(pile1==0&&pile2==0&&pile3==0)
+    done = true;
   }
-
   /** The "computer" chooses a row and removes stones from this chosen row.  This can be a simple, "dumb"
   *  removal (the method needs to make a valid choice, but it does not need to be a smart choice).  For
   *  up to 3 extra credit points, use an algorithm to make better choices for this method.
   */
   public void computerMakeChoice()
   {
-    //using optimized greedy algorithms
-    int computerChoice;
-
+      //backtracking
+    Prompt.getString("It's the computer's turn. Please hit enter to continue: \n\n");
+    System.out.println("\n\ncomputer turn");
+    if(pile1==0&&pile2==0&&pile3==0)
+    done = true;
   }
-
   /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
   *  comment each new method you create.
   */
   /** Shows the table, then tells the user who won, followed by an exit message.  */
   public void printWinner()
   {
+    showTable();
+    if(playerTurn)
+    {
+        System.out.println("\nYOU ARE THE WINNER!");
+        System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
+        System.out.print("\n\n\n");
+    }
+    else
+    {
+        System.out.println("\nYOU ARE THE WINNER!");
+        System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
+        System.out.print("\n\n\n");
+    }
+
 
   }
 }
