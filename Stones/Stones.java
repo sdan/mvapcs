@@ -137,12 +137,14 @@ public class Stones
   */
   public void computerMakeChoice()
   {
-      //backtracking
+      //greedy optimized
     Prompt.getString("It's the computer's turn. Please hit enter to continue: \n\n");
     System.out.println("\n\ncomputer turn");
     if(pile1==0&&pile2==0&&pile3==0)
     done = true;
   }
+
+  
   /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
   *  comment each new method you create.
   */
