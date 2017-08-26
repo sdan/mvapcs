@@ -142,9 +142,74 @@ public class Stones
     System.out.println("\n\ncomputer turn");
     if(pile1==0&&pile2==0&&pile3==0)
     done = true;
+
+
+    int calculateNimSum(int piles[], int n)
+    {
+        int i, nimsum = piles[0];
+        for (i=1; i<n; i++)
+            nimsum = nimsum ^ piles[i];
+        return(nimsum);
+    }
+
+
+    int i, nim_sum = calculateNimSum(piles, n);
+
+    // The player having the current turn is on a winning
+    // position. So he/she/it play optimally and tries to make
+    // Nim-Sum as 0
+    if (nim_sum != 0)
+    {
+        for (i=0; i<n; i++)
+        {
+            // If this is not an illegal move
+            // then make this move.
+            if ((piles[i] ^ nim_sum) < piles[i])
+            {
+                (*moves).pile_index = i;
+                (*moves).stones_removed =
+                                 piles[i]-(piles[i]^nim_sum);
+                piles[i] = (piles[i] ^ nim_sum);
+                break;
+            }
+        }
+    }
+
+    // The player having the current turn is on losing
+    // position, so he/she/it can only wait for the opponent
+    // to make a mistake(which doesn't happen in this program
+    // as both players are playing optimally). He randomly
+    // choose a non-empty pile and randomly removes few stones
+    // from it. If the opponent doesn't make a mistake,then it
+    // doesn't matter which pile this player chooses, as he is
+    // destined to lose this game.
+
+    // If you want to input yourself then remove the rand()
+    // functions and modify the code to take inputs.
+    // But remember, you still won't be able to change your
+    // fate/prediction.
+    else
+    {
+        // Create an array to hold indices of non-empty piles
+        int non_zero_indices[n], count;
+
+        for (i=0, count=0; i<n; i++)
+            if (piles[i] > 0)
+                non_zero_indices [count++] = i;
+
+        (*moves).pile_index = (rand() % (count));
+        (*moves).stones_removed =
+                 1 + (rand() % (piles[(*moves).pile_index]));
+        piles[(*moves).pile_index] =
+         piles[(*moves).pile_index] - (*moves).stones_removed;
+
+        if (piles[(*moves).pile_index] < 0)
+            piles[(*moves).pile_index]=0;
+    }
+    return;
   }
 
-  
+
   /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
   *  comment each new method you create.
   */
