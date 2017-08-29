@@ -145,7 +145,11 @@ public class Stones
     else
     {
       int currentSum = nimSum(pile1,pile2,pile3);
-
+      if(currentSum>0)
+      {
+        //call nimZero 8 times?
+        int maxPile =  Math.max(Math.max(pile1,pile2),pile3);
+      }
     }
   }
     public int nimSum(int pile1, int pile2, int pile3)
@@ -153,6 +157,14 @@ public class Stones
       int xorPile1Pile2 = pile1^pile2;
       int xorAllPiles = xorPile1Pile2^pile3;
       return xorAllPiles;
+    }
+    public int nimZero(int pile1, int pile2, int pile3)
+    {
+      for(int i = 0; i<=3; i++)
+      {
+
+      }
+      return boolean zeroPossibility;
     }
 
 //nim sum should equal 0.
