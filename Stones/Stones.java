@@ -142,9 +142,21 @@ public class Stones
     System.out.println("\n\ncomputer turn");
     if(pile1==0&&pile2==0&&pile3==0)
     done = true;
+    else
+    {
+      int currentSum = nimSum(pile1,pile2,pile3);
+
+    }
+  }
+    public int nimSum(int pile1, int pile2, int pile3)
+    {
+      int xorPile1Pile2 = pile1^pile2;
+      int xorAllPiles = xorPile1Pile2^pile3;
+      return xorAllPiles;
+    }
 
 //nim sum should equal 0.
-// A B C nim-sum 
+// A B C nim-sum
 //
 // 3 4 5 0102=210   I take 2 from A, leaving a sum of 000, so I will win.
 // 1 4 5 0002=010   You take 2 from C
@@ -157,22 +169,9 @@ public class Stones
 //                  number (1) of heaps of size 1.
 // 0 0 1 0012=110   You take 1 from C, and lose.
 
-    int calculateNimSum(int piles[], int n)
-    {
-        int i, nimsum = piles[0];
-        for (i=1; i<n; i++)
-            nimsum = nimsum ^ piles[i];
-        return(nimsum);
-    }
 
 
 
-  }
-
-public void toBinary()
-{
-
-}
 
   /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
   *  comment each new method you create.
