@@ -18,6 +18,8 @@ public class Stones
   /** Name of player.  */
   private String name;
   private Dice piles;
+  private boolean zeroSum;
+  private int stonesRemove;
   /** Setup field variables, placing from 3 to 10 stones (at random)
   *  in each pile.  Have the user (player) go first against the
   *  computer, and assume that the game has not ended yet (done set
@@ -145,12 +147,22 @@ public class Stones
     else
     {
       int currentSum = nimSum(pile1,pile2,pile3);
+      System.out.println("currentsum"+currentSum);
       if(currentSum>0)
       {
-        //call nimZero 8 times?
         int maxPile =  Math.max(Math.max(pile1,pile2),pile3);
+        //call nimZero 8 times?
+        while(zeroSum=false)
+        {
+          stonesRemove++;
+          zeroSum = nimZero(pile1,pile2,pile3,stonesRemove);
+
+        }
+
       }
     }
+
+
   }
     public int nimSum(int pile1, int pile2, int pile3)
     {
@@ -158,13 +170,26 @@ public class Stones
       int xorAllPiles = xorPile1Pile2^pile3;
       return xorAllPiles;
     }
-    public int nimZero(int pile1, int pile2, int pile3)
+    public boolean nimZero(int pile1, int pile2, int pile3, int stonesRemoved)
     {
-      for(int i = 0; i<=3; i++)
+      if(nimSum(pile1-stonesRemoved,pile2,pile3)==0)
       {
-
+        pile1 = pile1-stonesRemoved;
+        return true;
       }
-      return boolean zeroPossibility;
+      else if(nimSum(pile1,pile2-stonesRemoved,pile3)==0)
+      {
+        pile2 = pile2-stonesRemoved;
+        return true;
+      }
+      else if(nimSum(pile1,pile2,pile3-stonesRemoved)==0)
+      {
+        pile3 = pile3-stonesRemoved;
+        return true;
+      }
+      else
+      return false;
+
     }
 
 //nim sum should equal 0.
