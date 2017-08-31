@@ -31,9 +31,9 @@ public class Stones
     // pile1 = piles.roll() +2;
     // pile2 = piles.roll() +2;
     // pile3 = piles.roll() +2;
-    pile1 = 3;
-    pile2 = 4;
-    pile3 = 5;
+    pile1 = 5;
+    pile2 = 8;
+    pile3 = 7;
     whichPile = new Dice(3);
     randPile1 = new Dice(pile1-1);
     randPile2 = new Dice(pile2-1);
@@ -136,7 +136,7 @@ public class Stones
                pile3 = pile3-removeFromPile;
       break;
     }
-    System.out.print("\n"+name+" removed " + removeFromPile + " stone(s) from Pile "+pileSelect);
+    System.out.print("\n"+name+" removed " + removeFromPile + " stone(s) from Pile "+pileSelect+"\n");
     if(pile1==0&&pile2==0&&pile3==0)
     done = true;
   }
@@ -156,8 +156,9 @@ public class Stones
       pile1 = computerHeap[0];
       pile2 = computerHeap[1];
       pile3 = computerHeap[2];
+      System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
+
     }
-    System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
 
 
   }
@@ -179,11 +180,11 @@ public class Stones
     public int[] nimZero(int pile1, int pile2, int pile3)
     {
       int[] heap = new int[5];
-      int nimSumValue = nimSum(pile1,pile2,pile3,3);
+      int nimSumValue = nimSum(pile1,pile2,pile3,3);//X
       int pile1Xor = nimSum(pile1,nimSumValue,0,2);
       int pile2Xor = nimSum(pile2,nimSumValue,0,2);
       int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-      if(pile1Xor<nimSumValue)//1
+      if(pile1Xor<pile1)//1
       {
         heap[0] = pile1Xor;
         heap[1] = pile2;
@@ -191,7 +192,7 @@ public class Stones
         heap[3] = 1;
         heap[4] = pile1-pile1Xor;
       }
-      else if(pile2Xor<nimSumValue)//6
+      else if(pile2Xor<pile2)//6
       {
         heap[0] = pile1;
         heap[1] = pile2Xor;
@@ -199,7 +200,7 @@ public class Stones
         heap[3] = 2;
         heap[4] = pile2-pile2Xor;
       }
-      else if(pile3Xor<nimSumValue)
+      else if(pile3Xor<pile3)
       {
         heap[0] = pile1;
         heap[1] = pile2;
