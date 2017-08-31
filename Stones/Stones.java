@@ -35,9 +35,9 @@ public class Stones
     pile2 = 4;
     pile3 = 5;
     whichPile = new Dice(3);
-    randPile1 = new Dice(pile1);
-    randPile2 = new Dice(pile2);
-    randPile3 = new Dice(pile3);
+    randPile1 = new Dice(pile1-1);
+    randPile2 = new Dice(pile2-1);
+    randPile3 = new Dice(pile3-1);
 
     playerTurn = true;
     done = false;
@@ -147,8 +147,7 @@ public class Stones
   public void computerMakeChoice()
   {
       //greedy optimized
-    Prompt.getString("It's the computer's turn. Please hit enter to continue: \n\n");
-    System.out.println("\n\ncomputer turn");
+    Prompt.getString("\n\nIt's the computer's turn. Please hit enter to continue: \n\n");
     if(pile1==0&&pile2==0&&pile3==0)
     done = true;
     else
@@ -158,9 +157,11 @@ public class Stones
       pile2 = computerHeap[1];
       pile3 = computerHeap[2];
     }
+    System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
 
 
   }
+
     public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
     {
       if(xorTimes==3)
@@ -177,7 +178,7 @@ public class Stones
     }
     public int[] nimZero(int pile1, int pile2, int pile3)
     {
-      int[] heap = new int[3];
+      int[] heap = new int[5];
       int nimSumValue = nimSum(pile1,pile2,pile3,3);
       int pile1Xor = nimSum(pile1,nimSumValue,0,2);
       int pile2Xor = nimSum(pile2,nimSumValue,0,2);
@@ -187,18 +188,24 @@ public class Stones
         heap[0] = pile1Xor;
         heap[1] = pile2;
         heap[2] = pile3;
+        heap[3] = 1;
+        heap[4] = pile1-pile1Xor;
       }
       else if(pile2Xor<nimSumValue)//6
       {
         heap[0] = pile1;
         heap[1] = pile2Xor;
         heap[2] = pile3;
+        heap[3] = 2;
+        heap[4] = pile2-pile2Xor;
       }
       else if(pile3Xor<nimSumValue)
       {
         heap[0] = pile1;
         heap[1] = pile2;
         heap[2] = pile3Xor;
+        heap[3] = 3;
+        heap[4] = pile3-pile3Xor;
       }
       else
       {
@@ -210,16 +217,22 @@ public class Stones
           heap[0] = randPile1.roll();
           heap[1] = pile2;
           heap[2] = pile3;
+          heap[3] = 1;
+          heap[4] = pile1-randPile1.getValue();
           break;
           case 2:
           heap[0] = pile1;
           heap[1] = randPile2.roll();
           heap[2] = pile3;
+          heap[3] = 2;
+          heap[4] = pile2-randPile2.getValue();
           break;
           case 3:
           heap[0] = pile1;
           heap[1] = pile2;
           heap[2] = randPile3.roll();
+          heap[3] = 3;
+          heap[4] = pile3-randPile3.getValue();
           break;
         }
       }
