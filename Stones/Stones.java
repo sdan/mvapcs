@@ -28,9 +28,12 @@ public class Stones
   public Stones ( )
   {
     piles = new Dice(8);
-    pile1 = piles.roll() +2;
-    pile2 = piles.roll() +2;
-    pile3 = piles.roll() +2;
+    // pile1 = piles.roll() +2;
+    // pile2 = piles.roll() +2;
+    // pile3 = piles.roll() +2;
+    pile1 = 3;
+    pile2 = 4;
+    pile3 = 5;
 
     playerTurn = true;
     done = false;
@@ -146,7 +149,7 @@ public class Stones
     done = true;
     else
     {
-      int pile
+      int[] computerHeap = nimCalculate(pile1,pile2,pile3);
 
     }
 
@@ -169,8 +172,6 @@ public class Stones
     public int[] nimCalculate(int pile1, int pile2, int pile3)
     {
       int[] heap = new int[3];
-        // returning array of elements
-        return ans;
       int nimSumValue = nimSum(pile1,pile2,pile3,3);
       int pile1Xor = nimSum(pile1,nimSumValue,0,2);
       int pile2Xor = nimSum(pile2,nimSumValue,0,2);
@@ -199,7 +200,7 @@ public class Stones
       {
         heap[2] = pile3;
       }
-      return 0;
+      return heap;
     }
 
 //nim sum should equal 0.
