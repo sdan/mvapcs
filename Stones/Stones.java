@@ -200,7 +200,17 @@ public class Stones
       {
         heap[2] = pile3;
       }
+      else
+      {
+        heap = nimProbability(pile1,pile2,pile3);
+      }
       return heap;
+    }
+
+    public int[] nimProbability(int pile1, int pile2, int pile3)
+    {
+      int[] heapP = new int[3];
+      return heapP;
     }
 
 //nim sum should equal 0.
