@@ -27,7 +27,7 @@ public class test
       {
         for(int b=0;b<=pile3;b++)
         {
-          int bb = nimSum(i,a,b);
+          int bb = nimSum(i,a,b,3);
           if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
           {
             System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
@@ -36,13 +36,34 @@ public class test
       }
 
     }
-
+    nimZero(pile1,pile2,pile3);
   }
 
-  static int nimSum(int pile1, int pile2, int pile3)
+  static int nimZero(int pile1, int pile2, int pile3)
   {
+    int nimSumValue = nimSum(pile1,pile2,pile3,3);//X
+    int pile1Xor = nimSum(pile1,nimSumValue,0,2);
+    int pile2Xor = nimSum(pile2,nimSumValue,0,2);
+    int pile3Xor = nimSum(pile3,nimSumValue,0,2);
+    System.out.println("nimSumValue: "+nimSumValue);
+    System.out.println("pile1Xor: "+pile1Xor);
+    System.out.println("pile2Xor: "+pile2Xor);
+    System.out.println("pile3Xor: "+pile3Xor);
+    return 0;
+  }
+
+  static int nimSum(int pile1, int pile2, int pile3, int xorTimes)
+  {
+    if(xorTimes==3)
+    {
       int xorPile1Pile2 = pile1^pile2;
       int xorAllPiles = xorPile1Pile2^pile3;
       return xorAllPiles;
     }
+    else if(xorTimes==2)
+    {
+      return pile1^pile2;
+    }
+    return 0;
+  }
 }
