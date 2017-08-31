@@ -32,8 +32,8 @@ public class Stones
     // pile2 = piles.roll() +2;
     // pile3 = piles.roll() +2;
     pile1 = 5;
-    pile2 = 8;
-    pile3 = 7;
+    pile2 = 9;
+    pile3 = 8;
     whichPile = new Dice(3);
     randPile1 = new Dice(pile1-1);
     randPile2 = new Dice(pile2-1);
@@ -116,6 +116,7 @@ public class Stones
       System.out.print("O ");
     }
 
+    System.out.println("\n");
   }
   /** The player chooses the pile number, and then the number of stones to remove from
   *  the chosen row.  The input from the user should be checked.
@@ -123,16 +124,17 @@ public class Stones
   public void playerMakeChoice()
   {
     int removeFromPile = 0;
-    int pileSelect = Prompt.getInt("\n\n"+name+", please enter a pile number (1, 2, or 3): \n",1,3);
+    int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
+    System.out.println("\n");
     switch(pileSelect)
     {
-      case 1:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
+      case 1:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
                pile1 = pile1-removeFromPile;
       break;
-      case 2:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
+      case 2:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
                pile2 = pile2-removeFromPile;
       break;
-      case 3:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
+      case 3:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
                pile3 = pile3-removeFromPile;
       break;
     }
@@ -152,25 +154,30 @@ public class Stones
     done = true;
     else
     {
-      if(pile1<=2||pile2<=2||pile3<=2)
-      {
-        int[] computerHeapEnding = computerEnding(pile1,pile2,pile3);
-        pile1 = computerHeapEnding[0];
-        pile2 = computerHeapEnding[1];
-        pile3 = computerHeapEnding[2];
-      }
-      int[] computerHeap = nimZero(pile1,pile2,pile3);
-      pile1 = computerHeap[0];
-      pile2 = computerHeap[1];
-      pile3 = computerHeap[2];
-      System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
+      // if(pile1<=2&&pile2<=2&&pile3<=2)
+      // {
+      //   int[] computerHeapEnding = computerEnding(pile1,pile2,pile3);
+      //   pile1 = computerHeapEnding[0];
+      //   pile2 = computerHeapEnding[1];
+      //   pile3 = computerHeapEnding[2];
+      //   System.out.println("The computer removed "+computerHeapEnding[3]+" stone(s) from Pile "+computerHeapEnding[4]);
+      // }
+      // else
+      // {
+        int[] computerHeap = nimZero(pile1,pile2,pile3);
+        pile1 = computerHeap[0];
+        pile2 = computerHeap[1];
+        pile3 = computerHeap[2];
+        System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
+      //}
+
 
     }
   }
 
   public int[] computerEnding(int pile1, int pile2, int pile3)
   {
-    int[] heapE = new int[3];
+    int[] heapE = new int[5];
 
     if(((pile1+pile2+pile3)%2)==0)
     {
@@ -179,18 +186,24 @@ public class Stones
         heapE[0] = pile1-2;
         heapE[1] = pile2;
         heapE[2] = pile3;
+        heapE[3] = 2;
+        heapE[4] = 1;
       }
       if(pile2>0)
       {
         heapE[0] = pile1;
         heapE[1] = pile2-2;
         heapE[2] = pile3;
+        heapE[3] = 2;
+        heapE[4] = 2;
       }
       if(pile3>0)
       {
         heapE[0] = pile1;
         heapE[1] = pile2;
         heapE[2] = pile3-2;
+        heapE[3] = 2;
+        heapE[4] = 3;
       }
     }
     else
@@ -200,18 +213,24 @@ public class Stones
         heapE[0] = pile1-1;
         heapE[1] = pile2;
         heapE[2] = pile3;
+        heapE[3] = 1;
+        heapE[4] = 1;
       }
       if(pile2>0)
       {
         heapE[0] = pile1;
         heapE[1] = pile2-1;
         heapE[2] = pile3;
+        heapE[3] = 1;
+        heapE[4] = 2;
       }
       if(pile3>0)
       {
         heapE[0] = pile1;
         heapE[1] = pile2;
         heapE[2] = pile3-1;
+        heapE[3] = 1;
+        heapE[4] = 3;
       }
     }
     return heapE;
