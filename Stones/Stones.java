@@ -146,7 +146,7 @@ public class Stones
     done = true;
     else
     {
-
+      int pile
 
     }
 
@@ -166,11 +166,39 @@ public class Stones
       }
       return 0;
     }
-    public int nimCalculate(int pile1, int pile2, int pile3)
+    public int[] nimCalculate(int pile1, int pile2, int pile3)
     {
+      int[] heap = new int[3];
+        // returning array of elements
+        return ans;
       int nimSumValue = nimSum(pile1,pile2,pile3,3);
-
-
+      int pile1Xor = nimSum(pile1,nimSumValue,0,2);
+      int pile2Xor = nimSum(pile2,nimSumValue,0,2);
+      int pile3Xor = nimSum(pile3,nimSumValue,0,2);
+      if(pile1Xor<nimSumValue)
+      {
+        heap[0] = pile1Xor;
+      }
+      else if(pile1Xor>=nimSumValue)//1
+      {
+        heap[0] = pile1;
+      }
+      else if(pile2Xor<nimSumValue)//6
+      {
+        heap[1] = pile2Xor;
+      }
+      else if(pile2Xor>=nimSumValue)
+      {
+        heap[1] = pile2;
+      }
+      else if(pile3<nimSumValue)
+      {
+        heap[2] = pile3Xor;
+      }
+      else if(pile3>=nimSumValue)
+      {
+        heap[2] = pile3;
+      }
       return 0;
     }
 
