@@ -176,7 +176,7 @@ public class Stones
       int pile1Xor = nimSum(pile1,nimSumValue,0,2);
       int pile2Xor = nimSum(pile2,nimSumValue,0,2);
       int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-      if(pile1Xor<nimSumValue)
+      if(pile1Xor<nimSumValue)//1
       {
         heap[0] = pile1Xor;
         heap[1] = pile2;
@@ -201,35 +201,6 @@ public class Stones
         //recursion will stackoverflow
       }
       return heap;
-    }
-
-    public numCalculate(int pile1,int pile2,int pile3)
-    {
-
-
-    }
-
-    public int[] nimProbability(int pile1, int pile2, int pile3)
-    {
-      int[] heapP = new int[3];
-      for(int i = 0;i<=pile1;i++)
-      {
-        for(int k=0;a<=pile2;k++)
-        {
-          for(int j=0;b<=pile3;j++)
-          {
-            // int bb = nimSum(i,a,b);
-            // if(bb==0)
-            // {
-            //   if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
-            //   System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
-            // }
-            // else if()
-          }
-        }
-
-      }
-      return heapP;
     }
 
 //nim sum should equal 0.
