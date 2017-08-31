@@ -17,7 +17,7 @@ public class Stones
   private boolean done;
   /** Name of player.  */
   private String name;
-  private Dice piles;
+  private Dice piles, whichPile, randPile1, randPile2, randPile3;
   private boolean zeroSum;
   private int stonesRemove;
   /** Setup field variables, placing from 3 to 10 stones (at random)
@@ -34,6 +34,10 @@ public class Stones
     pile1 = 3;
     pile2 = 4;
     pile3 = 5;
+    whichPile = new Dice(3);
+    randPile1 = new Dice(pile1);
+    randPile2 = new Dice(pile2);
+    randPile3 = new Dice(pile3);
 
     playerTurn = true;
     done = false;
@@ -196,9 +200,26 @@ public class Stones
       }
       else
       {
-        heap = nimProbability(pile1,pile2,pile3);
-        //provides heap in the event that the opponent is optimized
-        //recursion will stackoverflow
+
+        int somePile = whichPile.roll();
+        switch(somePile)
+        {
+          case 1:
+          heap[0] = randPile1.roll();
+          heap[1] = pile2;
+          heap[2] = pile3;
+          break;
+          case 2:
+          heap[0] = pile1;
+          heap[1] = randPile2.roll();
+          heap[2] = pile3;
+          break;
+          case 3:
+          heap[0] = pile1;
+          heap[1] = pile2;
+          heap[2] = randPile3.roll();
+          break;
+        }
       }
       return heap;
     }
