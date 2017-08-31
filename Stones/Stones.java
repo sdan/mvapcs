@@ -146,50 +146,32 @@ public class Stones
     done = true;
     else
     {
-      int currentSum = nimSum(pile1,pile2,pile3);
-      System.out.println("currentsum"+currentSum);
-      if(currentSum>0)
-      {
-        int maxPile =  Math.max(Math.max(pile1,pile2),pile3);
-        //call nimZero 8 times?
-        while(zeroSum=false)
-        {
-          stonesRemove++;
-          zeroSum = nimZero(pile1,pile2,pile3,stonesRemove);
 
-        }
 
-      }
     }
 
 
   }
-    public int nimSum(int pile1, int pile2, int pile3)
+    public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
     {
-      int xorPile1Pile2 = pile1^pile2;
-      int xorAllPiles = xorPile1Pile2^pile3;
-      return xorAllPiles;
+      if(xorTimes==3)
+      {
+        int xorPile1Pile2 = pile1^pile2;
+        int xorAllPiles = xorPile1Pile2^pile3;
+        return xorAllPiles;
+      }
+      else if(xorTimes==2)
+      {
+        return pile1^pile2;
+      }
+      return 0;
     }
-    public boolean nimZero(int pile1, int pile2, int pile3, int stonesRemoved)
+    public int nimCalculate(int pile1, int pile2, int pile3)
     {
-      if(nimSum(pile1-stonesRemoved,pile2,pile3)==0)
-      {
-        pile1 = pile1-stonesRemoved;
-        return true;
-      }
-      else if(nimSum(pile1,pile2-stonesRemoved,pile3)==0)
-      {
-        pile2 = pile2-stonesRemoved;
-        return true;
-      }
-      else if(nimSum(pile1,pile2,pile3-stonesRemoved)==0)
-      {
-        pile3 = pile3-stonesRemoved;
-        return true;
-      }
-      else
-      return false;
+      int nimSumValue = nimSum(pile1,pile2,pile3,3);
 
+
+      return 0;
     }
 
 //nim sum should equal 0.
