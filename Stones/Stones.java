@@ -154,7 +154,9 @@ public class Stones
     else
     {
       int[] computerHeap = nimZero(pile1,pile2,pile3);
-
+      pile1 = computerHeap[0];
+      pile2 = computerHeap[1];
+      pile3 = computerHeap[2];
     }
 
 
