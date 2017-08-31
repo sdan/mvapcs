@@ -123,16 +123,16 @@ public class Stones
   public void playerMakeChoice()
   {
     int removeFromPile = 0;
-    int pileSelect = Prompt.getInt("\n\n"+name+", please enter a pile number (1, 2, or 3): ",1,3);
+    int pileSelect = Prompt.getInt("\n\n"+name+", please enter a pile number (1, 2, or 3): \n",1,3);
     switch(pileSelect)
     {
-      case 1:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
+      case 1:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
                pile1 = pile1-removeFromPile;
       break;
-      case 2:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
+      case 2:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
                pile2 = pile2-removeFromPile;
       break;
-      case 3:  removeFromPile = Prompt.getInt("\n\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
+      case 3:  removeFromPile = Prompt.getInt("\n"+name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
                pile3 = pile3-removeFromPile;
       break;
     }
@@ -152,6 +152,13 @@ public class Stones
     done = true;
     else
     {
+      if(pile1<=2||pile2<=2||pile3<=2)
+      {
+        int[] computerHeapEnding = computerEnding(pile1,pile2,pile3);
+        pile1 = computerHeapEnding[0];
+        pile2 = computerHeapEnding[1];
+        pile3 = computerHeapEnding[2];
+      }
       int[] computerHeap = nimZero(pile1,pile2,pile3);
       pile1 = computerHeap[0];
       pile2 = computerHeap[1];
@@ -159,8 +166,55 @@ public class Stones
       System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
 
     }
+  }
 
+  public int[] computerEnding(int pile1, int pile2, int pile3)
+  {
+    int[] heapE = new int[3];
 
+    if(((pile1+pile2+pile3)%2)==0)
+    {
+      if(pile1>0)
+      {
+        heapE[0] = pile1-2;
+        heapE[1] = pile2;
+        heapE[2] = pile3;
+      }
+      if(pile2>0)
+      {
+        heapE[0] = pile1;
+        heapE[1] = pile2-2;
+        heapE[2] = pile3;
+      }
+      if(pile3>0)
+      {
+        heapE[0] = pile1;
+        heapE[1] = pile2;
+        heapE[2] = pile3-2;
+      }
+    }
+    else
+    {
+      if(pile1>0)
+      {
+        heapE[0] = pile1-1;
+        heapE[1] = pile2;
+        heapE[2] = pile3;
+      }
+      if(pile2>0)
+      {
+        heapE[0] = pile1;
+        heapE[1] = pile2-1;
+        heapE[2] = pile3;
+      }
+      if(pile3>0)
+      {
+        heapE[0] = pile1;
+        heapE[1] = pile2;
+        heapE[2] = pile3-1;
+      }
+    }
+    return heapE;
   }
 
     public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
@@ -239,24 +293,6 @@ public class Stones
       }
       return heap;
     }
-
-//nim sum should equal 0.
-// A B C nim-sum
-//
-// 3 4 5 0102=210   I take 2 from A, leaving a sum of 000, so I will win.
-// 1 4 5 0002=010   You take 2 from C
-// 1 4 3 1102=610   I take 2 from B
-// 1 2 3 0002=010   You take 1 from C
-// 1 2 2 0012=110   I take 1 from A
-// 0 2 2 0002=010   You take 1 from C
-// 0 2 1 0112=310   The normal play strategy would be to take 1 from B, leaving an even number (2)
-//                  heaps of size 1.  For misère play, I take the entire B heap, to leave an odd
-//                  number (1) of heaps of size 1.
-// 0 0 1 0012=110   You take 1 from C, and lose.
-
-// To find out which move to make, let X be the nim-sum of all the heap sizes. Find a heap where the nim-sum of X and heap-size is less than the heap-size - the winning strategy is to play in such a heap, reducing that heap to the nim-sum of its original size with X. In the example above, taking the nim-sum of the sizes is X = 3 ⊕ 4 ⊕ 5 = 2. The nim-sums of the heap sizes A=3, B=4, and C=5 with X=2 are
-
-
 
   /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
   *  comment each new method you create.
