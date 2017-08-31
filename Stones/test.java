@@ -28,9 +28,8 @@ public class test
         for(int b=0;b<=pile3;b++)
         {
           int bb = nimSum(i,a,b);
-          if(bb==0)
+          if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
           {
-            if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
             System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
           }
         }
