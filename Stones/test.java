@@ -45,7 +45,7 @@ public class test
     int pile1Xor = nimSum(pile1,nimSumValue,0,2);
     int pile2Xor = nimSum(pile2,nimSumValue,0,2);
     int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-    System.out.println("nimSumValue: "+nimSumValue);
+    System.out.println("\nnimSumValue: "+nimSumValue);
     System.out.println("pile1Xor: "+pile1Xor);
     System.out.println("pile2Xor: "+pile2Xor);
     System.out.println("pile3Xor: "+pile3Xor);

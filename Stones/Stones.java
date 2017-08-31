@@ -32,8 +32,8 @@ public class Stones
     // pile2 = piles.roll() +2;
     // pile3 = piles.roll() +2;
     pile1 = 5;
-    pile2 = 9;
-    pile3 = 8;
+    pile2 = 8;
+    pile3 = 7;
     whichPile = new Dice(3);
     randPile1 = new Dice(pile1-1);
     randPile2 = new Dice(pile2-1);
@@ -166,8 +166,11 @@ public class Stones
       // {
         int[] computerHeap = nimZero(pile1,pile2,pile3);
         pile1 = computerHeap[0];
+        System.out.printf("heapCompu0: %d",computerHeap[0]);
         pile2 = computerHeap[1];
+        System.out.printf("heapCompu1: %d",computerHeap[1]);
         pile3 = computerHeap[2];
+        System.out.printf("heapCompu2: %d",computerHeap[2]);
         System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
       //}
 
@@ -257,6 +260,35 @@ public class Stones
       int pile1Xor = nimSum(pile1,nimSumValue,0,2);
       int pile2Xor = nimSum(pile2,nimSumValue,0,2);
       int pile3Xor = nimSum(pile3,nimSumValue,0,2);
+      if(pile1<=2&&pile2<=2&&pile3<=2)
+      {
+        for(int i = 0;i<=pile1;i++)
+        {
+          for(int a=0;a<=pile2;a++)
+          {
+            for(int b=0;b<=pile3;b++)
+            {
+              int bb = nimSum(i,a,b,3);
+              if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
+              {
+                if(bb==1)
+                {
+                  System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
+                  heap[0] = i;
+                  System.out.println("heap0: "+heap[0]);
+                  heap[1] = a;
+                  System.out.println("heap1: "+heap[1]);
+                  heap[2] = b;
+                  System.out.println("heap2: "+heap[2]);
+                  return heap;
+                }
+
+              }
+            }
+          }
+
+        }
+      }
       if(pile1Xor<pile1)//1
       {
         heap[0] = pile1Xor;
