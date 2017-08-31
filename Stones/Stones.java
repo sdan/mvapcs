@@ -206,7 +206,7 @@ public class Stones
 //                  number (1) of heaps of size 1.
 // 0 0 1 0012=110   You take 1 from C, and lose.
 
-
+// To find out which move to make, let X be the nim-sum of all the heap sizes. Find a heap where the nim-sum of X and heap-size is less than the heap-size - the winning strategy is to play in such a heap, reducing that heap to the nim-sum of its original size with X. In the example above, taking the nim-sum of the sizes is X = 3 ⊕ 4 ⊕ 5 = 2. The nim-sums of the heap sizes A=3, B=4, and C=5 with X=2 are
 
 
 
