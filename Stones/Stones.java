@@ -179,26 +179,20 @@ public class Stones
       if(pile1Xor<nimSumValue)
       {
         heap[0] = pile1Xor;
-      }
-      else if(pile1Xor>=nimSumValue)//1
-      {
-        heap[0] = pile1;
+        heap[1] = pile2;
+        heap[2] = pile3;
       }
       else if(pile2Xor<nimSumValue)//6
       {
+        heap[0] = pile1;
         heap[1] = pile2Xor;
-      }
-      else if(pile2Xor>=nimSumValue)
-      {
-        heap[1] = pile2;
-      }
-      else if(pile3<nimSumValue)
-      {
-        heap[2] = pile3Xor;
-      }
-      else if(pile3>=nimSumValue)
-      {
         heap[2] = pile3;
+      }
+      else if(pile3Xor<nimSumValue)
+      {
+        heap[0] = pile1;
+        heap[1] = pile2;
+        heap[2] = pile3Xor;
       }
       else
       {
@@ -211,42 +205,7 @@ public class Stones
 
     public numCalculate(int pile1,int pile2,int pile3)
     {
-      int[] heap = new int[3];
-      int nimSumValue = nimSum(pile1,pile2,pile3,3);
-      int pile1Xor = nimSum(pile1,nimSumValue,0,2);
-      int pile2Xor = nimSum(pile2,nimSumValue,0,2);
-      int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-      if(pile1Xor<nimSumValue)
-      {
-        heap[0] = pile1Xor;
-      }
-      else if(pile1Xor>=nimSumValue)//1
-      {
-        heap[0] = pile1;
-      }
-      else if(pile2Xor<nimSumValue)//6
-      {
-        heap[1] = pile2Xor;
-      }
-      else if(pile2Xor>=nimSumValue)
-      {
-        heap[1] = pile2;
-      }
-      else if(pile3<nimSumValue)
-      {
-        heap[2] = pile3Xor;
-      }
-      else if(pile3>=nimSumValue)
-      {
-        heap[2] = pile3;
-      }
-      else
-      {
-        heap = nimProbability(pile1,pile2,pile3);
-        //provides heap in the event that the opponent is optimized
-        //recursion will stackoverflow
-      }
-      return heap;
+
 
     }
 
