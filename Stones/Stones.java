@@ -118,7 +118,7 @@ public class Stones
     System.out.println("\n");
     if(pile1==0&&pile2==0&&pile3==0)
     {
-      done  = true;
+      done = true;
     }
   }
   /** The player chooses the pile number, and then the number of stones to remove from
@@ -127,21 +127,22 @@ public class Stones
   public void playerMakeChoice()
   {
     int removeFromPile =0;
-    int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
-    while((pileSelect==1&&pile1==0)||(pileSelect=2&&pile2==0)||(pileSelect==3&&pile3==0))
+    int pileSelect = 0;
+    do
     {
       pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
-    }
+    } while((pileSelect==1&&pile1==0)||(pileSelect==2&&pile2==0)||(pileSelect==3&&pile3==0));
+    System.out.println("pileSelect"+pileSelect);
     System.out.print("\n");
     switch(pileSelect)
     {
-      case 1:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
+      case 1:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile "+pileSelect+" (from 1 to "+pile1+"): ",1,pile1);
       pile1 = pile1-removeFromPile;
       break;
-      case 2:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile2+"): ",1,pile2);
+      case 2:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile "+pileSelect+" (from 1 to "+pile2+"): ",1,pile2);
       pile2 = pile2-removeFromPile;
       break;
-      case 3:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile3+"): ",1,pile3);
+      case 3:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile "+pileSelect+" (from 1 to "+pile3+"): ",1,pile3);
       pile3 = pile3-removeFromPile;
       break;
     }
@@ -199,36 +200,43 @@ public class Stones
       System.out.println("NOTICE ME IM UNDER 2");
       for(int i = 0;i<=pile1;i++)
       {
+        System.out.println("i"+i);
         for(int j=0;j<=pile2;j++)
         {
+          System.out.println("j"+i);
           for(int k=0;k<=pile3;k++)
           {
+            System.out.println("k"+k);
             int finalNimSum = nimSum(i,j,k,3);
-            boolean pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
-            boolean pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
-            boolean pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
-            if(pile1Changed&&pile2Changed&&pile3Changed&&finalNimSum==1)
+            if(((i!=pile1)&&(j==pile2)&&(k==pile3))||((j!=pile2)&&(i==pile1)&&(k==pile3))||((k!=pile3)&&(i==pile1)&&(j==pile2)))
             {
-              if(pile1Changed)
+              System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
+              if(finalNimSum==1)
               {
-                heap[3] = 1;
-                heap[4] = pile1-i;
+                System.out.println("finalsum: "+finalNimSum+"awak");
+                if(pile1Changed)
+                {
+                  heap[3] = 1;
+                  heap[4] = pile1-i;
+                }
+                else if(pile2Changed)
+                {
+                  heap[3] = 2;
+                  heap[4] = pile2-j;
+                }
+                else if(pile3Changed)
+                {
+                  heap[3] = 3;
+                  heap[4] = pile3-k;
+                }
+                heap[0] = i;
+                heap[1] = j;
+                heap[2] = k;
+                System.out.print("heapy"+heap[0]+heap[1]+heap[2]);
+                return heap;
               }
-              else if(pile2Changed)
-              {
-                heap[3] = 2;
-                heap[4] = pile2-j;
-              }
-              else if(pile3Changed)
-              {
-                heap[3] = 3;
-                heap[4] = pile3-k;
-              }
-              heap[0] = i;
-              heap[1] = j;
-              heap[2] = k;
-              return heap;
             }
+
           }
         }
 
