@@ -122,7 +122,7 @@ public class Stones
   */
   public void playerMakeChoice()
   {
-    int removeFromPile = 0;
+    int removeFromPile;
     int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
     System.out.println("\n");
     switch(pileSelect)
@@ -147,22 +147,17 @@ public class Stones
   */
   public void computerMakeChoice()
   {
-    //greedy optimized
     Prompt.getString("\n\nIt's the computer's turn. Please hit enter to continue: \n\n");
-    if(pile1==0&&pile2==0&&pile3==0)
-    done = true;
-    else
-    {
-      int[] computerHeap = nimZero(pile1,pile2,pile3);
-      pile1 = computerHeap[0];
-      System.out.printf("heapCompu0: %d",computerHeap[0]);
-      pile2 = computerHeap[1];
-      System.out.printf("heapCompu1: %d",computerHeap[1]);
-      pile3 = computerHeap[2];
-      System.out.printf("heapCompu2: %d",computerHeap[2]);
-      System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
 
-    }
+    int[] computerHeap = nimZero(pile1,pile2,pile3);
+    pile1 = computerHeap[0];
+    System.out.printf("heapCompu0: %d",computerHeap[0]);
+    pile2 = computerHeap[1];
+    System.out.printf("heapCompu1: %d",computerHeap[1]);
+    pile3 = computerHeap[2];
+    System.out.printf("heapCompu2: %d",computerHeap[2]);
+    System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
+
   }
 
   public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
@@ -179,6 +174,14 @@ public class Stones
     }
     return 0;
   }
+
+  /** Robust method that calculates best possible move
+  * to win the Nim game against another player
+  *  @param pile1       The String prompt to be displayed to the user.
+  *  @param pile2       The minimum integer value to be allowed as input.
+  *  @param pile3       The maximum integer value to be allowed as input.
+  *  @return            Integer array of 5 that stores updated heap values as well as
+  */
   public int[] nimZero(int pile1, int pile2, int pile3)
   {
     int[] heap = new int[5];
@@ -190,32 +193,42 @@ public class Stones
     {
       for(int i = 0;i<=pile1;i++)
       {
-        for(int a=0;a<=pile2;a++)
+        for(int j=0;j<=pile2;j++)
         {
-          for(int b=0;b<=pile3;b++)
+          for(int k=0;k<=pile3;k++)
           {
-            int bb = nimSum(i,a,b,3);
-            if(((i!=pile1)&&(a==pile2)&&(b==pile3))||((a!=pile2)&&(i==pile1)&&(b==pile3))||((b!=pile3)&&(i==pile1)&&(a==pile2)))
+            int finalNimSum = nimSum(i,j,k,3);
+            boolean pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
+            boolean pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
+            boolean pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
+            if(pile1Changed&&pile2Changed&&pile3Changed&&finalNimSum==1)
             {
-              if(bb==1)
+              if(pile1Changed)
               {
-                System.out.printf("\n%d,%d,%d,bb%d",i,a,b,bb);
-                heap[0] = i;
-                System.out.println("heap0: "+heap[0]);
-                heap[1] = a;
-                System.out.println("heap1: "+heap[1]);
-                heap[2] = b;
-                System.out.println("heap2: "+heap[2]);
-                return heap;
+                heap[3] = 1;
+                heap[4] = pile1-i;
               }
-
+              else if(pile2Changed)
+              {
+                heap[3] = 2;
+                heap[4] = pile2-j;
+              }
+              else if(pile3Changed)
+              {
+                heap[3] = 3;
+                heap[4] = pile3-k;
+              }
+              heap[0] = i;
+              heap[1] = j;
+              heap[2] = k;
+              return heap;
             }
           }
         }
 
       }
     }
-    if(pile1Xor<pile1)//1
+    if(pile1Xor<pile1)
     {
       heap[0] = pile1Xor;
       heap[1] = pile2;
@@ -223,7 +236,7 @@ public class Stones
       heap[3] = 1;
       heap[4] = pile1-pile1Xor;
     }
-    else if(pile2Xor<pile2)//6
+    else if(pile2Xor<pile2)
     {
       heap[0] = pile1;
       heap[1] = pile2Xor;
@@ -285,7 +298,7 @@ public class Stones
     }
     else
     {
-      System.out.println("\nYOU ARE THE WINNER!");
+      System.out.println("\nTHE COMPUTER IS THE WINNER!");
       System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
       System.out.print("\n\n\n");
     }
