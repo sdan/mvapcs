@@ -17,9 +17,9 @@ public class Stones
   private boolean done;
   /** Name of player.  */
   private String name;
+  /** Defines objects used to assign random values for decision making and initial heap generaption */
   private Dice piles, whichPile, randPile1, randPile2, randPile3;
-  private boolean zeroSum;
-  private int stonesRemove;
+
   /** Setup field variables, placing from 3 to 10 stones (at random)
   *  in each pile.  Have the user (player) go first against the
   *  computer, and assume that the game has not ended yet (done set
@@ -27,13 +27,13 @@ public class Stones
   */
   public Stones ( )
   {
+    /** Instantiation of Dice class */
     piles = new Dice(8);
-    // pile1 = piles.roll() +2;
-    // pile2 = piles.roll() +2;
-    // pile3 = piles.roll() +2;
-    pile1 = 5;
-    pile2 = 8;
-    pile3 = 7;
+    /** Invokes Dice object for random heap values */
+    pile1 = piles.roll() +2;
+    pile2 = piles.roll() +2;
+    pile3 = piles.roll() +2;
+    /** Creates more Dice objects */
     whichPile = new Dice(3);
     randPile1 = new Dice(pile1-1);
     randPile2 = new Dice(pile2-1);
@@ -115,7 +115,6 @@ public class Stones
     {
       System.out.print("O ");
     }
-
     System.out.println("\n");
   }
   /** The player chooses the pile number, and then the number of stones to remove from
@@ -176,67 +175,6 @@ public class Stones
 
 
     }
-  }
-
-  public int[] computerEnding(int pile1, int pile2, int pile3)
-  {
-    int[] heapE = new int[5];
-
-    if(((pile1+pile2+pile3)%2)==0)
-    {
-      if(pile1>0)
-      {
-        heapE[0] = pile1-2;
-        heapE[1] = pile2;
-        heapE[2] = pile3;
-        heapE[3] = 2;
-        heapE[4] = 1;
-      }
-      if(pile2>0)
-      {
-        heapE[0] = pile1;
-        heapE[1] = pile2-2;
-        heapE[2] = pile3;
-        heapE[3] = 2;
-        heapE[4] = 2;
-      }
-      if(pile3>0)
-      {
-        heapE[0] = pile1;
-        heapE[1] = pile2;
-        heapE[2] = pile3-2;
-        heapE[3] = 2;
-        heapE[4] = 3;
-      }
-    }
-    else
-    {
-      if(pile1>0)
-      {
-        heapE[0] = pile1-1;
-        heapE[1] = pile2;
-        heapE[2] = pile3;
-        heapE[3] = 1;
-        heapE[4] = 1;
-      }
-      if(pile2>0)
-      {
-        heapE[0] = pile1;
-        heapE[1] = pile2-1;
-        heapE[2] = pile3;
-        heapE[3] = 1;
-        heapE[4] = 2;
-      }
-      if(pile3>0)
-      {
-        heapE[0] = pile1;
-        heapE[1] = pile2;
-        heapE[2] = pile3-1;
-        heapE[3] = 1;
-        heapE[4] = 3;
-      }
-    }
-    return heapE;
   }
 
     public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
@@ -315,7 +253,6 @@ public class Stones
       }
       else
       {
-
         int somePile = whichPile.roll();
         switch(somePile)
         {
