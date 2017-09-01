@@ -116,15 +116,19 @@ public class Stones
       System.out.print("O ");
     }
     System.out.println("\n");
+    if(pile1==0&&pile2==0&&pile3==0)
+    {
+      done  = true;
+    }
   }
   /** The player chooses the pile number, and then the number of stones to remove from
   *  the chosen row.  The input from the user should be checked.
   */
   public void playerMakeChoice()
   {
-    int removeFromPile;
+    int removeFromPile =0;
     int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
-    System.out.println("\n");
+    System.out.print("\n");
     switch(pileSelect)
     {
       case 1:  removeFromPile = Prompt.getInt(name+", please enter the number of stones to remove in pile 2 (from 1 to "+pile1+"): ",1,pile1);
@@ -147,7 +151,7 @@ public class Stones
   */
   public void computerMakeChoice()
   {
-    Prompt.getString("\n\nIt's the computer's turn. Please hit enter to continue: \n\n");
+    Prompt.getString("It's the computer's turn. Please hit enter to continue: \n\n");
 
     int[] computerHeap = nimZero(pile1,pile2,pile3);
     pile1 = computerHeap[0];
@@ -290,7 +294,7 @@ public class Stones
   public void printWinner()
   {
     showTable();
-    if(playerTurn)
+    if(!playerTurn)
     {
       System.out.println("\nYOU ARE THE WINNER!");
       System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
