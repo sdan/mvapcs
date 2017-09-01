@@ -6,6 +6,9 @@
 * the user hit the enter key for the computer to take it's turn.  The game
 * continues until all the Stones are gone.  The player to remove the last Stone(s)
 * loses!  If there are no more Stones in a row, then the player can't choose that row!
+* @author Surya Dantuluri
+* @version 1.0
+* @since 9/1/2017
 */
 public class Stones
 {
@@ -162,7 +165,9 @@ public class Stones
       done = true;
     }
   }
-
+  /** Calculates the Nim Sum of 3 heaps.
+  * Returns the XOR values of 3 parameters.
+  */
   public int nimSum(int pile1, int pile2, int pile3, int xorTimes)
   {
     if(xorTimes==3)
@@ -180,10 +185,10 @@ public class Stones
 
   /** Robust method that calculates best possible move
   * to win the Nim game against another player
-  *  @param pile1       The String prompt to be displayed to the user.
-  *  @param pile2       The minimum integer value to be allowed as input.
-  *  @param pile3       The maximum integer value to be allowed as input.
-  *  @return            Integer array of 5 that stores updated heap values as well as
+  *  @param pile1       1st Heap of Stones
+  *  @param pile2       2nd Heap of Stones
+  *  @param pile3       3rd Heap of Stones
+  *  @return            Integer array of 5 that stores updated heap values as well as where and how many Stones were taken
   */
   public int[] nimZero(int pile1, int pile2, int pile3)
   {
@@ -192,7 +197,7 @@ public class Stones
     int pile1Xor = nimSum(pile1,nimSumValue,0,2);
     int pile2Xor = nimSum(pile2,nimSumValue,0,2);
     int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-    if(pile1<=2||pile2<=2||pile3<=2)
+    if((pile1+pile2+pile3)<=6)
     {
       for(int i = 0;i<=pile1;i++)
       {
@@ -290,9 +295,7 @@ public class Stones
     return heap;
   }
 
-  /** You may create other methods, used by playerMakeChoice and computerMakeChoice.  Be sure to
-  *  comment each new method you create.
-  */
+
   /** Shows the table, then tells the user who won, followed by an exit message.  */
   public void printWinner()
   {

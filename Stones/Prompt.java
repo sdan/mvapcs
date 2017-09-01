@@ -155,8 +155,8 @@ public class Prompt
 		{
 			done = false;
 			value = getChar(ask);
-			for(int x=0; x<input.length; x++){
-				if((input[x])==(value)){
+			for(int i =0; i<input.length; i++){
+				if((input[i])==(value)){
 				done = true;
 				}
 			}
