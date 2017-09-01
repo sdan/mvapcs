@@ -128,6 +128,10 @@ public class Stones
   {
     int removeFromPile =0;
     int pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
+    while((pileSelect==1&&pile1==0)||(pileSelect=2&&pile2==0)||(pileSelect==3&&pile3==0))
+    {
+      pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
+    }
     System.out.print("\n");
     switch(pileSelect)
     {
@@ -151,16 +155,13 @@ public class Stones
   */
   public void computerMakeChoice()
   {
-    Prompt.getString("It's the computer's turn. Please hit enter to continue: \n\n");
+    Prompt.getString("It's the computer's turn. Please hit enter to continue: ");
 
     int[] computerHeap = nimZero(pile1,pile2,pile3);
     pile1 = computerHeap[0];
-    System.out.printf("heapCompu0: %d",computerHeap[0]);
     pile2 = computerHeap[1];
-    System.out.printf("heapCompu1: %d",computerHeap[1]);
     pile3 = computerHeap[2];
-    System.out.printf("heapCompu2: %d",computerHeap[2]);
-    System.out.println("The computer removed "+computerHeap[3]+" stone(s) from Pile "+computerHeap[4]);
+    System.out.println("\nThe computer removed "+computerHeap[4]+" stone(s) from Pile "+computerHeap[3]);
 
   }
 
@@ -193,8 +194,9 @@ public class Stones
     int pile1Xor = nimSum(pile1,nimSumValue,0,2);
     int pile2Xor = nimSum(pile2,nimSumValue,0,2);
     int pile3Xor = nimSum(pile3,nimSumValue,0,2);
-    if(pile1<=2&&pile2<=2&&pile3<=2)
+    if(pile1<=2||pile2<=2||pile3<=2)
     {
+      System.out.println("NOTICE ME IM UNDER 2");
       for(int i = 0;i<=pile1;i++)
       {
         for(int j=0;j<=pile2;j++)
