@@ -36,8 +36,6 @@ public class Stones
     pile1 = piles.roll() +2;
     pile2 = piles.roll() +2;
     pile3 = piles.roll() +2;
-    /** Creates more Dice objects */
-    whichPile = new Dice(3);
 
     playerTurn = true;
     done = false;
@@ -207,16 +205,12 @@ public class Stones
           for(int k=0;k<=pile3;k++)
           {
             int finalNimSum = nimSum(i,j,k,3);
-            boolean pile1Changed = false;
-            boolean pile2Changed = false;
-            boolean pile3Changed = false;
-            if((((i!=pile1)&&(j==pile2)&&(k==pile3))||((j!=pile2)&&(i==pile1)&&(k==pile3))||((k!=pile3)&&(i==pile1)&&(j==pile2)))&&finalNimSum==1)
+            boolean pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
+           boolean pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
+           boolean pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
+            if((((i!=pile1)&&(j==pile2)&&(k==pile3))||((j!=pile2)&&(i==pile1)&&(k==pile3))||((k!=pile3)&&(i==pile1)&&(j==pile2)))&&(finalNimSum%2==1))
             {
-                pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
 
-                pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
-
-                pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
               if(pile1Changed)
               {
                 heap[3] = 1;
@@ -243,7 +237,7 @@ public class Stones
       }
 
     }
-    else if(finalNimSum!=0)
+    else if(nimSumValue!=0)
     {
       if(pile1Xor<pile1)
       {
@@ -270,9 +264,31 @@ public class Stones
         heap[4] = pile3-pile3Xor;
       }
     }
-    else
+    else if(nimSumValue==0)
     {
+      whichPile = new Dice(3);
       int somePile = whichPile.roll();
+      if(somePile==1&&pile1==0)
+      {
+        while(somePile==1)
+        {
+          somePile = whichPile.roll();
+        }
+      }
+      else if(somePile==2&&pile2==0)
+      {
+        while(somePile==2)
+        {
+          somePile = whichPile.roll();
+        }
+      }
+      else if(somePile==3&&pile3==0)
+      {
+        while(somePile==3)
+        {
+          somePile = whichPile.roll();
+        }
+      }
       randPile1 = new Dice(pile1-1);
       randPile2 = new Dice(pile2-1);
       randPile3 = new Dice(pile3-1);
