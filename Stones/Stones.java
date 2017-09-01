@@ -197,6 +197,7 @@ public class Stones
     int pile1Xor = nimSum(pile1,nimSumValue,0,2);
     int pile2Xor = nimSum(pile2,nimSumValue,0,2);
     int pile3Xor = nimSum(pile3,nimSumValue,0,2);
+
     if((pile1+pile2+pile3)<=6)
     {
       for(int i = 0;i<=pile1;i++)
@@ -206,11 +207,16 @@ public class Stones
           for(int k=0;k<=pile3;k++)
           {
             int finalNimSum = nimSum(i,j,k,3);
-            boolean pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
-            boolean pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
-            boolean pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
+            boolean pile1Changed = false;
+            boolean pile2Changed = false;
+            boolean pile3Changed = false;
             if((((i!=pile1)&&(j==pile2)&&(k==pile3))||((j!=pile2)&&(i==pile1)&&(k==pile3))||((k!=pile3)&&(i==pile1)&&(j==pile2)))&&finalNimSum==1)
             {
+                pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
+
+                pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
+
+                pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
               if(pile1Changed)
               {
                 heap[3] = 1;
@@ -237,29 +243,32 @@ public class Stones
       }
 
     }
-    if(pile1Xor<pile1)
+    else if(finalNimSum!=0)
     {
-      heap[0] = pile1Xor;
-      heap[1] = pile2;
-      heap[2] = pile3;
-      heap[3] = 1;
-      heap[4] = pile1-pile1Xor;
-    }
-    else if(pile2Xor<pile2)
-    {
-      heap[0] = pile1;
-      heap[1] = pile2Xor;
-      heap[2] = pile3;
-      heap[3] = 2;
-      heap[4] = pile2-pile2Xor;
-    }
-    else if(pile3Xor<pile3)
-    {
-      heap[0] = pile1;
-      heap[1] = pile2;
-      heap[2] = pile3Xor;
-      heap[3] = 3;
-      heap[4] = pile3-pile3Xor;
+      if(pile1Xor<pile1)
+      {
+        heap[0] = pile1Xor;
+        heap[1] = pile2;
+        heap[2] = pile3;
+        heap[3] = 1;
+        heap[4] = pile1-pile1Xor;
+      }
+      else if(pile2Xor<pile2)
+      {
+        heap[0] = pile1;
+        heap[1] = pile2Xor;
+        heap[2] = pile3;
+        heap[3] = 2;
+        heap[4] = pile2-pile2Xor;
+      }
+      else if(pile3Xor<pile3)
+      {
+        heap[0] = pile1;
+        heap[1] = pile2;
+        heap[2] = pile3Xor;
+        heap[3] = 3;
+        heap[4] = pile3-pile3Xor;
+      }
     }
     else
     {
