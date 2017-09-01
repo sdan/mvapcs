@@ -7,7 +7,7 @@
 * continues until all the Stones are gone.  The player to remove the last Stone(s)
 * loses!  If there are no more Stones in a row, then the player can't choose that row!
 */
-public class Stones
+public class StonesD
 {
   /** Number of stones in each pile.  */
   private int pile1, pile2, pile3;
@@ -25,7 +25,7 @@ public class Stones
   *  computer, and assume that the game has not ended yet (done set
   *  to false
   */
-  public Stones ( )
+  public StonesD ( )
   {
     /** Instantiation of Dice class */
     piles = new Dice(8);
@@ -45,7 +45,7 @@ public class Stones
   /** Play the game.  */
   public static void main (String [] args)
   {
-    Stones game = new Stones();
+    StonesD game = new StonesD();
     game.intro();
     game.play();
     game.printWinner();
