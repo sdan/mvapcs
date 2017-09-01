@@ -35,9 +35,6 @@ public class Stones
     pile3 = piles.roll() +2;
     /** Creates more Dice objects */
     whichPile = new Dice(3);
-    randPile1 = new Dice(pile1-1);
-    randPile2 = new Dice(pile2-1);
-    randPile3 = new Dice(pile3-1);
 
     playerTurn = true;
     done = false;
@@ -129,7 +126,6 @@ public class Stones
     {
       pileSelect = Prompt.getInt(name+", please enter a pile number (1, 2, or 3): ",1,3);
     } while((pileSelect==1&&pile1==0)||(pileSelect==2&&pile2==0)||(pileSelect==3&&pile3==0));
-    System.out.println("pileSelect"+pileSelect);
     System.out.print("\n");
     switch(pileSelect)
     {
@@ -146,7 +142,6 @@ public class Stones
     System.out.print("\n"+name+" removed " + removeFromPile + " stone(s) from Pile "+pileSelect+"\n");
     if(pile1==0&&pile2==0&&pile3==0)
     {
-      System.out.println("done");
       done = true;
     }
   }
@@ -164,7 +159,6 @@ public class Stones
     System.out.println("\nThe computer removed "+computerHeap[4]+" stone(s) from Pile "+computerHeap[3]);
     if(pile1==0&&pile2==0&&pile3==0)
     {
-      System.out.println("done");
       done = true;
     }
   }
@@ -200,24 +194,18 @@ public class Stones
     int pile3Xor = nimSum(pile3,nimSumValue,0,2);
     if(pile1<=2||pile2<=2||pile3<=2)
     {
-      System.out.println("NOTICE ME IM UNDER 2");
       for(int i = 0;i<=pile1;i++)
       {
-        System.out.println("i"+i);
         for(int j=0;j<=pile2;j++)
         {
-          System.out.println("j"+i);
           for(int k=0;k<=pile3;k++)
           {
-            System.out.println("k"+k);
             int finalNimSum = nimSum(i,j,k,3);
             boolean pile1Changed = ((i!=pile1)&&(j==pile2)&&(k==pile3));
             boolean pile2Changed = ((j!=pile2)&&(i==pile1)&&(k==pile3));
             boolean pile3Changed = ((k!=pile3)&&(i==pile1)&&(j==pile2));
             if((((i!=pile1)&&(j==pile2)&&(k==pile3))||((j!=pile2)&&(i==pile1)&&(k==pile3))||((k!=pile3)&&(i==pile1)&&(j==pile2)))&&finalNimSum==1)
             {
-              System.out.printf("\n%d,%d,%d,bb%d",i,j,k,finalNimSum);
-              System.out.println("finalsum: "+finalNimSum+"thisisFINALNIMSUM bb");
               if(pile1Changed)
               {
                 heap[3] = 1;
@@ -236,7 +224,6 @@ public class Stones
               heap[0] = i;
               heap[1] = j;
               heap[2] = k;
-              System.out.print("heapy"+heap[0]+heap[1]+heap[2]);
               return heap;
             }
           }
@@ -272,6 +259,9 @@ public class Stones
     else
     {
       int somePile = whichPile.roll();
+      randPile1 = new Dice(pile1-1);
+      randPile2 = new Dice(pile2-1);
+      randPile3 = new Dice(pile3-1);
       switch(somePile)
       {
         case 1:
@@ -309,13 +299,13 @@ public class Stones
     showTable();
     if(!playerTurn)
     {
-      System.out.println("\nYOU ARE THE WINNER!");
+      System.out.println("YOU ARE THE WINNER!");
       System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
       System.out.print("\n\n\n");
     }
     else
     {
-      System.out.println("\nTHE COMPUTER IS THE WINNER!");
+      System.out.println("THE COMPUTER IS THE WINNER!");
       System.out.println("\nTHANK YOU FOR PLAYING THE GAME OF STONES (TM)");
       System.out.print("\n\n\n");
     }
