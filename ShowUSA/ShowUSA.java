@@ -68,9 +68,7 @@ class GetAndDrawCities extends JPanel
   public void addCities(Graphics g)
   {
     int diameter = 4;
-    g.setColor(Color.gray);
     Scanner citiesScanner = OpenFile.openToRead("cities.txt");
-    Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
     while(citiesScanner.hasNext())
     {
       String citiesFullLine = citiesScanner.nextLine();
@@ -79,9 +77,25 @@ class GetAndDrawCities extends JPanel
       //System.out.println("latitude: "+(125-latitude)*16.9491525424+", longitude: "+(50-longitude)*23.0769230769);
       int laty = (int) ((125-latitude)*(PREF_W/59));
       int longy = (int) ((50-longitude)*(PREF_H/26));
-      System.out.println(citiesFullLine.substring(9,citiesFullLine.indexOf(',',9)));
+      //System.out.println();
+      Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
+      while(capitalsScanner.hasNext())
+      {
+        String capitalsFullLine = capitalsScanner.nextLine();
+        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +" "+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        System.out.println(capitalTrue);
+        String citieTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
+        if(capitalTrue.equals(citieTrue))
+        {
+          g.setColor(Color.red);
+          g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),12,12);
+        }
+
+      }
+      g.setColor(Color.gray);
       g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),4,4);
     }
+
     System.out.println("done");
 
   }
