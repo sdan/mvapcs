@@ -70,13 +70,17 @@ class GetAndDrawCities extends JPanel
     int diameter = 4;
     g.setColor(Color.gray);
     Scanner citiesScanner = OpenFile.openToRead("cities.txt");
+    Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
     while(citiesScanner.hasNext())
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
-      System.out.println("latitude: "+(124-latitude)+", longitude: "+(49-longitude));
-      g.fillOval((124-latitude)*26,(49-longitude)*23,4,4);
+      //System.out.println("latitude: "+(125-latitude)*16.9491525424+", longitude: "+(50-longitude)*23.0769230769);
+      int laty = (int) ((125-latitude)*(PREF_W/59));
+      int longy = (int) ((50-longitude)*(PREF_H/26));
+      System.out.println(citiesFullLine.substring(9,citiesFullLine.indexOf(',',9)));
+      g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),4,4);
     }
     System.out.println("done");
 
