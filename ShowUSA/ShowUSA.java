@@ -69,29 +69,11 @@ class GetAndDrawCities extends JPanel
   {
     int diameter = 4;
     Scanner citiesScanner = OpenFile.openToRead("cities.txt");
-    while(citiesScanner.hasNext())
+    while(citiesScanner.hasNextLine())
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
-      //System.out.println("latitude: "+(125-latitude)*16.9491525424+", longitude: "+(50-longitude)*23.0769230769);
-      int laty = (int) ((125-latitude)*(PREF_W/59));
-      int longy = (int) ((50-longitude)*(PREF_H/26));
-      //System.out.println();
-      Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
-      while(capitalsScanner.hasNext())
-      {
-        String capitalsFullLine = capitalsScanner.nextLine();
-        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +" "+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
-        System.out.println(capitalTrue);
-        String citieTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
-        if(capitalTrue.equals(citieTrue))
-        {
-          g.setColor(Color.red);
-          g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),12,12);
-        }
-
-      }
       g.setColor(Color.gray);
       g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),4,4);
     }
@@ -107,7 +89,27 @@ class GetAndDrawCities extends JPanel
   */
   public void addCapitals(Graphics g)
   {
+    Scanner citiesScanner = OpenFile.openToRead("cities.txt");
+    while(citiesScanner.hasNextLine())
+    {
+      String citiesFullLine = citiesScanner.nextLine();
+      Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
+      Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
+      Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
+      while(capitalsScanner.hasNextLine())
+      {
+        String capitalsFullLine = capitalsScanner.nextLine();
+        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        String cityTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
+        if(capitalTrue.equals(cityTrue))
+        {
+          System.out.println(capitalTrue);
+          g.setColor(Color.red);
+          g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),12,12);
+        }
 
+      }
+    }
   }
 
   public boolean checkForCapital(String city,String state)
