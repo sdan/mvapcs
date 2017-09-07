@@ -1,0 +1,15 @@
+java.util.Scanner;
+public class Example
+{
+public Example
+{
+double number = 0;
+}
+public static void main(String[]args)
+{
+  Scanner input = new Scanner(System.in);
+  number = input.nextLine();
+  System.out.println((int)number);
+
+}
+}
