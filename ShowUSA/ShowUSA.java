@@ -28,20 +28,19 @@ public class ShowUSA extends JFrame
     setLocationRelativeTo(null);
     setVisible(true);
   }
-
   public static void main(String[] args)
   {
     new ShowUSA();
   }
 }
 /**
-*  Add comments.
+*  Instatiating the GetAndDrawCities which extends the JPanel class. Sets the dimension of the JPanel 1000 pixels length by 600 pixels width.
+*  Also calls the paintComponent method of superclass.
 */
 class GetAndDrawCities extends JPanel
 {
   private static final int PREF_W = 1000;
   private static final int PREF_H = 600;
-
   public GetAndDrawCities()
   {
     setBackground(Color.white);
@@ -51,7 +50,6 @@ class GetAndDrawCities extends JPanel
   {
     return new Dimension(PREF_W, PREF_H);
   }
-
   @Override
   public void paintComponent(Graphics g)
   {
@@ -59,7 +57,6 @@ class GetAndDrawCities extends JPanel
     addCities(g);
     addCapitals(g);
   }
-
   /**
   *  Here, you should open up the cities text file, and translate the
   *  numbers you find to coordinate values to be plotted.  The
@@ -75,13 +72,10 @@ class GetAndDrawCities extends JPanel
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       g.setColor(Color.gray);
-      g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),4,4);
+      g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
     }
-
-    System.out.println("done");
-
+    citiesScanner.close();
   }
-
   /**
   *  Open up the capitals text file, and, for each city you find in
   *  this file, compare to the cities in cities.txt.  If you find a
@@ -89,6 +83,7 @@ class GetAndDrawCities extends JPanel
   */
   public void addCapitals(Graphics g)
   {
+    int diameter = 12;
     Scanner citiesScanner = OpenFile.openToRead("cities.txt");
     while(citiesScanner.hasNextLine())
     {
@@ -101,17 +96,17 @@ class GetAndDrawCities extends JPanel
         String capitalsFullLine = capitalsScanner.nextLine();
         String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
         String cityTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
+
         if(capitalTrue.equals(cityTrue))
         {
-          System.out.println(capitalTrue);
           g.setColor(Color.red);
-          g.fillOval((int) ((125-latitude)*(PREF_W/59)),(int) ((50-longitude)*(PREF_H/26)),12,12);
+          g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
         }
-
       }
+          capitalsScanner.close();
     }
+    citiesScanner.close();
   }
-
   public boolean checkForCapital(String city,String state)
   {
     return true;
