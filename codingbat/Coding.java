@@ -22,11 +22,11 @@ public class Coding
   }
   public String delDel(String str)
   {
-      // if(str.substring(str.indexOf(0),str.indexOf(3))=='del')
-      // return str.indexOf(0)+str.substring(str.indexOf(1),str.length()-1);
-      // else
-      // return str;
-      return "whats";
+    System.out.println(str);
+      if(str.substring(str.indexOf(0),str.indexOf(3))=="del")
+      return str.indexOf(0)+str.substring(str.indexOf(1),str.length()-1);
+      else
+      return str;
   }
 
 }
