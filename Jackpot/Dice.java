@@ -28,7 +28,7 @@
           value = -1;
       }
 
-      /** Create a Duce object, with n sides, roll count
+      /** Create a Dice object, with n sides, roll count
       * set to 0, value set to -1.
       * @param n The number of sides for the Dice object constructed.
       */
