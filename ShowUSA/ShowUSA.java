@@ -97,13 +97,18 @@ class GetAndDrawCities extends JPanel
       while(capitalsScanner.hasNextLine())
       {
         String capitalsFullLine = capitalsScanner.nextLine();
-        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+1,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
-        String cityTrue = citiesFullLine.substring(citiesFullLine.indexOf(',')+1,citiesFullLine.indexOf(',',citiesFullLine.indexOf(',')+4));
-        System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-        if(capitalTrue.substring(0,2)=="ME")
-        System.out.println("oh");
-        if(capitalTrue.equals(cityTrue))
+        String capitalTrue=capitalsFullLine.substring(capitalsFullLine.indexOf(',')+1)+","+capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        String cityTrue= citiesFullLine.substring(citiesFullLine.indexOf(',')+1,citiesFullLine.indexOf(',',citiesFullLine.indexOf(',')+4));
+        System.out.println(capitalTrue+cityTrue);
+        if(cityTrue.equals(capitalTrue))
         {
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
+
           g.setColor(Color.red);
           g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
         }
