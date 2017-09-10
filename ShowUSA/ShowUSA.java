@@ -90,7 +90,8 @@ class GetAndDrawCities extends JPanel
     while(citiesScanner.hasNextLine())
     {
       String citiesFullLine = citiesScanner.nextLine();
-      Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
+      Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
+      System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
       while(capitalsScanner.hasNextLine())
