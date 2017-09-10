@@ -34,8 +34,9 @@ public class ShowUSA extends JFrame
   }
 }
 /**
-*  Instatiating the GetAndDrawCities which extends the JPanel class. Sets the dimension of the JPanel 1000 pixels length by 600 pixels width.
-*  Also calls the paintComponent method of superclass.
+*  GetAndDrawCities class which extends the JPanel class. Sets the dimension of the JPanel 1000 pixels long by 600 pixels wide.
+*  Calls the paintComponent method of superclass, which is the JPanel class.
+*  Calls addCities and addCapitals methods with Graphics object g parameter so that the methods can "paint" onto JPanel.
 */
 class GetAndDrawCities extends JPanel
 {
@@ -69,7 +70,8 @@ class GetAndDrawCities extends JPanel
     while(citiesScanner.hasNextLine())
     {
       String citiesFullLine = citiesScanner.nextLine();
-      Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+2,citiesFullLine.length()));
+      Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
+      System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       g.setColor(Color.gray);
       g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
@@ -96,10 +98,12 @@ class GetAndDrawCities extends JPanel
         String capitalsFullLine = capitalsScanner.nextLine();
         String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
         String cityTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
-
+        if(capitalTrue.substring(0,2)=="ME")
+        System.out.println("capitalTrue: "+capitalTrue+" cityTrue: "+cityTrue);
         if(capitalTrue.equals(cityTrue))
         {
           g.setColor(Color.red);
+          // System.out.println("TRUE"+"capitalTrue: "+capitalTrue+" cityTrue: "+cityTrue);
           g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
         }
       }
@@ -107,8 +111,10 @@ class GetAndDrawCities extends JPanel
     }
     citiesScanner.close();
   }
+  /** Not using this method. No reason for the way I structured my code.
+  */
   public boolean checkForCapital(String city,String state)
   {
-    return true;
+    return false;
   }
 }
