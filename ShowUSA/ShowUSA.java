@@ -1,9 +1,9 @@
 /**
 *  ShowUSA.java
-*  Provide a description here.
+*  Simple program that uses OpenFile class to read cities.txt a text file with longitude, latitude, and city names to * display a small gray oval on GetAndDrawCities JPanel. This program also reads capitals.txt text file with state capital * cities and if a capital city is found in cities.txt, a larger red oval is drawn on the JPanel.
 *  @author Surya Dantuluri
 *  @version 1.0
-*  @since 9/4/2017
+*  @since 9/11/2017
 */
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -71,7 +71,6 @@ class GetAndDrawCities extends JPanel
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
-      //System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       g.setColor(Color.gray);
       g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
@@ -91,24 +90,15 @@ class GetAndDrawCities extends JPanel
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
-      //System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
       while(capitalsScanner.hasNextLine())
       {
         String capitalsFullLine = capitalsScanner.nextLine();
-        String capitalTrue=capitalsFullLine.substring(capitalsFullLine.indexOf(',')+1)+","+capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        String capitalTrue=capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2)+","+capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
         String cityTrue= citiesFullLine.substring(citiesFullLine.indexOf(',')+1,citiesFullLine.indexOf(',',citiesFullLine.indexOf(',')+4));
-        System.out.println(capitalTrue+cityTrue);
         if(cityTrue.equals(capitalTrue))
         {
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-          System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
-
           g.setColor(Color.red);
           g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
         }
