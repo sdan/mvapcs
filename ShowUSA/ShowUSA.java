@@ -71,7 +71,7 @@ class GetAndDrawCities extends JPanel
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
-      System.out.println("laty"+latitude);
+      //System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       g.setColor(Color.gray);
       g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
@@ -91,20 +91,20 @@ class GetAndDrawCities extends JPanel
     {
       String citiesFullLine = citiesScanner.nextLine();
       Double latitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',')+1,citiesFullLine.length()));
-      System.out.println("laty"+latitude);
+      //System.out.println("laty"+latitude);
       Double longitude = Double.parseDouble(citiesFullLine.substring(citiesFullLine.lastIndexOf(',',citiesFullLine.lastIndexOf(',')-1)+1,citiesFullLine.lastIndexOf(',')));
       Scanner capitalsScanner = OpenFile.openToRead("capitals.txt");
       while(capitalsScanner.hasNextLine())
       {
         String capitalsFullLine = capitalsScanner.nextLine();
-        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(','),capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
-        String cityTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
+        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+1,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        String cityTrue = citiesFullLine.substring(citiesFullLine.indexOf(',')+1,citiesFullLine.indexOf(',',citiesFullLine.indexOf(',')+4));
+        System.out.println("capitalTrue:"+capitalTrue+"cityTrue:"+cityTrue+"end");
         if(capitalTrue.substring(0,2)=="ME")
-        System.out.println("capitalTrue: "+capitalTrue+" cityTrue: "+cityTrue);
+        System.out.println("oh");
         if(capitalTrue.equals(cityTrue))
         {
           g.setColor(Color.red);
-          // System.out.println("TRUE"+"capitalTrue: "+capitalTrue+" cityTrue: "+cityTrue);
           g.fillOval((int) ((125-latitude)*(PREF_W/59))+30,(int) ((50-longitude)*(PREF_H/26)),diameter,diameter);
         }
       }
