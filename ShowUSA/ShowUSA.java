@@ -97,7 +97,7 @@ class GetAndDrawCities extends JPanel
       while(capitalsScanner.hasNextLine())
       {
         String capitalsFullLine = capitalsScanner.nextLine();
-        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(',')+2,capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
+        String capitalTrue = capitalsFullLine.substring(capitalsFullLine.indexOf(','),capitalsFullLine.length()) +","+ capitalsFullLine.substring(0,capitalsFullLine.indexOf(','));
         String cityTrue = citiesFullLine.substring(6,citiesFullLine.indexOf(',',9));
         if(capitalTrue.substring(0,2)=="ME")
         System.out.println("capitalTrue: "+capitalTrue+" cityTrue: "+cityTrue);
