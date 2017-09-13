@@ -10,7 +10,7 @@
  * entered by the user.  Every word that
  * matches the list should be printed to the
  * terminal window.
- * @author Surya Dantuluri
+ * @author Surya Dantulur
  * @version 1.0
  * @since 9/11/2017
  */
@@ -35,7 +35,7 @@ public class EveryWord
          EveryWord run = new EveryWord();
          run.getInput();
          run.processFile();
-         
+
      }
 
 
