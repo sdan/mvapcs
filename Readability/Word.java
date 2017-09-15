@@ -39,7 +39,7 @@
  *      char is a vowel ("a","e","i","o","u",or "y"), false otherwise.
  *      This method must be used as a helper method, called in the 2nd
  *      method above (numSyllables).
- *  @author Your Name Here
+ *  @author Surya Dantuluri
  *  @version 1.0
  *  @since 9/12/2017
  */
@@ -49,7 +49,6 @@ public class Word
     public Word(String inWord)
     {
         inputWord = inWord.toLowerCase();
-        //System.out.println(inputWord);
     }
     public String getWord()
     {
@@ -60,24 +59,33 @@ public class Word
     {
         //boolean[] syllable = new boolean[inputWord.length()];
         int syllable = 0;
+        // for(int i = 0;i<inputWord.length();i++)
+        // {
+        //     if(isVowel(inputWord.charAt(i)))
+        //     {
+        //         System.out.println("hello"+inputWord.charAt(i));
+        //         System.out.println("woah"+inputWord.indexOf(inputWord.charAt(i)));
+        //         while((isVowel(inputWord.charAt(i))))
+        //         {
+        //             if(isVowel(inputWord.charAt(i-1)))
+        //             {
+        //                 i++;
+        //             }
+        //         }
+        //         syllable++;
+        //     }
+        //
+        // }
         for(int i = 0;i<inputWord.length();i++)
         {
-            if(isVowel(inputWord.charAt(i)))
-            {
-                System.out.println("hello"+inputWord.charAt(i));
-                System.out.println("woah"+inputWord.indexOf(inputWord.charAt(i)));
-                while((isVowel(inputWord.charAt(i))))
-                {
-                    if(isVowel(inputWord.charAt(i-1)))
-                    {
-                        i++;
-                    }
-                }
-                syllable++;
-            }
-
+          if(isVowel(inputWord.charAt(i)))
+          {
+            if(!(isVowel(inputWord.charAt(i+1))))
+            System.out.println("hello"+inputWord.charAt(inputWord.length()-i-1));
+            syllable++;
+          }
         }
-        return 0;
+        return syllable;
     }
     public boolean isVowel(char vowel)
     {
