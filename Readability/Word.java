@@ -57,35 +57,17 @@ public class Word
     }
     public int numSyllables()
     {
-        //boolean[] syllable = new boolean[inputWord.length()];
-        int syllable = 0;
-        // for(int i = 0;i<inputWord.length();i++)
-        // {
-        //     if(isVowel(inputWord.charAt(i)))
-        //     {
-        //         System.out.println("hello"+inputWord.charAt(i));
-        //         System.out.println("woah"+inputWord.indexOf(inputWord.charAt(i)));
-        //         while((isVowel(inputWord.charAt(i))))
-        //         {
-        //             if(isVowel(inputWord.charAt(i-1)))
-        //             {
-        //                 i++;
-        //             }
-        //         }
-        //         syllable++;
-        //     }
-        //
-        // }
-        for(int i = 0;i<inputWord.length();i++)
+        int counter = 0;
+        while(inputWord.length()>0)
         {
-          if(isVowel(inputWord.charAt(i)))
+          while(isVowel(inputWord.charAt(counter)))
           {
-            if(!(isVowel(inputWord.charAt(i+1))))
-            System.out.println("hello"+inputWord.charAt(inputWord.length()-i-1));
-            syllable++;
+            counter++;
+            System.out.println(counter);
           }
+          inputWord=inputWord.substring(counter,inputWord.length());
         }
-        return syllable;
+        return counter;
     }
     public boolean isVowel(char vowel)
     {
