@@ -60,12 +60,12 @@ public class Word
         int counter = 0;
         while(inputWord.length()>0)
         {
-          while(isVowel(inputWord.charAt(counter)))
+          if(isVowel(inputWord.charAt(counter)))
           {
             counter++;
             System.out.println(counter);
+            inputWord=inputWord.substring(1,inputWord.length());
           }
-          inputWord=inputWord.substring(counter,inputWord.length());
         }
         return counter;
     }

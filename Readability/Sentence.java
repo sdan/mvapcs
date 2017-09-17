@@ -25,14 +25,12 @@
  *      IN THE Word CLASS.
  *  The method stripAllPunctuation may be helpful also, and
  *  is provided for you below.
- *  @author Your Name Here
+ *  @author Surya Dantuluri
  *  @version 1.0
  *  @since 9/12/2017
  */
 public class Sentence
 {
-
-
     public String stripAllPunctuation(String temp)
     {
         for(int i = 0; i < temp.length(); i++)
@@ -51,4 +49,18 @@ public class Sentence
         }
         return temp;
     }
+
+    public String getSentence()
+    {
+
+    }
+    public int getNumWords()
+    {
+
+    }
+    public int getNumSyllables()
+    {
+      
+    }
+
 }
