@@ -69,7 +69,7 @@ public class Word
     if(inputWord.charAt(inputWord.length()-1)!='e'&&isVowel(inputWord.charAt(inputWord.length()-1)))
     {
             syllable++;
-            //System.out.println(inputWord.charAt(inputWord.length()-2));
+            System.out.println("hello  :  "+inputWord.charAt(inputWord.length()-1));
             //!isVowel(inputWord.charAt(inputWord.length()-2))
     }
     //System.out.println(inputWord.charAt(inputWord.length()-1));
