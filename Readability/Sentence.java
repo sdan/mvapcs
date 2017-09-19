@@ -70,7 +70,7 @@ public class Sentence
     wordList = new Word[getNumWords()];
     for(int i = 0; i <getNumWords(); i++)
     {
-        list[i] = new Word(w[i]);
+        wordList[i] = new Word(w[i]);
         System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
     }
     // Word.getNumSyllables();
