@@ -1,4 +1,3 @@
-
 /**
  *  Sentence.java
  *  A class that models an English sentence.  This class
@@ -29,38 +28,60 @@
  *  @version 1.0
  *  @since 9/12/2017
  */
+
 public class Sentence
 {
-    public String stripAllPunctuation(String temp)
-    {
-        for(int i = 0; i < temp.length(); i++)
-        {
-            switch(temp.charAt(i))
-            {
-                case '.': case ':': case ';': case '?': case '!': case ',': case '\'': case '\"':
-                temp = temp.substring(0,i) + " " + temp.substring(i+1);
-                break;
+  String modifiedSentence;
+  Word [] wordList;
+  public Sentence(String originalSentence)
+  {
+    System.out.println("beef: "+originalSentence);
+  String modifiedSentence = originalSentence;
+  }
+	public String stripAllPunctuation(String temp)
+	{
+		for(int i = 0; i < temp.length(); i++)
+		{
+			switch(temp.charAt(i))
+			{
+				case '.': case ':': case ';': case '?': case '!': case ',': case '\"': case '-':
+					temp = temp.substring(0,i) + " " + temp.substring(i+1);
+					break;
 
-                case '\'':
-                temp = temp.substring(0,i) + temp.substring(i+1);
-                i--;
-                break;
-            }
-        }
-        return temp;
-    }
+				case '\'':
+					temp = temp.substring(0,i) + temp.substring(i+1);
+					i--;
+					break;
+			}
+		}
+		return temp;
+	}
+//getSentence -> no args, returns the String that
+//      represents the sentence (a field variable).
+  public String getSentence()
+  {
+    return modifiedSentence;
+  }
+//getNumWords -> no args, counts and returns
+// *      the number of words in the sentence.  Words are
+// *      defined as letter groups separated by white space.
+// *      White space could be tab(s), space(s), and new
+// *      line(s).
+  public int getNumWords()
+  {
+    System.out.println("chicken: "+modifiedSentence);
+    modifiedSentence = stripAllPunctuation(modifiedSentence);
+    return 0;
+  }
 
-    public String getSentence()
-    {
-
-    }
-    public int getNumWords()
-    {
-
-    }
-    public int getNumSyllables()
-    {
-      
-    }
-
+  public String getNumSyllables()
+  {
+    return "hello";
+  }
+ //  (c) getNumSyllables -> no args, counts and returns the
+ // *      number of syllables in the sentence.  The rules for
+ // *      counting the number of syllables in a Word can be
+ // *      found in the Word class.  YOU ARE REQUIRED TO MAKE
+ // *      USE OF (call) THE numSyllables METHOD YOU CREATED
+ // *      IN THE Word CLASS.
 }
