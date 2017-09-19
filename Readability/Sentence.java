@@ -52,19 +52,27 @@ public class Sentence
   {
     int counter = 0;
     modifiedSentence = stripAllPunctuation(modifiedSentence);
-    System.out.println("I like food: "+modifiedSentence);
-    for(int i = 0;i<modifiedSentence.length();i++)
+    System.out.println("I like food:_"+modifiedSentence+"___");
+    for(int i = 0;i<modifiedSentence.length()-1;i++)
     {
-      if(modifiedSentence.charAt(i)<65&&modifiedSentence.charAt(i+1)!<65)
+      if(modifiedSentence.charAt(i)<33&&!(modifiedSentence.charAt(i+1)<33))
       {
         counter++;
       }
     }
+    if(modifiedSentence.charAt(modifiedSentence.length()-1)<33&&!(modifiedSentence.charAt(0)<33))
+    counter++;
     return counter;
   }
 
   public int getNumSyllables()
   {
+    wordList = new Word[getNumWords()];
+    for(int i = 0; i <getNumWords(); i++)
+    {
+        list[i] = new Word(w[i]);
+        System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
+    }
     // Word.getNumSyllables();
     return 0;
   }
