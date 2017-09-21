@@ -68,23 +68,28 @@ public class Sentence
     String trimmed = "";
     int lasty = 0;
     //System.out.println("number of words: "+getNumWords());
-    for(int i = 0;i<getNumWords();i++)
+              // for(int i = 0;i<getNumWords();i++)
+              // {
+              //     System.out.println("mod "+modifiedSentence);
+              //     System.out.println("lasty "+lasty);
+              //     System.out.println("hello "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
+              //     //System.out.println("notmod "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
+              //     //wordList[i] = new Word(modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
+              //     //System.out.println(wordList[i].getWord() + "  " + wordList[i].numSyllables());
+              //     lasty+=modifiedSentence.indexOf(' ');
+              //
+    int modindexof = 0;
+    for(int i=0;i<modifiedSentence.length();i++)
     {
-        System.out.println("mod "+modifiedSentence);
-        System.out.println("lasty "+lasty);
-        System.out.println("hello "+modifiedSentence.substring(lasty,lasty+modifiedSentence.indexOf(' ')));
-        //System.out.println("notmod "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
-        //wordList[i] = new Word(modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
-        //System.out.println(wordList[i].getWord() + "  " + wordList[i].numSyllables());
-        lasty+=modifiedSentence.indexOf(' ');
+     modindexof = modifiedSentence.indexOf(' ',modindexof);
+     System.out.println("team10 "+modindexof);
+      // wordList[i] = new Word(//this is the word);
+      //   wordList[i]=new Word()
+      //
+      //   spaceIndex=i+1; //increment space index
+        }
     }
-        //trimmed = modifiedSentence.substring(modifiedSentence.indexOf(' ',getNumWords()-i));
-        //System.out.println("hello friends:"+trimmed+"_");
-        //wordList[i] = new Word(w[i]);
-        //System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
-     //wordList[1] = new Word(modifiedSentence);
-      //  System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
-    //System.out.println(wordList[1].
+    return  wordsArray; //return the 2 dimensional char array
     return 0;
   }
   //  (c) getNumSyllables -> no args, counts and returns the
