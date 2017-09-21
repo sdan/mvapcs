@@ -28,7 +28,6 @@
 *  @version 1.0
 *  @since 9/12/2017
 */
-
 public class Sentence
 {
   String modifiedSentence;
@@ -39,7 +38,7 @@ public class Sentence
   }
   //getSentence -> no args, returns the String that
   //      represents the sentence (a field variable).
-  public String getSentence()
+  public String getSentence()//done
   {
     return modifiedSentence;
   }
@@ -48,11 +47,10 @@ public class Sentence
   // *      defined as letter groups separated by white space.
   // *      White space could be tab(s), space(s), and new
   // *      line(s).
-  public int getNumWords()
+  public int getNumWords()//done
   {
     int counter = 0;
     modifiedSentence = stripAllPunctuation(modifiedSentence);
-    System.out.println("I like food:_"+modifiedSentence+"___");
     for(int i = 0;i<modifiedSentence.length()-1;i++)
     {
       if(modifiedSentence.charAt(i)<33&&!(modifiedSentence.charAt(i+1)<33))
@@ -64,16 +62,29 @@ public class Sentence
     counter++;
     return counter;
   }
-
   public int getNumSyllables()
   {
     wordList = new Word[getNumWords()];
-    for(int i = 0; i <getNumWords(); i++)
+    String trimmed = "";
+    int lasty = 0;
+    //System.out.println("number of words: "+getNumWords());
+    for(int i = 0;i<getNumWords();i++)
     {
-        wordList[i] = new Word(w[i]);
-        System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
+        System.out.println("mod "+modifiedSentence);
+        System.out.println("lasty "+lasty);
+        System.out.println("hello "+modifiedSentence.substring(lasty,lasty+modifiedSentence.indexOf(' ')));
+        //System.out.println("notmod "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
+        //wordList[i] = new Word(modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
+        //System.out.println(wordList[i].getWord() + "  " + wordList[i].numSyllables());
+        lasty+=modifiedSentence.indexOf(' ');
     }
-    // Word.getNumSyllables();
+        //trimmed = modifiedSentence.substring(modifiedSentence.indexOf(' ',getNumWords()-i));
+        //System.out.println("hello friends:"+trimmed+"_");
+        //wordList[i] = new Word(w[i]);
+        //System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
+     //wordList[1] = new Word(modifiedSentence);
+      //  System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
+    //System.out.println(wordList[1].
     return 0;
   }
   //  (c) getNumSyllables -> no args, counts and returns the
@@ -82,8 +93,7 @@ public class Sentence
   // *      found in the Word class.  YOU ARE REQUIRED TO MAKE
   // *      USE OF (call) THE numSyllables METHOD YOU CREATED
   // *      IN THE Word CLASS.
-
-  public String stripAllPunctuation(String temp)
+  public String stripAllPunctuation(String temp)//done
   {
     for(int i = 0; i < temp.length(); i++)
     {
@@ -92,7 +102,6 @@ public class Sentence
         case '.': case ':': case ';': case '?': case '!': case ',': case '\"': case '-':
         temp = temp.substring(0,i) + " " + temp.substring(i+1);
         break;
-
         case '\'':
         temp = temp.substring(0,i) + temp.substring(i+1);
         i--;
