@@ -70,7 +70,11 @@ public class Sentence
     int count = 0;
     for(int i=0;i<wordList.length;i++)
     {
-      System.out.println(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
+      while(modifiedSentence.substring(modindexof,modindexof+1).trim().isEmpty())
+      {
+        modindexof++;
+        System.out.println("BARNEY AND FRIENDS");
+      }
       System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       modindexof = modifiedSentence.indexOf(' ',modindexof);
       System.out.println("team10 "+modindexof);
