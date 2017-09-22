@@ -1,0 +1,41 @@
+
+The aim of this book is to explore the theoretical possibility and the
+social function of a unified approach to every phenomenon of signification
+and/or communication.  Such an approach should take the form of a general
+semiotic theory, able to explain every case of sign-function in terms of
+underlying systems of elements mutually correlated by one or more codes.
+
+A design for a general semiotics should consider: (a) a theory of codes
+and (b) a theory of sign production - the later taking into account a
+large range of phenomena such as the common use of languages, the
+evolution of codes, aesthetic communication, different types of interactional
+communicative behaviors, the use of signs in order to mention things or
+states of the world and so on.
+
+Since this book represents only a preliminary exploration of such a
+theoretical possibility, its first chapters are necessarily conditioned
+by the present state of the art, and cannot evade some questions that -
+in a further perspective - will definitely be left aside. In particular
+one must first take into account the all-purpose notion of 'sign' and the
+problem of a typology of signs (along with the apparently irreducible
+forms of semiotic enquiry they presuppose) in order to arrive at a more
+rigorous definition of sign-function and at a typology of modes of
+sign-production.
+
+Therefore a first chapter will be devoted to the analysis of the notion of
+'sign' in order to distinguish signs from non-signs and to translate the
+notion of 'sign' into the more flexible one of sign-function (which can
+be explained within the framework of a theory of codes).  This discussion
+will allow me to posit a distinction between 'signification' and
+'communication': in principle, a semiotics of signification entails a
+theory of codes, while a semiotics of communication entails a theory of
+sign produciton.
+
+The distinction between a theory of codes and a theory of sign production
+does not correspond to the ones between 'langue' and 'parole', competence
+and performance, syntactics (ane semantics) and pragmatics.  One of the
+claims of the present book is to overcome these distinctions and to outline
+a theory of codes which takes into account even the rules of discoursive
+competence, text formation, contextual and circumstantial (or situational)
+disambiguation, therefore proposing a semantics which solves within its
+own framework many problems of the so-called pragmatics.
