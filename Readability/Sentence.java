@@ -65,32 +65,19 @@ public class Sentence
   public int getNumSyllables()
   {
     wordList = new Word[getNumWords()];
-    String trimmed = "";
-    int lasty = 0;
-    //System.out.println("number of words: "+getNumWords());
-              // for(int i = 0;i<getNumWords();i++)
-              // {
-              //     System.out.println("mod "+modifiedSentence);
-              //     System.out.println("lasty "+lasty);
-              //     System.out.println("hello "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
-              //     //System.out.println("notmod "+modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
-              //     //wordList[i] = new Word(modifiedSentence.substring(lasty,modifiedSentence.indexOf(' ')).trim());
-              //     //System.out.println(wordList[i].getWord() + "  " + wordList[i].numSyllables());
-              //     lasty+=modifiedSentence.indexOf(' ');
-              //
+
     int modindexof = 0;
+    int count = 0;
     for(int i=0;i<modifiedSentence.length();i++)
     {
-     modindexof = modifiedSentence.indexOf(' ',modindexof);
-     System.out.println("team10 "+modindexof);
-      // wordList[i] = new Word(//this is the word);
-      //   wordList[i]=new Word()
-      //
-      //   spaceIndex=i+1; //increment space index
-        }
+      System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
+      modindexof = modifiedSentence.indexOf(' ',modindexof);
+      System.out.println("team10 "+modindexof);
+      wordList[i]=new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
+      count+=wordList[i].numSyllables();
+      modindexof++;
     }
-    return  wordsArray; //return the 2 dimensional char array
-    return 0;
+    return count;
   }
   //  (c) getNumSyllables -> no args, counts and returns the
   // *      number of syllables in the sentence.  The rules for
