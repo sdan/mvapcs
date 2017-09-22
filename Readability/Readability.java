@@ -33,6 +33,7 @@ public class Readability
 		if(args.length > 0)
 		{
 			run.readInText(args[0]);
+      System.out.println("team100");
 		}
 		else
 		{
@@ -41,10 +42,30 @@ public class Readability
 		run.calculateReadability();
 	}
 
-	/**
+  /**
 	 *  Write the methods readInText and calculateReadability, along with
 	 *  any other methods that are necessary.
 	 */
+
+  public void readInText(String inputFileName)
+  {
+    String fullTextFile = "";
+    Scanner infile = OpenFile.openToRead(inputFileName);
+    while(infile.hasNextLine())
+    {
+      fullTextFile+=infile.nextLine();
+      System.out.println(infile.nextLine());
+    }
+    System.out.println("jakepaul ");
+  }
+
+  public void calculateReadability()
+  {
+    System.out.println("loganpaul ");
+  }
+
+
+
 }
 
 /*
