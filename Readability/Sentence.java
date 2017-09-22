@@ -65,7 +65,7 @@ public class Sentence
   public int getNumSyllables()
   {
     wordList = new Word[getNumWords()];
-
+    System.out.println("NUMWORDS: "+getNumWords());
     int modindexof = 0;
     int count = 0;
     for(int i=0;i<modifiedSentence.length();i++)
@@ -73,8 +73,10 @@ public class Sentence
       System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       modindexof = modifiedSentence.indexOf(' ',modindexof);
       System.out.println("team10 "+modindexof);
-      wordList[i]=new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
-      count+=wordList[i].numSyllables();
+      wordList[0] = new Word("what's popping");
+      System.out.println("fried "+wordList[0]);
+      //wordList[i]=new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
+      //count+=wordList[i].numSyllables();
       modindexof++;
     }
     return count;
