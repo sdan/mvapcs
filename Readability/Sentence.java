@@ -68,13 +68,14 @@ public class Sentence
     System.out.println("NUMWORDS: "+getNumWords());
     int modindexof = 0;
     int count = 0;
-    for(int i=0;i<modifiedSentence.length();i++)
+    for(int i=0;i<wordList.length;i++)
     {
+      System.out.println(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       modindexof = modifiedSentence.indexOf(' ',modindexof);
       System.out.println("team10 "+modindexof);
-      wordList[0] = new Word("what's popping");
-      System.out.println("fried "+wordList[0]);
+      wordList[0] = new Word("java");
+      System.out.println("fried "+wordList[0].numSyllables());
       //wordList[i]=new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       //count+=wordList[i].numSyllables();
       modindexof++;
