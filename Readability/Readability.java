@@ -50,10 +50,9 @@ public class Readability
   public void readInText(String inputFileName)
   {
     Scanner infile = OpenFile.openToRead(inputFileName);
-    while(infile.hasNextLine())
+    while(infile.hasNext())
     {
-      wholeText+=infile.next();
-      System.out.println(infile.nextLine());
+      wholeText+=" "+infile.nextLine();
     }
   System.out.println(wholeText);
   }
@@ -71,11 +70,11 @@ public class Readability
     }
     Sentence countSentence = new Sentence(wholeText);
     //ability=206.835-84.6*(countSentence.getNumSyllables()/countSentence.getNumWords())-1.015*(countSentence.getNumWords()/countSentence.getNumSyllables());
-    // System.out.println("\n\n\n");
-    // System.out.println(" Text File  : ");
-    // System.out.println("\n Sentences  : "+count);
-    // System.out.println(" Words      : "+countSentence.getNumWords());
-    // System.out.println(" Syllables  : "+countSentence.getNumSyllables());
+     System.out.println("\n\n\n");
+     System.out.println(" Text File  : ");
+     System.out.println("\n Sentences  : "+count);
+     System.out.println(" Words      : "+countSentence.getNumWords());
+     System.out.println(" Syllables  : "+countSentence.getNumSyllables());
     // System.out.println("\n Readability: "+ability);
     //System.out.println("jakepaul "+count);
   }

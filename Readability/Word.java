@@ -57,14 +57,20 @@ public class Word
   public int numSyllables()
   {
     int syllable = 0;
+    char secondToLastChar = 0;
     for(int i = 0; i<inputWord.length()-1; i++)
     {
       if(isVowel(inputWord.charAt(i))&&!isVowel(inputWord.charAt(i+1)))
+      {
+        syllable++;
+      }
+      //else if(isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||
+      else if((isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e')&&i==inputWord.length()-2)
         syllable++;
     }
-    if(isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e')
-      syllable++;
-    else if(syllable==0)
+
+      //||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e'
+    if(syllable==0)
     syllable++;
     return syllable;
   }

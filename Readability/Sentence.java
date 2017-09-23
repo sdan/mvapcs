@@ -51,20 +51,15 @@ public class Sentence
   {
     int counter = 0;
     modifiedSentence = stripAllPunctuation(modifiedSentence);
-    modifiedSentence = modifiedSentence.trim();
     for(int i = 0;i<modifiedSentence.length()-1;i++)
     {
       if(modifiedSentence.charAt(i)<33&&!(modifiedSentence.charAt(i+1)<33))
       {
         counter++;
-        System.out.println("a~~~~"+modifiedSentence.charAt(i));
       }
     }
     if(modifiedSentence.charAt(modifiedSentence.length()-1)<33&&!(modifiedSentence.charAt(0)<33))
-    {
-      System.out.println("e~~~~"+modifiedSentence.charAt(modifiedSentence.length()-1));
-      counter++;
-    }
+    counter++;
     return counter;
   }
   public int getNumSyllables()
@@ -82,8 +77,9 @@ public class Sentence
       }
       //System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       wordList[i] = new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
-      wordList[i]=new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
+      //System.out.println("clout "+wordList[i].getWord());
       count+=wordList[i].numSyllables();
+      //System.out.println(count);
       modindexof = modifiedSentence.indexOf(' ',modindexof);
       //System.out.println("team10 "+modindexof);
       //System.out.println("fried "+wordList[i].numSyllables());
