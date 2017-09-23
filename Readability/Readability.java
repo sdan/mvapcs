@@ -53,7 +53,7 @@ public class Readability
     {
       wholeText+=" "+infile.nextLine();
     }
-    System.out.println("\n\n\n");
+    System.out.print("\n\n\n");
     System.out.println(" Text File  : "+inputFileName);
   }
 
@@ -69,7 +69,7 @@ public class Readability
       }
     }
     Sentence sentenceIndex = new Sentence(wholeText);
-    ability=206.835-(((-84.6*sentenceIndex.getNumSyllables())/sentenceIndex.getNumWords())+((-1.015*sentenceIndex.getNumWords())/sentenceCount));
+    ability=206.835+(((-84.6*sentenceIndex.getNumSyllables())/sentenceIndex.getNumWords())+((-1.015*sentenceIndex.getNumWords())/sentenceCount));
      System.out.println("\n Sentences  : "+sentenceCount);
      System.out.println(" Words      : "+sentenceIndex.getNumWords());
      System.out.println(" Syllables  : "+sentenceIndex.getNumSyllables());
