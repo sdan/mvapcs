@@ -33,7 +33,6 @@ public class Readability
 		if(args.length > 0)
 		{
 			run.readInText(args[0]);
-      System.out.println("team100");
 		}
 		else
 		{
@@ -54,28 +53,28 @@ public class Readability
     {
       wholeText+=" "+infile.nextLine();
     }
-  System.out.println(wholeText);
+    System.out.println("\n\n\n");
+    System.out.println(" Text File  : "+inputFileName);
   }
 
   public void calculateReadability()
   {
-    int count = 0;
+    int sentenceCount = 0;
     double ability = 0;
     for(int i =0;i<wholeText.length();i++)
     {
       if(wholeText.charAt(i)=='.'||wholeText.charAt(i)==':'||wholeText.charAt(i)==';'||wholeText.charAt(i)=='?'||wholeText.charAt(i)=='!')
       {
-        count++;
+        sentenceCount++;
       }
     }
-    Sentence countSentence = new Sentence(wholeText);
-    //ability=206.835-84.6*(countSentence.getNumSyllables()/countSentence.getNumWords())-1.015*(countSentence.getNumWords()/countSentence.getNumSyllables());
+    Sentence sentenceIndex = new Sentence(wholeText);
+    ability=206.835-84.6*(sentenceIndex.getNumSyllables()/sentenceIndex.getNumWords())-1.015*(sentenceIndex.getNumWords()/sentenceCount);
+     System.out.println("\n Sentences  : "+sentenceCount);
+     System.out.println(" Words      : "+sentenceIndex.getNumWords());
+     System.out.println(" Syllables  : "+sentenceIndex.getNumSyllables());
+     System.out.printf("\n Readability: %.3f",ability);
      System.out.println("\n\n\n");
-     System.out.println(" Text File  : ");
-     System.out.println("\n Sentences  : "+count);
-     System.out.println(" Words      : "+countSentence.getNumWords());
-     System.out.println(" Syllables  : "+countSentence.getNumSyllables());
-    // System.out.println("\n Readability: "+ability);
     //System.out.println("jakepaul "+count);
   }
 
