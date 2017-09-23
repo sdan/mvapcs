@@ -50,10 +50,12 @@ public class Word
   {
     inputWord = inWord.toLowerCase();
   }
+
   public String getWord()
   {
     return inputWord;
   }
+
   public int numSyllables()
   {
     int syllable = 0;
@@ -64,16 +66,14 @@ public class Word
       {
         syllable++;
       }
-      //else if(isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||
       else if((isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e')&&i==inputWord.length()-2)
-        syllable++;
+      syllable++;
     }
-
-      //||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e'
     if(syllable==0)
     syllable++;
     return syllable;
   }
+
   public boolean isVowel(char vowel)
   {
     if(vowel=='a'||vowel=='e'||vowel=='i'||vowel=='o'||vowel=='u'||vowel=='y')

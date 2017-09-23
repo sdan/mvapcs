@@ -1,6 +1,10 @@
 /**
  * Readability.java
- * E        D           I       T       H E R E
+ * A class that calculates reading comprehension level necessary to read documents.
+ * This class has a single field variable, a String that holds the entire document
+ * content using class OpenFile. This class has a constructor that takes no arguments.
+ * This class has a main method that takes the text file name as an argument for
+ * readInText and calculateReadability methods to process text file and outputs readability index.
  * @author Surya Dantuluri
  * @version 1.0
  * @since 9/18/2017
@@ -41,11 +45,9 @@ public class Readability
 		run.calculateReadability();
 	}
 
-  /**
-	 *  Write the methods readInText and calculateReadability, along with
-	 *  any other methods that are necessary.
+	/*
+	 * Reads entire text file choosen by user into a field variable.
 	 */
-
   public void readInText(String inputFileName)
   {
     Scanner infile = OpenFile.openToRead(inputFileName);
@@ -57,6 +59,11 @@ public class Readability
     System.out.println(" Text File  : "+inputFileName);
   }
 
+	/*
+	 * Calculates reading comprehension level needed to read text file choosen by user.
+	 * Uses the number of syllables and words of the text file calculated by the Sentence class
+	 * and the number of sentences in the text file to calculate readibility index.
+	 */
   public void calculateReadability()
   {
     int sentenceCount = 0;
@@ -75,11 +82,7 @@ public class Readability
      System.out.println(" Syllables  : "+sentenceIndex.getNumSyllables());
      System.out.printf("\n Readability: %.3f",ability);
      System.out.println("\n\n\n");
-    //System.out.println("jakepaul "+count);
   }
-
-
-
 }
 
 /*

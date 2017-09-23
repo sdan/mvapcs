@@ -36,18 +36,13 @@ public class Sentence
   {
     modifiedSentence = originalSentence;
   }
-  //getSentence -> no args, returns the String that
-  //      represents the sentence (a field variable).
-  public String getSentence()//done
+
+  public String getSentence()
   {
     return modifiedSentence;
   }
-  //getNumWords -> no args, counts and returns
-  // *      the number of words in the sentence.  Words are
-  // *      defined as letter groups separated by white space.
-  // *      White space could be tab(s), space(s), and new
-  // *      line(s).
-  public int getNumWords()//done
+
+  public int getNumWords()
   {
     int counter = 0;
     modifiedSentence = stripAllPunctuation(modifiedSentence);
@@ -62,10 +57,10 @@ public class Sentence
     counter++;
     return counter;
   }
+
   public int getNumSyllables()
   {
     wordList = new Word[getNumWords()];
-    //System.out.println("NUMWORDS: "+getNumWords());
     int modindexof = 0;
     int count = 0;
     for(int i=0;i<wordList.length;i++)
@@ -73,26 +68,15 @@ public class Sentence
       while(modifiedSentence.substring(modindexof,modindexof+1).trim().isEmpty())
       {
         modindexof++;
-        //System.out.println("BARNEY AND FRIENDS");
       }
-      //System.out.println("clout "+modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
       wordList[i] = new Word(modifiedSentence.substring(modindexof,modifiedSentence.indexOf(' ',modindexof+1)));
-      //System.out.println("clout "+wordList[i].getWord());
       count+=wordList[i].numSyllables();
-      //System.out.println(count);
       modindexof = modifiedSentence.indexOf(' ',modindexof);
-      //System.out.println("team10 "+modindexof);
-      //System.out.println("fried "+wordList[i].numSyllables());
     }
     return count;
   }
-  //  (c) getNumSyllables -> no args, counts and returns the
-  // *      number of syllables in the sentence.  The rules for
-  // *      counting the number of syllables in a Word can be
-  // *      found in the Word class.  YOU ARE REQUIRED TO MAKE
-  // *      USE OF (call) THE numSyllables METHOD YOU CREATED
-  // *      IN THE Word CLASS.
-  public String stripAllPunctuation(String temp)//done
+
+  public String stripAllPunctuation(String temp)
   {
     for(int i = 0; i < temp.length(); i++)
     {
