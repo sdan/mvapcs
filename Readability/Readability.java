@@ -49,19 +49,35 @@ public class Readability
 
   public void readInText(String inputFileName)
   {
-    String fullTextFile = "";
     Scanner infile = OpenFile.openToRead(inputFileName);
-    while(infile.hasNextLine())
+    while(infile.hasNext())
     {
-      fullTextFile+=infile.nextLine();
-      System.out.println(infile.nextLine());
+      wholeText+=infile.next();
+      System.out.println(infile.next());
     }
-    System.out.println("jakepaul ");
+  System.out.println(wholeText);
   }
 
   public void calculateReadability()
   {
-    System.out.println("loganpaul ");
+    int count = 0;
+    double ability = 0;
+    for(int i =0;i<wholeText.length();i++)
+    {
+      if(wholeText.charAt(i)=='.'||wholeText.charAt(i)==':'||wholeText.charAt(i)==';'||wholeText.charAt(i)=='?'||wholeText.charAt(i)=='!')
+      {
+        count++;
+      }
+    }
+    Sentence countSentence = new Sentence(wholeText);
+    //ability=206.835-84.6*(countSentence.getNumSyllables()/countSentence.getNumWords())-1.015*(countSentence.getNumWords()/countSentence.getNumSyllables());
+    // System.out.println("\n\n\n");
+    // System.out.println(" Text File  : ");
+    // System.out.println("\n Sentences  : "+count);
+    // System.out.println(" Words      : "+countSentence.getNumWords());
+    // System.out.println(" Syllables  : "+countSentence.getNumSyllables());
+    // System.out.println("\n Readability: "+ability);
+    //System.out.println("jakepaul "+count);
   }
 
 

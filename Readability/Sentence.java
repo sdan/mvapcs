@@ -51,15 +51,20 @@ public class Sentence
   {
     int counter = 0;
     modifiedSentence = stripAllPunctuation(modifiedSentence);
+    modifiedSentence = modifiedSentence.trim();
     for(int i = 0;i<modifiedSentence.length()-1;i++)
     {
       if(modifiedSentence.charAt(i)<33&&!(modifiedSentence.charAt(i+1)<33))
       {
         counter++;
+        System.out.println("a~~~~"+modifiedSentence.charAt(i));
       }
     }
     if(modifiedSentence.charAt(modifiedSentence.length()-1)<33&&!(modifiedSentence.charAt(0)<33))
-    counter++;
+    {
+      System.out.println("e~~~~"+modifiedSentence.charAt(modifiedSentence.length()-1));
+      counter++;
+    }
     return counter;
   }
   public int getNumSyllables()
