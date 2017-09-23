@@ -50,10 +50,10 @@ public class Readability
   public void readInText(String inputFileName)
   {
     Scanner infile = OpenFile.openToRead(inputFileName);
-    while(infile.hasNext())
+    while(infile.hasNextLine())
     {
       wholeText+=infile.next();
-      System.out.println(infile.next());
+      System.out.println(infile.nextLine());
     }
   System.out.println(wholeText);
   }
