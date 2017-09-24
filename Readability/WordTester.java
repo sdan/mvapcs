@@ -1,23 +1,25 @@
 public class WordTester
 {
-    public static void main(String [] args)
-    {
-        String [] w = {"java", "rate", "ROTATE", "hierarchy", "juxtaposition", "great",
-                        "syllable", "able", "are", "phylae", "simplicity", "GRouP",
-                        "keeping", "AYE", "testing123", "pqr132", "unique", "quixotic",
-                        "rambunctious", "pleurodynia", "presenteeism", "umbriferous",
-                        "wayzgoose", "Sequoia", "SIMple"};
-        Word [] list = new Word[w.length];
-        System.out.println("\n\n\n");
-        for(int i = 0; i < list.length; i++)
-        {
-            list[i] = new Word(w[i]);
-            System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
-        }
-        System.out.println("\n\n\n");
-    }
+	public static void main(String [] args)
+	{
+		String [] w = {"java", "rate", "ROTATE", "hierarchy", "juxtaposition", "great",
+						"syllable", "able", "are", "phylae", "simplicity", "GRouP",
+						"keeping", "AYE", "testing123", "pqr132", "unique", "quixotic",
+						"rambunctious", "pleurodynia", "presenteeism", "umbriferous",
+						"wayzgoose", "Sequoia", "SIMple"};
+		Word [] list = new Word[w.length];
+		System.out.println("\n\n\n");
+		for(int i = 0; i < list.length; i++)
+		{
+			list[i] = new Word(w[i]);
+			System.out.println(list[i].getWord() + "  " + list[i].numSyllables());
+		}
+		System.out.println("\n\n\n");
+	}
 }
+
 /*
+
 
 java  2
 rate  1
@@ -44,5 +46,6 @@ umbriferous  4
 wayzgoose  2
 sequoia  2
 simple  1
+
 
 */

@@ -1,111 +1,124 @@
 /**
- * FindMe.java
- * e            d            i            t        h    e    r    e
- * @author Surya Dantuluri
- * @version 1.0
- * @since 9/21/2017
- */
+* FindMe.java
+* e            d            i            t        h    e    r    e
+* @author Surya Dantuluri
+* @version 1.0
+* @since 9/21/2017
+*/
 public class FindMe
 {
-    /**  The int array containing the random "master" key. These are to be filled with random numbers from 1 to 9.  */
-    private int [] master;
+  /**  The int array containing the random "master" key. These are to be filled with random numbers from 1 to 9.  */
+  private int [] master;
 
-    /**  The int array used to store the user's guesses.  */
-    private int [] guess;
+  /**  The int array used to store the user's guesses.  */
+  private int [] guess;
 
-    /**  If this boolean is set to true, then the master key should be shown at each turn.  Otherwise the master is not shown until the end. */
-    private boolean show;
+  /**  If this boolean is set to true, then the master key should be shown at each turn.  Otherwise the master is not shown until the end. */
+  private boolean show;
 
-    /**
-     *  Sets up and runs FindMe.
-     *  @param  args     An array of String arguments (the first element,
-     *                   at index 0, could be used.  If the user enters
-     *                   "show" then the MASTER KEY should be printed
-     *                   before every user turn).
-     */
-    public FindMe ( )
-    {
-        //  Set up the field variables.
+  /**
+  *  Sets up and runs FindMe.
+  *  @param  args     An array of String arguments (the first element,
+  *                   at index 0, could be used.  If the user enters
+  *                   "show" then the MASTER KEY should be printed
+  *                   before every user turn).
+  */
+  public FindMe ( )
+  {
+    //  Set up the field variables.
     Dice dice1 = new Dice(8);
     master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
-    guess = new int[3];
-    }
+    guess = new int[4];
+  }
 
-    public static void main(String [] args)
+  public static void main(String [] args)
+  {
+    FindMe run = new FindMe();
+    if(args.length > 0)
     {
-        FindMe run = new FindMe();
-        if(args.length > 0)
-        {
-            run.setShow(args[0]);
-        }
-        run.instructions();
-        run.play();
+      run.setShow(args[0]);
     }
+    run.instructions();
+    run.play();
+  }
 
-    public void setShow(String str)
+  public void setShow(String str)
+  {
+    if(str.equalsIgnoreCase("show"))
     {
-        if(str.equalsIgnoreCase("show"))
-        {
-            show = true;
-            System.out.println("show has been activated");
-        }
+      show = true;
     }
+  }
 
-    public void instructions ( )
+  public void instructions ( )
+  {
+    System.out.println("\n\n\n");
+    System.out.println(" _____ _           _ __  __");
+    System.out.println("|  ___(_)_ __   __| |  \\/  | ___");
+    System.out.println("| |_  | | '_ \\ / _` | |\\/| |/ _ \\");
+    System.out.println("|  _| | | | | | (_| | |  | |  __/");
+    System.out.println("|_|   |_|_| |_|\\__,_|_|  |_|\\___|\n");
+    System.out.println("Welcome to the game of FINDME (TM).  In this game, an array of 4 ints (the master array)");
+    System.out.println("is filled with random numbers from 1 to 9.  The goal of the game is to guess these random");
+    System.out.println("numbers, in order.  The user is prompted to enter a 4-digit number, and the input is");
+    System.out.println("checked to make sure it is within the range from 1000 to 9999, and contains no 0's.  Then,");
+    System.out.println("the user is informed of the number of exact digit matches, and the number of partial digit");
+    System.out.println("matches.  For these matches, exact + partial may not exceed 4, because a match may be exact");
+    System.out.println("or it may be partial, but it cannot be both.  The user continues to make guesses until four");
+    System.out.println("exact matches are made.  Once the puzzle is solved, the game ends, with an exit message,");
+    System.out.println("informing the user of how many guesses it took to find the pattern. See the sample run");
+    System.out.println("outputs for detailed formatting information.");
+    System.out.println("\n  THE MASTER KEY HAS BEEN CHOSEN.  LET THE GAME BEGIN . . .\n\n\n");
+  }
+
+  public void play ( )
+  {
+    //  This method should have a loop, and it should call the methods necessary to
+    //  play the game.  This method should not be too long.
+    getInput();
+  }
+  public void getInput()
+  {
+    if(show)
+    System.out.printf("HERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
+    // int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+    // guess[0]=(guessedNumber/1000)%10;
+    // guess[1]=(guessedNumber/100)%10;
+    // guess[2]=(guessedNumber/10)%10;
+    // guess[3]=guessedNumber%10;
+    while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
     {
-        System.out.println("\n\n\n");
-        System.out.println(" _____ _           _ __  __");
-        System.out.println("|  ___(_)_ __   __| |  \\/  | ___");
-        System.out.println("| |_  | | '_ \\ / _` | |\\/| |/ _ \\");
-        System.out.println("|  _| | | | | | (_| | |  | |  __/");
-        System.out.println("|_|   |_|_| |_|\\__,_|_|  |_|\\___|\n");
-        System.out.println("Welcome to the game of FINDME (TM).  In this game, an array of 4 ints (the master array)");
-        System.out.println("is filled with random numbers from 1 to 9.  The goal of the game is to guess these random");
-        System.out.println("numbers, in order.  The user is prompted to enter a 4-digit number, and the input is");
-        System.out.println("checked to make sure it is within the range from 1000 to 9999, and contains no 0's.  Then,");
-        System.out.println("the user is informed of the number of exact digit matches, and the number of partial digit");
-        System.out.println("matches.  For these matches, exact + partial may not exceed 4, because a match may be exact");
-        System.out.println("or it may be partial, but it cannot be both.  The user continues to make guesses until four");
-        System.out.println("exact matches are made.  Once the puzzle is solved, the game ends, with an exit message,");
-        System.out.println("informing the user of how many guesses it took to find the pattern. See the sample run");
-        System.out.println("outputs for detailed formatting information.");
-        System.out.println("\n  THE MASTER KEY HAS BEEN CHOSEN.  LET THE GAME BEGIN . . .\n\n\n");
+      int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+      guess[0]=(guessedNumber/1000)%10;
+      guess[1]=(guessedNumber/100)%10;
+      guess[2]=(guessedNumber/10)%10;
+      guess[3]=guessedNumber%10;
     }
+  }
+  public void showStatus()
+  {
+    YOUR GUESS : 9883
+    Exact Matches : 0
+    Partial Matches: 3
+    System.out.println("")
 
-    public void play ( )
-    {
-        //  This method should have a loop, and it should call the methods necessary to
-        //  play the game.  This method should not be too long.
-        System.out.println("team10 ");
-        getInput();
-    }
-    public void getInput()
-    {
-        int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
-        guess[0]=guessedNumber%10;
-        guess[1]=guessedNumber/10;
-        guess[2]=guessedNumber%1000;
-    }
-    public void showStatus()
-    {
-
-    }
+  }
 
 
-    /**
-     *  Write the methods necessary to solve the stated problem.  Be sure to keep
-     *  your methods relatively small and concise.
-     */
+  /**
+  *  Write the methods necessary to solve the stated problem.  Be sure to keep
+  *  your methods relatively small and concise.
+  */
 
-    public void exitMessage(int count)
-    {
+  public void exitMessage(int count)
+  {
 
 
-        System.out.println("\n    +-------------+");
-        System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
-        System.out.println("    +-------------+\n");
+    System.out.println("\n    +-------------+");
+    System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
+    System.out.println("    +-------------+\n");
 
-        //  This method has been started for you, but it needs to be completed.
+    //  This method has been started for you, but it needs to be completed.
 
-    }
+  }
 }
