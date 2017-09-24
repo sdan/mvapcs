@@ -75,17 +75,19 @@ public class FindMe
   {
     //  This method should have a loop, and it should call the methods necessary to
     //  play the game.  This method should not be too long.
+    int numberOfGuesses = 0;
     getInput();
+    while(!calculateExactMatches()==4)
+    {
+      showStatus();
+      numberOfGuesses++;
+    }
+    exitMessage(numberOfGuesses);
   }
   public void getInput()
   {
     if(show)
     System.out.printf("HERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
-    // int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
-    // guess[0]=(guessedNumber/1000)%10;
-    // guess[1]=(guessedNumber/100)%10;
-    // guess[2]=(guessedNumber/10)%10;
-    // guess[3]=guessedNumber%10;
     while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
     {
       int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
@@ -97,13 +99,36 @@ public class FindMe
   }
   public void showStatus()
   {
-    YOUR GUESS : 9883
-    Exact Matches : 0
-    Partial Matches: 3
-    System.out.println("")
-
+    System.out.printf("YOUR GUESS     : %d%d%d%d\n",master[0],master[1],master[2],master[3]);
+    System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
+    System.out.printf("Partial Matches: %d\n",calculatePartialMatches());
+    numberOfGuesses++;
   }
 
+  public int calculateExactMatches()
+  {
+    int count = 0;
+    for(int i = 0;i<4;i++)
+    {
+      if(master[i]==guess[i])
+      count++;
+    }
+    return count;
+  }
+
+  public int calculatePartialMatches()
+  {
+    int count = 0;
+    for(int i = 0;i<4;i++)
+    {
+      for(int j = 0;j<4;j++)
+      {
+        if(master[i]==guess[j])
+        count++;
+      }
+    }
+    return count-calculateExactMatches();
+  }
 
   /**
   *  Write the methods necessary to solve the stated problem.  Be sure to keep
@@ -113,7 +138,7 @@ public class FindMe
   public void exitMessage(int count)
   {
 
-
+    System.out.println("Congratulations! You found the master key.")
     System.out.println("\n    +-------------+");
     System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
     System.out.println("    +-------------+\n");
