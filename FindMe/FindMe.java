@@ -124,6 +124,7 @@ public class FindMe
   public int calculatePartialMatches()
   {
     int count = 0;
+    int temp = 0;
     for(int i = 0;i<4;i++)
     {
       for(int j = 0;j<4;j++)
@@ -133,13 +134,11 @@ public class FindMe
           System.out.println("masteri: "+master[i]+"i: "+i);
           System.out.println("masterj: "+master[j]+"j: "+j);
           System.out.println("guess: "+guess[j]);
+          //temp=guess[j];
+          System.out.println("tempp: "+temp);
+          
           j=4;
-          if(master[i-2]==2)
-          {
-            System.out.println("HEllo there jake paulers!");
-            count++;
-          }
-
+          count++;
         }
 
       }
