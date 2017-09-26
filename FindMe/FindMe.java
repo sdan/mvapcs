@@ -27,7 +27,8 @@ public class FindMe
   {
     //  Set up the field variables.
     Dice dice1 = new Dice(8);
-    master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
+    //master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
+    master = new int[] {6,1,5,5};
     guess = new int[4];
   }
 
@@ -76,9 +77,9 @@ public class FindMe
     //  This method should have a loop, and it should call the methods necessary to
     //  play the game.  This method should not be too long.
     int numberOfGuesses = 0;
-    getInput();
-    while(!calculateExactMatches()==4)
+    while(calculateExactMatches()!=4)
     {
+      getInput();
       showStatus();
       numberOfGuesses++;
     }
@@ -87,10 +88,15 @@ public class FindMe
   public void getInput()
   {
     if(show)
-    System.out.printf("HERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
+    System.out.printf("\nHERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
+    int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+    guess[0]=(guessedNumber/1000)%10;
+    guess[1]=(guessedNumber/100)%10;
+    guess[2]=(guessedNumber/10)%10;
+    guess[3]=guessedNumber%10;
     while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
     {
-      int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+       guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
       guess[0]=(guessedNumber/1000)%10;
       guess[1]=(guessedNumber/100)%10;
       guess[2]=(guessedNumber/10)%10;
@@ -99,10 +105,9 @@ public class FindMe
   }
   public void showStatus()
   {
-    System.out.printf("YOUR GUESS     : %d%d%d%d\n",master[0],master[1],master[2],master[3]);
+    System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
     System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
-    System.out.printf("Partial Matches: %d\n",calculatePartialMatches());
-    numberOfGuesses++;
+    System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches()-calculateExactMatches());
   }
 
   public int calculateExactMatches()
@@ -123,11 +128,23 @@ public class FindMe
     {
       for(int j = 0;j<4;j++)
       {
-        if(master[i]==guess[j])
-        count++;
+        if(master[i]==guess[j]&&i!=j)
+        {
+          System.out.println("masteri: "+master[i]+"i: "+i);
+          System.out.println("masterj: "+master[j]+"j: "+j);
+          System.out.println("guess: "+guess[j]);
+          j=4;
+          if(master[i-2]==2)
+          {
+            System.out.println("HEllo there jake paulers!");
+            count++;
+          }
+
+        }
+
       }
     }
-    return count-calculateExactMatches();
+    return count;
   }
 
   /**
@@ -138,11 +155,12 @@ public class FindMe
   public void exitMessage(int count)
   {
 
-    System.out.println("Congratulations! You found the master key.")
+    System.out.println("Congratulations! You found the master key.");
     System.out.println("\n    +-------------+");
     System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
     System.out.println("    +-------------+\n");
-
+    System.out.println("It took you "+count+" guesses to find it.");
+    System.out.println("Goodbye for now, and please play again . . . \n\n\n");
     //  This method has been started for you, but it needs to be completed.
 
   }
