@@ -9,13 +9,10 @@ public class FindMe
 {
   /**  The int array containing the random "master" key. These are to be filled with random numbers from 1 to 9.  */
   private int [] master;
-
   /**  The int array used to store the user's guesses.  */
   private int [] guess;
-
   /**  If this boolean is set to true, then the master key should be shown at each turn.  Otherwise the master is not shown until the end. */
   private boolean show;
-
   /**
   *  Sets up and runs FindMe.
   *  @param  args     An array of String arguments (the first element,
@@ -31,7 +28,6 @@ public class FindMe
     master = new int[] {6,1,5,5};
     guess = new int[4];
   }
-
   public static void main(String [] args)
   {
     FindMe run = new FindMe();
@@ -42,7 +38,6 @@ public class FindMe
     run.instructions();
     run.play();
   }
-
   public void setShow(String str)
   {
     if(str.equalsIgnoreCase("show"))
@@ -50,7 +45,6 @@ public class FindMe
       show = true;
     }
   }
-
   public void instructions ( )
   {
     System.out.println("\n\n\n");
@@ -71,7 +65,6 @@ public class FindMe
     System.out.println("outputs for detailed formatting information.");
     System.out.println("\n  THE MASTER KEY HAS BEEN CHOSEN.  LET THE GAME BEGIN . . .\n\n\n");
   }
-
   public void play ( )
   {
     //  This method should have a loop, and it should call the methods necessary to
@@ -107,9 +100,8 @@ public class FindMe
   {
     System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
     System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
-    System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches()-calculateExactMatches());
+    System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches());
   }
-
   public int calculateExactMatches()
   {
     int count = 0;
@@ -120,40 +112,51 @@ public class FindMe
     }
     return count;
   }
-
   public int calculatePartialMatches()
   {
     int count = 0;
-    double temp = 0;
+    int temp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
     for(int i = 0;i<4;i++)
     {
+        for(int k = 0;k<guess.length;k++)
+          {
+              if(temp[i]==guess[k]&&i!=k)
+              {
+                temp[k]=-1;
+                System.out.println("match guess of i: "+temp[i]+" match guess of k: "+temp[k]);
+              }
+
+          }
+          for(int a = 0;a<4;a++)
+          {
+              System.out.print(" "+temp[a]);
+          }
+          System.out.println("\n");
       for(int j = 0;j<4;j++)
       {
-        if(master[i]==guess[j]&&i!=j)
+        if(master[i]==temp[j]&&i!=j)
         {
-          System.out.println("masteri: "+master[i]+"i: "+i);
-          System.out.println("masterj: "+master[j]+"j: "+j);
-          System.out.println("guess: "+guess[j]);
-          //temp=guess[j];
-          temp = i*(Math.pow(10.0,(double)j));
-          System.out.println("temp: "+temp);
-          j=4;
-          count++;
-        }
 
+          if(temp[j]!=-1)
+          {
+              System.out.println("masteri: "+master[i]+"i: "+i);
+          System.out.println("temp: "+temp[j]);
+          i++;
+          count++;
+           j=4;
+          }
+
+        }
       }
     }
     return count;
   }
-
   /**
   *  Write the methods necessary to solve the stated problem.  Be sure to keep
   *  your methods relatively small and concise.
   */
-
   public void exitMessage(int count)
   {
-
     System.out.println("Congratulations! You found the master key.");
     System.out.println("\n    +-------------+");
     System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
@@ -161,6 +164,5 @@ public class FindMe
     System.out.println("It took you "+count+" guesses to find it.");
     System.out.println("Goodbye for now, and please play again . . . \n\n\n");
     //  This method has been started for you, but it needs to be completed.
-
   }
 }
