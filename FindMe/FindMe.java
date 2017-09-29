@@ -89,7 +89,7 @@ public class FindMe
     guess[3]=guessedNumber%10;
     while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
     {
-       guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+      guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
       guess[0]=(guessedNumber/1000)%10;
       guess[1]=(guessedNumber/100)%10;
       guess[2]=(guessedNumber/10)%10;
@@ -118,51 +118,47 @@ public class FindMe
     int temp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
     for(int i = 0;i<4;i++)
     {
-        for(int k = 0;k<guess.length;k++)
-          {
-              if(temp[i]==guess[k]&&i!=k)
-              {
-                temp[k]=-1;
-                System.out.println("match guess of i: "+temp[i]+" match guess of k: "+temp[k]);
-              }
-
-          }
-          for(int a = 0;a<4;a++)
-          {
-              System.out.print(" "+temp[a]);
-          }
-          System.out.println("\n");
+      // for(int k = 0;k<guess.length;k++)
+      // {
+      //   if(temp[i]==guess[k]&&i!=k)
+      //   {
+      //     temp[k]=-1;
+      //     System.out.println("match guess of i: "+temp[i]+" match guess of k: "+temp[k]);
+      //   }
+      // }
+      // for(int a = 0;a<4;a++)
+      // {
+      //     System.out.print(" "+temp[a]);
+      // }
+      // System.out.println("\n");
       for(int j = 0;j<4;j++)
       {
         if(master[i]==temp[j]&&i!=j)
         {
-
-          if(temp[j]!=-1)
-          {
-              System.out.println("masteri: "+master[i]+"i: "+i);
+          System.out.println("masteri: "+master[i]+"i: "+i);
           System.out.println("temp: "+temp[j]);
           i++;
           count++;
-           j=4;
-          }
-
+          j=4;
         }
+
       }
     }
-    return count;
   }
-  /**
-  *  Write the methods necessary to solve the stated problem.  Be sure to keep
-  *  your methods relatively small and concise.
-  */
-  public void exitMessage(int count)
-  {
-    System.out.println("Congratulations! You found the master key.");
-    System.out.println("\n    +-------------+");
-    System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
-    System.out.println("    +-------------+\n");
-    System.out.println("It took you "+count+" guesses to find it.");
-    System.out.println("Goodbye for now, and please play again . . . \n\n\n");
-    //  This method has been started for you, but it needs to be completed.
-  }
+  return count;
+}
+/**
+*  Write the methods necessary to solve the stated problem.  Be sure to keep
+*  your methods relatively small and concise.
+*/
+public void exitMessage(int count)
+{
+  System.out.println("Congratulations! You found the master key.");
+  System.out.println("\n    +-------------+");
+  System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
+  System.out.println("    +-------------+\n");
+  System.out.println("It took you "+count+" guesses to find it.");
+  System.out.println("Goodbye for now, and please play again . . . \n\n\n");
+  //  This method has been started for you, but it needs to be completed.
+}
 }
