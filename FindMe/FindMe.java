@@ -100,6 +100,7 @@ public class FindMe
   {
     System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
     System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
+    System.out.println("showStatus break");
     System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches());
   }
   public int calculateExactMatches()
@@ -108,43 +109,44 @@ public class FindMe
     for(int i = 0;i<4;i++)
     {
       if(master[i]==guess[i])
-      count++;
+      {
+        count++;
+        guess[i]=-1;
+      }
+      System.out.println("master[i]: "+master[i]+" guess[i]: "+guess[i]);
     }
     return count;
   }
   public int calculatePartialMatches()
   {
+    System.out.println("check1");
     int count = 0;
-    int temp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
-    for(int i = 0;i<4;i++)
+    int temp[] =new int[] {master[0],master[1],master[2],master[3]};
+    for(int i=0;i<4;i++)
     {
-      // for(int k = 0;k<guess.length;k++)
-      // {
-      //   if(temp[i]==guess[k]&&i!=k)
-      //   {
-      //     temp[k]=-1;
-      //     System.out.println("match guess of i: "+temp[i]+" match guess of k: "+temp[k]);
-      //   }
-      // }
-      // for(int a = 0;a<4;a++)
-      // {
-      //     System.out.print(" "+temp[a]);
-      // }
-      // System.out.println("\n");
-      for(int j = 0;j<4;j++)
+      System.out.println("check2");
+      for(int j=0;j<4;j++)
       {
-        if(master[i]==temp[j]&&i!=j)
+        System.out.println("check3");
+        // if(temp[i]==guess[j])
+        // {
+        //   temp[i]=-1;
+        // }
+        if(i!=j&&temp[i]==guess[j])
         {
-          System.out.println("masteri: "+master[i]+"i: "+i);
-          System.out.println("temp: "+temp[j]);
-          i++;
+          System.out.println("Pmaster[i]: "+temp[i]+" guess[i]: "+guess[j]+" i: "+i+" j: "+j);
+          temp[i]=-1;
+          // for(int k=0;k<4;k++)
+          // {
+          //
+          // }
           count++;
-          j=4;
         }
-
       }
+
+
     }
-  }
+    System.out.println("partialDONE");
   return count;
 }
 /**
