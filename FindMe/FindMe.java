@@ -25,7 +25,7 @@ public class FindMe
     //  Set up the field variables.
     Dice dice1 = new Dice(8);
     //master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
-    master = new int[] {6,1,5,5};
+    master = new int[] {7,8,7,6};
     guess = new int[4];
   }
   public static void main(String [] args)
@@ -122,21 +122,23 @@ public class FindMe
     int count = 0;
     int masterTemp[] =new int[] {master[0],master[1],master[2],master[3]};
     int guessTemp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
+      for(int l = 0;l<4;l++)
+      {
+        if(masterTemp[l]==guessTemp[l])
+        {
+          //System.out.println("masterTemp: "+masterTemp[i]+" guessTemp: "+guessTemp[i]);
+          masterTemp[l]=-1;
+          guessTemp[l]=-1;
+        }
+        System.out.println("FRmaster: "+masterTemp[0]+" "+masterTemp[1]+" "+masterTemp[2]+" "+masterTemp[3]+" ");
+        System.out.println("FRguess: "+guessTemp[0]+" "+guessTemp[1]+" "+guessTemp[2]+" "+guessTemp[3]+" ");
+      }
 
     for(int i=0;i<4;i++)
     {
       System.out.println("check2");
       for(int j=0;j<4;j++)
       {
-        for(int l = 0;l<4;l++)
-        {
-          if(masterTemp[l]==guessTemp[l])
-          {
-            System.out.println("masterTemp: "+masterTemp[i]+" guessTemp: "+guessTemp[i]);
-            masterTemp[i]=-1;
-            guessTemp[i]=-1;
-          }
-        }
         if(i!=j&&masterTemp[i]==guessTemp[j]&&(masterTemp[i]!=-1&&guessTemp[j]!=-1))
         {
           System.out.println("master: "+masterTemp[0]+" "+masterTemp[1]+" "+masterTemp[2]+" "+masterTemp[3]+" ");
