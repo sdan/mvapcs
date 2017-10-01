@@ -111,7 +111,6 @@ public class FindMe
       if(master[i]==guess[i])
       {
         count++;
-        guess[i]=-1;
       }
       System.out.println("master[i]: "+master[i]+" guess[i]: "+guess[i]);
     }
@@ -121,21 +120,35 @@ public class FindMe
   {
     System.out.println("check1");
     int count = 0;
-    int temp[] =new int[] {master[0],master[1],master[2],master[3]};
+    int masterTemp[] =new int[] {master[0],master[1],master[2],master[3]};
+    int guessTemp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
+
     for(int i=0;i<4;i++)
     {
       System.out.println("check2");
       for(int j=0;j<4;j++)
       {
         System.out.println("check3");
-        // if(temp[i]==guess[j])
-        // {
-        //   temp[i]=-1;
-        // }
-        if(i!=j&&temp[i]==guess[j])
+        if(masterTemp[i]==guessTemp[i])
         {
-          System.out.println("Pmaster[i]: "+temp[i]+" guess[i]: "+guess[j]+" i: "+i+" j: "+j);
-          temp[i]=-1;
+          System.out.println("jakepaul");
+          masterTemp[i]=-1;
+          guessTemp[i]=-1;
+          // for(int k=0;k<4;k++)
+          // {
+          //   System.out.println("fried chicken");
+          //   if(masterTemp[i]==guessTemp[k])
+          //   {
+          //     System.out.println("FRmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[k]+" i: "+i+" k: "+k);
+          //     guessTemp[k]=-1;
+          //   }
+          // }
+        }
+        if(i!=j&&masterTemp[i]==guessTemp[j]&&(masterTemp[i]!=-1&&guessTemp[j]!=-1))
+        {
+          System.out.println("Pmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
+          masterTemp[i]=-1;
+          guessTemp[i]=-1;
           // for(int k=0;k<4;k++)
           // {
           //
