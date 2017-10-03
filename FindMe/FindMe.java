@@ -25,7 +25,7 @@ public class FindMe
     //  Set up the field variables.
     Dice dice1 = new Dice(8);
     //master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
-    master = new int[] {7,8,7,6};
+    master = new int[] {3,2,9,8};
     guess = new int[4];
   }
   public static void main(String [] args)
@@ -100,7 +100,7 @@ public class FindMe
   {
     System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
     System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
-    System.out.println("showStatus break");
+    //System.out.println("showStatus break");
     System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches());
   }
   public int calculateExactMatches()
@@ -112,7 +112,7 @@ public class FindMe
       {
         count++;
       }
-      System.out.println("master[i]: "+master[i]+" guess[i]: "+guess[i]);
+      //System.out.println("master[i]: "+master[i]+" guess[i]: "+guess[i]);
     }
     return count;
   }
@@ -145,6 +145,7 @@ public class FindMe
           System.out.println("guess: "+guessTemp[0]+" "+guessTemp[1]+" "+guessTemp[2]+" "+guessTemp[3]+" ");
           System.out.println("Pmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
           masterTemp[i]=-1;
+          guessTemp[j]=-1;
           System.out.println("PAmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
           for(int k=0;k<4;k++)
           {
