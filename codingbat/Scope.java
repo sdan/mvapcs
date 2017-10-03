@@ -12,6 +12,7 @@ public class Scope
   }
   public void methods()
   {
+    System.out.println(number);
     method1(number);
     System.out.println(number);
     number+=15;
