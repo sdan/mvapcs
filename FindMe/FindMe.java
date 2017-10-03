@@ -1,9 +1,10 @@
 /**
 * FindMe.java
-* e            d            i            t        h    e    r    e
+* Simple Java game, inspired by the popular board game Mastermind that generates a 4 digit number
+* that the user through a strategy or by simply guessing tries to guess through input of the program.
 * @author Surya Dantuluri
 * @version 1.0
-* @since 9/21/2017
+* @since 8/2/2017
 */
 public class FindMe
 {
@@ -24,8 +25,7 @@ public class FindMe
   {
     //  Set up the field variables.
     Dice dice1 = new Dice(8);
-    //master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
-    master = new int[] {3,2,9,8};
+    master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
     guess = new int[4];
   }
   public static void main(String [] args)
@@ -82,27 +82,23 @@ public class FindMe
   {
     if(show)
     System.out.printf("\nHERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
-    int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
-    guess[0]=(guessedNumber/1000)%10;
-    guess[1]=(guessedNumber/100)%10;
-    guess[2]=(guessedNumber/10)%10;
-    guess[3]=guessedNumber%10;
-    while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
+    do
     {
-      guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+      int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
       guess[0]=(guessedNumber/1000)%10;
       guess[1]=(guessedNumber/100)%10;
       guess[2]=(guessedNumber/10)%10;
       guess[3]=guessedNumber%10;
-    }
+    } while(guess[0]!=0&&guess[1]!=0&&guess[2]!=0&&guess[3]!=0);
   }
   public void showStatus()
   {
     System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
     System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
-    //System.out.println("showStatus break");
     System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches());
   }
+  /* Calculates the number of exact matches the user input has with the master key
+  */
   public int calculateExactMatches()
   {
     int count = 0;
@@ -112,46 +108,40 @@ public class FindMe
       {
         count++;
       }
-      //System.out.println("master[i]: "+master[i]+" guess[i]: "+guess[i]);
     }
     return count;
   }
+  /* Calculates the number of partial matches the user input has with the master key
+  */
   public int calculatePartialMatches()
   {
-    System.out.println("check1");
     int count = 0;
     int masterTemp[] =new int[] {master[0],master[1],master[2],master[3]};
     int guessTemp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
-      for(int l = 0;l<4;l++)
+    /* For loop to filter out exact matches between arrays
+    */
+    for(int l = 0;l<4;l++)
+    {
+      if(masterTemp[l]==guessTemp[l])
       {
-        if(masterTemp[l]==guessTemp[l])
-        {
-          //System.out.println("masterTemp: "+masterTemp[i]+" guessTemp: "+guessTemp[i]);
-          masterTemp[l]=-1;
-          guessTemp[l]=-1;
-        }
-        System.out.println("FRmaster: "+masterTemp[0]+" "+masterTemp[1]+" "+masterTemp[2]+" "+masterTemp[3]+" ");
-        System.out.println("FRguess: "+guessTemp[0]+" "+guessTemp[1]+" "+guessTemp[2]+" "+guessTemp[3]+" ");
+        masterTemp[l]=-1;
+        guessTemp[l]=-1;
       }
-
+    }
+    /* For loop that counts partial matches while conditioning loop in a way that allows
+    the loop to accuratly count the number of parial matches */
     for(int i=0;i<4;i++)
     {
-      System.out.println("check2");
       for(int j=0;j<4;j++)
       {
         if(i!=j&&masterTemp[i]==guessTemp[j]&&(masterTemp[i]!=-1&&guessTemp[j]!=-1))
         {
-          System.out.println("master: "+masterTemp[0]+" "+masterTemp[1]+" "+masterTemp[2]+" "+masterTemp[3]+" ");
-          System.out.println("guess: "+guessTemp[0]+" "+guessTemp[1]+" "+guessTemp[2]+" "+guessTemp[3]+" ");
-          System.out.println("Pmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
           masterTemp[i]=-1;
           guessTemp[j]=-1;
-          System.out.println("PAmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
           for(int k=0;k<4;k++)
           {
             if(masterTemp[i]==masterTemp[k]&&guessTemp[j]==guessTemp[k])
             {
-              System.out.println("FFAmaster[i]: "+masterTemp[i]+" guess[i]: "+guessTemp[j]+" i: "+i+" j: "+j);
               masterTemp[i]=-1;
               guessTemp[j]=-1;
             }
@@ -160,23 +150,20 @@ public class FindMe
         }
       }
 
-
     }
-    System.out.println("partialDONE");
-  return count;
-}
-/**
-*  Write the methods necessary to solve the stated problem.  Be sure to keep
-*  your methods relatively small and concise.
-*/
-public void exitMessage(int count)
-{
-  System.out.println("Congratulations! You found the master key.");
-  System.out.println("\n    +-------------+");
-  System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
-  System.out.println("    +-------------+\n");
-  System.out.println("It took you "+count+" guesses to find it.");
-  System.out.println("Goodbye for now, and please play again . . . \n\n\n");
-  //  This method has been started for you, but it needs to be completed.
-}
+    return count;
+  }
+  /**
+  *  Write the methods necessary to solve the stated problem.  Be sure to keep
+  *  your methods relatively small and concise.
+  */
+  public void exitMessage(int count)
+  {
+    System.out.println("Congratulations! You found the master key.");
+    System.out.println("\n    +-------------+");
+    System.out.println("    |   " + master[0] + " " + master[1] + " " + master[2] + " " + master[3] + "   |");
+    System.out.println("    +-------------+\n");
+    System.out.println("It took you "+count+" guesses to find it.");
+    System.out.println("Goodbye for now, and please play again . . . \n\n\n");
+  }
 }
