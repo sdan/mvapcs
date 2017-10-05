@@ -4,8 +4,8 @@ public class Test3
   {
     Test3 testClassObject3 = new Test3();
     //testClassObject3.variableChange();
-    testClassObject3.codeFrag();
-    //testClassObject3.basicOperations();
+    //testClassObject3.codeFrag();
+    testClassObject3.basicOperations();
   }
   public void variableChange()
   {
@@ -66,5 +66,9 @@ public class Test3
     char anotherone = 'o';
     int something = somechar%50;
     System.out.println(somechar%5+" "+somechar%50);
+    if(2.0==2)
+    System.out.println("2 is 2.0");
+    else if(2.0!=2)
+    System.out.println("2 is not 2.0");
   }
 }
