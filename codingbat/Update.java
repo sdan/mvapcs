@@ -24,3 +24,19 @@
 *          returned , such that:
 *          "xyz408" counts as 1 syllable
 */
+public int numSyllables()
+{
+  int syllable = 0;
+  for(int i = 0;i<inputWord.length()-1;i++)
+  {
+    if(isVowel(inputWord.charAt(i))&&!isVowel(inputWord.charAt(i+1)))
+    {
+      syllable++;
+    }
+    if(i==inputWord.length()-2&&(isVowel(inputWord.charAt(i))&&inputWord.charAt(i+1)!='e'||
+
+  }
+  if(syllable==0)
+  syllable=1;
+  return syllable;
+}

@@ -6,7 +6,8 @@ public class Test3
     //testClassObject3.variableChange();
     //testClassObject3.codeFrag();
     //testClassObject3.basicOperations();
-    testClassObject3.methodThree();
+    //testClassObject3.methodThree();
+    testClassObject3.secondTest();
   }
   public void variableChange()
   {
@@ -213,5 +214,40 @@ public class Test3
 		}
 		System.out.println();
 }
+public void secondTest()
+{
+  int ab = 15;
+  for(int cd = 120; cd>0;cd-=ab)
+  {
+    System.out.print("loop ");
+    System.out.print("next ");
+    System.out.printf("\n %d , %d \n",ab,cd);
+  }
+  thirdTest();
+}
+
+public void thirdTest()
+{
+  char dee = 'd';
+  while(dee!='D')
+  {
+    dee-=8.0;
+    System.out.println((int)dee);
+    System.out.println((double)dee);
+    System.out.println(dee);
+  }
+  fourTest();
+}
+
+public void fourTest()
+{
+  System.out.println("spocy");
+  System.out.println(12 % 5 != 2.0);
+  //System.out.println((! 65 > 4 * 15 || false));
+  System.out.println((8 * 4 % 16 != 5) && (44 / 11 + 5 >= 31));
+  System.out.println((int) 7.4 < 7.4 || ! (5.6 / 7.8 > 1 && true) );
+  System.out.println((5 +(-2) * 4 + 6.5) + 24 / 6 % 2);
+}
+
 
 }
