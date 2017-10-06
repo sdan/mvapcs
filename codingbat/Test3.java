@@ -7,7 +7,8 @@ public class Test3
     //testClassObject3.codeFrag();
     //testClassObject3.basicOperations();
     //testClassObject3.methodThree();
-    testClassObject3.secondTest();
+    //testClassObject3.secondTest();
+    testClassObject3.bruh();
   }
   public void variableChange()
   {
@@ -247,6 +248,37 @@ public void fourTest()
   System.out.println((8 * 4 % 16 != 5) && (44 / 11 + 5 >= 31));
   System.out.println((int) 7.4 < 7.4 || ! (5.6 / 7.8 > 1 && true) );
   System.out.println((5 +(-2) * 4 + 6.5) + 24 / 6 % 2);
+  System.out.println((double)68/3);
+  System.out.println((double)(68/3));
+}
+
+public void bruh()
+{
+  for (int i = 0;i<4;i++)
+
+
+
+
+
+
+
+  {
+    System.out.println(i);
+    if(i==2)
+    System.out.println("heiaa");
+
+
+
+
+
+
+
+    else
+    System.out.println("WHATSSS");
+  }
+
+
+
 }
 
 

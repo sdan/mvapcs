@@ -13,6 +13,7 @@ public class FindMe
   /**  The int array used to store the user's guesses.  */
   private int [] guess;
   /**  If this boolean is set to true, then the master key should be shown at each turn.  Otherwise the master is not shown until the end. */
+
   private boolean show;
   /**
   *  Sets up and runs FindMe.
@@ -70,7 +71,8 @@ public class FindMe
     //  This method should have a loop, and it should call the methods necessary to
     //  play the game.  This method should not be too long.
     int numberOfGuesses = 0;
-    while(calculateExactMatches()!=4)
+    boolean [] used = new boolean[4];
+    while(calculateExactMatches(boolean [] used)!=4)
     {
       getInput();
       showStatus();
@@ -94,12 +96,12 @@ public class FindMe
   public void showStatus()
   {
     System.out.printf("\nYOUR GUESS     : %d%d%d%d\n",guess[0],guess[1],guess[2],guess[3]);
-    System.out.printf("Exact Matches  : %d\n",calculateExactMatches());
-    System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches());
+    System.out.printf("Exact Matches  : %d\n",calculateExactMatches(boolean [] used));
+    System.out.printf("Partial Matches: %d\n\n",calculatePartialMatches(boolean [] used));
   }
   /* Calculates the number of exact matches the user input has with the master key
   */
-  public int calculateExactMatches()
+  public int calculateExactMatches(boolean [] used)
   {
     int count = 0;
     for(int i = 0;i<4;i++)
@@ -107,49 +109,26 @@ public class FindMe
       if(master[i]==guess[i])
       {
         count++;
+        used[i]=true;
       }
     }
     return count;
   }
   /* Calculates the number of partial matches the user input has with the master key
   */
-  public int calculatePartialMatches()
+  public int calculatePartialMatches(boolean [] used)
   {
     int count = 0;
-    int masterTemp[] =new int[] {master[0],master[1],master[2],master[3]};
-    int guessTemp[] =new int[] {guess[0],guess[1],guess[2],guess[3]};
-    /* For loop to filter out exact matches between arrays
-    */
-    for(int l = 0;l<4;l++)
+    for(int i = 0;i<4;i++)
     {
-      if(masterTemp[l]==guessTemp[l])
+      for(int j = 0;j<4;i++)
       {
-        masterTemp[l]=-1;
-        guessTemp[l]=-1;
-      }
-    }
-    /* For loop that counts partial matches while conditioning loop in a way that allows
-    the loop to accuratly count the number of parial matches */
-    for(int i=0;i<4;i++)
-    {
-      for(int j=0;j<4;j++)
-      {
-        if(i!=j&&masterTemp[i]==guessTemp[j]&&(masterTemp[i]!=-1&&guessTemp[j]!=-1))
+        if(master[i]==guess[j]&&i!=j&&used[i]==false)
         {
-          masterTemp[i]=-1;
-          guessTemp[j]=-1;
-          for(int k=0;k<4;k++)
-          {
-            if(masterTemp[i]==masterTemp[k]&&guessTemp[j]==guessTemp[k])
-            {
-              masterTemp[i]=-1;
-              guessTemp[j]=-1;
-            }
-          }
+          used[i]==true;
           count++;
         }
       }
-
     }
     return count;
   }
