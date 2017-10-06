@@ -67,7 +67,7 @@ public class Word
         syllable++;
       }
       else if((isVowel(inputWord.charAt(inputWord.length()-1))&&inputWord.charAt(inputWord.length()-1)!='e'||isVowel(inputWord.charAt(inputWord.length()-2))&&inputWord.charAt(inputWord.length()-1)=='e')&&i==inputWord.length()-2)
-      syllable++;
+      syllable++;//activates only when i is 1 less than the biggest number
     }
     if(syllable==0)
     syllable++;

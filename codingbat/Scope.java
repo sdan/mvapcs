@@ -6,7 +6,7 @@ public class Scope
   public Scope()
   {
     int number=20;
-    String hello = new String("what's poppin");
+     hello = new String("what's poppin");
     array[0]=21;
   }
   public static void main(String[]args)
