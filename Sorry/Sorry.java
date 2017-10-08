@@ -1,3 +1,43 @@
+import java.util.Scanner;
+public class Sorry
+{
+    private Scanner keyboard;
+    private SorryPlayer player1, player2;
+    private DiceGroup dice;
+    private SorryScoreCard card;
+    private boolean player1turn;
+
+    public Yahtzee()
+    {
+        keyboard = new Scanner(System.in);
+        player1 = new YahtzeePlayer();
+        player2 = new YahtzeePlayer();
+        dice = new DiceGroup();
+        card = new YahtzeeScoreCard();
+        player1turn = true;
+    }
+
+    public static void main(String[]args)
+    {
+        Yahtzee game = new Yahtzee();
+        game.playOneGame();
+
+    }
+
+    public void playOneGame()
+    {
+        introduction();
+        getName(player1,1);
+        getName(player2,2);
+        chooseWhoGoesFirst();
+        card.printScoreCardHeading();
+        card.printPlayerStatus(player1);
+        card.printPlayerStatus(player2);
+        for(int i = 1;i<=13;i++)
+        {
+            takeATurnForEachPlayer(i);
+        }
+    }
 
 //  To be used in Sorry.java
 	public void introduction ( )
