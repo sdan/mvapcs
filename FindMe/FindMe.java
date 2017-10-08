@@ -25,8 +25,7 @@ public class FindMe
   {
     //  Set up the field variables.
     Dice dice1 = new Dice(8);
-    //master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
-    master = new int[] {3,2,9,8};
+    master = new int[] {dice1.roll()+1,dice1.roll()+1,dice1.roll()+1,dice1.roll()+1};
     guess = new int[4];
   }
   public static void main(String [] args)
@@ -64,6 +63,7 @@ public class FindMe
     System.out.println("exact matches are made.  Once the puzzle is solved, the game ends, with an exit message,");
     System.out.println("informing the user of how many guesses it took to find the pattern. See the sample run");
     System.out.println("outputs for detailed formatting information.");
+    if(show)
     System.out.println("\n  THE MASTER KEY HAS BEEN CHOSEN.  LET THE GAME BEGIN . . .\n\n\n");
   }
   public void play ( )
@@ -84,20 +84,22 @@ public class FindMe
     if(show)
     System.out.printf("\nHERE IS THE MASTER KEY: %d%d%d%d\n",master[0],master[1],master[2],master[3]);
 
-      int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
-      guess[0]=(guessedNumber/1000)%10;
-      guess[1]=(guessedNumber/100)%10;
-      guess[2]=(guessedNumber/10)%10;
-      guess[3]=guessedNumber%10;
-      
-     while(guess[0]!=0&&guess[1]!=0&&guess[2]!=0&&guess[3]!=0)
-     {
-       int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
-       guess[0]=(guessedNumber/1000)%10;
-       guess[1]=(guessedNumber/100)%10;
-       guess[2]=(guessedNumber/10)%10;
-       guess[3]=guessedNumber%10;
-     }
+    int guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+        guess[0]=(guessedNumber/1000)%10;
+        guess[1]=(guessedNumber/100)%10;
+        guess[2]=(guessedNumber/10)%10;
+        guess[3]=guessedNumber%10;
+        //System.out.println("hake");
+while(guess[0]==0||guess[1]==0||guess[2]==0||guess[3]==0)
+{
+  guess[0]=(guessedNumber/1000)%10;
+  guess[1]=(guessedNumber/100)%10;
+  guess[2]=(guessedNumber/10)%10;
+  guess[3]=guessedNumber%10;
+  guessedNumber = Prompt.getInt("Please enter an integer value, with no zero digits (from 1000 to 9999): ",1000,9999);
+  System.out.print("a");
+}
+  System.out.println("sheep");
   }
   public void showStatus()
   {
