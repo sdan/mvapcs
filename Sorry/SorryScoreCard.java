@@ -1,3 +1,5 @@
+public class SorryScoreCard
+{
 //  To be used in SorryScoreCard.java
 	public void printScoreCardHeading ( )
 	{
@@ -76,3 +78,4 @@
 		}
 		System.out.println("\n+--------------------------------------------------------------------------------------------------+");
 	}
+}

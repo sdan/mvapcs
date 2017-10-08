@@ -7,19 +7,19 @@ public class Sorry
     private SorryScoreCard card;
     private boolean player1turn;
 
-    public Yahtzee()
+    public Sorry()
     {
         keyboard = new Scanner(System.in);
-        player1 = new YahtzeePlayer();
-        player2 = new YahtzeePlayer();
+        player1 = new SorryPlayer();
+        player2 = new SorryPlayer();
         dice = new DiceGroup();
-        card = new YahtzeeScoreCard();
+        card = new SorryScoreCard();
         player1turn = true;
     }
 
     public static void main(String[]args)
     {
-        Yahtzee game = new Yahtzee();
+        Sorry game = new Sorry();
         game.playOneGame();
 
     }
@@ -29,13 +29,13 @@ public class Sorry
         introduction();
         getName(player1,1);
         getName(player2,2);
-        chooseWhoGoesFirst();
+        //chooseWhoGoesFirst();
         card.printScoreCardHeading();
         card.printPlayerStatus(player1);
         card.printPlayerStatus(player2);
         for(int i = 1;i<=13;i++)
         {
-            takeATurnForEachPlayer(i);
+            //takeATurnForEachPlayer(i);
         }
     }
 
@@ -61,6 +61,13 @@ public class Sorry
 		System.out.println("| LET'S PLAY SOME SORRY!                                                             |");
 		System.out.println("+------------------------------------------------------------------------------------+\n\n");
 	}
+
+  public void getName (SorryPlayer sp, int num)
+  {
+      System.out.print("\nPlayer " + num + ", please enter your first name : ");
+      String name = keyboard.nextLine();
+      sp.setName(name);
+  }
 
 //  To be used in Sorry.java
 	public void makeChoice (SorryPlayer sp)
@@ -92,5 +99,6 @@ public class Sorry
 		}
 		while(badinput);
 
-		card.movePieces(sp, dice, order);
+		//card.movePieces(sp, dice, order);
 	}
+}
