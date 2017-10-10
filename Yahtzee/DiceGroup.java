@@ -10,6 +10,7 @@
  */
 
  import java.util.Scanner;
+
  public class DiceGroup
 {
     /**
@@ -24,10 +25,10 @@
 
      public DiceGroup()
      {
-         die = new Dice[5];
+         die = new Dice[3];
          for(int i = 0;i<die.length;i++)
          {
-             die[i]= new Dice();
+             die[i]= new Dice(4);
          }
      }
 
@@ -62,6 +63,7 @@
          }
      }
 
+
     public static void main (String [] args)
     {
         DiceGroup game = new DiceGroup();
@@ -80,6 +82,7 @@
     {
         return die[i];
     }
+
 
     /**
      * Rolls all of the Dice in the Dice array.
@@ -214,3 +217,5 @@
         }
     }
 }
+
+ 

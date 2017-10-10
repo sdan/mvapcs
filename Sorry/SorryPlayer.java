@@ -4,10 +4,10 @@ public class SorryPlayer
     private int[] scoreArray;
     private int totalscore;
 
-    public SorryPlayer()
+    public SorryPlayer ()
     {
         name = new String("NAMETOBECHANGEDLATER");
-        scoreArray = new int[13];
+        scoreArray = new int[3];
         totalscore = 0;
         for(int i = 0;i<scoreArray.length;i++)
         {
@@ -53,4 +53,10 @@ public class SorryPlayer
         calculateScore();
         System.out.printf("%-12s : %4d\n");
     }
+
+    public int getPieceArrayElement(int n)
+    {
+        return 0;
+    }
+
 }
