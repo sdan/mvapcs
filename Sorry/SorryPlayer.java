@@ -12,7 +12,7 @@ public class SorryPlayer
         totalscore = 0;
         for(int i = 0;i<scoreArray.length;i++)
         {
-            scoreArray[i]=-1;
+            scoreArray[i]=0;
         }
     }
 
@@ -28,12 +28,7 @@ public class SorryPlayer
 
     public void setScoreArrayElement(int i, int value)
     {
-        scoreArray[i]=value;
-    }
-
-    public int getScoreArrayElement(int i)
-    {
-        return scoreArray[i];
+        scoreArray[i]+=value;
     }
 
     public int calculateScore()
@@ -57,6 +52,6 @@ public class SorryPlayer
 
     public int getPieceArrayElement(int n)
     {
-        return 0;
+        return scoreArray[n];
     }
 }
