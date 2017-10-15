@@ -5,7 +5,7 @@ public class SorryScoreCard
         System.out.println("\n  NAME               1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20");
         System.out.println("+--------------------------------------------------------------------------------------------------+");
     }
-
+    //  To be used in SorryScoreCard.java
 	public void printPlayerStatus (SorryPlayer sp)
 	{
 		if (sp.getName().length() <= 12)
@@ -79,8 +79,19 @@ public class SorryScoreCard
 
     public void movePieces(SorryPlayer sp, DiceGroup dice, String order)
     {
+      System.out.println("dice "+(dice.getDie(0)).getValue());
+      System.out.println("dice "+(dice.getDie(1)).getValue());
+      System.out.println("dice "+(dice.getDie(2)).getValue());
+      if(order.equals("aaa")||order.equals("bbb")||order.equals("ccc"))
+      {
+        sp.scoreArray[0]=dice.getDie(0)).getValue()+dice.getDie(1)).getValue()+dice.getDie(2)).getValue();
+        sp.scoreArray[1]=sp.scoreArray[0];
+        sp.scoreArray[2]=sp.scoreArray[1];
+      }
+      else if
+
         //int firstValue = sp.getArrayElement();
-        order.charAt(0);
+        //order.charAt(0)
         //sp.setScoreArrayElement(0,dice.getDie(0));
     }
 

@@ -24,10 +24,10 @@
 
      public DiceGroup()
      {
-         die = new Dice[5];
+         die = new Dice[3];
          for(int i = 0;i<die.length;i++)
          {
-             die[i]= new Dice();
+             die[i]= new Dice(4);
          }
      }
 

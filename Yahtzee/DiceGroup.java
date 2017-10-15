@@ -1,3 +1,4 @@
+
 /**
  * Simulates the action of a group of Dice.  The dice
  * can be rolled and displayed in a row in the terminal window.
@@ -10,7 +11,6 @@
  */
 
  import java.util.Scanner;
-
  public class DiceGroup
 {
     /**
@@ -26,6 +26,7 @@
      public DiceGroup()
      {
          die = new Dice[3];
+         System.out.println("DICELENGTH: "die.length);
          for(int i = 0;i<die.length;i++)
          {
              die[i]= new Dice(4);
@@ -62,7 +63,6 @@
              die[i]= new Dice(n);
          }
      }
-
 
     public static void main (String [] args)
     {
@@ -159,6 +159,7 @@
     public void printDiceHeadings ( )
     {
         System.out.println();
+        System.out.println("DICELENGTH: "die.length);
         for (int i = 0; i < die.length; i++)
         {
             System.out.print("    # " + (i+1) + "       ");
@@ -217,5 +218,3 @@
         }
     }
 }
-
- 

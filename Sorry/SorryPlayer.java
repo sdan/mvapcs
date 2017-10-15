@@ -1,3 +1,4 @@
+
 public class SorryPlayer
 {
     private String name;
@@ -15,7 +16,7 @@ public class SorryPlayer
         }
     }
 
-    public void setName(String n)
+    public void setName(String n)//used
     {
         name= new String(n);
     }
@@ -25,7 +26,15 @@ public class SorryPlayer
         return name;
     }
 
+    public void setScoreArrayElement(int i, int value)
+    {
+        scoreArray[i]=value;
+    }
 
+    public int getScoreArrayElement(int i)
+    {
+        return scoreArray[i];
+    }
 
     public int calculateScore()
     {
@@ -50,13 +59,4 @@ public class SorryPlayer
     {
         return 0;
     }
-    // public int getArrayElement(int i)
-    // {
-    //     return scoreArray[i];
-    // }
-    // public void setScoreArrayElement(int i, int value)
-    // {
-    //     //scoreArray[i]=value;
-    // }
-
 }

@@ -26,19 +26,21 @@ public class Sorry
 
     public void playOneGame()
     {
-        introduction();//done
-        getName(player1,1);//done
-        getName(player2,2);//done
-        chooseWhoGoesFirst();//done
+        introduction();
+        getName(player1,1);
+        getName(player2,2);
+        chooseWhoGoesFirst();
         card.printScoreCardHeading();
         card.printPlayerStatus(player1);
         card.printPlayerStatus(player2);
         for(int i = 1;i<=13;i++)
         {
-            takeATurnForEachPlayer(i);
+            takeATurnForEachPlayer();
         }
     }
 
+
+//  To be used in Sorry.java
     public void introduction ( )
     {
         System.out.println("\n\n+------------------------------------------------------------------------------------+");
@@ -75,7 +77,6 @@ public class Sorry
         {
             System.out.print("\nLet's see who will go first.  " + player1.getName() + ", please hit enter to roll the dice : ");
             keyboard.nextLine();
-            System.out.println("hello");
             dice.rollDice();
             dice.printDice();
             player1Sum = dice.getTotal();
@@ -109,7 +110,7 @@ public class Sorry
         }
     }
 
-    public void takeATurnForEachPlayer (int turn)
+    public void takeATurnForEachPlayer ()
     {
         if (player1turn)
         {
@@ -152,7 +153,6 @@ public class Sorry
         System.out.println("spaces.  For examples, if you'd like to 'hold' die 1, 2, and 5, enter 125");
         System.out.print("(enter -1 if you'd like to end the turn) : ");
     }
-
 //  To be used in Sorry.java
     public void makeChoice (SorryPlayer sp)
     {
@@ -188,7 +188,7 @@ public class Sorry
 
     public void finalMessage ( )
     {
-        System.out.println("\n\nThanks for playing Monta Vista YAHTZEE!");
+        System.out.println("\n\nThanks for playing SORRY!");
         System.out.println("Here are the final results:\n");
         player1.printScore();
         player2.printScore();
