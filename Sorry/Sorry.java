@@ -26,10 +26,10 @@ public class Sorry
 
     public void playOneGame()
     {
-        introduction();
-        getName(player1,1);
-        getName(player2,2);
-        chooseWhoGoesFirst();
+        introduction();//done
+        getName(player1,1);//done
+        getName(player2,2);//done
+        chooseWhoGoesFirst();//done
         card.printScoreCardHeading();
         card.printPlayerStatus(player1);
         card.printPlayerStatus(player2);
@@ -39,9 +39,6 @@ public class Sorry
         }
     }
 
-
-
-//  To be used in Sorry.java
     public void introduction ( )
     {
         System.out.println("\n\n+------------------------------------------------------------------------------------+");
@@ -78,6 +75,7 @@ public class Sorry
         {
             System.out.print("\nLet's see who will go first.  " + player1.getName() + ", please hit enter to roll the dice : ");
             keyboard.nextLine();
+            System.out.println("hello");
             dice.rollDice();
             dice.printDice();
             player1Sum = dice.getTotal();
