@@ -26,9 +26,9 @@ public class SorryPlayer
         return name;
     }
 
-    public void setScoreArrayElement(int i, int value)
+    public void setScoreArrayElement(int n, int value)
     {
-        scoreArray[i]+=value;
+      scoreArray[n]+=value;
     }
 
     public int calculateScore()

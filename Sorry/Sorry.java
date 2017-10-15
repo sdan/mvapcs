@@ -195,15 +195,30 @@ public class Sorry
     {
       for(int j = 0;j<3;j++)
       {
-        if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j))
+        if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0)
         {
           if(player1turn)
-          sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
+          sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
           else
+          sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
+        }
+      }
+    }
+    for(int i = 0;i<3;i++)
+    {
+      for(int j = 0;j<3;j++)
+      {
+        if(player1turn&&sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j))
+        {
+          sp1.setScoreArrayElement(j,-sp1.getPieceArrayElement(j));
+        }
+        else if(!player1turn&&sp2.getPieceArrayElement(i)==sp1.getPieceArrayElement(j))
+        {
           sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
         }
       }
     }
+
   }
 
   public void finalMessage ( )
