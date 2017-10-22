@@ -1,5 +1,5 @@
 /**
- * Simulates the action of a group of Dice.  The dice
+ * Simulates the action of a group of Dice. The dice
  * can be rolled and displayed in a row in the terminal window.
  * An individual Dice instance from the array of Dice can
  * be accessed, the dice values can be summed, and subgroups

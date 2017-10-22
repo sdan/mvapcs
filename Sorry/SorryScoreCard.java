@@ -1,3 +1,15 @@
+/**
+ * SorryScoreCard.java
+ * Prints out current standing of both player's pieces.
+ * Uses a player object parameter to move pieces,
+ * and to display the current position of both players.
+ * No constructors are included.
+ * 
+ * @author Surya Dantuluri
+ * @version 1.0
+ * @since 10/22/2017
+ */
+
 public class SorryScoreCard
 {
   public void printScoreCardHeading ( )
@@ -83,13 +95,10 @@ public class SorryScoreCard
       switch(order.charAt(i))
       {
         case 'a': sp.setScoreArrayElement(0,dice.getDie(i).getValue());
-         System.out.println("move a: "+dice.getDie(i).getValue());
           break;
         case 'b': sp.setScoreArrayElement(1,dice.getDie(i).getValue());
-         System.out.println("move b: "+dice.getDie(i).getValue());
           break;
         case 'c': sp.setScoreArrayElement(2,dice.getDie(i).getValue());
-        System.out.println("move c: "+dice.getDie(i).getValue());
           break;
       }
     }
