@@ -189,19 +189,20 @@ public class Sorry
         if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0)
         {
           System.out.println("sp1 getPieceArrayElement: "+sp1.getPieceArrayElement(i)+"sp2 getPieceArrayElement: "+sp2.getPieceArrayElement(j));
-          if(player1turn)
+          if(!player1turn)
           {
             System.out.println("player 1 turn to go down");
-            //sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
+            sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
           }
           else
           {
             System.out.println("player 2 turn to go down");
-            //sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
+            sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
           }
         }
       }
     }
+    player1turn = !player1turn;
     //for(int i = 0;i<3;i++)
     //{
     //for(int j = 0;j<3;j++)
