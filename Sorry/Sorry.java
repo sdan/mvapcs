@@ -173,7 +173,6 @@ public class Sorry
     }
     while(badinput);
     card.movePieces(sp, dice, order);
-
     checkOnTop(player1, player2, sp);
     card.printScoreCardHeading();
     card.printPlayerStatus(player1);
@@ -189,36 +188,37 @@ public class Sorry
         //other player on top of you
         if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0)
         {
+          System.out.println("sp1 getPieceArrayElement: "+sp1.getPieceArrayElement(i)+"sp2 getPieceArrayElement: "+sp2.getPieceArrayElement(j));
           if(player1turn)
           {
-            sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
-            System.out.println("player 1 down");
+            System.out.println("player 1 turn to go down");
+            //sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
           }
           else
           {
-            sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
-            System.out.println("player 2 down");
+            System.out.println("player 2 turn to go down");
+            //sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
           }
         }
       }
     }
     //for(int i = 0;i<3;i++)
     //{
-        //for(int j = 0;j<3;j++)
-        //{
-        //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
-        //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
-        //if(reroll.getPieceArrayElement(i)==reroll.getPieceArrayElement(j)&&i!=j&&i<21&&i>0&&j>0&&j<21)
-        //{
-          //System.out.println("you have to reroll");
-          //System.out.println("Whoops, your game pieces landed on top of each other (both rolled " + reroll.getPieceArrayElement(i) +
-          //"). Looks like we'll have to try that again . . .");
-          //reroll.setScoreArrayElement(i,-reroll.getPieceArrayElement(i));
-            //System.out.println("reroll  down");
-            //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
-        //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
-        //}
-        //}
+    //for(int j = 0;j<3;j++)
+    //{
+    //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
+    //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
+    //if(reroll.getPieceArrayElement(i)==reroll.getPieceArrayElement(j)&&i!=j&&i<21&&i>0&&j>0&&j<21)
+    //{
+    //System.out.println("you have to reroll");
+    //System.out.println("Whoops, your game pieces landed on top of each other (both rolled " + reroll.getPieceArrayElement(i) +
+    //"). Looks like we'll have to try that again . . .");
+    //reroll.setScoreArrayElement(i,-reroll.getPieceArrayElement(i));
+    //System.out.println("reroll  down");
+    //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
+    //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
+    //}
+    //}
 
     //}
     //self inflicting

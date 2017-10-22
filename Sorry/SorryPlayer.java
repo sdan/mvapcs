@@ -25,16 +25,25 @@ public class SorryPlayer
     {
       System.out.println("setScore enter with "+n+" val: "+value);
       scoreArray[n]+=value;
+      System.out.println("currentVal"+scoreArray[n]);
             System.out.println("AFsetScore enter with "+scoreArray[n]);
+
+
       for(int i = 0;i<scoreArray.length;i++)
       {
           System.out.println("for");
-        if(scoreArray[i]==(scoreArray[n]+=value))
+          System.out.println("currentVal"+scoreArray[i]);
+
+        if(scoreArray[i]==scoreArray[n]&&i!=n)
         {
-            scoreArray[n]=0;
-            System.out.println("scoreArray: "+n+" +value "+value);
+            scoreArray[i]=0;
+            System.out.println("comapare i: "+scoreArray[i]+" to n "+scoreArray[n]);
         }
       }
+
+System.out.println("jake paul");
+System.out.println(scoreArray[n]);
+
       for(int i = 0;i<scoreArray.length;i++)
       {
           System.out.println("scoreArrayP: "+scoreArray[i]);
@@ -42,6 +51,9 @@ public class SorryPlayer
                       System.out.println("setScore exit");
 
     }
+
+
+
     public int calculateScore()
     {
         totalscore = 0;
