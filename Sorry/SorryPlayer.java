@@ -34,11 +34,13 @@ public class SorryPlayer
           System.out.println("for");
           System.out.println("currentVal"+scoreArray[i]);
 
-        if(scoreArray[i]==scoreArray[n]&&i!=n)
+        if(scoreArray[i]==scoreArray[n]&&i!=n&&scoreArray[i]<21)
         {
             scoreArray[i]=0;
             System.out.println("comapare i: "+scoreArray[i]+" to n "+scoreArray[n]);
         }
+        else if(scoreArray[i]>20)
+        scoreArray[i]=21;
       }
 
 System.out.println("jake paul");

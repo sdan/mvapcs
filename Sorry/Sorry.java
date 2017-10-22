@@ -30,9 +30,20 @@ public class Sorry
     card.printScoreCardHeading();
     card.printPlayerStatus(player1);
     card.printPlayerStatus(player2);
-    for(int i = 1;i<=13;i++)
+    boolean ending = false;
+    while(!ending)
     {
       takeATurnForEachPlayer();
+      if(player1.getPieceArrayElement(0)+player1.getPieceArrayElement(1)+player1.getPieceArrayElement(2)>=63)
+      {
+        finalMessage(player1.getName());
+        ending = true;
+      }
+      else if(player2.getPieceArrayElement(0)+player2.getPieceArrayElement(1)+player2.getPieceArrayElement(2)>=63)
+      {
+        finalMessage(player2.getName());
+        ending = true;
+      }
     }
   }
 
@@ -186,7 +197,7 @@ public class Sorry
       for(int j = 0;j<3;j++)
       {
         //other player on top of you
-        if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0)
+        if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0&&sp1.getPieceArrayElement(i)<21)
         {
           System.out.println("sp1 getPieceArrayElement: "+sp1.getPieceArrayElement(i)+"sp2 getPieceArrayElement: "+sp2.getPieceArrayElement(j));
           if(!player1turn)
@@ -241,12 +252,11 @@ public class Sorry
     //   }
     // }
   }
-  public void finalMessage ( )
+  public void finalMessage (String winner)
   {
     System.out.println("\n\nThanks for playing SORRY!");
-    System.out.println("Here are the final results:\n");
-    player1.printScore();
-    player2.printScore();
+    System.out.println(winner+" was the WINNER!");
+    System.out.println("PLAY AGAIN SOON!");
     System.out.println("\n\n\n");
   }
 }
