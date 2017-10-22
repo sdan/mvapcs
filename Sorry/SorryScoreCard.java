@@ -76,30 +76,22 @@ public class SorryScoreCard
     }
     System.out.println("\n+--------------------------------------------------------------------------------------------------+");
   }
-
   public void movePieces(SorryPlayer sp, DiceGroup dice, String order)
   {
-    // System.out.println("dice "+(dice.getDie(0)).getValue());
-    // System.out.println("dice "+(dice.getDie(1)).getValue());
-    // System.out.println("dice "+(dice.getDie(2)).getValue());
     for(int i = 0;i<3;i++)
     {
       switch(order.charAt(i))
       {
         case 'a': sp.setScoreArrayElement(0,dice.getDie(i).getValue());
-        // System.out.println("a: "+dice.getDie(i).getValue());
+         System.out.println("move a: "+dice.getDie(i).getValue());
           break;
         case 'b': sp.setScoreArrayElement(1,dice.getDie(i).getValue());
-        // System.out.println("b: "+dice.getDie(i).getValue());
+         System.out.println("move b: "+dice.getDie(i).getValue());
           break;
         case 'c': sp.setScoreArrayElement(2,dice.getDie(i).getValue());
-        // System.out.println("b: "+dice.getDie(i).getValue());
+        System.out.println("move c: "+dice.getDie(i).getValue());
           break;
       }
     }
-    //int firstValue = sp.getArrayElement();
-    //order.charAt(0)
-    //sp.setScoreArrayElement(0,dice.getDie(0));
   }
-
 }

@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 public class Sorry
 {
@@ -6,7 +7,6 @@ public class Sorry
   private DiceGroup dice;
   private SorryScoreCard card;
   private boolean player1turn;
-
   public Sorry()
   {
     keyboard = new Scanner(System.in);
@@ -16,14 +16,11 @@ public class Sorry
     card = new SorryScoreCard();
     player1turn = true;
   }
-
   public static void main(String[]args)
   {
     Sorry game = new Sorry();
     game.playOneGame();
-
   }
-
   public void playOneGame()
   {
     introduction();
@@ -38,7 +35,6 @@ public class Sorry
       takeATurnForEachPlayer();
     }
   }
-
 
   //  To be used in Sorry.java
   public void introduction ( )
@@ -62,14 +58,12 @@ public class Sorry
     System.out.println("| LET'S PLAY SOME SORRY!                                                             |");
     System.out.println("+------------------------------------------------------------------------------------+\n\n");
   }
-
   public void getName (SorryPlayer sp, int num)
   {
     System.out.print("\nPlayer " + num + ", please enter your first name : ");
     String name = keyboard.nextLine();
     sp.setName(name);
   }
-
   public void chooseWhoGoesFirst ( )
   {
     int player1Sum, player2Sum;
@@ -93,7 +87,6 @@ public class Sorry
     } while (player1Sum == player2Sum);
     setFirstPlayer(player1Sum,player2Sum);
   }
-
   public void setFirstPlayer (int p1sum, int p2sum)
   {
     System.out.print("\n" + player1.getName() + ", you rolled a sum of " + p1sum);
@@ -109,7 +102,6 @@ public class Sorry
       System.out.println("\n" + player2.getName() + ", since your sum was higher, you'll roll first.\n");
     }
   }
-
   public void takeATurnForEachPlayer ()
   {
     if (player1turn)
@@ -123,7 +115,6 @@ public class Sorry
       takeTurn(player1);
     }
   }
-
   public void takeTurn (SorryPlayer sp)
   {
     System.out.print("\n" + sp.getName() + ", it's your turn to play.  Please hit enter to roll the dice : ");
@@ -146,7 +137,6 @@ public class Sorry
     }
     makeChoice(sp);
   }
-
   public void promptForAnotherRoll ( )
   {
     System.out.println("Which di(c)e would you like to keep?  Enter the values you'd like to 'hold' without");
@@ -182,45 +172,74 @@ public class Sorry
       }
     }
     while(badinput);
-
     card.movePieces(sp, dice, order);
-    checkOnTop(player1, player2);
+
+    checkOnTop(player1, player2, sp);
     card.printScoreCardHeading();
     card.printPlayerStatus(player1);
     card.printPlayerStatus(player2);
   }
-  public void checkOnTop(SorryPlayer sp1, SorryPlayer sp2)
+  public void checkOnTop(SorryPlayer sp1, SorryPlayer sp2, SorryPlayer reroll)
   {
+    System.out.println("enter checkOnTop method");
     for(int i = 0;i<3;i++)
     {
       for(int j = 0;j<3;j++)
       {
+        //other player on top of you
         if(sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j)&&sp1.getPieceArrayElement(i)>0)
         {
           if(player1turn)
-          sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
+          {
+            sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
+            System.out.println("player 1 down");
+          }
           else
-          sp1.setScoreArrayElement(i,-sp1.getPieceArrayElement(i));
+          {
+            sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
+            System.out.println("player 2 down");
+          }
         }
       }
     }
-    for(int i = 0;i<3;i++)
-    {
-      for(int j = 0;j<3;j++)
-      {
-        if(player1turn&&sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j))
-        {
-          sp1.setScoreArrayElement(j,-sp1.getPieceArrayElement(j));
-        }
-        else if(!player1turn&&sp2.getPieceArrayElement(i)==sp1.getPieceArrayElement(j))
-        {
-          sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
-        }
-      }
-    }
+    //for(int i = 0;i<3;i++)
+    //{
+        //for(int j = 0;j<3;j++)
+        //{
+        //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
+        //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
+        //if(reroll.getPieceArrayElement(i)==reroll.getPieceArrayElement(j)&&i!=j&&i<21&&i>0&&j>0&&j<21)
+        //{
+          //System.out.println("you have to reroll");
+          //System.out.println("Whoops, your game pieces landed on top of each other (both rolled " + reroll.getPieceArrayElement(i) +
+          //"). Looks like we'll have to try that again . . .");
+          //reroll.setScoreArrayElement(i,-reroll.getPieceArrayElement(i));
+            //System.out.println("reroll  down");
+            //System.out.println("rerolli "+i+": "+reroll.getPieceArrayElement(i));
+        //System.out.println("rerollj "+j+": "+reroll.getPieceArrayElement(j));
+        //}
+        //}
 
+    //}
+    //self inflicting
+
+    System.out.println("exit checkOnTop method");
+    // for(int i = 0;i<3;i++)
+    // {
+    //   for(int j = 0;j<3;j++)
+    //   {
+    //     if(player1turn&&sp1.getPieceArrayElement(i)==sp2.getPieceArrayElement(j))
+    //     {
+    //       sp1.setScoreArrayElement(j,-sp1.getPieceArrayElement(j));
+    //       System.out.println("after check ");
+    //     }
+    //     else if(!player1turn&&sp2.getPieceArrayElement(i)==sp1.getPieceArrayElement(j))
+    //     {
+    //       sp2.setScoreArrayElement(j,-sp2.getPieceArrayElement(j));
+    //     }
+    //   }
+    // }
   }
-
   public void finalMessage ( )
   {
     System.out.println("\n\nThanks for playing SORRY!");

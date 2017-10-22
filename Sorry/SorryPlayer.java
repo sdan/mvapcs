@@ -1,10 +1,8 @@
-
 public class SorryPlayer
 {
     private String name;
     private int[] scoreArray;
     private int totalscore;
-
     public SorryPlayer ()
     {
         name = new String("NAMETOBECHANGEDLATER");
@@ -15,22 +13,35 @@ public class SorryPlayer
             scoreArray[i]=0;
         }
     }
-
     public void setName(String n)//used
     {
         name= new String(n);
     }
-
     public String getName()
     {
         return name;
     }
-
     public void setScoreArrayElement(int n, int value)
     {
+      System.out.println("setScore enter with "+n+" val: "+value);
       scoreArray[n]+=value;
-    }
+            System.out.println("AFsetScore enter with "+scoreArray[n]);
+      for(int i = 0;i<scoreArray.length;i++)
+      {
+          System.out.println("for");
+        if(scoreArray[i]==(scoreArray[n]+=value))
+        {
+            scoreArray[n]=0;
+            System.out.println("scoreArray: "+n+" +value "+value);
+        }
+      }
+      for(int i = 0;i<scoreArray.length;i++)
+      {
+          System.out.println("scoreArrayP: "+scoreArray[i]);
+        }
+                      System.out.println("setScore exit");
 
+    }
     public int calculateScore()
     {
         totalscore = 0;
@@ -43,13 +54,11 @@ public class SorryPlayer
         }
         return totalscore;
     }
-
     public void printScore()
     {
         calculateScore();
         System.out.printf("%-12s : %4d\n");
     }
-
     public int getPieceArrayElement(int n)
     {
         return scoreArray[n];
