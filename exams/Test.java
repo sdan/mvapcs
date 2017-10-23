@@ -10,9 +10,14 @@ public class Test
   }
   public void run()
   {
-    exOut("Good Work","o");
-    exOut("This is bliss.","is");
-    exOut("Hello there!","ere");
+    //exOut("Good Work","o");
+    //exOut("This is bliss.","is");
+    //exOut("Hello there!","ere");
+    repeatBuild("Monta");
+    //repeatBuild("Crazy");
+    //repeatBuild("");
+    //repeatBuild("cool");
+    //repeatBuild("Loopy");
   }
   public void first()
   {
@@ -75,12 +80,32 @@ public class Test
 			index = phrase.indexOf(keep,index+1);
 		}
 
-    // 
-		// for(int i = start; i < phrase.length(); i++)
-		// {
-		// 	phrase = phrase.substring(0,i) + "X" + phrase.substring(i+1);
-		// }
+
+		for(int i = start; i < phrase.length(); i++)
+		{
+			phrase = phrase.substring(0,i) + "X" + phrase.substring(i+1);
+		}
 		System.out.println(phrase);
 	}
+
+  public void repeatBuild(String word)
+  {
+    System.out.println("enter");
+    int length = word.length();
+    String better = "";
+  	if(length==0)
+    {
+      System.out.println("nothing");
+    }
+  	else
+  	{
+  		for(int i = 0;i<=length;i++)
+  		{
+  			better+=word.substring(0,word.length()-i);
+  		}
+      System.out.println(better);
+  	}
+    System.out.println("exit");
+  }
 
 }
