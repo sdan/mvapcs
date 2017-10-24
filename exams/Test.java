@@ -13,11 +13,12 @@ public class Test
     //exOut("Good Work","o");
     //exOut("This is bliss.","is");
     //exOut("Hello there!","ere");
-    repeatBuild("Monta");
+    //repeatBuild("Monta");
     //repeatBuild("Crazy");
     //repeatBuild("");
     //repeatBuild("cool");
     //repeatBuild("Loopy");
+    stringy();
   }
   public void first()
   {
@@ -106,6 +107,13 @@ public class Test
       System.out.println(better);
   	}
     System.out.println("exit");
+  }
+  public void stringy()
+  {
+    System.out.println("Hello");
+    String empty;
+    System.out.println(empty.length());
+    System.out.println("bye");
   }
 
 }
