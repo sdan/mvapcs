@@ -1,6 +1,6 @@
 /**
  * SuperH.java
- * Description Here
+ * EDIT                                                                HERE
  * @author Surya Dantuluri
  * @version 1.0
  * @since 10/24/2017
@@ -14,6 +14,7 @@ public class SuperH
     /** You should start with the simpler game of Hangman, and make this a single String, not an array    */
     /** of String.     */
     private String [] wordlist;
+    private char[] guessedCharacters;
 
     /** A boolean to determine if the list of words should be shown.  True to show, false to hide.        */
     private boolean show;
@@ -24,6 +25,8 @@ public class SuperH
     /** You may want to create a few more field variables.    */
     private Dice die1;
 
+    private int possibleWords;
+
     /** Setup field variables, setting show equal to the boolean in the parameter
      *  list, choosing a random number from 5 to 9 for the wordlength, etc.
      */
@@ -33,7 +36,7 @@ public class SuperH
         wordlength = -1;
         die1 = new Dice(4);
         wordlength = die1.roll()+5;
-
+        globalNum = 0;
     }
 
     /** Play the game.  */
@@ -49,8 +52,8 @@ public class SuperH
             run = new SuperH(false);
         }
         run.loadWords();
-        //run.welcome();
-        //run.playGame();
+        run.welcome();
+        run.playGame();
         //run.exitMessage();
     }
 
@@ -66,11 +69,13 @@ public class SuperH
      String inputString = "";
         while(wordScanner.hasNextLine())
         {
-        //inputString = wordScanner.nextLine();
-        if(wordlength == wordScanner.nextLine().length())
-        counter++;
+            inputString = wordScanner.nextLine();
+            if(wordlength==inputString.length())
+            {
+                counter++;
+            }
         }
-        //System.out.println(counter);
+        //System.out.println("len "+wordlength);
         wordScanner.close();
         String[] wordlist = new String[counter];
         wordScanner = OpenFile.openToRead("words.txt");
@@ -78,17 +83,22 @@ public class SuperH
         counter = 0;
         while(counter<wordlist.length)
         {
-        inputString = wordScanner.nextLine();
-        if(wordlength == wordScanner.nextLine().length())
-        //System.out.println(counter);
-        //System.out.println(inputString);
-        wordlist[counter] = inputString;
-        counter++;
+            inputString = wordScanner.nextLine();
+            if(inputString.length()==wordlength)
+            {
+                //System.out.println(inputString);
+                wordlist[counter] = inputString;
+                counter++;
+                globalNum++;
+            }
         }
-        for(int i = 0;i<wordlength;i++)
+        //printing press
+        for(int i = 0;i<counter;i++)
         {
-            System.out.println(wordlist[i]);
+            //System.out.println(wordlist[i]);
         }
+        System.out.println("len "+wordlength);
+        System.out.println("num "+globalNum);
     }
 
     /** A loop that plays a single game.      */
@@ -137,7 +147,6 @@ public class SuperH
      */
     public void printWordList ( )
     {
-
         for(int i = 0; i < wordlist.length; i++)
         {
             if(i % 7 == 0)
@@ -146,7 +155,6 @@ public class SuperH
             }
             System.out.print(wordlist[i] + "  ");
         }
-
         System.out.print("\n\n" + wordlength + "   " + wordlist.length);
         System.out.println("\n\n");
     }
@@ -155,7 +163,19 @@ public class SuperH
      */
     public void getCharGuess ( )
     {
+        printScore();
         Prompt.getString("\n\nPlaced here to pause the loop for now: ");
+    }
+
+    public void printScore()
+    {
+        guessedCharacters[] = new char[wordlength];
+        for(int i = 0;i<wordlength;i++)
+        {
+            if(guessedCharacters[i]!=null)
+            System.out.println(guessedCharacters[i]);
+        }
+        System.out.println("end char");
     }
 
     /** Reacts to user input, paring down the list of words.  The idea is to keep as many words as possible
