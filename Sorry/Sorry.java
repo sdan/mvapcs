@@ -136,7 +136,8 @@ public class Sorry
       takeTurn(player1);
     }
   }
-
+//second array value to 0
+//after 1st array valye is set 
   public void takeTurn (SorryPlayer sp)
   {
     System.out.print("\n" + sp.getName() + ", it's your turn to play.  Please hit enter to roll the dice : ");
