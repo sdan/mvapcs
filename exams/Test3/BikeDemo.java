@@ -1,3 +1,4 @@
+//done
 public class BikeDemo
 {
      public static void main (String[] args)
@@ -8,32 +9,32 @@ public class BikeDemo
 
           System.out.println("\n\n\n");
           // Invoke methods on those objects
-          bike1.changeCadence(50);
-          bike1.speedUp(10);
-          bike1.changeGear(2);
-          bike1.printStates();
+          bike1.changeCadence(50);//50
+          bike1.speedUp(10);//11
+          bike1.changeGear(2);//2
+          bike1.printStates();//50,11,2
 
-          bike2.changeCadence(50);
-          bike2.speedUp(10);
-          bike2.changeGear(2);
-          bike2.changeCadence(40);
-          bike2.speedUp(10);
-          bike2.changeGear(3);
-          bike2.printStates();
+          bike2.changeCadence(50);//50
+          bike2.speedUp(10);//11
+          bike2.changeGear(2);//2
+          bike2.changeCadence(40);//trash 50, 40
+          bike2.speedUp(10);//21
+          bike2.changeGear(3);//trash 2, 3
+          bike2.printStates();//50,21,3
 
-          MountainBike mbike1 = new MountainBike ( 25, 0, 0, 1 );
-          mbike1.changeCadence(50);
-          mbike1.speedUp(10);
+          MountainBike mbike1 = new MountainBike ( 25, 0, 0, 1 );//001
+          mbike1.changeCadence(50);//50
+          mbike1.speedUp(10);//10
           mbike1.changeGear(2);
-          mbike1.changeCadence(40);
-          mbike1.speedUp(10);
-          mbike1.changeGear(3);
-          mbike1.printStates();
+          mbike1.changeCadence(40);//scrap 50, 40
+          mbike1.speedUp(10);//20
+          mbike1.changeGear(3);//3
+          mbike1.printStates();//40,20,3
           System.out.println("\n\n\n");
      }
 }
 
-public class Bicycle
+class Bicycle
 {
     // the Bicycle class has three fields
     private int cadence;
@@ -97,16 +98,16 @@ public class Bicycle
     }
 }
 
-public class MountainBike extends Bicycle
+class MountainBike extends Bicycle
 {
     // the MountainBike subclass adds one field
     private int seatHeight;
 
     // the MountainBike subclass has one constructor
     public MountainBike(int startHeight, int startCadence, int startSpeed, int startGear)
-    {
-        super(startCadence, startSpeed, startGear);
-        seatHeight = startHeight;
+    {//25,0,0,1
+        super(startCadence, startSpeed, startGear);//0,0,1
+        seatHeight = startHeight;//25
     }
 
     // the MountainBike subclass adds one method
