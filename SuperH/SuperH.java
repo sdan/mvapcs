@@ -169,7 +169,7 @@ public class SuperH
 
     public void printScore()
     {
-        guessedCharacters[] = new char[wordlength];
+        //guessedCharacters[] = new char[wordlength];
         for(int i = 0;i<wordlength;i++)
         {
             if(guessedCharacters[i]!=null)
