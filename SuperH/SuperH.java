@@ -164,18 +164,7 @@ public class SuperH
     public void getCharGuess ( )
     {
         printScore();
-        Prompt.getString("\n\nPlaced here to pause the loop for now: ");
-    }
-
-    public void printScore()
-    {
-        //guessedCharacters[] = new char[wordlength];
-        for(int i = 0;i<wordlength;i++)
-        {
-            if(guessedCharacters[i]!=null)
-            System.out.println(guessedCharacters[i]);
-        }
-        System.out.println("end char");
+        Prompt.getString("\n\nEnter your character: ");
     }
 
     /** Reacts to user input, paring down the list of words.  The idea is to keep as many words as possible
@@ -184,11 +173,7 @@ public class SuperH
      */
     public String [] eliminateWords ( )
     {
-        String [] newwordlist;
-        newwordlist = new String [1];
-        newwordlist[0] = new String("");
-        newwordlist[0] = new String("partial");
-        return newwordlist;
+
     }
 
     /** A check to see if the game is finished, either because the user has made
