@@ -14,8 +14,6 @@ public class SuperH
     /** You should start with the simpler game of Hangman, and make this a single String, not an array    */
     /** of String.     */
     private String [] wordlist;
-    private char[] guessedCharacters;
-
     /** A boolean to determine if the list of words should be shown.  True to show, false to hide.        */
     private boolean show;
 
@@ -25,7 +23,8 @@ public class SuperH
     /** You may want to create a few more field variables.    */
     private Dice die1;
 
-    private int possibleWords;
+    private char inputChar;
+
 
     /** Setup field variables, setting show equal to the boolean in the parameter
      *  list, choosing a random number from 5 to 9 for the wordlength, etc.
@@ -171,9 +170,19 @@ public class SuperH
      *  (to make it harder for the user), but following the letters input by the user . . .
      *  @return   The String array of words still possible, matching the user's guesses.
      */
-    public String [] eliminateWords ( )
+    public String [] eliminateWords ()
     {
-
+      //find biggest frequency of how many input characters
+      int[] store = new int[wordlength];
+      for(int i = 0;i<wordlist.length;i++)
+      {
+        for(int j = 0;j<wordlength;j++)
+        {
+          if(wordlist[i].charAt(j)==inputChar)
+          store[j]++;
+        }
+      }
+      //find most frequent index of that character
     }
 
     /** A check to see if the game is finished, either because the user has made
