@@ -172,17 +172,37 @@ public class SuperH
      */
     public String [] eliminateWords ()
     {
-      //find biggest frequency of how many input characters
-      int[] store = new int[wordlength];
+      //0101
+      //0100
+      //0100
+      String[] bypass1 = new String[wordlist.length];
+      String[] bypass2 = new String[wordlist.length];
+      int[] frequency = new int[wordlist.length];
       for(int i = 0;i<wordlist.length;i++)
       {
         for(int j = 0;j<wordlength;j++)
         {
           if(wordlist[i].charAt(j)==inputChar)
-          store[j]++;
+          bypass1[j]+='1';
+          else
+          bypass1[j]+='0';
         }
       }
-      //find most frequent index of that character
+      for(int i = 0;i<bypass1.length;i++)
+      {
+        bypass1[i] = bypass2[i];
+      }
+      for(int i = 0;i<wordlist.length;i++)
+      {
+        for(int j = i;j<wordlist.length;j++)
+        {
+          if(bypass1[i].equals(bypass2[j])&&i!=j)
+          {
+            frequency[i]++;
+
+          }
+        }
+      }
     }
 
     /** A check to see if the game is finished, either because the user has made
