@@ -14,7 +14,9 @@ public class SuperH
     /** You should start with the simpler game of Hangman, and make this a single String, not an array    */
     /** of String.     */
     private String [] wordlist;
-    private char [] guess;
+    private String guess;
+    private char [] correctGuess;
+    private char [] totalGuess;
     /** A boolean to determine if the list of words should be shown.  True to show, false to hide.        */
     private boolean show;
 
@@ -37,6 +39,8 @@ public class SuperH
         die1 = new Dice(4);
         //wordlength = die1.roll()+5;
         wordlength = 7;
+        correctGuess = new correctGuess[wordlength];
+        totalGuess = new totalGuess[7];
     }
 
     /** Play the game.  */
@@ -165,9 +169,19 @@ public class SuperH
 // Please enter a new letter guess: e
 
         String input = "";
+        int counter = 0;
         while(input.length()==0||input.length()>1)
         {
-          input = Prompt.getString("\n\nEnter your character: ");
+          printScore();
+          System.out.printf("\tThe word has "+wordlength+" letters, and you've guessed: ")
+          for (int i= 0;i<totalGuess.length;i++)
+          {
+            System.out.print(totalGuess[i]+" ");
+            if(!totalGuess[i].charAt(0)>64)
+            counter++;
+          }
+          System.out.println("\nFind the words in less than 7 wrong guesses. So far, you have made "+counter+" wrong guess(es).");
+          input = Prompt.getString("\nPlease enter a new letter guess: ");
         }
         inputChar = input;
         System.out.println("end guess");
@@ -175,14 +189,21 @@ public class SuperH
 
     public void printScore()
     {
-
+      for (int i = 0;i<correctGuess.length;i++)
+      {
+        if(correctGuess[i]!=inputChar.charAt(0))
+        System.out.print("_");
+        else
+        System.out.print(inputChar.charAt(0));
+      }
     }
     public void updateStatus()
     {
-      for (int i = 0;i<wordlist.length;i++)
+      for (int i = 0;i<guess.length();i++)
       {
-        if(wordlist[i].contains(inputChar))
-        guess[i]
+        if(guess.charAt(i)=='1')
+        correctGuess[i] = inputChar.charAt(0);
+
       }
     }
     /** Reacts to user input, paring down the list of words.  The idea is to keep as many words as possible
@@ -196,6 +217,7 @@ public class SuperH
       int[] frequency = new int[wordlist.length];
       int humanWin = 0;
       int algoWin = 0;
+
 
       for(int i = 0;i<wordlist.length;i++)
       {
@@ -236,9 +258,8 @@ public class SuperH
           indexOfBest = i;
         }
       }
-
       String master = bypass1[indexOfBest];
-
+      System.out.println("most num times: "+frequency[indexOfBest]+"indexOfbest "+indexOfBest+" binarysig: "+master+" string "+wordlist[indexOfBest]);
       int counter = 0;
       int finalArrayLength = 0;
 
@@ -287,14 +308,17 @@ public class SuperH
           counter++;
         }
       }
+      String algoMaster = cleanAlgoWin[0];
       System.out.println("endy h" +humanWin);
       System.out.println("endyy a" +algoWin);
       if(humanWin>algoWin)
       {
+        guess = master;
         return clean;
       }
       else
       {
+        guess = algoMaster;
         return cleanAlgoWin;
       }
     }
