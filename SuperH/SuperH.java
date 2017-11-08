@@ -191,37 +191,32 @@ public class SuperH
      */
     public String [] eliminateWords ()
     {
-      System.out.println("hea");
       String[] bypass1 = new String[wordlist.length];
       String[] bypass2 = new String[wordlist.length];
       int[] frequency = new int[wordlist.length];
       int humanWin = 0;
       int algoWin = 0;
+
       for(int i = 0;i<wordlist.length;i++)
       {
         bypass1[i] = wordlist[i];
       }
-      //System.out.println("bb"+bypass1[0]);
-      //System.out.println("worldis"+wordlist[0]);
+
       for(int i = 0;i<wordlist.length;i++)
       {
-            bypass1[i] = exOut(bypass1[i],inputChar,"0");
-            bypass1[i] = exOut(bypass1[i],"0","1");
-        }
+        bypass1[i] = exOut(bypass1[i],inputChar,"0");
+        bypass1[i] = exOut(bypass1[i],"0","1");
+      }
 
       for(int i = 0;i<bypass1.length;i++)
       {
         bypass2[i] = bypass1[i];
-        //System.out.println(bypass1[i]);
       }
-      System.out.println("bypa1 done");
 
       for(int i = 0;i<bypass1.length;i++)
       {
         for(int j = 0;j<bypass1.length;j++)
         {
-          // System.out.println("b1 "+bypass1[i]);
-          // System.out.println("b2 "+bypass2[j]);
           if(bypass1[i].equals(bypass2[j])&&i!=j&&bypass1[i].contains("1"))
           {
             frequency[i]++;
@@ -229,6 +224,7 @@ public class SuperH
           }
         }
       }
+
       int best = 0;
       int indexOfBest = 0;
       //find biggest
@@ -240,10 +236,12 @@ public class SuperH
           indexOfBest = i;
         }
       }
+
       String master = bypass1[indexOfBest];
-      //System.out.println("most num times: "+frequency[indexOfBest]+" binarysig: "+master+" string "+wordlist[indexOfBest]);
+
       int counter = 0;
       int finalArrayLength = 0;
+
       for (int i = 0;i<wordlist.length;i++)
       {
           if(bypass1[i].equals(master))
@@ -251,8 +249,10 @@ public class SuperH
             finalArrayLength++;
           }
       }
+
       humanWin = finalArrayLength;
       String[] clean = new String[finalArrayLength];
+
       for (int i = 0;i<wordlist.length;i++)
       {
           if(bypass1[i].equals(master))
@@ -262,6 +262,7 @@ public class SuperH
             counter++;
           }
       }
+
       for(int i = 0;i<clean.length;i++)
       {
         System.out.println(clean[i]);
