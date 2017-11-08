@@ -74,7 +74,6 @@ public class SuperH
                 counter++;
             }
         }
-        //System.out.println("len "+wordlength);
         wordScanner.close();
         wordlist = new String[counter];
         wordScanner = OpenFile.openToRead("words.txt");
@@ -85,13 +84,11 @@ public class SuperH
             inputString = wordScanner.nextLine();
             if(inputString.length()==wordlength)
             {
-                //System.out.println(inputString);
                 wordlist[counter] = inputString;
                 counter++;
             }
         }
         wordScanner.close();
-        //printing press
         for(int i = 0;i<counter;i++)
         {
             System.out.println(wordlist[i]);
@@ -177,19 +174,12 @@ public class SuperH
      */
     public String [] eliminateWords ()
     {
-      //0101
-      //0100
-      //0100
-
       System.out.println("hea");
-      // for(int i = 0;i<50;i++)
-      // {
-      //     System.out.println(wordlist[i]);
-      // }
-
       String[] bypass1 = new String[wordlist.length];
       String[] bypass2 = new String[wordlist.length];
       int[] frequency = new int[wordlist.length];
+      int humanWin = 0;
+      int algoWin = 0;
       for(int i = 0;i<wordlist.length;i++)
       {
         bypass1[i] = wordlist[i];
@@ -200,25 +190,6 @@ public class SuperH
       {
             bypass1[i] = exOut(bypass1[i],inputChar,"0");
             bypass1[i] = exOut(bypass1[i],"0","1");
-            //System.out.println(bypass1[i]);
-            // if(j!=wordlength-1)
-            // {
-            //   bypass1[i] = bypass1[i].substring(0,j)+"1"+bypass1[i].substring(j+1,bypass1[i].length());
-            //   System.out.println(bypass1[i]);
-            // }
-            // else
-            // {
-            //   bypass1[i] = bypass1[i].substring(0,j)+"1";
-            //   System.out.println(bypass1[i]);
-            // }
-          // }
-          // else if(bypass1[i].charAt(j)==inputChar)
-          // {
-          //   if(j!=wordlength-1)
-          //   bypass1[i] = bypass1[i].substring(0,j)+"0"+bypass1[i].substring(j+1,bypass1[i].length());
-          //   else
-          //   bypass1[i] = bypass1[i].substring(0,j)+"0";
-          // }
         }
 
       for(int i = 0;i<bypass1.length;i++)
@@ -258,15 +229,16 @@ public class SuperH
       int finalArrayLength = 0;
       for (int i = 0;i<wordlist.length;i++)
       {
-          if(!bypass1[i].equals(master))
+          if(bypass1[i].equals(master))
           {
             finalArrayLength++;
           }
       }
+      humanWin = finalArrayLength;
       String[] clean = new String[finalArrayLength];
       for (int i = 0;i<wordlist.length;i++)
       {
-          if(!bypass1[i].equals(master))
+          if(bypass1[i].equals(master))
           {
             System.out.println("equal master");
             clean[counter] = wordlist[i];
@@ -277,10 +249,36 @@ public class SuperH
       {
         System.out.println(clean[i]);
       }
-      System.out.println("end eli" +finalArrayLength);
       //construct better array
       //for(int i = 0;i<)
-      return clean;
+      //without the e
+      counter = 0;
+      for (int i = 0;i<wordlist.length;i++)
+      {
+        if(!wordlist[i].contains(inputChar))
+        counter++;
+      }
+      String[] cleanAlgoWin = new String[counter];
+      algoWin = counter;
+      counter = 0;
+      for (int i = 0;i<wordlist.length;i++)
+      {
+        if(!wordlist[i].contains(inputChar))
+        {
+          cleanAlgoWin[counter] = wordlist[i];
+          counter++;
+        }
+      }
+      System.out.println("endy h" +humanWin);
+      System.out.println("endyy a" +algoWin);
+      if(humanWin>algoWin)
+      {
+        return clean;
+      }
+      else
+      {
+        return cleanAlgoWin;
+      }
     }
 
     public String exOut(String phrase, String keep, String getOut)
