@@ -34,7 +34,8 @@ public class SuperH
         show = peek;
         wordlength = -1;
         die1 = new Dice(4);
-        wordlength = die1.roll()+5;
+        //wordlength = die1.roll()+5;
+        wordlength = 7;
     }
 
     /** Play the game.  */
@@ -166,6 +167,7 @@ public class SuperH
         {
           input = Prompt.getString("\n\nEnter your character: ");
         }
+        inputChar = input;
         System.out.println("end guess");
     }
 
@@ -192,16 +194,13 @@ public class SuperH
       {
         bypass1[i] = wordlist[i];
       }
-      System.out.println("bb"+bypass1[0]);
-      System.out.println("worldis"+wordlist[0]);
+      //System.out.println("bb"+bypass1[0]);
+      //System.out.println("worldis"+wordlist[0]);
       for(int i = 0;i<wordlist.length;i++)
       {
-        for(int j = 0;j<wordlength;j++)
-        {
-          if(bypass1[i].charAt(j)==inputChar)
-          {
-            System.out.print(bypass1[i].charAt(j));
-            bypass1[i] = bypass1[i].replaceAll(inputChar,"1");
+            bypass1[i] = exOut(bypass1[i],inputChar,"0");
+            bypass1[i] = exOut(bypass1[i],"0","1");
+            //System.out.println(bypass1[i]);
             // if(j!=wordlength-1)
             // {
             //   bypass1[i] = bypass1[i].substring(0,j)+"1"+bypass1[i].substring(j+1,bypass1[i].length());
@@ -212,33 +211,34 @@ public class SuperH
             //   bypass1[i] = bypass1[i].substring(0,j)+"1";
             //   System.out.println(bypass1[i]);
             // }
-          }
-          else if(bypass1[i].charAt(j)==inputChar)
-          {
-            if(j!=wordlength-1)
-            bypass1[i] = bypass1[i].substring(0,j)+"0"+bypass1[i].substring(j+1,bypass1[i].length());
-            else
-            bypass1[i] = bypass1[i].substring(0,j)+"0";
-          }
+          // }
+          // else if(bypass1[i].charAt(j)==inputChar)
+          // {
+          //   if(j!=wordlength-1)
+          //   bypass1[i] = bypass1[i].substring(0,j)+"0"+bypass1[i].substring(j+1,bypass1[i].length());
+          //   else
+          //   bypass1[i] = bypass1[i].substring(0,j)+"0";
+          // }
         }
-      }
+
       for(int i = 0;i<bypass1.length;i++)
       {
-        bypass1[i] = bypass2[i];
+        bypass2[i] = bypass1[i];
         //System.out.println(bypass1[i]);
       }
       System.out.println("bypa1 done");
-      for(int i = 0;i<wordlist.length;i++)
+
+      for(int i = 0;i<bypass1.length;i++)
       {
-        for(int j = 0;j<wordlist.length;j++)
+        for(int j = 0;j<bypass1.length;j++)
         {
-          //System.out.println("b1"+bypass1[i]);
-          //System.out.println("b2"+bypass2[j]);
-          // if(bypass1[i].equals(bypass2[j])&&i!=j)
-          // {
-          //   frequency[i]++;
-          //   bypass2[j] = "";
-          // }
+          // System.out.println("b1 "+bypass1[i]);
+          // System.out.println("b2 "+bypass2[j]);
+          if(bypass1[i].equals(bypass2[j])&&i!=j&&bypass1[i].contains("1"))
+          {
+            frequency[i]++;
+            bypass2[j] = "";
+          }
         }
       }
       int best = 0;
@@ -252,14 +252,42 @@ public class SuperH
           indexOfBest = i;
         }
       }
-      System.out.println("most num times: "+frequency[indexOfBest]+" binarysig: "+bypass1[indexOfBest]+" string "+wordlist[indexOfBest]);
+      String master = bypass1[indexOfBest];
+      //System.out.println("most num times: "+frequency[indexOfBest]+" binarysig: "+master+" string "+wordlist[indexOfBest]);
+      int counter = 0;
+      int finalArrayLength = 0;
+      for (int i = 0;i<wordlist.length;i++)
+      {
+          if(!bypass1[i].equals(master))
+          {
+            finalArrayLength++;
+          }
+      }
+      String[] clean = new String[finalArrayLength];
+      for (int i = 0;i<wordlist.length;i++)
+      {
+          if(!bypass1[i].equals(master))
+          {
+            System.out.println("equal master");
+            clean[counter] = wordlist[i];
+            counter++;
+          }
+      }
+      for(int i = 0;i<clean.length;i++)
+      {
+        System.out.println(clean[i]);
+      }
+      System.out.println("end eli" +finalArrayLength);
       //construct better array
       //for(int i = 0;i<)
-      return null;
+      return clean;
     }
 
     public String exOut(String phrase, String keep, String getOut)
     	{
+        // System.out.println(phrase);
+        // System.out.println(keep);
+        // System.out.println(getOut);
     		int index = phrase.indexOf(keep);
     		int start = 0;
     		while(index != -1 && index < phrase.length())
@@ -278,7 +306,6 @@ public class SuperH
     		return phrase;
     	}
 
-    }
 
 
     /** A check to see if the game is finished, either because the user has made
