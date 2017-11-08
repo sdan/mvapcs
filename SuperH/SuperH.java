@@ -35,7 +35,6 @@ public class SuperH
         wordlength = -1;
         die1 = new Dice(4);
         wordlength = die1.roll()+5;
-        globalNum = 0;
     }
 
     /** Play the game.  */
@@ -76,7 +75,7 @@ public class SuperH
         }
         //System.out.println("len "+wordlength);
         wordScanner.close();
-        String[] wordlist = new String[counter];
+        wordlist = new String[counter];
         wordScanner = OpenFile.openToRead("words.txt");
         inputString = "";
         counter = 0;
@@ -88,16 +87,15 @@ public class SuperH
                 //System.out.println(inputString);
                 wordlist[counter] = inputString;
                 counter++;
-                globalNum++;
             }
         }
+        wordScanner.close();
         //printing press
         for(int i = 0;i<counter;i++)
         {
-            //System.out.println(wordlist[i]);
+            System.out.println(wordlist[i]);
         }
         System.out.println("len "+wordlength);
-        System.out.println("num "+globalNum);
     }
 
     /** A loop that plays a single game.      */
@@ -162,8 +160,14 @@ public class SuperH
      */
     public void getCharGuess ( )
     {
-        printScore();
-        Prompt.getString("\n\nEnter your character: ");
+        //printScore();
+        String input = "";
+        while(input.length()==0||input.length()>1)
+        {
+          input = Prompt.getString("\n\nEnter your character: ");
+        }
+        inputChar = input.charAt(0);
+        System.out.println("end guess");
     }
 
     /** Reacts to user input, paring down the list of words.  The idea is to keep as many words as possible
@@ -175,17 +179,34 @@ public class SuperH
       //0101
       //0100
       //0100
+
+      System.out.println("hea");
+      // for(int i = 0;i<50;i++)
+      // {
+      //     System.out.println(wordlist[i]);
+      // }
+
       String[] bypass1 = new String[wordlist.length];
       String[] bypass2 = new String[wordlist.length];
       int[] frequency = new int[wordlist.length];
       for(int i = 0;i<wordlist.length;i++)
       {
-        for(int j = 0;j<wordlength;j++)
+        wordlist[i] = bypass1[i];
+      }
+      
+      for(int i = 0;i<wordlist.length;i++)
+      {
+        for(int j = 0;j<wordlength+1;j++)
         {
-          if(wordlist[i].charAt(j)==inputChar)
-          bypass1[j]+='1';
+          if(bypass[i].charAt(j)==inputChar)
+          {
+            bypass[i] = bypass[i].substring(0,j)+"1"+bypass[j].substring(j+2,bypass[j].length()-1);
+          }
+          bypass[i] = bypass1[i].replace(j
+
+          bypass1[j]+="1";
           else
-          bypass1[j]+='0';
+          bypass1[j]+="0";
         }
       }
       for(int i = 0;i<bypass1.length;i++)
@@ -194,15 +215,32 @@ public class SuperH
       }
       for(int i = 0;i<wordlist.length;i++)
       {
-        for(int j = i;j<wordlist.length;j++)
+        for(int j = 0;j<wordlist.length;j++)
         {
-          if(bypass1[i].equals(bypass2[j])&&i!=j)
-          {
-            frequency[i]++;
-
-          }
+          System.out.println("b1"+bypass1[i]);
+          System.out.println("b2"+bypass2[j]);
+          // if(bypass1[i].equals(bypass2[j])&&i!=j)
+          // {
+          //   frequency[i]++;
+          //   bypass2[j] = "";
+          // }
         }
       }
+      int best = 0;
+      int indexOfBest = 0;
+      //find biggest
+      for(int i = 0;i<frequency.length;i++)
+      {
+        if(!(best>frequency[i]))
+        {
+          best = frequency[i];
+          indexOfBest = i;
+        }
+      }
+      System.out.println("most num times: "+frequency[indexOfBest]+" binarysig: "+bypass1[indexOfBest]+" string "+wordlist[indexOfBest]);
+      //construct better array
+      //for(int i = 0;i<)
+      return null;
     }
 
     /** A check to see if the game is finished, either because the user has made
