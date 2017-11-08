@@ -23,7 +23,7 @@ public class SuperH
     /** You may want to create a few more field variables.    */
     private Dice die1;
 
-    private char inputChar;
+    private String inputChar;
 
 
     /** Setup field variables, setting show equal to the boolean in the parameter
@@ -166,7 +166,6 @@ public class SuperH
         {
           input = Prompt.getString("\n\nEnter your character: ");
         }
-        inputChar = input.charAt(0);
         System.out.println("end guess");
     }
 
@@ -191,34 +190,50 @@ public class SuperH
       int[] frequency = new int[wordlist.length];
       for(int i = 0;i<wordlist.length;i++)
       {
-        wordlist[i] = bypass1[i];
+        bypass1[i] = wordlist[i];
       }
-      
+      System.out.println("bb"+bypass1[0]);
+      System.out.println("worldis"+wordlist[0]);
       for(int i = 0;i<wordlist.length;i++)
       {
-        for(int j = 0;j<wordlength+1;j++)
+        for(int j = 0;j<wordlength;j++)
         {
-          if(bypass[i].charAt(j)==inputChar)
+          if(bypass1[i].charAt(j)==inputChar)
           {
-            bypass[i] = bypass[i].substring(0,j)+"1"+bypass[j].substring(j+2,bypass[j].length()-1);
+            System.out.print(bypass1[i].charAt(j));
+            bypass1[i] = bypass1[i].replaceAll(inputChar,"1");
+            // if(j!=wordlength-1)
+            // {
+            //   bypass1[i] = bypass1[i].substring(0,j)+"1"+bypass1[i].substring(j+1,bypass1[i].length());
+            //   System.out.println(bypass1[i]);
+            // }
+            // else
+            // {
+            //   bypass1[i] = bypass1[i].substring(0,j)+"1";
+            //   System.out.println(bypass1[i]);
+            // }
           }
-          bypass[i] = bypass1[i].replace(j
-
-          bypass1[j]+="1";
-          else
-          bypass1[j]+="0";
+          else if(bypass1[i].charAt(j)==inputChar)
+          {
+            if(j!=wordlength-1)
+            bypass1[i] = bypass1[i].substring(0,j)+"0"+bypass1[i].substring(j+1,bypass1[i].length());
+            else
+            bypass1[i] = bypass1[i].substring(0,j)+"0";
+          }
         }
       }
       for(int i = 0;i<bypass1.length;i++)
       {
         bypass1[i] = bypass2[i];
+        //System.out.println(bypass1[i]);
       }
+      System.out.println("bypa1 done");
       for(int i = 0;i<wordlist.length;i++)
       {
         for(int j = 0;j<wordlist.length;j++)
         {
-          System.out.println("b1"+bypass1[i]);
-          System.out.println("b2"+bypass2[j]);
+          //System.out.println("b1"+bypass1[i]);
+          //System.out.println("b2"+bypass2[j]);
           // if(bypass1[i].equals(bypass2[j])&&i!=j)
           // {
           //   frequency[i]++;
@@ -242,6 +257,29 @@ public class SuperH
       //for(int i = 0;i<)
       return null;
     }
+
+    public String exOut(String phrase, String keep, String getOut)
+    	{
+    		int index = phrase.indexOf(keep);
+    		int start = 0;
+    		while(index != -1 && index < phrase.length())
+    		{
+    		    for(int i = start; i < index; i++)
+    			{
+    				phrase = phrase.substring(0,i) + getOut + phrase.substring(i+1);
+    			}
+    			start = index+keep.length();
+    			index = phrase.indexOf(keep,index+1);
+    		}
+    		for(int i = start; i < phrase.length(); i++)
+    		{
+    			phrase = phrase.substring(0,i) + getOut + phrase.substring(i+1);
+    		}
+    		return phrase;
+    	}
+
+    }
+
 
     /** A check to see if the game is finished, either because the user has made
      *  too many wrong guesses, or the word has been found.
