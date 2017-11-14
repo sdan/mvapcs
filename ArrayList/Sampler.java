@@ -219,7 +219,7 @@ public class Sampler
   public boolean inOrder(ArrayList<String> arr)
   {
     int i = 0;
-    while(i<arr.size())
+    while(i<arr.size()-1)
     {
       if((arr.get(i).compareTo(arr.get(i+1))>0))
       {
@@ -259,8 +259,9 @@ public class Sampler
   */
   public void swap(ArrayList<String> arr, int i, int j)
   {
-    arr.set(i,arr.get(i));
-    arr.set(j,arr.get(j));
+    String temp = arr.get(i);
+    arr.set(i,arr.get(j));
+    arr.set(j,temp);
   }
 
   /**
@@ -272,12 +273,11 @@ public class Sampler
   */
   public ArrayList<Integer> reverseArray(ArrayList<Integer> arr)
   {
-    ArrayList<Integer> result = new ArrayList<Integer>();    //  To be completed by you.
-    for(int i = arr.size(); i>-1; i++)
+    ArrayList<Integer> result = new ArrayList<Integer>();
+    for(int i = arr.size()-1; i>-1; i--)
     {
-      result.add(i,arr.get(i));
+      result.add(arr.get(i));
     }
-    return list;
     return result;
   }
 
@@ -305,7 +305,16 @@ public class Sampler
   */
   public void removeLeast(ArrayList<Double> arr)
   {
-    //  To be completed by you.
+    double min = arr.get(0);
+    int index = -99999;
+    for(int i = 0;i<arr.size();i++)
+    {
+      if(arr.get(i)<min)
+      {
+        min=arr.get(i);
+      }
+    }
+    arr.remove(arr.indexOf(min));
   }
 
   /**
@@ -332,7 +341,14 @@ public class Sampler
   */
   public void removeDuplicates(ArrayList<String> arr)
   {
-    //  To be completed by you.
+    for(int i = 0;i<arr.size();i++)
+    {
+      for (int j = 0;j<arr.size();j++)
+      {
+        if(arr.get(i).equals(arr.get(j))&&i!=j)
+        arr.remove(j) ;
+      }
+    }
   }
 
   /**
@@ -342,7 +358,10 @@ public class Sampler
   */
   public void rotateRight(ArrayList<Integer> a)
   {
-    //  To be completed by you.
+
+    a.add(0,a.get(a.size()-1));
+    a.remove(a.size()-1);
+
   }
 
   /**
@@ -352,7 +371,8 @@ public class Sampler
   */
   public void rotateLeft(ArrayList<Integer> a)
   {
-    //  To be completed by you.
+    a.add(a.get(0));
+    a.remove(0);
   }
 
   /**
@@ -363,7 +383,19 @@ public class Sampler
   */
   public void rotateRight(ArrayList<Integer> a, int n)
   {
-    //  To be completed by you.
+    if(n>0)
+    while(n>0)
+    {
+      rotateRight(a);
+      n--;
+    }
+    else
+    while(n<0)
+    {
+      rotateLeft(a);
+      n++;
+    }
+
   }
 }
 
