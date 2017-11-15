@@ -19,22 +19,17 @@
 *  @version 1.0
 *  @since 11/14/2017
 */
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 public class Sampler
 {
   /**    The ArrayList of String to be used in tasks (1), (2), and (5) above   */
   private ArrayList<String> elements;
-
   /**    The ArrayList of Integer to be used in tasks (3) and (6) above   */
   private ArrayList<Integer> numbers;
-
   /**    The ArrayList of Double to be used in task (4) above   */
   private ArrayList<Double> values;
-
   /**    Creates a Sampler object, initializing the 3 ArrayLists with some
   *     values.
   */
@@ -44,13 +39,11 @@ public class Sampler
     numbers = new ArrayList<Integer>(Arrays.asList(45, 23, 94, 15, 83, 59, 70, 34, 62, 38));
     values = new ArrayList<Double>(Arrays.asList(5.6, 4.1, 9.4, 8.8, 1.3, 2.1, 7.9));
   }
-
   public static void main(String [] args)
   {
     Sampler sample = new Sampler();
     sample.run();
   }
-
   /**
   *  Runs all of the tasks, fully testing them.
   */
@@ -64,7 +57,6 @@ public class Sampler
     taskSix();
     System.out.println("\n\n\n");
   }
-
   /**
   *  Runs tasks (1) and (2), swapping elements of a String ArrayList,
   *  printing the ArrayList and checking to see if the ArrayList is in order.
@@ -101,7 +93,6 @@ public class Sampler
     checkOrder(elements);
     System.out.println();
   }
-
   /**
   *  Runs task (3), reversing an ArrayList of Integer, printing out both the
   *  original ArrayList of Integer and the reversed ArrayList of Integer.
@@ -117,7 +108,6 @@ public class Sampler
     printIntegerArrayList(reversed);
     System.out.println();
   }
-
   /**
   *  Runs task (4), removing the least value in an ArrayList of Double.
   */
@@ -144,7 +134,6 @@ public class Sampler
     printDoubleArrayList(values);
     System.out.println();
   }
-
   /**
   *  Runs task (5), removing duplicate Strings from an ArrayList of String.
   */
@@ -164,7 +153,6 @@ public class Sampler
     printStringArrayList(elements);
     System.out.println();
   }
-
   /**
   *  Runs task (6), rotating an ArrayList of Integer, printing out both the
   *  original ArrayList of Integer and the rotated ArrayList of Integer.
@@ -192,7 +180,6 @@ public class Sampler
     printIntegerArrayList(numbers);
     System.out.println();
   }
-
   /**
   *  Checks to see if the Strings in the ArrayList are in lexicographic order,
   *  printing a message for either case.
@@ -209,7 +196,6 @@ public class Sampler
       System.out.println("The ArrayList is NOT in order");
     }
   }
-
   /**
   *  Checks to see if the Strings in the ArrayList are in lexicographic order,
   *  returning true if they are in order, false otherwise.
@@ -231,7 +217,6 @@ public class Sampler
     }
     return true;
   }
-
   /**
   *  Prints the ArrayList of String.
   *  @param arr        The ArrayList of String to be printed
@@ -249,7 +234,6 @@ public class Sampler
     }
     System.out.println();
   }
-
   /**
   *  Swaps the ArrayList of String elements, as indicated by the index
   *  values that are passed in as arguments.
@@ -263,7 +247,6 @@ public class Sampler
     arr.set(i,arr.get(j));
     arr.set(j,temp);
   }
-
   /**
   *  Creates an ArrayList of Integer.  This ArrayList of Integer is the
   *  reverse of the ArrayList of Integer passed as an argument.  The
@@ -280,7 +263,6 @@ public class Sampler
     }
     return result;
   }
-
   /**
   *  Prints the ArrayList of Integer.
   *  @param arr        The ArrayList of Integer to be printed
@@ -298,7 +280,6 @@ public class Sampler
     }
     System.out.println();
   }
-
   /**
   *  Removes the least value from the ArrayList of Double.
   *  @param arr        The ArrayList of Double to be changed (least value removed)
@@ -316,7 +297,6 @@ public class Sampler
     }
     arr.remove(arr.indexOf(min));
   }
-
   /**
   *  Prints the ArrayList of Double.
   *  @param arr        The ArrayList of Double to be printed
@@ -334,7 +314,6 @@ public class Sampler
     }
     System.out.println();
   }
-
   /**
   *  Removes duplicates from an ArrayList of String
   *  @param arr        The ArrayList of String to be changed (duplicates removed)
@@ -350,7 +329,6 @@ public class Sampler
       }
     }
   }
-
   /**
   *  Rotates an ArrayList of Integer 1 step to the right, with the last element
   *  wrapped around to the first spot in the ArrayList of Integer.
@@ -358,12 +336,9 @@ public class Sampler
   */
   public void rotateRight(ArrayList<Integer> a)
   {
-
-    a.add(0,a.get(a.size()-1));
+    a.add(0,a.get((a.size()-1)));
     a.remove(a.size()-1);
-
   }
-
   /**
   *  Rotates an ArrayList of Integer 1 step to the left, with the first element
   *  wrapped around to the last spot in the ArrayList of Integer.
@@ -374,7 +349,6 @@ public class Sampler
     a.add(a.get(0));
     a.remove(0);
   }
-
   /**
   *  Rotates an ArrayList of Integer n steps to the right, with the last elements
   *  wrapped around to the beginning of the ArrayList of Integer.
@@ -395,127 +369,82 @@ public class Sampler
       rotateLeft(a);
       n++;
     }
-
   }
 }
-
 /*
-
 C:\Java>java Sampler
 
-
-
-
-
-
 TASKS (1) AND (2)
-
 0       1       2       3       4       5       6       7
 Zinc    Copper  Gold    Iron    Neon    Boron   Carbon  Argon
 The ArrayList is NOT in order
-
 Swapping elements at indices 0 and 7:
 0       1       2       3       4       5       6       7
 Argon   Copper  Gold    Iron    Neon    Boron   Carbon  Zinc
 The ArrayList is NOT in order
-
 Swapping elements at indices 1 and 5:
 0       1       2       3       4       5       6       7
 Argon   Boron   Gold    Iron    Neon    Copper  Carbon  Zinc
 The ArrayList is NOT in order
-
 Swapping elements at indices 2 and 6:
 0       1       2       3       4       5       6       7
 Argon   Boron   Carbon  Iron    Neon    Copper  Gold    Zinc
 The ArrayList is NOT in order
-
 Swapping elements at indices 3 and 5:
 0       1       2       3       4       5       6       7
 Argon   Boron   Carbon  Copper  Neon    Iron    Gold    Zinc
 The ArrayList is NOT in order
-
 Swapping elements at indices 4 and 6:
 0       1       2       3       4       5       6       7
 Argon   Boron   Carbon  Copper  Gold    Iron    Neon    Zinc
 The ArrayList is IN ORDER
-
-
-
 TASK (3)
-
 The original ArrayList:
 0    1    2    3    4    5    6    7    8    9
 45   23   94   15   83   59   70   34   62   38
-
 The reversed ArrayList:
 0    1    2    3    4    5    6    7    8    9
 38   62   34   70   59   83   15   94   23   45
-
-
-
 TASK (4)
-
 The original ArrayList:
 0       1       2       3       4       5       6
 5.60    4.10    9.40    8.80    1.30    2.10    7.90
-
 The ArrayList with the least value removed:
 0       1       2       3       4       5
 5.60    4.10    9.40    8.80    2.10    7.90
-
 The ArrayList with the least value removed:
 0       1       2       3       4
 5.60    4.10    9.40    8.80    7.90
-
 The ArrayList with the least value removed:
 0       1       2       3
 5.60    9.40    8.80    7.90
-
 The ArrayList with the least value removed:
 0       1       2
 9.40    8.80    7.90
-
-
-
 TASK (5)
-
 The original ArrayList:
 0       1       2       3       4       5       6       7       8       9       10      11      12
 Argon   Copper  Boron   Gold    Gold    Carbon  Copper  Copper  Gold    Copper  Iron    Neon    Zinc
-
 The ArrayList with duplicates removed:
 0       1       2       3       4       5       6       7
 Argon   Copper  Boron   Gold    Carbon  Iron    Neon    Zinc
-
-
-
 TASK (6)
-
 The original ArrayList:
 0    1    2    3    4    5    6    7    8    9
 45   23   94   15   83   59   70   34   62   38
-
 The rotated (3 spots) ArrayList:
 0    1    2    3    4    5    6    7    8    9
 34   62   38   45   23   94   15   83   59   70
-
 The rotated (1 spot) ArrayList:
 0    1    2    3    4    5    6    7    8    9
 70   34   62   38   45   23   94   15   83   59
-
 The rotated (5 spots) ArrayList:
 0    1    2    3    4    5    6    7    8    9
 23   94   15   83   59   70   34   62   38   45
-
 The rotated (-5 spots) ArrayList:
 0    1    2    3    4    5    6    7    8    9
 70   34   62   38   45   23   94   15   83   59
 
-
-
-
-
-
 C:\Java>
-
 */
+ 
