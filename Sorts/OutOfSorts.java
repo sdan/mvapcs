@@ -116,7 +116,7 @@ public class OutOfSorts
     //  Prompts the user to enter a 'c' or 'C' to continue, any other character to exit.
     public char repeatOrEnd (char c)
     {
-        return '5';
+        
     }
     //  A goodbye message.
     public void goodBye ( )
