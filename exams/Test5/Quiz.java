@@ -78,11 +78,19 @@ int n = list.length;
  while ( n >= 2 )
 {
 int z = 0;
-for ( /* missing code */ )
-if (list[i] > list[z]) z = i;
-int temp = list[n‐1]; list[n‐1] = list[z]; list[z] = temp;
-n‐‐;
+for (int i=n;i>0;i--)
+if (list[i] > list[z])
+z = i;
+int temp = list[n-1];
+list[n-1] = list[z]; list[z] = temp;
+n--;
 }
+
+
+for (int i = 0; i<list.length;i++ ) {
+  System.out.print(list[i]+" ");
+}
+
 }
 
 
