@@ -50,13 +50,16 @@ public class OutOfSorts
     //  Gets the size of the array, from 5 to 10000.
     public int getSize ( )
     {
-        Prompt.getInt("Please enter the number of random integers you would like to generate (5 - 10000)\t->",5,10000);
-        return 1000;
+        int size = Prompt.getInt("Please enter the number of random integers you would like to generate (5 - 10000)\t->",5,10000);
+        return size;
+
     }
     //  Gets the max value of the random values to be generated, from 1 to max.  The max should be from 5 to 10000.
     public int getMax ( )
     {
-        return 10000;
+      int max = Prompt.getInt("Please enter the maximum value that you would like to generate (5 - 10000) \t",5,10000);
+      return max;
+
     }
     //  Generates an ArrayList of Integer values, with a size of s, and values from 1 to m.
     public void createList (int s, int m, ArrayList <Integer> a)
@@ -116,7 +119,12 @@ public class OutOfSorts
     //  Prompts the user to enter a 'c' or 'C' to continue, any other character to exit.
     public char repeatOrEnd (char c)
     {
-        
+      while(c==67||c==99)
+      {
+        char charnot = Prompt.getChar("Enter a character to get c or C to continue or any other character if you don't want to ->");
+      }
+
+      return 'c';
     }
     //  A goodbye message.
     public void goodBye ( )
