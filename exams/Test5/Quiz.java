@@ -7,10 +7,12 @@ public class Quiz
     Quiz dame = new Quiz();
     // dame.swapy();
     // dame.adam();
-     int[]beta = {5,4,3,1,2};
+     int[]beta = {3,4,3,6};
     // dame.somesort(beta);
     //dame.daddy();
-    dame.sortThis(beta);
+    //dame.sortThis(beta);
+    //System.out.println(dame.isSorted(beta));
+    dame.methodToMadness();
   }
   public void swapy()
   {
@@ -92,6 +94,58 @@ for (int i = 0; i<list.length;i++ ) {
 }
 
 }
+
+
+
+
+
+public static boolean isSorted (int [] data)
+{
+  for (int k = 0; k < data.length-1; k++)
+  {
+    if (data[k] > data[k + 1])
+    return false;
+    else
+    return true;
+  }
+  return true;
+}
+
+
+
+
+
+
+public void methodToMadness ( ) {
+ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(5, 4, 3, 2, 1));
+newValues(nums);
+for(int k = 0; k < nums.size(); k++) {
+System.out.print(nums.get(k).intValue() + " ");
+}
+mixThemUp(nums);
+for(int k = 0; k < nums.size(); k++) {
+System.out.print(nums.get(k).intValue() + " ");
+} }
+public void newValues (ArrayList<Integer> list) {
+for(int x = 0; x < list.size(); x++) {
+list.set(x,new Integer(x * 2));
+} }
+public void mixThemUp (ArrayList<Integer> list) {
+list = new ArrayList<Integer>();
+for(int x = 0; x < 5; x++) {
+list.add(new Integer(x * 5));
+} }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
