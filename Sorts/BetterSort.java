@@ -8,7 +8,7 @@ public class BetterSort
     BetterSort parti = new BetterSort();
     //parti.bubbleSort();
     //parti.selectionSort();
-     parti.insertionSort();
+     //parti.insertionSort();
     parti.printout();
   }
   public void bubbleSort()
