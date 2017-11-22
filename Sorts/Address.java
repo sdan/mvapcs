@@ -55,11 +55,11 @@ public class Address implements Comparable<Address>
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(Object obj1, Object obj2)
 	{
 		if(obj != null && obj instanceof Address)
 		{
-			return compareTo((Address)obj) == 0;
+			return ob1.name.compareTo((Address)obj) == 0;
 		}
 		return false;
 	}
