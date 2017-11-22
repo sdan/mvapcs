@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class Quiz
 {
+  ArrayList<Double> values =  new ArrayList<Double>(Arrays.asList(2.4,3.8,4.2,1.6));
+
   public static void main(String[]args)
   {
     Quiz dame = new Quiz();
@@ -12,7 +14,14 @@ public class Quiz
     //dame.daddy();
     //dame.sortThis(beta);
     //System.out.println(dame.isSorted(beta));
-    dame.methodToMadness();
+    //dame.methodToMadness();
+    //dame.badboy();
+    //dame.arraybig();
+  //  dame.anything();
+  //dame.anotherone();
+  //dame.jake();
+  //dame.paul();
+  dame.sortArray(beta);
   }
   public void swapy()
   {
@@ -135,6 +144,126 @@ list = new ArrayList<Integer>();
 for(int x = 0; x < 5; x++) {
 list.add(new Integer(x * 5));
 } }
+
+public void badboy()
+{
+  ArrayList<Double> stringList = new ArrayList<Double>();
+  //ArrayList<double> intList = new ArrayList<double>();
+  ArrayList<Comparable> compList = new ArrayList<Comparable>();
+}
+
+public void arraybig()
+{
+  ArrayList<String> mylist = new ArrayList<String>(); mylist.add("M");
+mylist.add("V");
+mylist.add("A");
+mylist.add("P"); mylist.add("C"); mylist.add("S");
+for (int count = 0; count < mylist.size(); count+=2) {
+mylist.remove(count);
+}
+for (int count = 1; count <= mylist.size()/2; count++) {
+mylist.add(1,"RAIN!");
+}
+for (String value : mylist) {
+System.out.print(value + " ");
+}
+
+}
+
+
+
+public void anything()
+{
+  ArrayList<Integer> list = new ArrayList<Integer>();
+  list.add(3);
+list.add(2);
+list.add(1);
+int n = list.size();
+for (int i = 0; i < n; i++) {
+int value = list.get(i);
+if (value > 0)
+{
+list.add(value, new Integer(value));
+}
+}
+System.out.println(list);
+
+}
+
+
+
+
+
+
+public void anotherone()
+{
+  ArrayList<String> myclasses = new ArrayList<String>();
+myclasses.add("AP Computer Science"); myclasses.add("World History"); myclasses.add("American Literature"); myclasses.add(0, "AP Biology"); myclasses.remove(3);
+myclasses.add(0, "Physical Education"); System.out.println(myclasses);
+}
+
+
+
+
+
+
+public void jake()
+{
+  ArrayList<Integer> number = new ArrayList<Integer>(Arrays.asList(99,0,1,2,3,110));
+  System.out.println(number);
+}
+
+public void paul()
+{
+System.out.println(calcTotal());
+}
+
+public double calcTotal ( ) {
+double total = 0.0;
+for (int pos = 0; pos < values.size(); pos++)
+total += values.get(pos).doubleValue();
+return total;
+}
+
+
+
+
+
+
+
+
+
+
+public void sortArray(int [] arr)
+{
+int j, k;
+for (j = arr.length - 1; j > 0; j--)
+ {
+int pos = j;
+
+for ( k=j-1;k>=0;k--) {
+if (arr[k] > arr[pos]) {
+pos = k;
+}
+}
+swap(arr,j,pos);
+}
+for (int i = 0;i<arr.length;i++ ) {
+  System.out.print(arr[i]+" ");
+}
+}
+
+public int[] swap(int[]arr,int a,int b)
+{
+  int temp = arr[a];
+  arr[a] = arr[b];
+  arr[b] = temp;
+  return arr;
+}
+
+
+
+
 
 
 
