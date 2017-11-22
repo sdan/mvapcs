@@ -3,13 +3,14 @@ import java.util.Arrays;
 public class Quiz
 {
   ArrayList<Double> values =  new ArrayList<Double>(Arrays.asList(2.4,3.8,4.2,1.6));
+  ArrayList<Integer> ineeda =  new ArrayList<Integer>(Arrays.asList(2,2));
 
   public static void main(String[]args)
   {
     Quiz dame = new Quiz();
     // dame.swapy();
     // dame.adam();
-     int[]beta = {3,4,3,6};
+     int[]beta = {3,4,3,6,1,2,3,4,45,6,7,8,8,2,2,2,2,1,1,1,9,9,9,99,9,0,0,0,0,00,0,0,0};
     // dame.somesort(beta);
     //dame.daddy();
     //dame.sortThis(beta);
@@ -21,8 +22,31 @@ public class Quiz
   //dame.anotherone();
   //dame.jake();
   //dame.paul();
-  dame.sortArray(beta);
+  //dame.sortArray(beta);
+  //System.out.println(dame.allEven());
+  dame.numero();
+
   }
+  public void numero()
+  {
+    ArrayList<Integer> numbers = new ArrayList<Integer>(Arrays.asList(1,3,9,14,18));
+    for (int i = 0; i < numbers.size(); i++) {
+if (numbers.get(i).intValue() % 3 == 0)
+numbers.remove(i);
+}
+System.out.println(numbers);
+  }
+  public boolean allEven () {
+  boolean isEven = true ;
+  for (int k = 0; k < ineeda.size(); k++) {
+    if (ineeda.get(k) % 2 == 0) isEven = false;
+    else
+    isEven = true;
+  }
+  return isEven;
+  }
+
+
   public void swapy()
   {
     ArrayList<String> names = new ArrayList<String>();
@@ -241,7 +265,7 @@ for (j = arr.length - 1; j > 0; j--)
  {
 int pos = j;
 
-for ( k=j-1;k>=0;k--) {
+for (k=j-1;k>=0;k--) {
 if (arr[k] > arr[pos]) {
 pos = k;
 }
@@ -260,8 +284,6 @@ public int[] swap(int[]arr,int a,int b)
   arr[b] = temp;
   return arr;
 }
-
-
 
 
 
