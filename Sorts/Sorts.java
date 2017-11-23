@@ -4,18 +4,22 @@ public class Sorts
 {
 	public static int bubbleSort (ArrayList <Integer> list)
 	{
+		System.out.println("BELLLASODIAJSDJ");
 		int steps = 0;
 		boolean swap = false;
 		int numberOfUnsortedElements = 0;
 		steps+=3; //Declaration and assignment of steps, swap, and numberOfUnsortedElements
 		do {
-			steps+=2 //Declaration of iterate and assignment of swap and iterate
+			steps+=2; //Declaration of iterate and assignment of swap and iterate
 			swap = false;
+			System.out.println("HELL:L:OISJDOAISJDOAISDJOASIJD");
 			for (int iterate = 1;iterate<numberOfUnsortedElements;iterate++)
 			{
+				System.out.println("HELL:L:OISJDOAISJDOAISDJOASIJD");
 				steps+=3; //boolean above and below, iterate++
 				if(list.get(iterate-1)>list.get(iterate))
 				{
+					System.out.println("HELL:L:OISJDOAISJDOAISDJOASIJD");
 					steps+=4; // Assignment of temp, swap, and swapping indexes of the ArrayList
 					int temp = list.get(iterate);
 					list.set(iterate,list.get(iterate-1));
