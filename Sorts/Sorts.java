@@ -111,19 +111,10 @@ public class Sorts
 
 	public static int merge (ArrayList<Integer> a, int from, int middle, int to)
 	{
-		ArrayList<Integer> temp = new ArrayList<Integer>(a.size());
+		ArrayList<Integer> temp = new ArrayList<Integer>(a);
 		int i = from, j = middle+1, k = from;
 		int steps = 0;
-		steps+=5 ;//Declaration and assignment of i,j,k, ArrayList temp
-		System.out.println(temp);
-		for (int x = 0; x < a.size(); x++)
-		{
-			steps+=3;
-			temp.add(0);
-		}
-		System.out.println(temp);
-		steps++;
-
+		steps+=4 ;//Declaration and assignment of i,j,k, ArrayList temp
 		while( i <= middle && j <= to)
 		{
 			steps+=3; //both boolean expresions above
