@@ -7,19 +7,25 @@ public class Sorts
 		int steps = 0;
 		boolean swap = false;
 		int numberOfUnsortedElements = 0;
+		steps+=3; //Declaration and assignment of steps, swap, and numberOfUnsortedElements
 		do {
+			steps+=2 //Declaration of iterate and assignment of swap and iterate
 			swap = false;
 			for (int iterate = 1;iterate<numberOfUnsortedElements;iterate++)
 			{
+				steps+=3; //boolean above and below, iterate++
 				if(list.get(iterate-1)>list.get(iterate))
 				{
+					steps+=4; // Assignment of temp, swap, and swapping indexes of the ArrayList
 					int temp = list.get(iterate);
 					list.set(iterate,list.get(iterate-1));
 					list.set(iterate-1,temp);
+					swap = true;
 				}
 			}
 			numberOfUnsortedElements++;
-		} while ();
+			steps+=2; // boolean below and assignment above
+		} while (swap);
 		return steps;
 	}
 	public static int selectionSort (ArrayList <Integer> list)
