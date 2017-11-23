@@ -110,9 +110,13 @@ public class OutOfSorts
   //  to be run.
   public char getSortType ( )
   {
-    char inputChar = ' ';
-    char[] valid = {'1','2','3','4'};    
-    inputChar = Prompt.getChar("Enter a choice (1-4) from the menu above -> ",valid);
+    char inputChar = '';
+    Scanner input = new Scanner(System.in);
+    do
+    {
+      System.out.println("Enter a choice (1-4) from the menu above -> ");
+      inputChar = input.next().charAt(0);
+    }while(inputChar!='1'||inputChar!='2'||inputChar!='3'||inputChar!='4')
     System.out.println("\n");
     return inputChar;
   }
@@ -142,7 +146,7 @@ public class OutOfSorts
   //  Prints the number of steps taken by the sort.
   public void printSteps (int s)
   {
-    System.out.printf("\n\n\n");
+    System.out.printf("\n\n\n\n");
     System.out.printf("%,d steps taken  in this sort.",s);
     System.out.printf("\n\n\n");
   }
