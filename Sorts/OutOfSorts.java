@@ -53,14 +53,14 @@ public class OutOfSorts
     //  Gets the size of the array, from 5 to 10000.
     public int getSize ( )
     {
-        int size = Prompt.getInt("\n\nPlease enter the number of random integers you would like to generate (5 - 10000)\t->",5,10000);
+        int size = Prompt.getInt("\n\nPlease enter the number of random integers you would like to generate (5 - 10000)    -> ",5,10000);
         return size;
     }
 
     //  Gets the max value of the random values to be generated, from 1 to max.  The max should be from 5 to 10000.
     public int getMax ( )
     {
-        int max = Prompt.getInt("\n\nPlease enter the maximum value that you would like to generate (5 - 10000)\t->",5,10000);
+        int max = Prompt.getInt("\n\nPlease enter the maximum value that you would like to possibly generate (5 - 10000)  -> ",5,10000);
         return max;
     }
 
@@ -91,16 +91,19 @@ public class OutOfSorts
     public char chooseFromMenu (String arraytype, ArrayList <Integer> list)
     {
         menuOfSorts(arraytype);
-        return '2';
+        return getSortType();
+
     }
 
     //  Prints the list of sort options.
     public void menuOfSorts (String title)
     {
+        System.out.println("\n\n");
         System.out.println("\n\n1. " + title + " Bubble Sort");
         System.out.println("2. " + title + " Selection Sort");
         System.out.println("3. " + title + " Insertion Sort");
         System.out.println("4. " + title + " Merge Sort\n");
+        System.out.println("\n");
     }
 
     //  Prompts the user to enter a character value from '1' to '4', indicating the sort
@@ -108,7 +111,7 @@ public class OutOfSorts
     public char getSortType ( )
     {
         char inputChar = ' ';
-            inputChar = Prompt.getChar("Enter a choice (1-4) from the menu above ->",new char[]{'1','2','3','4'});
+            inputChar = Prompt.getChar("Enter a choice (1-4) from the menu above -> ",new char[]{'1','2','3','4'});
         return inputChar;
     }
 
@@ -144,7 +147,7 @@ public class OutOfSorts
       char cornot = Prompt.getChar("Enter a character to get or c or C to continue or any other character if you don't want to->");
       if(cornot=='c'||cornot=='C')
       return '1';
-      return '5';
+      return '0';
     }
 
     //  A goodbye message.
