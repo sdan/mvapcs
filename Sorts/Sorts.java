@@ -5,20 +5,21 @@ public class Sorts
 	public static int bubbleSort (ArrayList <Integer> list)
 	{
 		int steps = 0;
-		for (int i = 0;i<list.size();i++) {
-			for (int j = 0;j<list.size()-i-1;j++) {
-				//i-1 since last i's are sorted
-				if(list.get(j).intValue()>list.get(j+1).intValue())
+		boolean swap = false;
+		int numberOfUnsortedElements = 0;
+		do {
+			swap = false;
+			for (int iterate = 1;iterate<numberOfUnsortedElements;iterate++)
+			{
+				if(list.get(iterate-1)>list.get(iterate))
 				{
-					//swap
-					int temp = list.get(j).intValue();
-					list.set(j,list.get(j+1).intValue());
-					list.set(j+1,temp);
-					steps++;
+					int temp = list.get(iterate);
+					list.set(iterate,list.get(iterate-1));
+					list.set(iterate-1,temp);
 				}
-				steps++;
 			}
-		}
+			numberOfUnsortedElements++;
+		} while ();
 		return steps;
 	}
 	public static int selectionSort (ArrayList <Integer> list)
@@ -72,16 +73,68 @@ public class Sorts
 	public static int mergeSort (ArrayList<Integer> a, int from, int to)
 	{
 		int steps = 0;
-		int middle = (from + to) / 2;
-		steps += mergeSort(a, from, middle);
-		steps += mergeSort(a, middle + 1, to);
-		steps += merge(a, from, middle, to);
+		if(to - from < 2){
+			steps++;
+			if(to>from && (a.get(to) < a.get(from)))
+			{
+				int aTemp = a.get(to);
+				int bTemp = a.get(from);
+				a.set(to, bTemp);
+				a.set(from, aTemp);
+				steps++;
+			}
+		}
+		else
+		{
+			int middle = (from + to) / 2;
+
+			steps += mergeSort(a, from, middle);
+			steps += mergeSort(a, middle + 1, to);
+			steps += merge(a, from, middle, to);
+		}
 		return steps;
 	}
 
 	public static int merge (ArrayList<Integer> a, int from, int middle, int to)
 	{
+		ArrayList<Integer> temp = new ArrayList<Integer>(a.size());
+		int i = from, j = middle+1, k = from;
 		int steps = 0;
+		while( i <= middle && j <= to){
+			steps++;
+			if(a.get(i) < a.get(j)){
+				temp.set(k,a.get(i));
+				i++;
+				steps++;
+			}
+			else
+			{
+				temp.set(k, a.get(j));
+				j++;
+			}
+			k++;
+		}
+
+		while (i <= middle){
+			temp.set(k, a.get(i));
+			i++;
+			k++;
+			steps++;
+		}
+		steps++;
+
+		while(j<=to){
+			temp.set(k, a.get(j));
+			j++;
+			k++;
+			steps++;
+		}
+		steps++;
+
+		for(k = from; k<=to;k++){
+			a.set(k, temp.get(k));
+			steps++;
+		}
 		return steps;
 	}
 }
