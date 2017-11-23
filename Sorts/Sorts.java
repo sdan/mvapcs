@@ -99,11 +99,12 @@ public class Sorts
 		}
 		else
 		{
-			int middle = (from + to) / 2;
-			steps++;//Declaration and assignment of middle
-			steps += mergeSort(a, from, middle);
-			steps += mergeSort(a, middle + 1, to);
-			steps += merge(a, from, middle, to);
+			int middle = (from + to)/2;
+			steps+=4;//Declaration and assignment of middle, call mergeSort twice and merge once
+			System.out.println("FROM: "+from+" MID: "+middle);
+			mergeSort(a, from, middle);
+			mergeSort(a, middle + 1, to);
+			merge(a, from, middle, to);
 		}
 		return steps;
 	}

@@ -121,13 +121,17 @@ public class OutOfSorts
         switch(choice)
         {
             case '1':
-            steps = Sorts.bubbleSort(intlist); break;
+            steps = Sorts.bubbleSort(intlist);
+             break;
             case '2':
-            steps = Sorts.selectionSort(intlist); break;
+            steps = Sorts.selectionSort(intlist);
+             break;
             case '3':
-            steps = Sorts.insertionSort(intlist); break;
+            steps = Sorts.insertionSort(intlist);
+             break;
             case '4':
-            steps = Sorts.mergeSort(intlist,0,intlist.size()); break;
+            steps = Sorts.mergeSort(intlist,0,intlist.size()-1);
+            break;
         }
         printList(intlist);
         printSteps(steps);
