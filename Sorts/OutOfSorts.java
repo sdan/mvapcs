@@ -3,7 +3,7 @@
 * Sorting Practice
 * @author Surya Dantuluri
 * @version 1.0
-* @since 11/17/2017
+* @since 11/22/2017
 */
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -110,17 +110,18 @@ public class OutOfSorts
   //  to be run.
   public char getSortType ( )
   {
-    char inputChar = '';
+    char inputChar = ' ';
     Scanner input = new Scanner(System.in);
     do
     {
-      System.out.println("Enter a choice (1-4) from the menu above -> ");
+      System.out.println("");
+      System.out.print("Enter a choice (1-4) from the menu above -> ");
       inputChar = input.next().charAt(0);
-    }while(inputChar!='1'||inputChar!='2'||inputChar!='3'||inputChar!='4')
+    }while(inputChar!='1'&&inputChar!='2'&&inputChar!='3'&&inputChar!='4');
     System.out.println("\n");
     return inputChar;
   }
-
+  //Excecutes sorting algorithm depending on selection which is passed in as a parameter
   public void sortIt(char choice)
   {
     int steps = 0;
