@@ -101,7 +101,7 @@ public class Sorts
 		{
 			steps++;//Declaration and assignment of middle
 			int middle = (from + to) / 2;
-			// System.out.println("FROM: "+from+" MID: "+middle);
+			System.out.println("FROM: "+from+" MID: "+middle);
 			steps += mergeSort(a, from, middle);
 			steps += mergeSort(a, middle + 1, to);
 			steps += merge(a, from, middle, to);
@@ -115,15 +115,6 @@ public class Sorts
 		int i = from, j = middle+1, k = from;
 		int steps = 0;
 		steps+=5 ;//Declaration and assignment of i,j,k, ArrayList temp
-		System.out.println(temp);
-		for (int x = 0; x < a.size(); x++)
-		{
-			steps+=3;
-			temp.add(0);
-		}
-		System.out.println(temp);
-		steps++;
-
 		while( i <= middle && j <= to)
 		{
 			steps+=3; //both boolean expresions above
@@ -166,6 +157,5 @@ public class Sorts
 		}
 		steps++;
 		return steps;
-
 	}
 }
