@@ -39,6 +39,32 @@ public class Test
     cupertino.friends();
     System.out.println("Adjusting dimensions...");
     cupertino.dimensions();
+    for (int i = 0;i<cupertino.food.size();i++) {
+      System.out.println("\n\n\n");
+      System.out.println("------------Turkey Stats-------------------");
+      System.out.println("Name: "+cupertino.food.get(i).name);
+      System.out.println("Age: "+cupertino.food.get(i).age);
+      System.out.println("Traits------");
+      for(int j = 0;j<cupertino.traits;j++)
+      {
+        System.out.print(cupertino.food.get(i).traits[j]+" ");
+      }
+      System.out.println("");
+      System.out.println("Friends-------");
+      for (int k = 0;k<cupertino.friends.size();k++) {
+        System.out.print(cupertino.food.get(i).friends.get(k)+" ");
+      }
+      System.out.println("");
+      for (int l = 0;l<3;l++ ) {
+        System.out.println("");
+        for (int  m = 0;m<3;m++) {
+          System.out.print(cupertino.food.get(i).dimensions[l][m]+" ");
+        }
+      }
+      System.out.println("");
+      System.out.println("-----------------------------------------");
+    }
+
 
   }
 }

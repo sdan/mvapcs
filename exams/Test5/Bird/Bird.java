@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 public class Bird
 {
-  private ArrayList<Turkey> food;
+  public ArrayList<Turkey> food;
   private ArrayList<String> llamar;
   private int numberOfTurkeys;
   public Bird(int num, ArrayList<String> names)
@@ -16,7 +16,7 @@ public class Bird
   public void generateTurkey()
   {
     for (int i = 0;i<numberOfTurkeys;i++) {
-      System.out.println(llamar.get(i));
+      // System.out.println(llamar.get(i));
       String temp = llamar.get(i);
       food.add(new Turkey(temp));
     }
@@ -40,9 +40,9 @@ public class Bird
   public void friends()
   {
     for (int i = 0;i<food.size();i++) {
-      System.out.println("i in bird: "+i);
+      // System.out.println("i in bird: "+i);
       String woah = random();
-      System.out.println("rand in bird: "+woah);
+      // System.out.println("rand in bird: "+woah);
       food.get(i).setFriends(i,woah);
     }
   }
@@ -73,14 +73,15 @@ public class Bird
   public String random()
   {
     int n = (int)Math.random()*4;
+    String beta = "";
     switch(n)
     {
-      case 1: return "Steve";
-      case 2: return "Bill";
-      case 3: return "Mark";
-      case 4: return "Jake";
+      case 1: beta= "Steve";
+      case 2: beta= "Bill";
+      case 3: beta= "Mark";
+      case 4: beta= "Jake";
     }
-    return "Adam";
+    return beta;
   }
 
 

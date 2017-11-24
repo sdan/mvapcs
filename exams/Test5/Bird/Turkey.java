@@ -9,7 +9,7 @@ public class Turkey implements Comparable <Turkey>
   private int[][]dimensions;
   public Turkey(String name)
   {
-    System.out.println("TURKEY NAME "+name);
+    // System.out.println("TURKEY NAME "+name);
     age = 0;
     name = name;
     traits = new int[2];
@@ -38,7 +38,7 @@ public class Turkey implements Comparable <Turkey>
   }
   public void setFriends(int i, String what)
   {
-    System.out.println("friends "+ friends);
+    // System.out.println("friends "+ friends);
 
 
 
