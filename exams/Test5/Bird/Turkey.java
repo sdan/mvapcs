@@ -38,11 +38,11 @@ public class Turkey implements Comparable <Turkey>
   }
   public void setFriends(int i, String what)
   {
-    aslkdmasldkmasdlkasmdalkdmasdasdlkasmda
-     jsaodimasdoasd null = =naaaalla;
     System.out.println("friends "+ friends);
 
-    friends.set(i,what);
+
+
+    friends.add(what);
   }
   public ArrayList<String> getFriends()
   {
