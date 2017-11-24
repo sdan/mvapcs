@@ -23,7 +23,10 @@ public class Test
     System.out.println("");
     for (int i = 0;i<num;i++) {
       System.out.println("Turkey name "+i+" : ");
-
+      name.add(input.nextLine());
     }
+    Bird cupertino = new Bird(num, ArrayList<String> name);
+    cupertino.generateTurkey();
+
   }
 }

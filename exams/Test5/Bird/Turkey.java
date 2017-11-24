@@ -7,13 +7,13 @@ public class Turkey
   private String[]traits;
   private ArrayList<String> friends;
   private int[][]dimensions;
-  public Turkey(int age, String name, String[]traits, ArrayList<String> friends, int[][]dimensions)
+  public Turkey(String name)
   {
-    age = age;
+    age = 0;
     name = name;
-    traits = traits;
-    friends = friends;
-    dimensions = dimensions;
+    traits = new traits[5];
+    friends = new ArrayList<String>();
+    dimensions = new dimensions[3][3];
   }
   public int getAge()
   {

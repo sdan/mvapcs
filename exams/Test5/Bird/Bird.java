@@ -16,9 +16,16 @@ public class Bird implements Comparable <Bird>
   public generateTurkey()
   {
     for (int i = 0;i<numberOfTurkeys;i++) {
-      food.add(new Turkey(name))
+      food.add(new Turkey(llamar.get(i)))
     }
   }
+
+  public age()
+  {
+      for(int i = 0;i<food.size())
+  }
+
+
 
 
   public int compareTo(Bird other)
