@@ -3,13 +3,14 @@ import java.util.ArrayList;
 public class Bird implements Comparable <Bird>
 {
   private ArrayList<Turkey> food;
-  private String name;
+  private ArrayList<String> llamar;
   private int numberOfTurkeys;
-  public Bird(int num, String name)
+  public Bird(int num, ArrayList<String> names)
   {
     food = new ArrayList<Turkey>();
+    llamar = names;
     numberOfTurkeys = num;
-    name = name;
+
   }
 
   public generateTurkey()
