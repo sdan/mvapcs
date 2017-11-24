@@ -42,23 +42,23 @@ public class Test
     for (int i = 0;i<cupertino.food.size();i++) {
       System.out.println("\n\n\n");
       System.out.println("------------Turkey Stats-------------------");
-      System.out.println("Name: "+cupertino.food.get(i).name);
-      System.out.println("Age: "+cupertino.food.get(i).age);
+      System.out.println("Name: "+cupertino.food.get(i).getName());
+      System.out.println("Age: "+cupertino.food.get(i).getAge());
       System.out.println("Traits------");
-      for(int j = 0;j<cupertino.traits;j++)
+      for(int j = 0;j<cupertino.food.get(i).getTraits().length;j++)
       {
-        System.out.print(cupertino.food.get(i).traits[j]+" ");
+        System.out.print(cupertino.food.get(i).getTraits()[j]+" ");
       }
       System.out.println("");
       System.out.println("Friends-------");
-      for (int k = 0;k<cupertino.friends.size();k++) {
-        System.out.print(cupertino.food.get(i).friends.get(k)+" ");
+      for (int k = 0;k<cupertino.food.get(i).getFriends().size();k++) {
+        System.out.print(cupertino.food.get(i).getFriends().get(k)+" ");
       }
       System.out.println("");
       for (int l = 0;l<3;l++ ) {
         System.out.println("");
         for (int  m = 0;m<3;m++) {
-          System.out.print(cupertino.food.get(i).dimensions[l][m]+" ");
+          System.out.print(cupertino.food.get(i).getDimensions()[l][m]+" ");
         }
       }
       System.out.println("");
