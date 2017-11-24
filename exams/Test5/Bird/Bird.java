@@ -26,14 +26,15 @@ public class Bird
   {
       for(int i = 0;i<food.size();i++)
       {
-        food.get(i).setAge((int)Math.random()*100);
+        food.get(i).setAge((int)(Math.random() * 100));
       }
   }
 
   public void traits()
   {
     for (int i = 0;i<food.size();i++ ) {
-      food.get(i).setTraits(0,(int)Math.random()*10);
+      food.get(i).setTraits(0,((char)((int)(Math.random() * 94) + 32)));
+      food.get(i).setTraits(1,((char)((int)(Math.random() * 94) + 32)));
     }
   }
 
@@ -41,45 +42,79 @@ public class Bird
   {
     for (int i = 0;i<food.size();i++) {
       // System.out.println("i in bird: "+i);
-      String woah = random();
-      // System.out.println("rand in bird: "+woah);
-      food.get(i).setFriends(i,woah);
+      String temp = arny();
+      System.out.println("ARNY: "+temp);
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
+      temp = arny();
+      food.get(i).setFriends(temp);
     }
   }
 
   public void dimensions()
   {
     for (int i = 0;i<food.size();i++) {
-      food.get(i).setDimensions(ran(),ran(),rant());
+      int a = ran();
+      int b = ran();
+      char c = rant();
+      System.out.println("a: "+a+" b: "+b+" c: "+c);
+      food.get(i).setDimensions(a,b,rant());
     }
   }
   public int ran()
   {
-    return (int)Math.random()*3;
+    int num = (int)(Math.random() * 2) + 1;
+    System.out.println("RAN SOM: "+ num);
+    return num;
   }
   public char rant()
   {
-    int n = (int)Math.random()*5;
+    int n = (int)(Math.random() * 4) + 1;
+    System.out.println("OASJDOIAJFOEWIJFOWEIFJOEWIFJEWOFJEOWIF: "+n);
+    char beta = ' ';
     switch(n)
     {
-      case 1: return '/';
-      case 2: return '#';
-      case 3: return '|';
-      case 4: return '_';
-      case 5: return '=';
+      case 1: beta='/';
+      break;
+      case 2: beta='#';
+      break;
+      case 3: beta='|';
+      break;
+      case 4: beta='_';
+      break;
+      case 5: beta='=';
+      break;
     }
-    return '$';
+    System.out.println("RANT: "+beta);
+    return beta;
   }
-  public String random()
+  public String arny()
   {
-    int n = (int)Math.random()*4;
+    int n = (int)(Math.random() * 3) + 1;
     String beta = "";
     switch(n)
     {
       case 1: beta= "Steve";
+      break;
       case 2: beta= "Bill";
+      break;
       case 3: beta= "Mark";
+      break;
       case 4: beta= "Jake";
+      break;
     }
     return beta;
   }

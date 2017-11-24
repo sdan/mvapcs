@@ -4,20 +4,21 @@ public class Turkey implements Comparable <Turkey>
 {
   private int age;
   private String name;
-  private int[]traits;
+  private char[]traits;
   private ArrayList<String> friends;
   private int[][]dimensions;
-  public Turkey(String name)
+  public Turkey(String n)
   {
     // System.out.println("TURKEY NAME "+name);
     age = 0;
-    name = name;
-    traits = new int[2];
+    name = n;
+    traits = new char[2];
     friends = new ArrayList<String>(10);
     dimensions = new int[3][3];
   }
   public void setAge(int a)
   {
+    // System.out.println("age "+a);
     age = a;
   }
   public int getAge()
@@ -26,22 +27,21 @@ public class Turkey implements Comparable <Turkey>
   }
   public String getName()
   {
+    // System.out.println("NNNNNAME: "+name);
     return name;
   }
-  public void setTraits(int i, int what)
+  public void setTraits(int i, char what)
   {
+    System.out.println("INT I: "+i+" what?: "+what);
     traits[i] = what;
   }
-  public int[] getTraits()
+  public char[] getTraits()
   {
     return traits;
   }
-  public void setFriends(int i, String what)
+  public void setFriends(String what)
   {
-    // System.out.println("friends "+ friends);
-
-
-
+     System.out.println("friends "+ what);
     friends.add(what);
   }
   public ArrayList<String> getFriends()

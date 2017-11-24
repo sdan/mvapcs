@@ -55,6 +55,7 @@ public class Test
         System.out.print(cupertino.food.get(i).getFriends().get(k)+" ");
       }
       System.out.println("");
+      System.out.println("Dimensions-----------");
       for (int l = 0;l<3;l++ ) {
         System.out.println("");
         for (int  m = 0;m<3;m++) {
@@ -62,7 +63,6 @@ public class Test
         }
       }
       System.out.println("");
-      System.out.println("-----------------------------------------");
     }
 
 
