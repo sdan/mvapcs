@@ -7,11 +7,13 @@ public class Test
   ArrayList<String> name;
   public static void main(String[]args)
   {
-    num = 0;
+    Test mandm = new Test();
+    mandm.run();
 
   }
   public Test()
   {
+    num = 0;
     name = new ArrayList<String>();
   }
   public void run()
@@ -23,10 +25,20 @@ public class Test
     System.out.println("");
     for (int i = 0;i<num;i++) {
       System.out.println("Turkey name "+i+" : ");
-      name.add(input.nextLine());
+      name.add(input.next());
+      System.out.println("");
     }
-    Bird cupertino = new Bird(num, ArrayList<String> name);
+    Bird cupertino = new Bird(num, name);
+    System.out.println("\nGenerating a Turkey...");
     cupertino.generateTurkey();
+    System.out.println("Setting age...");
+    cupertino.age();
+    System.out.println("Adjusting traits...");
+    cupertino.traits();
+    System.out.println("Adjusting friends...");
+    cupertino.friends();
+    System.out.println("Adjusting dimensions...");
+    cupertino.dimensions();
 
   }
 }
