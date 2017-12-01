@@ -78,9 +78,9 @@ public class CitySearch
      *  Prompts the user to enter a char, from the list of '1', '2',
      *  '3', '4', or '5'.  Keeps asking until one of these is chosen.
      */
-    public char getUserInput ( )
+    public char getUserInput ()
     {
-        char choice = '-1';
+        char choice = '0';
         System.out.println("\n\n1: Display Cities sorted by name");
         System.out.println("2: Display Cities sorted by population");
         System.out.println("3: Display Cities in a given state");

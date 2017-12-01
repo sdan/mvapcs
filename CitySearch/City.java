@@ -76,7 +76,7 @@ public class City implements Comparable<City>
     public boolean equals(Object obj)
     {
         boolean isequal = false;
-        if(obj!=null)
+        if(obj!=null&&obj instanceof City )
         {
             if(compareTo((City)obj)==0)
             isequal=true;
