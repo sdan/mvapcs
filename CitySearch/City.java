@@ -1,4 +1,3 @@
-
 /**
  *  City.java
  *  Represents a City within the United States of America,

@@ -80,7 +80,7 @@ public class CitySearch
      */
     public char getUserInput ( )
     {
-        char choice = '1';
+        char choice = '-1';
         System.out.println("\n\n1: Display Cities sorted by name");
         System.out.println("2: Display Cities sorted by population");
         System.out.println("3: Display Cities in a given state");
@@ -216,6 +216,17 @@ public class CitySearch
      */
     public void insertionSortPopulation(ArrayList<City> list)
     {
+      for(int i = 1;i<list.size();i++)
+      {
+        int temp = list.get(i);
+        int pos = i;
+        while(pos>0&&temp<list.get(pos-1))
+        {
+          list.set(pos,list.get(pos-1));
+          pos--;
+        }
+        list.set(pos,temp);
+      }
     }
 
     /**
@@ -223,6 +234,17 @@ public class CitySearch
      */
     public void selectionSortPopulation(ArrayList<City> list)
     {
+      for(int i = list.size();i>1;i++)
+      {
+        int max = 0;
+        for(int j = 1;j<i;j++)
+        {
+          if(list.get(max)<list.get(j))
+          max = j;
+        }
+        int temp = list.set(max,list.get(i-1));
+        list.set(i-1,temp);
+      }
     }
     /**
      *  Prompts the user to enter the name of a city and state in the form of:
