@@ -216,6 +216,8 @@ public class CitySearch
      */
     public void insertionSortPopulation(ArrayList<City> list)
     {
+      System.out.println("");
+      System.out.println("listpop");
       for(int i = 1;i<list.size();i++)
       {
         int temp = list.get(i);
