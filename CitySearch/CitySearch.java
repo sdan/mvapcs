@@ -325,22 +325,12 @@ public class CitySearch
             System.out.println("\n\n----------------------------------------------------------------\n");
             cityName = Prompt.getString("Please enter a City and State (City, State) to search for (-1 to exit): ");
             String onlyCity = cityName.substring(0,cityName.indexOf(','));
-            int counter = 0;
             onlyCity = onlyCity.substring(0,1).toUpperCase()+onlyCity.substring(1);
-            int len = onlyCity.length();
-            //int n =cityName.indexOf(',');
-            // for (int i = 0;i<n;i++) {
-            //   System.out.println("i");
-            //   if(cityName.charAt(i)==' ')
-            //   {
-            //     cityName = cityName.substring(0,i+1)+cityName.substring(i+1,i+2).toUpperCase()+cityName.substring(n+2);
-            //     System.out.println(cityName);
-            //   }
-            //   else if(i==0)
-            //   {
-            //     cityName = cityName.substring(0,1).toUpperCase()+cityName.substring(1);
-            //   }
-            // }
+            if(onlyCity.indexOf(' ')>0);
+            onlyCity = onlyCity.substring(0,onlyCity.indexOf(' ')+1)+onlyCity.substring(onlyCity.indexOf(' ')+1,onlyCity.indexOf(' ')+2).toUpperCase()+onlyCity.substring(onlyCity.indexOf(' ')+2);
+
+            cityName = onlyCity+cityName.substring(cityName.indexOf(',')).toUpperCase();
+
             System.out.println("REFRESH CITY: "+cityName);
             binarySearch(list,new City(cityName.substring(0,cityName.indexOf(",")),cityName.substring(cityName.indexOf(",")+1,cityName.length()),0));
 
