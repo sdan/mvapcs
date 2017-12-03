@@ -68,6 +68,11 @@ public class City implements Comparable<City>
     {
         return this.population-other.population;
     }
+
+    public int compareToState(String other)
+    {
+      return state.compareTo(other);
+    }
     /**
      *  Compares the City to the specified object.  The Cities should
      *  be considered equal if they have the same name and state
