@@ -50,6 +50,10 @@ public class City implements Comparable<City>
      */
      public int compareTo(City other)
      {
+        if(name.compareTo(other.name)==0)
+        {
+          return state.compareTo(other.state);
+        }
         return name.compareTo(other.name);
      }
     /**

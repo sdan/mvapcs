@@ -58,7 +58,7 @@ public class CitySearch
                     displayCities();
                     break;
                 case '2':
-                    insertionSortPopulation(cities);
+                    selectionSortPopulation(cities);
                     displayCities();
                     break;
                 case '3':
@@ -187,18 +187,80 @@ public class CitySearch
      *  A merge sort implementation, sorting the cities by city name (primary), and
      *  state name (secondary).
      */
-    public void mergeSortName(ArrayList<City> list, int first, int last)
+    public void mergeSortName(ArrayList<City> list, int from, int to)
     {
-
+  		if(to - from < 2)
+  		{
+  		 if(to>from && (list.get(from).compareTo(list.get(to)))>0)
+  			{
+        //   System.out.println(list.get(from).toString());
+        // System.out.println(list.get(to).toString());
+  				City temp = list.get(to);
+  				list.set(to, list.get(from));
+  				list.set(from, temp);
+  			}
+      }
+  		else
+  		{
+  			int middle = (from + to) / 2;
+  			mergeSortName(list, from, middle);
+  			mergeSortName(list, middle + 1, to);
+  			merge(list, from, middle, to);
+  		}
+      //System.out.println("endy");
     }
 
     /**
      *  A helper method for the mergeSortName method, merging two "halves" into
      *  an ordered "whole".
      */
-    private void merge(ArrayList<City> list, int first, int mid, int last)
+    private void merge(ArrayList<City> list, int from, int middle, int to)
     {
-
+      ArrayList<City> temp = new ArrayList<City>(list);
+  		int i = from, j = middle+1, k = from;
+  		while( i <= middle && j <= to)
+  		{
+      //   System.out.println("1start");
+      //   System.out.println(list.get(from).toString());
+      // System.out.println(list.get(to).toString());
+      // System.out.println("1end");
+  			if(list.get(j).compareTo(list.get(i))>0)
+  			{
+  				temp.set(k,list.get(i));
+          System.out.println("print1t");
+          System.out.println(list.get(k).toString());
+  				i++;
+  			}
+  			else
+  			{
+  				temp.set(k, list.get(j));
+          System.out.println("print1f");
+          System.out.println(list.get(k).toString());
+  				j++;
+  			}
+  			k++;
+  		}
+  		while (i <= middle)
+  		{
+    
+  			temp.set(k, list.get(i));
+        System.out.println("print2");
+        System.out.println(list.get(k).toString());
+  			i++;
+  			k++;
+  		}
+  		while(j<=to)
+  		{
+  			temp.set(k, list.get(j));
+        System.out.println("print3");
+        System.out.println(list.get(k).toString());
+  			j++;
+  			k++;
+  		}
+  		for(k = from; k<=to;k++)
+  		{
+          list.set(k, temp.get(k));
+  		}
     }
 
     /**
@@ -220,9 +282,9 @@ public class CitySearch
       System.out.println("listpop");
       for(int i = 1;i<list.size();i++)
       {
-        int temp = list.get(i);
+        City temp = list.get(i);
         int pos = i;
-        while(pos>0&&temp<list.get(pos-1))
+        while(pos>0&&list.get(pos-1).compareToPopulation(temp)<0)
         {
           list.set(pos,list.get(pos-1));
           pos--;
@@ -241,10 +303,10 @@ public class CitySearch
         int max = 0;
         for(int j = 1;j<i;j++)
         {
-          if(list.get(max)<list.get(j))
+          if(list.get(j).compareToPopulation(list.get(max))<0)
           max = j;
         }
-        int temp = list.set(max,list.get(i-1));
+        City temp = list.set(max,list.get(i-1));
         list.set(i-1,temp);
       }
     }
