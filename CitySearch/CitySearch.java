@@ -58,7 +58,7 @@ public class CitySearch
                     displayCities();
                     break;
                 case '2':
-                    selectionSortPopulation(cities);
+                    insertionSortPopulation(cities);
                     displayCities();
                     break;
                 case '3':
@@ -166,9 +166,9 @@ public class CitySearch
     public void displayCitiesForState ( )
     {
         String st = Prompt.getString("\nEnter the name of the state(-1 to exit): ");
-        st = st.toUpperCase();
         while(!st.equals("-1"))
         {
+            st = st.toUpperCase();
             System.out.println("\n\n\n+------------------+");
             System.out.println("| List of Cities   |");
             System.out.println("+----------------------------------------------+");
@@ -177,19 +177,19 @@ public class CitySearch
             int counter = 0;
             for (int i = 0; i < cities.size(); i++)
             {
-              System.out.println("citi: "+cities.toString());
-              System.out.println("PRINT ST: "+st);
               if(cities.get(i).compareToState(st)==0)
               {
-                if (i%5 == 0)
+                if (counter%5 == 0)
                 {
                     System.out.println("|                                              |");
                 }
+                counter++;
+                //System.out.println("citi: "+cities.toString());
+                //System.out.println("PRINT ST: "+st);
                 System.out.print("|  ");
                 System.out.printf("%4d  ",(i+1));
                 System.out.println(cities.get(i) + "  |");
               }
-
             }
             System.out.println("|                                              |");
             System.out.println("+----------------------------------------------+");
@@ -324,8 +324,25 @@ public class CitySearch
         {
             System.out.println("\n\n----------------------------------------------------------------\n");
             cityName = Prompt.getString("Please enter a City and State (City, State) to search for (-1 to exit): ");
-
-            //  Call the binary search algorithm (method).
+            String onlyCity = cityName.substring(0,cityName.indexOf(','));
+            int counter = 0;
+            onlyCity = onlyCity.substring(0,1).toUpperCase()+onlyCity.substring(1);
+            int len = onlyCity.length();
+            //int n =cityName.indexOf(',');
+            // for (int i = 0;i<n;i++) {
+            //   System.out.println("i");
+            //   if(cityName.charAt(i)==' ')
+            //   {
+            //     cityName = cityName.substring(0,i+1)+cityName.substring(i+1,i+2).toUpperCase()+cityName.substring(n+2);
+            //     System.out.println(cityName);
+            //   }
+            //   else if(i==0)
+            //   {
+            //     cityName = cityName.substring(0,1).toUpperCase()+cityName.substring(1);
+            //   }
+            // }
+            System.out.println("REFRESH CITY: "+cityName);
+            binarySearch(list,new City(cityName.substring(0,cityName.indexOf(",")),cityName.substring(cityName.indexOf(",")+1,cityName.length()),0));
 
         }while(!cityName.equals("-1"));
     }
@@ -336,32 +353,24 @@ public class CitySearch
      */
     public int binarySearch (ArrayList<City> list, City city)
     {
-        int counter = 0;
-        int low = 0;
-        int high = list.size() - 1;
-        int mid;
-        int x;
-      //  while (low <= high)
-      //  {
-      //       mid = low + (high-low)/2;
-       //
-      //      // Check if x is present at mid
-      //      if (arr[mid] == x)
-      //          return m;
-       //
-      //      // If x greater, ignore left half
-      //      if (arr[m] < x)
-      //          low = mid + 1;
-       //
-      //      // If x is smaller, ignore right half
-      //      else
-      //          high = mid - 1;
-      //  }
-
-       // if we reach here, then element was not present
-      //  return -1;
-       //
-      //   System.out.println("\nThe binary search took " + counter + " steps to determine that this City does not exist in the list.");
+        int counter=0, low=0, high=list.size()-1, mid=0;
+       while (low <= high)
+       {
+            mid = low + (high-low)/2;
+           if (list.get(mid).equals(city))
+               return mid;
+           if (list.get(mid).compareTo(city)<0)
+           {
+             low = mid + 1;
+             counter++;
+           }
+           else
+           {
+             high = mid - 1;
+             counter++;
+           }
+       }
+        System.out.println("\nThe binary search took " + counter + " steps to determine that this City does not exist in the list.");
          return -1;
     }
     /**

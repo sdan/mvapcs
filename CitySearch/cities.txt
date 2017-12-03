@@ -1,3 +1,4 @@
+rank,city,state,population,2000-2013 growth
 1,New York,NY,8405837,4.8%
 2,Los Angeles,CA,3884307,4.8%
 3,Chicago,IL,2718782,-6.1%
