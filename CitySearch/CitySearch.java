@@ -1,6 +1,9 @@
 /**
  *  CitySearch.java
- *  E            D            I    T            H    E            R            E
+ *  A sorting algorithm exercise in order to provide user with information about US cities.
+ *  The user can select to view a sorted list of US cities by name and population. They can also
+ *  select to view cities in a state that they input and have the option to search for
+ *  a city given the city name and state.
  *  @author Surya Dantuluri
  *  @version 1.0
  *  @since 11/28/2017
@@ -324,16 +327,22 @@ public class CitySearch
         {
             System.out.println("\n\n----------------------------------------------------------------\n");
             cityName = Prompt.getString("Please enter a City and State (City, State) to search for (-1 to exit): ");
-            String onlyCity = cityName.substring(0,cityName.indexOf(','));
-            onlyCity = onlyCity.substring(0,1).toUpperCase()+onlyCity.substring(1);
-            if(onlyCity.indexOf(' ')>0);
-            onlyCity = onlyCity.substring(0,onlyCity.indexOf(' ')+1)+onlyCity.substring(onlyCity.indexOf(' ')+1,onlyCity.indexOf(' ')+2).toUpperCase()+onlyCity.substring(onlyCity.indexOf(' ')+2);
-
-            cityName = onlyCity+cityName.substring(cityName.indexOf(',')).toUpperCase();
-
-            System.out.println("REFRESH CITY: "+cityName);
-            binarySearch(list,new City(cityName.substring(0,cityName.indexOf(",")),cityName.substring(cityName.indexOf(",")+1,cityName.length()),0));
-
+            if(!cityName.equals("-1"))
+            {
+              String onlyCity = cityName.substring(0,cityName.indexOf(','));
+              onlyCity = onlyCity.substring(0,1).toUpperCase()+onlyCity.substring(1);
+              if(onlyCity.indexOf(' ')>0);
+              onlyCity = onlyCity.substring(0,onlyCity.indexOf(' ')+1)+onlyCity.substring(onlyCity.indexOf(' ')+1,onlyCity.indexOf(' ')+2).toUpperCase()+onlyCity.substring(onlyCity.indexOf(' ')+2);
+              //cityName = onlyCity+cityName.substring(cityName.indexOf(',')).toUpperCase();
+              //System.out.println("REFRESH CITY:"+cityName.substring(cityName.indexOf(',')+2).toUpperCase());
+              int index = 0;
+              index = binarySearch(list,new City(onlyCity,cityName.substring(cityName.indexOf(',')+2).toUpperCase(),0));
+              if(index!=-1)
+              {
+                System.out.println("\nThe City is:");
+                System.out.println(cities.get(index).toString());
+              }
+            }
         }while(!cityName.equals("-1"));
     }
 
@@ -348,8 +357,12 @@ public class CitySearch
        {
             mid = low + (high-low)/2;
            if (list.get(mid).equals(city))
-               return mid;
-           if (list.get(mid).compareTo(city)<0)
+           {
+             counter++;
+             System.out.println("\nThe binary search took "+counter+" steps to find this City.");
+             return mid;
+           }
+           else if (list.get(mid).compareTo(city)<0)
            {
              low = mid + 1;
              counter++;
