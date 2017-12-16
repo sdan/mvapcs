@@ -35,8 +35,8 @@ abstract class HomoSapiens implements Homonid
 
 public class Human extends HomoSapiens implements Homonid
 {
-  String name, school, lifespan, autism, chromosomes, chromatids, whoIsDaddy;
-  boolean loraApproved, retarded, doubleChromatid, kochleen;
+  String name, race, school, autism, chromosomes, chromatids, whoIsDaddy;
+  boolean loraApproved, retarded, doubleChromatid, kochleen, raceIsReal, mueller;
   int prophase,genes, population, income, cancerRating, rapeRating, strength, grade, lifespan, raped;
   public int efficiency(String traits, int length, int lifespan, String chromosomes, String chromatids, boolean loraApproved, boolean retarded)
   {return 0;}
@@ -66,13 +66,13 @@ public class Human extends HomoSapiens implements Homonid
       raceIsReal = true;
      prophase = 69;
      genes = 420;
-     population = 9001
-     income = 100000
-     cancerRating = 1
-     rapeRating = 6900000
-     strength = 0
-     grade = 0
-     lifespan = 0
+     population = 9001;
+     income = 100000;
+     cancerRating = 1;
+     rapeRating = 6900000;
+     strength = 0;
+     grade = 0;
+     lifespan = 0;
      raped = 10;
 
   }
@@ -150,17 +150,50 @@ public class Human extends HomoSapiens implements Homonid
        case 1: school = "Monta Vista High School";
        System.out.println("Unfortunately your lifespan decreases by 25 YEARS AUTOMATICALLY for choosing MVHS");
        System.out.println("\nStudies have shown students who have been sleep deprived for years");
-       System.out.println("and have been raped multiple times decreases life expectancy");
+       System.out.println("and have been raped multiple times decreases life expectancy\n");
+       autism = "ARNAV HEMMADY";
+       System.out.println("\nYour race has been determined. It just is Asian, there is nothing else");
+       race = "ASIAN";
        break;
        case 2: school = "Homestead High School";
+       System.out.println("Your lifespan has decreased by 30 YEARS AUTOMATICALLY");
+       System.out.println("\nStudies have shown teen pregnancies have been skyrocketing");
+       System.out.println("at high schools like this. This causes domestic violence and ");
+       System.out.println("causes depression in many cases. Eventually this will DECREASE");
+       System.out.println("your life, so remember not to become preganent in middle school");
+       System.out.println(", Homestead kids.");
+       autism = "Tobias Fork";
+       System.out.println("\nYour race has been determined. It is Mexican. Get out. There is no turning back after Big Daddy Donald has cume to town.");
+       race = "MEXICAN";
        break;
        case 3: school = "Fremont High School";
+       System.out.println("Life is not fair. 50 YEARS AUTOMATIC deduction in lifespan.");
+       System.out.println("50 point ec, 80% A, and having the most students arrested causes a shorter life.");
+       System.out.println("You also have anand. ;o");
+       autism = "ANAND BALAKRISHNAN";
+       System.out.println("\nYour race has automatically determined. You are a nibba. Bring up your grades first before you take those drugs.");
+       race = "AFRO";
        break;
        case 4: school = "Lynbrook High School";
+       System.out.println("No one knows you. 5 YEAR AUTOMATIC deduction because life is not fair");
+       autism = "Some dude";
+       System.out.println("\nYour race has been determined. It just is Asian, there is nothing else");
+       race = "ASIAN"
        break;
        case 5: school = "Cupertino High School";
+       System.out.println("45 YEAR AUTONMATIC deduction in lifespan. You get remodelling and easy af teachers. ");
+       System.out.println("Another reason: you don't have lora.");
+       autism = "ANJU 5^2";
+       System.out.println("\nYour race has been determined. It just is Asian, there is nothing else");
+       race = "ASIAN";
        break;
        case 6: school = "Another High School";
+       System.out.println("60 YEAR AUTOMATIC deduction. Gun violence, domestic abuse, robberies, cheating");
+       System.out.println("hard WORKING CONDITIONS and drugs lead to a shorter lifespan.");
+       autism = "DEM NIBBAS";
+       System.out.println("\nYour race has been determined. It just is a Nibba, there is nothing else considering your skin color and culture and school");
+       race = "AFRO";
+       break;
      }
   }
 }
