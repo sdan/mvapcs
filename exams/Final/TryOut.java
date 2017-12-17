@@ -10,9 +10,9 @@ public class TryOut
 
 	private static void tryout(Act actor)
 	{
-		System.out.println("nl \n");
+		System.out.println("\n");
 		actor.act();
-		System.out.println("nl \n");
+		System.out.println("\n");
 	}
 }
 

@@ -33,7 +33,8 @@ public class Rectangle implements Relatable
 	public Rectangle(Point p, int w, int h)
 	{
 		origin = p;
-		System.out.println("origin"+origin);
+		System.out.println("origin"+
+		origin);
 		width = w;
 		height = h;
 	}
@@ -69,7 +70,7 @@ class Point
 	public int x = 0;
 	public int y = 0;
 
-	// a constructor!
+	// a constructor0
 	public Point(int a, int b)
 	{
 		x = a;
