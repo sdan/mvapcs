@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sorts
 {
@@ -33,25 +34,28 @@ public class Sorts
 	{
 		int steps = 0;
 		steps+=3; //Declaration of max and temp, and the declaration and assignment of outer.
-		int max, temp;
+		int min, temp;
 
-		for (int outer = list.size(); outer > 1; outer--)
+		for (int outer = 0; outer <list.size(); outer++)
 		{
 			steps+=4; // boolean above (when true), outer--, max=0, declaration of inner.
-			max = 0;
-			for (int inner = 1; inner < outer; inner++)
+			min = outer;
+			for (int inner = outer; inner < list.size(); inner++)
 			{
 				steps+=3; //boolean above (when true), inner++, boolean below.
-				if (list.get(inner).intValue() > list.get(max).intValue())
+				if (list.get(inner).intValue() < list.get(min).intValue())
 				{
 					steps++; //for max = inner.
-					max = inner; // a new largest item is found
+					min = inner; // a new largest item is found
 				}
 			}
 			steps++; //inner<outer is false.
 			steps+=3; // for the swap inthe two statements below.
-			temp = list.set(outer-1,list.get(max)).intValue();
-			list.set(max,new Integer(temp));
+			 temp = list.get(min);
+      list.set(min, list.get(outer));
+      list.set(outer, temp);
+			// temp = list.set(outer,list.get(min)).intValue();
+			// list.set(min,new Integer(temp));
 
 		}
 		steps++; //when outer>1 is false.
