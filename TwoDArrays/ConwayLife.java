@@ -218,7 +218,7 @@ public class ConwayLife
             {
                 if(board[row][col] == true)
                 {
-                    System.out.println("row of "+i+" is a neighbor of "+row+" :: col of "+j+" is a neighbor of "+col);
+                    //System.out.println("row of "+i+" is a neighbor of "+row+" :: col of "+j+" is a neighbor of "+col);
                     neighborcount++;
                 }
             }
