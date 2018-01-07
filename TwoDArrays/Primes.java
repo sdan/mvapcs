@@ -27,10 +27,14 @@ public class Primes
     numbers = new int [(num/10)+1][10];
     for (int i = 0;i<numbers.length;i++) {
       for (int j = 0;j<numbers[0].length;j++) {
+        if(i==0&&j==1)
+        numbers[i][j]=0;
+        else
         numbers[i][j] = i*10+j;
       }
     }
     System.out.println("Here is your list of "+calculate(num)+" primes: ");
+    print();
   }
 
   public int calculate(int num)
@@ -39,16 +43,15 @@ public class Primes
     int c = 0;
     for (int i = 2;i*i<=num;i++) {
       for (int j = i*2;j<=num;j+=i) {
-        // c=j%10;
-        // j=j/10;
-        // r = j;
+        c=j%10;
+        r=j/10;
         //System.out.println("r "+r+" c "+c);
-        System.out.println("j "+j);
-        //numbers[r][c] = 0;
+        //System.out.println("j "+j);
+        numbers[r][c] = 0;
       }
     }
     int count = 0;
-    for (int i = 2;i<numbers.length;i++) {
+    for (int i = 0;i<numbers.length;i++) {
       for (int j = 0;j<numbers[0].length;j++) {
         if(numbers[i][j]!=0)
         count++;
@@ -62,7 +65,10 @@ public class Primes
     for (int i = 0;i<numbers.length;i++) {
       System.out.print(i+" |   ");
       for(int j = 0;j<numbers[0].length;j++){
+        if(numbers[i][j]!=0)
         System.out.print(numbers[i][j]+"  ");
+        else
+        System.out.print("   ");
       }
       System.out.println("");
     }
