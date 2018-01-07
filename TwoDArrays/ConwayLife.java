@@ -198,8 +198,6 @@ public void generateNext ( )
       }
     }
   }
-
-
   board=nextboard;
 }
 
@@ -212,12 +210,10 @@ public void generateNext ( )
 public int countNeighbors(int row, int col)
 {
   int neighborcount = 0;
-
   for(int i = -1; i <= 1; i++)
-  for(int j = -1; j <= 1; j++)
-  if ((i!=0 || j!=0)&&(row+i<board.length&&row+i>=0)&&(col+j<board[0].length&&col+j>=0)&& board[row+i][col+j])
-  neighborcount++;
-
+    for(int j = -1; j <= 1; j++)
+      if ((i!=0 || j!=0)&&(row+i<board.length&&row+i>=0)&&(col+j<board[0].length&&col+j>=0)&& board[row+i][col+j])
+      neighborcount++;
   return neighborcount;
 }
 }
