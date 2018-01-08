@@ -3,7 +3,7 @@
 * Just for fun.
 * @author Surya Dantuluri
 * @version 1.0
-* @since 1/9/2018
+* @since 1/6/2018
 */
 
 import java.util.Scanner;
