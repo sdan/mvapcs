@@ -26,9 +26,9 @@ public class Recursion
 		System.out.println("\n(1) GCF");
 		System.out.println("(2) Factorial");
 		System.out.println("(3) Fibonacci");
-		System.out.println("(4) Fibonacci");
-		System.out.println("(5) Fibonacci");
-		System.out.println("(6) Fibonacci");
+		System.out.println("(4) Arrow");
+		System.out.println("(5) Convert Decimal");
+		System.out.println("(6) Pascal's Triangle");
 
 	}
 
@@ -44,6 +44,15 @@ public class Recursion
 				break;
 			case '3':
 				fibonacciLoop();
+				break;
+			case '4':
+				arrow();
+				break;
+			case '5':
+				convertdecimal();
+				break;
+			case '6':
+				pascal();
 				break;
 		}
 	}
