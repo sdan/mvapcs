@@ -58,9 +58,10 @@ public class Marbles
     {
         boolean done = false;
         boolean toggleChangeBackground = true;
+        boolean drawBackToggle = true;
         do
         {
-            drawBoard(toggleChangeBackground);
+            drawBoard(toggleChangeBackground, drawBackToggle);
             if(StdDraw.mousePressed())
             {
                 double x = StdDraw.mouseX();
@@ -87,15 +88,29 @@ public class Marbles
                 }
             }
             StdDraw.show(pause);
+            drawBackToggle = false;
         }
         while(!done);
     }
 
+
+    public void drawBackground(boolean draw)
+    {
+        if(draw)
+        {
+            StdDraw.setPenColor(new Color(0,0,0));
+            StdDraw.filledSquare(0.5,0.5,0.5);
+            draw = false;
+        }
+        
+    }
     /**
     *  Comments.
     */
-    public void drawBoard (boolean toggle)
+    public void drawBoard (boolean toggle, boolean drawBackToggle)
     {
+        if(drawBackToggle)
+            drawBackground(true);
         if(toggle)
         {
             double x = 0.5, y = 0.5;   // center of square
