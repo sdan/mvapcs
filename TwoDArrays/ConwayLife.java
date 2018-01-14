@@ -89,6 +89,7 @@ public class ConwayLife
       temp = infile.nextLine();
       for(int row = 0; row < temp.length(); row++)
       {
+
         if(temp.charAt(row) == '*' && row < board.length && col < board[row].length)
         {
           board[row][col] = true;
