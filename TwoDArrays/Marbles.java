@@ -204,38 +204,33 @@ public class Marbles
     public boolean possibleMoveSpace(int x, int y, int xval, int yval)
     {
 
-        if(x>=0 && y>=0 && board[x][y] == 1 && board[(xval+x)/2][(yval+y)/2] == 1)
+        if(x>=0 && y>=0 && board[x][y] == 1)
         {
-            if(x+2 < board.length && board[x+2][y]==0 && (xval==x+2 && yval==y))
+            if(x+2 < board.length && x+2==xval && y==yval && board[x+2][y]==0 && board[x+1][y]==1)
             {
-                System.out.println("\n\ncase 1\n\n");
                 return true;
             }
-            else if(x-2 >= 0 && board[x-2][y]==0  && (xval==x-2 && yval==y))
+            else if(x-2 >= 0 && x-2==xval && y==yval && board[x-2][y]==0  && board[x-1][y]==1)
             {
-                                System.out.println("\n\ncase 2\n\n");
                 return true;
             }
-            else if(y+2 < board[0].length && board[x][y+2]==0 && (xval==x && yval==y+2))
+            else if(board[0].length>y+2 && x==xval && y+2==yval && board[x][y+2]==0 && board[x][y+1]==1)
             {
-                                System.out.println("\n\ncase 3\n\n");
-
                 return true;
             }
-            else if(y-2 >= 0 && board[x][y-2]==0 && (xval==x && yval==y-2))
+            else if(y-2 >= 0 && x==xval && y-2==yval &&  board[x][y-2]==0 && board[x][y-1]==1)
             {
-                                System.out.println("\n\ncase 4\n\n");
-
                 return true;
             }
         }
+        // System.out.println("NO POSSIBLE MOVE SPACES: ");
+        // System.out.println("x "+x);
+        // System.out.println("y "+y);
+        // System.out.println("xval "+xval);
+        // System.out.println("yval "+yval);
+        // System.out.println("\n\n");
         return false;
-        System.out.println("NO POSSIBLE MOVE SPACES: ");
-        System.out.println("x "+x);
-        System.out.println("y "+y);
-        System.out.println("xval "+xval);
-        System.out.println("yval "+yval);
-        System.out.println("\n\n");
+
     }
     
     /**
@@ -243,18 +238,30 @@ public class Marbles
      */
     public boolean gameIsFinished()
     {
-        for(int x = 1; x < board.length; x++)
+        for(int x = 0; x < board.length; x++)
         {
-            for(int y = 1; y < board[0].length; y++)
+            for(int y = 0; y < board[0].length; y++)
             {
                if(x-2>=1&&possibleMoveSpace(x,y,x-2,y))
-                     return false;
+               {
+                 System.out.println("Possible Move: (" + (x-2) + ", " + (y) + ")");
+                    return false;
+               }
                 if(x+2<board.length&&possibleMoveSpace(x,y,x+2,y))
+                {
+                 System.out.println("Possible Move: (" + (x+2) + ", " + (y) + ")");
                      return false;
+                }
                 if(y-2>=1&&possibleMoveSpace(x,y,x,y-2))
+                {
+                System.out.println("Possible Move: (" + (x) + ", " + (y-2) + ")");
                      return false;
+                }
                 if(y+2<board[0].length&&possibleMoveSpace(x,y,x,y+2))
+                {
+                    System.out.println("Possible Move: (" + (x) + ", " + (y+2) + ")");
                      return false;
+                }
                     
              }
         }
