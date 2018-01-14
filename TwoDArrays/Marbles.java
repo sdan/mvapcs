@@ -230,6 +230,12 @@ public class Marbles
             }
         }
         return false;
+        System.out.println("NO POSSIBLE MOVE SPACES: ");
+        System.out.println("x "+x);
+        System.out.println("y "+y);
+        System.out.println("xval "+xval);
+        System.out.println("yval "+yval);
+        System.out.println("\n\n");
     }
     
     /**
