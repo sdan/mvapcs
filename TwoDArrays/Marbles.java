@@ -58,10 +58,10 @@ public class Marbles
     {
         boolean done = false;
         boolean toggleChangeBackground = true;
-        boolean drawBackToggle = true;
+        drawBackground(true);
         do
         {
-            drawBoard(toggleChangeBackground, drawBackToggle);
+            drawBoard(toggleChangeBackground);
             if(StdDraw.mousePressed())
             {
                 double x = StdDraw.mouseX();
@@ -88,7 +88,6 @@ public class Marbles
                 }
             }
             StdDraw.show(pause);
-            drawBackToggle = false;
         }
         while(!done);
     }
@@ -107,10 +106,8 @@ public class Marbles
     /**
     *  Comments.
     */
-    public void drawBoard (boolean toggle, boolean drawBackToggle)
+    public void drawBoard (boolean toggle)
     {
-        if(drawBackToggle)
-            drawBackground(true);
         if(toggle)
         {
             double x = 0.5, y = 0.5;   // center of square
@@ -217,6 +214,8 @@ public class Marbles
     {
         if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.05 && y <= 0.25+0.05)
         {
+            drawBackground(true);
+            drawBoard(true);
             board = new int[][]{{-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {-1,1,1,1,1,1,1,1,-1},{-1,1,1,1,0,1,1,1,-1},{-1,1,1,1,1,1,1,1,-1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1}};
@@ -224,6 +223,8 @@ public class Marbles
         }
         else if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.125-0.05 && y <= 0.25-0.125+0.05)
         {
+            drawBackground(true);
+            drawBoard(true);
             board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
