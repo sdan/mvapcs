@@ -68,11 +68,12 @@ public class Marbles
                 {
                     xposition = yposition = -5;
                 }
-                else if(possibleMoveSpace(xposition,yposition,checkx,checky))
+                else if(possibleMoveSpace(xposition,yposition,checkx,checky) && !gameIsFinished())
                 {
                     board[checkx][checky] = 1;
                     board[xposition][yposition] = 0;
                     board[(checkx+xposition)/2][(checky+yposition)/2] = 0;
+                    
                     StdDraw.show(4 * pause);
                 }
                 else
@@ -118,21 +119,29 @@ public class Marbles
     {
         StdDraw.setPenColor(new Color(0,0,0));
         StdDraw.filledRectangle(0.8, 0.25, 0.125, 0.05);
+        StdDraw.filledRectangle(0.8, 0.25-0.125, 0.125, 0.05);
         StdDraw.setPenColor(new Color(255,255,255));
         StdDraw.text(0.8, 0.25, "RESET 7 x 7");
-
-        StdDraw.setPenColor(new Color(0,0,0));
-        StdDraw.filledRectangle(0.8, 0.13, 0.125, 0.05);
-        StdDraw.setPenColor(new Color(255,255,255));
-        StdDraw.text(0.8, 0.13, "RESET 9 x 9");
-    }
+        StdDraw.text(0.8, 0.25-0.125, "RESET 9 x 9");
+      }
     
     /**
      *  Comments.
      */
     public void drawWinOrLoseMessage ( )
     {       
-        StdDraw.filledRectangle(0.8,0.13,0.125,0.05);
+     String message = "YOU LOSE!";
+
+        if(countMarbles() == 1)
+            message = "YOU WIN!";
+        
+        if(gameIsFinished())
+        {
+            StdDraw.setPenColor(new Color(0,0,0));
+            StdDraw.filledRectangle(0.8, 0.25-0.125, 0.125, 0.05);
+            StdDraw.setPenColor(new Color(255,255,255));
+            StdDraw.text(0.8, 0.25-0.125, message);
+        }
     }
     
     /**
@@ -163,7 +172,7 @@ public class Marbles
      */
     public void drawCell(int x, int y)   
     {
-        StdDraw.setPenColor(new Color(0,0,0));
+       StdDraw.setPenColor(new Color(0,0,0));
         StdDraw.filledSquare(0.1 + 0.1 * x, 0.1 + 0.1 * y, 0.055);
         StdDraw.setPenColor(new Color(255,255,255));
         StdDraw.filledSquare(0.1 + 0.1 * x, 0.1 + 0.1 * y, 0.0425);
@@ -194,11 +203,33 @@ public class Marbles
      */
     public boolean possibleMoveSpace(int x, int y, int xval, int yval)
     {
-        if(((y==yval&&(x==xval+2||x==xval-2))||(x==xval&&(y==yval+2||y==yval-2)))&&(xval<board.length&&xval>=0)&&(yval<board.length&&yval>=0))
-            if((x<board.length&&x>=0)&&(y<board.length&&y>=0))
-                if(board[xval][yval]==0)
-                    return true;
-       return false;
+
+        if(x>=0 && y>=0 && board[x][y] == 1 && board[(xval+x)/2][(yval+y)/2] == 1)
+        {
+            if(x+2 < board.length && board[x+2][y]==0 && (xval==x+2 && yval==y))
+            {
+                System.out.println("\n\ncase 1\n\n");
+                return true;
+            }
+            else if(x-2 >= 0 && board[x-2][y]==0  && (xval==x-2 && yval==y))
+            {
+                                System.out.println("\n\ncase 2\n\n");
+                return true;
+            }
+            else if(y+2 < board[0].length && board[x][y+2]==0 && (xval==x && yval==y+2))
+            {
+                                System.out.println("\n\ncase 3\n\n");
+
+                return true;
+            }
+            else if(y-2 >= 0 && board[x][y-2]==0 && (xval==x && yval==y-2))
+            {
+                                System.out.println("\n\ncase 4\n\n");
+
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -210,16 +241,18 @@ public class Marbles
         {
             for(int y = 1; y < board[0].length; y++)
             {
-                for(int xval = 1; xval <board.length;xval++)
-                {
-                    for (int yval = 1;yval<board[0].length;yval++) {
-                        if(possibleMoveSpace(x,y,xval,yval))
-                            return true;
-                    }
-                }
-            }
+               if(x-2>=1&&possibleMoveSpace(x,y,x-2,y))
+                     return false;
+                if(x+2<board.length&&possibleMoveSpace(x,y,x+2,y))
+                     return false;
+                if(y-2>=1&&possibleMoveSpace(x,y,x,y-2))
+                     return false;
+                if(y+2<board[0].length&&possibleMoveSpace(x,y,x,y+2))
+                     return false;
+                    
+             }
         }
-        return false;
+        return true;
     }
     
     /**
