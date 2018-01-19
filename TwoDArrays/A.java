@@ -1,4 +1,187 @@
-/**
+import java.awt.Color;
+import java.awt.Font;
+class GameBoard {
+            
+            private static final int OCCUPIED = 1;
+            
+            private static final int EMPTY = 0;
+    
+            private static final int RIGHT = 0;
+            private static final int TOP = 1;
+            private static final int LEFT = 2;
+            private static final int BOTTOM = 3;
+            
+            /**
+             * Contains all directions a peg can be moved according to the rules of the game.
+             * In practice one should use an enumeration type.
+             */
+            private static int [] richtungen = {RIGHT, TOP, LEFT, BOTTOM};
+            
+            /**
+             * the game borad with initial position of all pegs
+             */
+
+            private int [] [] board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
+                            {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
+                            {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
+
+            // private int [] [] board = {
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            //                 {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            //                 {1, 1, 1, 1, 2, 1, 1, 1, 1},
+            //                 {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            //                 {0, 0, 0, 1, 1, 1, 0, 0, 0},
+            // };
+    
+            /**
+             * returns the width (always 7) of the board
+             */
+            public int getWidth() {
+                    return board.length;
+            }
+    
+            /**
+             * returns the height (always 7) of the board
+             */
+            public int getHeight() {
+                    return board.length;
+            }
+    
+            public void clearField(int x, int y) {
+                    board[x][y] = EMPTY;
+            }
+    
+            public void setPeg(int x, int y) {
+                    board[x][y] = OCCUPIED;
+            }
+    
+            /**
+             * copies the content of the  source to the target
+             */
+            public void copyBoard(GameBoard source, GameBoard target) {
+                    for (int x = 0; x < getWidth(); x++) {
+                   for (int y = 0; y < getHeight(); y++) {
+                               target.board[x][y] = source.board[x][y];
+                       }
+                    }
+            }
+            
+            /**
+             * Checks whether there is a peg at (x,y), an empty field at (newX, newY),
+             * and a peg between both fields.
+             */
+            private boolean isValidMove(int x, int y, int newX, int newY) {
+                    return 0 <= x && x < board.length 
+                            && 0 <= y && y < board[x].length
+                            && 0 <= newX && newX < board.length 
+                            && 0 <= newY && newY < board[newX].length
+                            && board[newX][newY] == EMPTY
+                            && board[(x + newX) / 2][(y + newY) / 2] == OCCUPIED
+                            && board[x][y] == OCCUPIED;
+                            
+            }
+            
+            /**
+             * Jumps the peg from (x,y) over the neighbouring peg in the given <code>direction</code>
+             * and removes the peg we have jumped over. 
+             * Returns true if the move was according to the game rules; and false otherwise.
+             * The game board only changes state, if the move was valid.
+             *       */
+            public boolean jump(int x, int y, int direction) {
+                    int newX = getNewX(x, direction);
+                    int newY = getNewY(y, direction);
+    
+                    if ( isValidMove(x, y, newX, newY)) {
+                            setPeg(newX, newY);
+                            clearField(x, y);
+                            clearField((x + newX) / 2, (y + newY) / 2);
+                            
+                            return true;
+                    }
+                    
+                    return false;
+            }
+            
+    
+            /**
+             * A peg "jumps back" and the previously removed peg is returned at
+             * its proper position.
+             */
+            public void jumpBack(int x, int y, int direction) {
+                    int newX = getNewX(x, direction);
+                    int newY = getNewY(y, direction);
+                    
+                    clearField(newX, newY);
+                    setPeg(x, y);
+                    setPeg((x + newX) / 2, (y + newY) / 2);
+            }
+            
+            private int getNewX(int x, int direction) {
+                    int newX = x;
+                    switch (direction) {
+                    case RIGHT: newX += 2;
+                                break;
+                    case LEFT: newX -= 2;
+                    }
+                    return newX;
+            }
+            
+            private int getNewY(int y, int direction) {
+                    int newY = y;
+                    
+                    switch (direction) {
+                    case TOP: newY -= 2;
+                                    break;
+                    case BOTTOM: newY += 2;
+                    }
+                    
+                    return newY;
+            }
+            /**
+             * Prints out the contents of this board with
+             * <ul>
+             * <li>0 = no valid field</li>
+             * <li>1 = field with a peg</li>
+             * <li>2 = field without a peg</li>
+             * </ul>
+             */
+            public void print() {
+                    for (int x = 0; x < board.length; x++) {
+                            for (int y = 0; y < board[x].length; y++) {
+                                    System.out.print(board[x][y]);
+                            }
+                            System.out.println();
+                    }
+                    System.out.println();
+            }
+            
+            /**
+             * Returns true if there is a peg at (x,y).
+             */
+            public boolean isOccupied(int x, int y) {
+                    return board[x][y] == OCCUPIED;
+            }
+    
+            
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
 * Marbles.java
 * An intensive game that utilizes the StdDraw class from Princeton University to create a GUI 
 * that allows players to play a classic game of Marbles. The enhanced game shows one of the multitude
@@ -8,8 +191,7 @@
 * @version 1.0
 * @since 1/9/2018
 */
-import java.awt.Color;
-import java.awt.Font;
+
 
 public class A
 {
@@ -47,7 +229,7 @@ public class A
     */
     public static void main(String [] args)   
     {
-        A run = new X();
+        A run = new A();
         run.playGame();
     }
 
@@ -396,28 +578,62 @@ public class A
     }
             private int [] directions = {0, 1, 2, 3};
 
-    //right, top, left, bottom
-    //[0,1,2,3]
-    public boolean findSolution(int n) {
-        for (int i = 0; n <= 31 && i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                for (int direction : directions) {
-                    if (jump(i, j, direction)) {
-                        if (! (n >= 31 && gameIsFinished())) {
 
 
-                            drawBoard(false);
-                                        StdDraw.show(60);
 
-                            if ( findSolution(n + 1)) {
-                                return true;
-                            } else {
-                                        jumpBack(i, j, direction);
-                                        System.out.println("JUMP BACK");
-                                        drawBoard(false);
-                                    }
-                                } else {
-                            return true;
+
+
+
+
+
+
+
+
+
+/**
+             * the game board with values 1 (a peg), 2 (empty field), 0 (unused field)
+             */
+            
+            /**
+             * the solution given as a sequence of board situations
+             */
+            private GameBoard [] solution = new GameBoard[44];
+                    private GameBoard original = new GameBoard();
+
+            /**
+             * all four possible directions for a move (jump of a peg over another peg)
+             */
+            
+            /**
+             * creates a new solitare instance with empty solution
+             * and initial start position of all pegs
+             */
+
+       /**
+        * Starts the backtracking algorithm and prints out the solution
+        * as the sequence of all resulting intermediate board situation
+            */
+
+    
+            /**
+             * Backtracking algorithm to solve the solitare puzzle
+             * 
+             * @param move current number of move, first move must be 1
+             */
+            public boolean findSolution(int move) {
+                    for (int x = 0; move <= 31 && x < original.getWidth(); x++) {
+                            for (int y = 0; y < original.getHeight(); y++) {
+                                    for (int direction : directions) {
+                                            if (original.jump(x, y, direction)) {
+                                                    original.copyBoard (original, solution[move]);
+                                                    if (! (move >= 31 && original.isOccupied(3, 3))) {
+                                                            if ( findSolution(move + 1)) {
+                                                                    return true;
+                                                            } else {
+                                                                    original.jumpBack(x, y, direction);
+                                                            }
+                                                    } else {
+                                                            return true;
                                                     }
                                             }
                                     }
@@ -427,59 +643,11 @@ public class A
                     return false;
             }
 
-    public boolean jump(int x, int y, int moveSpace) {
-                    int newX = getNewX(x, moveSpace);
-                    int newY = getNewY(y, moveSpace);
-    
-                    if ( possibleMoveSpace(x, y, newX, newY)&&!gameIsFinished()) {
-
-                            
-                            board[newX][newY] = 1;
-                    board[x][y] = 0;
-                    board[(newX+x)/2][(newY+y)/2] = 0;
-                    StdDraw.show(4 * pause);
 
 
-                            return true;
-                    }
-                    
-                    return false;
-            }
-public void jumpBack(int x, int y, int direction) {
-                    int newX = getNewX(x, direction);
-                    int newY = getNewY(y, direction);
-                    
-                     board[newX][newY] = 1;
-                    board[x][y] = 0;
-                    board[(newX+x)/2][(newY+y)/2] = 0;
-                    StdDraw.show(4 * pause);
-                    drawBoard(false);
-            }
-            public void setPeg(int x, int y) {
-                    board[x][y] = 1;
-            }
 
-     private int getNewX(int x, int direction) {
-                    int newX = x;
-                    switch (direction) {
-                    case 0: newX += 2;
-                                break;
-                    case 2: newX -= 2;
-                    }
-                    return newX;
-            }   
 
-    private int getNewY(int y, int direction) {
-                    int newY = y;
-                    
-                    switch (direction) {
-                    case 1: newY -= 2;
-                                    break;
-                    case 3: newY += 2;
-                    }
-                    
-                    return newY;
-            }    
+
 
 
 
