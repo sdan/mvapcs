@@ -6,12 +6,12 @@
 * 
 * @author Surya Dantuluri
 * @version 1.0
-* @since 1/9/2018
+* @since 1/19/2018
 */
 import java.awt.Color;
 import java.awt.Font;
 
-public class X
+public class MarblesPlus
 {
     /**    The board object.  1 represents a marble on the board, 0 is an empty space,
     *     and -1 would indicate that this cell is not part of the board.                  */
@@ -25,12 +25,17 @@ public class X
     *     the bottom left up.                                                             */
     private int xposition, yposition;
 
+    /**    Used to iterate through all possible positions when backtracking to find solution.
+    * 
+    *                                                                                       */
+    private int [] direction = {0, 1, 2, 3};
+
     /**
     *  Creates a Marbles object, with the font to be used, current position initially
     *  pause off the board, pause at 50 milliseconds, and the board values initialized
     *  in a 9 x 9 grid.
     */
-    public X ( )
+    public MarblesPlus ( )
     {
         Font font = new Font("Arial", Font.BOLD, 18);
         StdDraw.setFont(font);
@@ -47,7 +52,7 @@ public class X
     */
     public static void main(String [] args)   
     {
-        X run = new X();
+        MarblesPlus run = new MarblesPlus();
         run.playGame();
     }
 
@@ -110,7 +115,11 @@ public class X
         
     }
     /**
-    *  Comments.
+    *  The GUI board is draw. The domain and range of the board is [0,1].
+    *  The boolean parameter toggles the background of the board, which overlays
+    *  on top of a black background. If a cell exists, drawCell(int a, int b) is 
+    *  invoked which draws a cell. The reset, solution, and win/lose messages and buttons
+    *  are also invoked to draw them on the board.
     */
     public void drawBoard (boolean toggle)
     {
@@ -131,7 +140,10 @@ public class X
         drawSolutionMessage();
         drawWinOrLoseMessage();
     }
-
+    /**
+    *   A square is drawn with center at x,y and extends out to size/2 on all four
+    *   sides of the square. The color of the square is also set. 
+    */
     public void drawSquare(double x, double y, double size, Color color) 
     {
         StdDraw.setPenColor(color);
@@ -140,11 +152,16 @@ public class X
         StdDraw.square(x, y, size/2);
     }
 
+    /**
+    *   A recursive method that draws squares that have half the side lengths
+    *   of the previous square on the corner of the previous square. The first square
+    *   is in the center of the background.
+    */
     public void draw(int n, double x, double y, double size, Color color) {
         if (n == 0) 
             return;
         drawSquare(x, y, size, color);
-        double ratio = 2.2;
+        double ratio = 2;
         Color colorful = new Color(0,0,0);
         int randomNum = (int)(Math.random()*13+1);
 
@@ -182,7 +199,7 @@ public class X
 
 
     /**
-    *  Comments.
+    *  Draws two rectangles which can toggle the size of the board.
     */
     public void drawResetButtons ( )
     {
@@ -194,6 +211,9 @@ public class X
         StdDraw.text(0.8, 0.25-0.125, "RESET 9 x 9");
     }
 
+    /**
+    *  Draws two messages which can toggle one of the solutions to the game.
+    */
     public void drawSolutionMessage()
     {
         StdDraw.setPenColor(new Color(0,0,0));
@@ -207,7 +227,8 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Draws message on top left of the screen when the game is over. Draws a black
+    *  rectangular box as well on the top left for readability.
     */
     public void drawWinOrLoseMessage ( )
     {       
@@ -228,7 +249,8 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Resets the game board. If the user preses on the "RESET 7 x 7" button, the board configuration
+    *  is completely resets to a initial 7 x 7 board. This applies to the 9 x 9 board as well.
     */
     public boolean reset(double x, double y)
     {
@@ -257,6 +279,10 @@ public class X
         
         return false;
     }
+
+    /**
+    *  Resets the game board. Returns true if the user pressed on either of the "SOLUTION" buttons.
+    */
     public boolean resetSolutionButton(double x, double y)
     {
         if(x >= 0.2-0.145 && x <= 0.2+0.145 && y >= 0.25-0.05 && y <= 0.25+0.05)
@@ -286,7 +312,8 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Draws each cell with center (x,y). If there is a possible position where the user can
+    *  move to, those positions are highlighted as well.
     */
     public void drawCell(int x, int y)   
     {
@@ -318,7 +345,7 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Determines if the cell at (x,y) can legally move to (xval,yval).
     */
     public boolean possibleMoveSpace(int x, int y, int xval, int yval)
     {
@@ -345,7 +372,8 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Determines if the game is finished. This can happen when there is no possible moves, which results
+    *  in a loss or when there is only one marble in the middle of the board, which is a win.
     */
     public boolean gameIsFinished()
     {
@@ -375,7 +403,7 @@ public class X
     }
 
     /**
-    *  Comments.
+    *  Counts the total number of marbles.
     */
     public int countMarbles ( )
     {
@@ -394,38 +422,42 @@ public class X
         boolean cool = findSolution(1);
        
     }
-            private int [] directions = {0, 1, 2, 3};
 
-    //right, top, left, bottom
-    //[0,1,2,3]
-    public boolean findSolution(int n) {
-        for (int i = 0; n <= 31 && i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                for (int direction : directions) {
-                    if (jump(i, j, direction)) {
-                        if (! (n >= 31 && gameIsFinished())) {
-
-
+    public boolean findSolution(int n) 
+    {
+        for (int i = 0; n <= 32 && i < board.length; i++) 
+        {
+            for (int j = 0; j < board[i].length; j++) 
+            {
+                for (int direction : directions) 
+                {
+                    if (jump(i, j, direction)) 
+                    {
+                        if (! (n >= 32 && gameIsFinished())) 
+                        {
                             drawBoard(false);
-                                        StdDraw.show(60);
-
-                            if ( findSolution(n + 1)) {
+                            StdDraw.show(50);
+                            if (findSolution(n+1)) 
+                            {
                                 return true;
-                            } else {
-                                        jumpBack(i, j, direction);
-                                        System.out.println("JUMP BACK");
-                                        drawBoard(false);
-                                    }
-                                } else {
+                            } 
+                            else 
+                            {
+                                goBack(i, j, direction);
+                                drawBoard(false);
+                            }
+                        } 
+                        else 
+                        {
                             return true;
-                                                    }
-                                            }
-                                    }
-                            }                       
+                        }
                     }
-                    
-                    return false;
-            }
+                }
+            }                       
+        }
+
+        return false;
+    }
 
     public boolean jump(int x, int y, int moveSpace) {
                     int newX = getNewX(x, moveSpace);
@@ -445,7 +477,7 @@ public class X
                     
                     return false;
             }
-public void jumpBack(int x, int y, int direction) {
+public void goBack(int x, int y, int direction) {
                     int newX = getNewX(x, direction);
                     int newY = getNewY(y, direction);
                     

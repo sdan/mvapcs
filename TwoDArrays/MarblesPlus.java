@@ -6,12 +6,12 @@
 * 
 * @author Surya Dantuluri
 * @version 1.0
-* @since 1/9/2018
+* @since 1/19/2018
 */
 import java.awt.Color;
 import java.awt.Font;
 
-public class Marbles
+public class MarblesPlus
 {
     /**    The board object.  1 represents a marble on the board, 0 is an empty space,
     *     and -1 would indicate that this cell is not part of the board.                  */
@@ -25,12 +25,17 @@ public class Marbles
     *     the bottom left up.                                                             */
     private int xposition, yposition;
 
+    /**    Used to iterate through all possible positions when backtracking to find solution.
+    * 
+    *                                                                                       */
+    private int [] directions = {0, 1, 2, 3};
+
     /**
     *  Creates a Marbles object, with the font to be used, current position initially
     *  pause off the board, pause at 50 milliseconds, and the board values initialized
     *  in a 9 x 9 grid.
     */
-    public Marbles ( )
+    public MarblesPlus ( )
     {
         Font font = new Font("Arial", Font.BOLD, 18);
         StdDraw.setFont(font);
@@ -47,14 +52,16 @@ public class Marbles
     */
     public static void main(String [] args)   
     {
-        Marbles run = new Marbles();
+        MarblesPlus run = new MarblesPlus();
         run.playGame();
     }
 
     /**
-    *  Comments.
+    *  Starts game by invoking methods that draw the background. Then a do while loop runs until the game 
+    *  is over. In the do while loop, methods that draw the cells of the game and methods that calculate
+    *  the legality over a position determine if the game continues or not, and what happens in the game.
     */
-    public void playGame ( )
+    private void playGame ( )
     {
         boolean done = false;
         boolean toggleChangeBackground = true;
@@ -71,6 +78,11 @@ public class Marbles
                 if(reset(x,y))
                 {
                     xposition = yposition = -5;
+                }
+                if(resetSolutionButton(x,y))
+                {
+                    xposition = yposition = -5;
+                    attemptCompute();
                 }
                 else if(possibleMoveSpace(xposition,yposition,checkx,checky) && !gameIsFinished())
                 {
@@ -93,7 +105,7 @@ public class Marbles
     }
 
 
-    public void drawBackground(boolean draw)
+    private void drawBackground(boolean draw)
     {
         if(draw)
         {
@@ -104,9 +116,13 @@ public class Marbles
         
     }
     /**
-    *  Comments.
+    *  The GUI board is draw. The domain and range of the board is [0,1].
+    *  The boolean parameter toggles the background of the board, which overlays
+    *  on top of a black background. If a cell exists, drawCell(int a, int b) is 
+    *  invoked which draws a cell. The reset, solution, and win/lose messages and buttons
+    *  are also invoked to draw them on the board.
     */
-    public void drawBoard (boolean toggle)
+    private void drawBoard (boolean toggle)
     {
         if(toggle)
         {
@@ -122,10 +138,14 @@ public class Marbles
                     drawCell(i,j);
 
         drawResetButtons();
+        drawSolutionMessage();
         drawWinOrLoseMessage();
     }
-
-    public void drawSquare(double x, double y, double size, Color color) 
+    /**
+    *   A square is drawn with center at x,y and extends out to size/2 on all four
+    *   sides of the square. The color of the square is also set. 
+    */
+    private void drawSquare(double x, double y, double size, Color color) 
     {
         StdDraw.setPenColor(color);
         StdDraw.filledSquare(x, y, size/2);
@@ -133,13 +153,19 @@ public class Marbles
         StdDraw.square(x, y, size/2);
     }
 
-    public void draw(int n, double x, double y, double size, Color color) {
+    /**
+    *   A recursive method that draws squares that have half the side lengths
+    *   of the previous square on the corner of the previous square. The first square
+    *   is in the center of the background.
+    */
+    private void draw(int n, double x, double y, double size, Color color) {
         if (n == 0) 
             return;
         drawSquare(x, y, size, color);
         double ratio = 2;
         Color colorful = new Color(0,0,0);
         int randomNum = (int)(Math.random()*13+1);
+
         if(randomNum==1)
         colorful = StdDraw.BLACK;
         if(randomNum==2)
@@ -174,9 +200,9 @@ public class Marbles
 
 
     /**
-    *  Comments.
+    *  Draws two rectangles which can toggle the size of the board.
     */
-    public void drawResetButtons ( )
+    private void drawResetButtons ( )
     {
         StdDraw.setPenColor(new Color(0,0,0));
         StdDraw.filledRectangle(0.8, 0.25, 0.125, 0.05);
@@ -187,47 +213,68 @@ public class Marbles
     }
 
     /**
-    *  Comments.
+    *  Draws two messages which can toggle one of the solutions to the game.
     */
-    public void drawWinOrLoseMessage ( )
+    private void drawSolutionMessage()
+    {
+        StdDraw.setPenColor(new Color(0,0,0));
+        StdDraw.filledRectangle(0.2, 0.25, 0.145, 0.05);
+        StdDraw.setPenColor(new Color(255,255,255));
+        StdDraw.text(0.2, 0.25, "SOLUTION 7 x 7");
+        StdDraw.setPenColor(new Color(0,0,0));
+        StdDraw.filledRectangle(0.2, 0.25-0.125, 0.145, 0.05);
+        StdDraw.setPenColor(new Color(255,255,255));
+        StdDraw.text(0.2, 0.25-0.125, "SOLUTION 9 x 9");
+    }
+
+    /**
+    *  Draws message on top left of the screen when the game is over. Draws a black
+    *  rectangular box as well on the top left for readability.
+    */
+    private void drawWinOrLoseMessage ( )
     {       
         if(countMarbles()==1)
         {
             StdDraw.setPenColor(new Color(0,0,0));
-            StdDraw.filledRectangle(0.8, 0.25-0.125, 0.125, 0.05);
+            StdDraw.filledRectangle(0.2, 0.8, 0.125, 0.05);
             StdDraw.setPenColor(new Color(255,255,255));
             StdDraw.text(0.2, 0.8, "YOU WIN!");
         }
         else if(gameIsFinished())
         {
             StdDraw.setPenColor(new Color(0,0,0));
-            StdDraw.filledRectangle(0.8, 0.25-0.125, 0.125, 0.05);
+            StdDraw.filledRectangle(0.2, 0.8, 0.125, 0.05);
             StdDraw.setPenColor(new Color(255,255,255));
             StdDraw.text(0.2, 0.8, "YOU LOSE!");
         }
     }
 
     /**
-    *  Comments.
+    *  Resets the game board. If the user preses on the "RESET 7 x 7" button, the board configuration
+    *  is completely resets to a initial 7 x 7 board. This applies to the 9 x 9 board as well.
     */
-    public boolean reset(double x, double y)
+    private boolean reset(double x, double y)
     {
         if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.05 && y <= 0.25+0.05)
         {
-            drawBackground(true);
             drawBoard(true);
+            drawBackground(true);
             board = new int[][]{{-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {-1,1,1,1,1,1,1,1,-1},{-1,1,1,1,0,1,1,1,-1},{-1,1,1,1,1,1,1,1,-1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+            drawBoard(true);
+
             return true;
         }
         else if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.125-0.05 && y <= 0.25-0.125+0.05)
         {
-            drawBackground(true);
             drawBoard(true);
+            drawBackground(true);
             board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
+            drawBoard(true);
+
             return true;
         }
         
@@ -235,9 +282,41 @@ public class Marbles
     }
 
     /**
-    *  Comments.
+    *  Resets the game board. Returns true if the user pressed on either of the "SOLUTION" buttons.
     */
-    public void drawCell(int x, int y)   
+    private boolean resetSolutionButton(double x, double y)
+    {
+        if(x >= 0.2-0.145 && x <= 0.2+0.145 && y >= 0.25-0.05 && y <= 0.25+0.05)
+        {
+            drawBoard(true);
+            drawBackground(true);
+            board = new int[][]{{-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
+                {-1,1,1,1,1,1,1,1,-1},{-1,1,1,1,0,1,1,1,-1},{-1,1,1,1,1,1,1,1,-1},
+                {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+            drawBoard(true);
+
+            return true;
+        }
+        else if(x >= 0.2-0.145 && x <= 0.2+0.145 && y >= 0.25-0.125-0.05 && y <= 0.25-0.125+0.05)
+        {
+            drawBoard(true);
+            drawBackground(true);
+            board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
+                {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
+                {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
+            drawBoard(true);
+
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+    *  Draws each cell with center (x,y). If there is a possible position where the user can
+    *  move to, those positions are highlighted as well.
+    */
+    private void drawCell(int x, int y)   
     {
         StdDraw.setPenColor(new Color(0,0,0));
         StdDraw.filledSquare(0.1 + 0.1 * x, 0.1 + 0.1 * y, 0.055);
@@ -267,9 +346,9 @@ public class Marbles
     }
 
     /**
-    *  Comments.
+    *  Determines if the cell at (x,y) can legally move to (xval,yval).
     */
-    public boolean possibleMoveSpace(int x, int y, int xval, int yval)
+    private boolean possibleMoveSpace(int x, int y, int xval, int yval)
     {
         if(x>=0 && y>=0 && board[x][y] == 1)
         {
@@ -294,9 +373,10 @@ public class Marbles
     }
 
     /**
-    *  Comments.
+    *  Determines if the game is finished. This can happen when there is no possible moves, which results
+    *  in a loss or when there is only one marble in the middle of the board, which is a win.
     */
-    public boolean gameIsFinished()
+    private boolean gameIsFinished()
     {
         for(int x = 0; x < board.length; x++)
         {
@@ -324,9 +404,9 @@ public class Marbles
     }
 
     /**
-    *  Comments.
+    *  Counts the total number of marbles.
     */
-    public int countMarbles ( )
+    private int countMarbles ( )
     {
         int count = 0;
         for (int i = 0;i<board.length;i++)
@@ -336,5 +416,120 @@ public class Marbles
         return count;
     }
 
+    /**
+    *   Attempts to show user how to solve the game.
+    */
+    private void attemptCompute ( )
+    {
+        drawBoard(true);
+        StdDraw.show(pause);
+        boolean possible = findSolution(1);
+       
+    }
+
+    /**
+    *   A failed attempt at recursively backtracking through the possibilities of where the marbles should go.
+    */
+    private boolean findSolution(int n) 
+    {
+        for (int i = 0; n <= 32 && i < board.length; i++) 
+        {
+            for (int j = 0; j < board[i].length; j++) 
+            {
+                for (int direction : directions) 
+                {
+                    if (jump(i, j, direction)) 
+                    {
+                        if (! (n >= 32 && gameIsFinished())) 
+                        {
+                            drawBoard(false);
+                            StdDraw.show(50);
+                            if (findSolution(n+1)) 
+                            {
+                                return true;
+                            } 
+                            else 
+                            {
+                                goBack(i, j, direction);
+                                drawBoard(false);
+                            }
+                        } 
+                        else 
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }                       
+        }
+
+        return false;
+    }
+
+    /**
+    *   Checks if the x and y position of a cell can move in the input direction.
+    */
+    private boolean jump(int x, int y, int direction) 
+    {
+        int checkX = checkPosX(x, direction);
+        int checkY = checkPosY(y, direction);
+
+        if (possibleMoveSpace(x, y, checkX, checkY)&&!gameIsFinished()) 
+        {
+            board[checkX][checkY] = 1;
+            board[x][y] = 0;
+            board[(checkX+x)/2][(checkY+y)/2] = 0;
+            StdDraw.show(4 * pause);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    *   Moves the marble back into previous position (doesn't work completely, since it ghosts marbles
+    *   out of nowhere when moving back).
+    */
+    private void goBack(int x, int y, int direction) 
+    {
+        int checkX = checkPosX(x, direction);
+        int checkY = checkPosY(y, direction);
+        
+        board[checkX][checkY] = 1;
+        board[x][y] = 0;
+        board[(checkX+x)/2][(checkY+y)/2] = 0;
+        StdDraw.show(4 * pause);
+        drawBoard(false);
+    }
+    /**
+    *   Checks if the x position of a cell can move in the input direction.
+    */
+     private int checkPosX(int x, int direction) 
+     {
+        int checkX = x;
+        switch (direction) 
+        {
+            case 0: checkX += 2;
+                    break;
+            case 2: checkX -= 2;
+        }
+        return checkX;
+    }  
+
+    /**
+    *   Checks if the y position of a cell can move in the input direction.
+    */
+    private int checkPosY(int y, int direction) 
+    {
+        int checkY = y;
+        
+        switch (direction) 
+        {
+            case 1: checkY -= 2;
+                    break;
+            case 3: checkY += 2;
+        }
+        
+        return checkY;
+    }    
 }
 
