@@ -61,7 +61,6 @@ public class X
         drawBackground(true);
         do
         {
-
             drawBoard(toggleChangeBackground);
             if(StdDraw.mousePressed())
             {
@@ -72,6 +71,12 @@ public class X
                 if(reset(x,y))
                 {
                     xposition = yposition = -5;
+                }
+                if(resetSolutionButton(x,y))
+                {
+                    done = true;
+                    xposition = yposition = -5;
+                    attemptCompute();
                 }
                 else if(possibleMoveSpace(xposition,yposition,checkx,checky) && !gameIsFinished())
                 {
@@ -123,6 +128,7 @@ public class X
                     drawCell(i,j);
 
         drawResetButtons();
+        drawSolutionMessage();
         drawWinOrLoseMessage();
     }
 
@@ -182,10 +188,22 @@ public class X
     {
         StdDraw.setPenColor(new Color(0,0,0));
         StdDraw.filledRectangle(0.8, 0.25, 0.125, 0.05);
-        StdDraw.filledRectangle(0.8, 0.13, 0.125, 0.05);
+        StdDraw.filledRectangle(0.8, 0.25-0.125, 0.125, 0.05);
         StdDraw.setPenColor(new Color(255,255,255));
         StdDraw.text(0.8, 0.25, "RESET 7 x 7");
-        StdDraw.text(0.8, 0.13, "RESET 9 x 9");
+        StdDraw.text(0.8, 0.25-0.125, "RESET 9 x 9");
+    }
+
+    public void drawSolutionMessage()
+    {
+        StdDraw.setPenColor(new Color(0,0,0));
+        StdDraw.filledRectangle(0.2, 0.25, 0.145, 0.05);
+        StdDraw.setPenColor(new Color(255,255,255));
+        StdDraw.text(0.2, 0.25, "SOLUTION 7 x 7");
+        StdDraw.setPenColor(new Color(0,0,0));
+        StdDraw.filledRectangle(0.2, 0.25-0.125, 0.145, 0.05);
+        StdDraw.setPenColor(new Color(255,255,255));
+        StdDraw.text(0.2, 0.25-0.125, "SOLUTION 9 x 9");
     }
 
     /**
@@ -209,11 +227,6 @@ public class X
         }
     }
 
-    public void drawSolutionMessage()
-    {
-        return;
-    }
-
     /**
     *  Comments.
     */
@@ -221,20 +234,51 @@ public class X
     {
         if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.05 && y <= 0.25+0.05)
         {
-            drawBackground(true);
             drawBoard(true);
+            drawBackground(true);
             board = new int[][]{{-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {-1,1,1,1,1,1,1,1,-1},{-1,1,1,1,0,1,1,1,-1},{-1,1,1,1,1,1,1,1,-1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+            drawBoard(true);
+
             return true;
         }
         else if(x >= 0.8-0.125 && x <= 0.8+0.125 && y >= 0.25-0.125-0.05 && y <= 0.25-0.125+0.05)
         {
-            drawBackground(true);
             drawBoard(true);
+            drawBackground(true);
             board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
                 {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
                 {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
+            drawBoard(true);
+
+            return true;
+        }
+        
+        return false;
+    }
+    public boolean resetSolutionButton(double x, double y)
+    {
+        if(x >= 0.2-0.145 && x <= 0.2+0.145 && y >= 0.25-0.05 && y <= 0.25+0.05)
+        {
+            drawBoard(true);
+            drawBackground(true);
+            board = new int[][]{{-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
+                {-1,1,1,1,1,1,1,1,-1},{-1,1,1,1,0,1,1,1,-1},{-1,1,1,1,1,1,1,1,-1},
+                {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+            drawBoard(true);
+
+            return true;
+        }
+        else if(x >= 0.2-0.145 && x <= 0.2+0.145 && y >= 0.25-0.125-0.05 && y <= 0.25-0.125+0.05)
+        {
+            drawBoard(true);
+            drawBackground(true);
+            board = new int[][]{{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},
+                {1,1,1,1,1,1,1,1,1},{1,1,1,1,0,1,1,1,1},{1,1,1,1,1,1,1,1,1},
+                {-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1},{-1,-1,-1,1,1,1,-1,-1,-1}};
+            drawBoard(true);
+
             return true;
         }
         
@@ -342,6 +386,23 @@ public class X
                 count++;
         return count;
     }
+
+    public void attemptCompute ( )
+    {
+        drawBoard();
+        StdDraw.show(pause);
+        boolean foundplace = false;
+        do
+        {
+            foundplace = moveToNext();
+            drawBoard();
+            StdDraw.show(pause);
+        }
+        while(foundplace);
+    }
+
+
+    
 
 
 
