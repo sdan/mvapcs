@@ -11,7 +11,7 @@
 import java.awt.Color;
 import java.awt.Font;
 
-public class X
+public class A
 {
     /**    The board object.  1 represents a marble on the board, 0 is an empty space,
     *     and -1 would indicate that this cell is not part of the board.                  */
@@ -30,7 +30,7 @@ public class X
     *  pause off the board, pause at 50 milliseconds, and the board values initialized
     *  in a 9 x 9 grid.
     */
-    public X ( )
+    public A ( )
     {
         Font font = new Font("Arial", Font.BOLD, 18);
         StdDraw.setFont(font);
@@ -47,7 +47,7 @@ public class X
     */
     public static void main(String [] args)   
     {
-        X run = new X();
+        A run = new X();
         run.playGame();
     }
 
