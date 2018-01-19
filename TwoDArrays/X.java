@@ -401,17 +401,19 @@ public class X
         while(foundplace);
     }
 
-    public boolean findSolution(int move) {
-        for (int x = 0; move <= 31 && x < board.getWidth(); x++) {
-            for (int y = 0; y < board.getHeight(); y++) {
+    //right, top, left, bottom
+    //[0,1,2,3]
+    public boolean findSolution(int n) {
+        for (int i = 0; n <= 31 && i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 for (int direction : directions) {
-                    if (board.jump(x, y, direction)) {
-                        board.copyBoard(board, solution[move]);
-                        if (! (move >= 31 && board.isOccupied(3, 3))) {
-                            if ( findSolution(move + 1)) {
+                    if (board.jump(i, j, direction)) {
+                        board.copyBoard(board, solution[n]);
+                        if (! (n >= 31 && board.isOccupied(3, 3))) {
+                            if ( findSolution(n + 1)) {
                                 return true;
                             } else {
-                                        board.jumpBack(x, y, direction);
+                                        board.jumpBack(i, j, direction);
                                     }
                                 } else {
                             return true;
@@ -423,6 +425,47 @@ public class X
                     
                     return false;
             }
+
+    public boolean jump(int x, int y, int moveSpace) {
+                    int newX = getNewX(x, moveSpace);
+                    int newY = getNewY(y, moveSpace);
+    
+                    if ( possibleMoveSpace(x, y, newX, newY)) {
+                            setPeg(newX, newY);
+                            clearField(x, y);
+                            clearField((x + newX) / 2, (y + newY) / 2);
+                            
+                            return true;
+                    }
+                    
+                    return false;
+            }
+
+            public void setPeg(int x, int y) {
+                    board[x][y] = 1;
+            }
+
+     private int getNewX(int x, int direction) {
+                    int newX = x;
+                    switch (direction) {
+                    case 0: newX += 2;
+                                break;
+                    case 2: newX -= 2;
+                    }
+                    return newX;
+            }   
+
+    private int getNewY(int y, int direction) {
+                    int newY = y;
+                    
+                    switch (direction) {
+                    case 1: newY -= 2;
+                                    break;
+                    case 3: newY += 2;
+                    }
+                    
+                    return newY;
+            }    
 
 
 
