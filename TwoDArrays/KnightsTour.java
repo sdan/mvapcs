@@ -6,7 +6,7 @@ public class KnightsTour
 	KnightCell [][] board;
 	int x, y, pause, animPause;
 	boolean foundplace, warnsdorff;
-
+	
 	public KnightsTour(int p, int ap, boolean b)
 	{
 		Font font = new Font("Arial", Font.BOLD, 18);
@@ -25,10 +25,10 @@ public class KnightsTour
 		}
 		setAllDecisionVals();
 		board[x][y].turnOn();
-		foundplace = true;
+		foundplace = true;	
 	}
 
-	public static void main(String [] args)
+	public static void main(String [] args)   
 	{
 		int pause = 100;
 		int animPause = 50;
@@ -48,7 +48,7 @@ public class KnightsTour
 		KnightsTour run = new KnightsTour(pause,animPause,onOrOff);
 		run.attemptTour();
 	}
-
+	
 	public void attemptTour ( )
 	{
 		drawBoard();
@@ -62,7 +62,7 @@ public class KnightsTour
 		}
 		while(foundplace);
 	}
-
+	
 	public void drawBoard ( )
 	{
 		StdDraw.setPenColor(new Color(139,69,19));
@@ -87,17 +87,17 @@ public class KnightsTour
 			}
 		}
 	}
-
-	public boolean moveToNext ( )
+	
+	public boolean moveToNext ( )   
 	{
 		int choice = (int)(Math.random() * 8);
 		int countTry = 0;
 		int [][] move = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
 		int smalldecision = findSmallestDecisionVal(move);
-		do
+		do   
 		{
 			foundplace = false;
-			if(onBoard(move[choice]))
+			if(onBoard(move[choice])) 
 			{
 				makeMoveChoice(move[choice],smalldecision);
 			}
@@ -107,23 +107,23 @@ public class KnightsTour
 				choice = (choice + 1) % 8;
 			}
 		} while(countTry < 8 && !foundplace);
-		if(foundplace)
+		if(foundplace)   
 		{
 			animateMove(choice,move[choice]);
 			return true;
 		}
 		return false;
-	}
+	}	
 
-	public int findSmallestDecisionVal (int [][] move)
+	public int findSmallestDecisionVal (int [][] move)   
 	{
 		int smalldecision = 10;
 		for(int i = 0; i < move.length; i++)
 		{
-			if(onBoard(move[i]))
+			if(onBoard(move[i]))   
 			{
 				board[x + move[i][0]][y + move[i][1]].decrementDecisionVal();
-				if ( board[x + move[i][0]][y + move[i][1]].getDecisionVal() < smalldecision )
+				if ( board[x + move[i][0]][y + move[i][1]].getDecisionVal() < smalldecision ) 
 				{
 					smalldecision = board[x + move[i][0]][y + move[i][1]].getDecisionVal();
 				}
@@ -131,13 +131,13 @@ public class KnightsTour
 		}
 		return smalldecision;
 	}
-
+	
 	public boolean onBoard(int [] moveTo)
 	{
-		return (x + moveTo[0] >= 0 && x + moveTo[0]<= 7 &&
+		return (x + moveTo[0] >= 0 && x + moveTo[0]<= 7 && 
 					y + moveTo[1] >= 0 && y + moveTo[1] <= 7);
 	}
-
+	
 	public void makeMoveChoice(int [] moveTo,int smalldecision)
 	{
 		if(!board[x + moveTo[0]][y + moveTo[1]].visited())
@@ -152,13 +152,13 @@ public class KnightsTour
 			}
 		}
 	}
-
+	
 	public void animateMove(int choice, int [] moveTo)
 	{
 		board[x][y].turnOff();
 		for(int i = 0; i < 10; i++)
 		{
-			StdDraw.picture(0.154 + 0.1 * (x + moveTo[0] * i / 10.0),
+			StdDraw.picture(0.154 + 0.1 * (x + moveTo[0] * i / 10.0), 
 							0.151 + 0.1 * (y + moveTo[1] * i / 10.0),"knightred.png");
 			StdDraw.show(animPause);
 			drawBoard();
@@ -169,7 +169,7 @@ public class KnightsTour
 	}
 }
 
-class KnightCell
+class KnightCell         
 {
 	private int visitnumber;
 	private boolean visited;
@@ -188,7 +188,7 @@ class KnightCell
 		decisionval = 0;
 	}
 
-	public void drawCell ( )
+	public void drawCell ( )   
 	{
 		StdDraw.setPenColor(new Color(255,255,255));
 		if((x + y) % 2 == 0)
@@ -215,23 +215,23 @@ class KnightCell
 			StdDraw.text(0.149 + 0.1 * x, 0.142 + 0.1 * y,"" + visitnumber);
 		}
 	}
-
+	
 	public void setDecisionVal(int value)
 	{
 		decisionval = value;
 	}
-
+	
 	public int getDecisionVal ( )
 	{
 		return decisionval;
 	}
-
+	
 	public void decrementDecisionVal ( )
 	{
 		decisionval--;
 	}
 
-	public void turnOn ( )
+	public void turnOn ( )   
 	{
 		oncell = true;
 		keepcount++;
@@ -239,15 +239,14 @@ class KnightCell
 		decisionval = 10;
 	}
 
-	public void turnOff ( )
+	public void turnOff ( )   
 	{
 		oncell = false;
 		visited = true;
 	}
 
-	public boolean visited ( )
+	public boolean visited ( )   
 	{
 		return visited;
 	}
 }
-Back to APCS Main Page
