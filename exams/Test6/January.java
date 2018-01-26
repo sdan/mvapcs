@@ -1,12 +1,23 @@
 public class January   {
-public int[][] mat;// mat is square
+public int[][] mat = new int[5][5];// mat is square
+public String[] students = {"Amy","Jung","Joe","Neha","Nancy"};
 	public static void main ( String [] args )   {
 		January ace = new January ( );
-		ace.setup();
-		ace.mark(3,1);
-		ace.print();
+		ace.runny();
 	}
-public void setup
+
+	public void runny()
+	{
+		printNames(students,students.length-1);
+	}
+public void setup()
+{
+	for (int i = 0;i<5;i++) {
+		for (int j = 0;j<5;j++) {
+			mat[i][j] = 0;
+		}
+	}
+}
 	/** Precondition: x >= 0
 	*/
 	public void run()
@@ -49,6 +60,28 @@ public void print()
 		System.out.println("");
 	}
 }
+
+
+
+
+
+public void printNames(String []elements, int k)
+{
+	if(k>1)
+	{
+		printNames(elements, k-1);
+		System.out.print(elements[k]+" ");
+		printNames(elements, k-2);
+	}
+}
+
+
+
+
+
+
+
+
 
 
 

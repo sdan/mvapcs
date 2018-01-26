@@ -9,8 +9,8 @@ public class TestSample
 	}
 	public void beta()
 	{
-	     ArrayList<Integer> samples = new ArrayList<Integer>();
+	    ArrayList<Integer> samples = new ArrayList<Integer>();
 	    samples.add(0);
-	    samples.get(1);
+	    System.out.println(samples.get(1).intValue());
 	}
 }
