@@ -142,9 +142,10 @@ public class PictureTester
    public static void testFlip()
    {
         Picture jedi = new Picture("jedi.jpg");
+        Picture temp = new Picture(jedi.height(),jedi.width());
         jedi.explore();
-        jedi.flip();
-        jedi.explore();
+        temp.flip(jedi);
+        temp.explore();
    }
     
    public static void testPixelated()

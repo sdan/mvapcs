@@ -84,6 +84,16 @@ public class Picture extends SimplePicture
     return output;
      
   }
+
+  public int height()
+  {
+    return getHeight();
+  }
+
+  public  int width()
+  {
+    return getWidth();
+  }
    
   /** Method to set the blue to 0 */
   public void zeroBlue()
@@ -324,15 +334,13 @@ public class Picture extends SimplePicture
     }   
   }
    
-  public void flip()
+  public void flip(Picture tempPicture)
   {
-    Pixel[][] boom = this.getPixels2D();
-    Pixel[][] pixels;
-    for (int i = 0;i<pixels.length;i++) {
-      for (int j = 0;j<pixels[0].length;j++) {
-        pixels[i][j].setColor(boom[boom.length-1-i][boom[0].length-1-j].getColor());
-      }
-    }
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] tempArray = tempPicture.getPixels2D();
+    for (int i = 0;i<pixels.length;i++)
+      for (int j = 0;j<pixels[0].length;j++)
+        pixels[i][j].setColor(tempArray[tempArray.length-1-i][tempArray[0].length-1-j].getColor());
   }
    
    
