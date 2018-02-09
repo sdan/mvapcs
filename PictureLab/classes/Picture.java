@@ -262,37 +262,27 @@ public class Picture extends SimplePicture
   public void flipVertical()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    for (int row = 0; row < pixels.length/2; row++)
-    {
-        for (int col = 0; col < pixels[0].length; col++)
-        {
-            leftPixel = pixels[row][col];
-            rightPixel = pixels[pixels.length-1-row][col];
-            Color tempColor = rightPixel.getColor();
-            rightPixel.setColor(leftPixel.getColor());
-            leftPixel.setColor(tempColor);
-        }
-    }   
+    for (int i = 0;i<pixels.length/2;i++) {
+      for (int j = 0;j<pixels[0].length;j++) {
+        Color temp = pixels[i][j].getColor();
+        pixels[i][j].setColor(pixels[pixels.length-1-i][j].getColor());
+        pixels[pixels.length-1-i][j].setColor(temp);
+      }
+    }
   }
    
   public void flipHorizontal()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    for (int row = 0; row < pixels.length; row++)
+    for(int i = 0;i<pixels.length;i++)
     {
-        for (int col = 0; col < pixels[0].length/2; col++)
-        {
-            rightPixel = pixels[row][col];
-            leftPixel = pixels[row][pixels[0].length -1 - col];
-            Color tempColor = rightPixel.getColor();
-            rightPixel.setColor(leftPixel.getColor());
-            leftPixel.setColor(tempColor);
-        }
-    }   
+      for(int j = 0;j<pixels[0].length/2;j++)
+      {
+        Color temp = pixels[i][j].getColor();
+        pixels[i][j].setColor(pixels[i][pixels[0].length-1-j].getColor());
+        pixels[i][pixels[0].length-1-j].setColor(temp);
+      }
+    } 
   }
    
   public void pixelated()

@@ -162,13 +162,13 @@ public class PictureTester
         //testMirrorVerticalRightToLeft();
         //testMirrorHorizontal();
         //testMirrorHorizontalBotToTop();
-        testMirrorDiagonal();
+        //testMirrorDiagonal();
    }
     
    public static void pictureLab5()
    {
        //testFlipVertical();
-       //testFlipHorizontal();
+       testFlipHorizontal();
        //testExtremeContrast();
    }
    
@@ -180,8 +180,8 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
     //pictureLab3();
-    pictureLab4();
-    //pictureLab5();
+    //pictureLab4();
+    pictureLab5();
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
