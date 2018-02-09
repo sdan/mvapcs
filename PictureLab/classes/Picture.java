@@ -211,67 +211,52 @@ public class Picture extends SimplePicture
   public void mirrorVerticalRightToLeft()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    int width = pixels[0].length;
-    for (int row = 0; row < pixels.length; row++)
+  
+    for(int i = 0;i<pixels.length;i++)
     {
-      for (int col = 0; col < width / 2; col++)
+      for(int j = 0;j<pixels[0].length/2;j++)
       {
-        rightPixel = pixels[row][col];
-        leftPixel = pixels[row][width - 1 - col];
-        rightPixel.setColor(leftPixel.getColor());
+        pixels[i][j].setColor(pixels[i][pixels[0].length-1-j].getColor());
       }
-    }  
+    } 
   }
    
   public void mirrorHorizontal()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    for (int row = 0; row < pixels.length/2; row++)
+    for(int i = 0;i<pixels.length/2;i++)
     {
-      for (int col = 0; col < pixels[0].length; col++)
+      for(int j = 0;j<pixels[0].length;j++)
       {
-        leftPixel = pixels[row][col];
-        rightPixel = pixels[pixels.length-1-row][col];
-        rightPixel.setColor(leftPixel.getColor());
+        pixels[pixels.length-1-i][j].setColor(pixels[i][j].getColor());
       }
-    }   
+    }
+      
+
   }
    
   public void mirrorHorizontalBotToTop()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    for (int row = 0; row < pixels.length/2; row++)
+    for(int i = 0;i<pixels.length/2;i++)
     {
-      for (int col = 0; col < pixels[0].length; col++)
+      for(int j = 0;j<pixels[0].length;j++)
       {
-        rightPixel = pixels[row][col];
-        leftPixel = pixels[pixels.length-1-row][col];
-        rightPixel.setColor(leftPixel.getColor());
+        pixels[i][j].setColor(pixels[pixels.length-1-i][j].getColor());
       }
-    }     
+    }
   }
    
   public void mirrorDiagonal()
   {
     Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    int height = pixels.length;
-    for (int row = 0; row < height; row++)
+    for(int i = 0;i<pixels.length;i++)
     {
-      for (int col = 0; col < row; col++)
+      for(int j = 0;j<i;j++)
       {
-        rightPixel = pixels[col][row];
-        leftPixel = pixels[row][col];
-        rightPixel.setColor(leftPixel.getColor());
+        pixels[j][i].setColor(pixels[i][j].getColor());
       }
-    }      
+    }
   }
    
   public void flipVertical()
@@ -445,4 +430,4 @@ public class Picture extends SimplePicture
     beach.explore();
   }
    
-} // this } is the end of class Picture, put all new methods before this
+} // this } is the end of class Picture, put all new methods before this=

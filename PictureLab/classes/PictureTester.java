@@ -54,6 +54,7 @@ public class PictureTester
    
   public static void testKeepOnlyBlue()
   {
+          Picture jedi = new Picture("jedi.jpg");
       jedi.explore();
         jedi.keepOnlyBlue();
         jedi.explore();
@@ -158,9 +159,9 @@ public class PictureTester
     
    public static void pictureLab4()
    {
-        testMirrorVerticalRightToLeft();
-        testMirrorHorizontal();
-        testMirrorHorizontalBotToTop();
+        //testMirrorVerticalRightToLeft();
+        //testMirrorHorizontal();
+        //testMirrorHorizontalBotToTop();
         testMirrorDiagonal();
    }
     
@@ -179,8 +180,8 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
     //pictureLab3();
-    //pictureLab4();
-    pictureLab5();
+    pictureLab4();
+    //pictureLab5();
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
@@ -188,6 +189,7 @@ public class PictureTester
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
+    //testMirrorVertical();
     //testMirrorVerticalRightToLeft();
     //testMirrorHorizontal();
     //testMirrorHorizontalBotToTop();
