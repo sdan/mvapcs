@@ -139,6 +139,13 @@ public class PictureTester
         jedi.extremeContrast();
         jedi.explore();
    }
+   public static void testFlip()
+   {
+        Picture jedi = new Picture("jedi.jpg");
+        jedi.explore();
+        jedi.flip();
+        jedi.explore();
+   }
     
    public static void testPixelated()
    {
@@ -168,8 +175,9 @@ public class PictureTester
    public static void pictureLab5()
    {
        //testFlipVertical();
-       testFlipHorizontal();
+       //testFlipHorizontal();
        //testExtremeContrast();
+       testFlip();
    }
    
   /** Main method for testing.  Every class can have a main

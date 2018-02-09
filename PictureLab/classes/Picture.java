@@ -324,7 +324,16 @@ public class Picture extends SimplePicture
     }   
   }
    
-   
+  public void flip()
+  {
+    Pixel[][] boom = this.getPixels2D();
+    Pixel[][] pixels;
+    for (int i = 0;i<pixels.length;i++) {
+      for (int j = 0;j<pixels[0].length;j++) {
+        pixels[i][j].setColor(boom[boom.length-1-i][boom[0].length-1-j].getColor());
+      }
+    }
+  }
    
    
    
