@@ -1,63 +1,132 @@
-public class SudokuSolver
+import java.util.Scanner;
+
+public class SudokuSolver 
 {
+	private int[][] board;
+	private int[][] originalBoard;
 	public static final int WIDTH = 9;
 	public static final int HEIGHT = 9;
-	private int [][] board;
-
-	public SudokuSolver () 
+	private String fileName;
+	
+	public SudokuSolver(String fileName)
 	{
+		this.fileName = fileName;
 		board = new int[HEIGHT][WIDTH];
-	}
-
-	public static void main(String[] args)
-	{
-		SudokuSolver sg = new SudokuSolver();
-		sg.run();
+		originalBoard = new int[HEIGHT][WIDTH];
 	}
 	
+	public static void main(String[] args)
+	{
+		SudokuSolver ss = new SudokuSolver("a1.txt");
+		if(args.length > 0)
+			ss = new SudokuSolver(args[0]);
+		ss.run();
+	}
+
 	public void run ( )
 	{
 		createBoard();
+		nextBoard();
 		SudokuUtilities.print(board);
 	}
 	
-	public void createBoard ( )
+	/* Reads a file into a 2D array
+	*/
+	public void createBoard( )
 	{
-		nextCell(0,0);
-	}
-	
-	public boolean nextCell(int r, int c)
-	{
-		int nextRow = r;
-		int nextCol = c;
-		int [] toCheck = {1,2,3,4,5,6,7,8,9};
-		
-		SudokuUtilities.shuffleArray(toCheck);
-		
-		for(int i = 0;i<toCheck.length;i++)
+		Scanner reader = OpenFile.openToRead(fileName);
+
+		for(int i = 0; i < board.length; i++)
 		{
-			if(SudokuUtilities.legalMove(board,r,c,toCheck[i]))
+			for(int c = 0; c < board[i].length; c++)
 			{
-				board[r][c] = toCheck[i];
-				SudokuUtilities.printInfo(board, r, c, toCheck, i);
-				if(c == WIDTH-1)
-				{
-					if(r == HEIGHT -1)
-					return true;
-					else
-					{
-						nextCol = 0;
-						nextRow = r+1;
-					}
-				}
-				else
-					nextCol = c+1;
-				if(nextCell(nextRow,nextCol))
-					return true;
+				int num = reader.nextInt();
+				board[i][c] = num;
+				originalBoard[i][c] = num;
 			}
 		}
-		board[r][c] = 0;
-		SudokuUtilities.printInfo(board, r, c, toCheck, -1);
+	}
+	
+	public void nextBoard( )
+	{
+		nextCell(0, 0);
+	}
+	
+	/*
+	* Checks if zero exists. 
+	* If zero exists, systematically checks numbers to see if 
+	* a number can be placed at that position until it finds
+	* a valid number. 
+	*/
+	public boolean nextCell(int row, int col)
+	{
+		int nextRow = row;
+		int nextCol = col;
+		int [] toCheck = {1,2,3,4,5,6,7,8,9};
+		SudokuUtilities.shuffleArray(toCheck);
+		
+		if(originalBoard[row][col] == 0)
+		{
+			for(int i = 0; i < toCheck.length; i++)
+			{
+				if(SudokuUtilities.legalMove(board, row, col, toCheck[i]))
+				{
+					board[row][col] = toCheck[i];
+					SudokuUtilities.printInfo(board, row, col, toCheck, i);
+					if(col == WIDTH-1)
+					{
+						if(row == HEIGHT-1)
+						{
+							return true;
+						}
+						else
+						{
+							nextCol = 0;
+							nextRow = row + 1;
+						}
+					}
+					else
+					{
+						nextCol = col + 1;
+					}
+				
+					if(nextCell(nextRow, nextCol))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		else
+		{
+			if(col == 8)
+			{
+				if(row == 8)
+				{
+					return true;
+				}
+				else
+				{
+					nextCol = 0;
+					nextRow = row + 1;
+				}
+			}
+			else
+			{
+				nextCol = col + 1;
+			}
+			if(nextCell(nextRow, nextCol))
+			{
+				return true;
+			}
+			else
+			{
+				SudokuUtilities.printInfo(board, row, col, toCheck, -1);
+				return false;
+			}
+		}
+		board[row][col] = 0;
+		SudokuUtilities.printInfo(board, row, col, toCheck, -1);
 		return false;
 	}
 }
