@@ -172,13 +172,17 @@ public class PictureTester
         //testMirrorHorizontalBotToTop();
         //testMirrorDiagonal();
    }
-    
+  
+   public static void quiz()
+   {
+      testFlip();
+   }
    public static void pictureLab5()
    {
        //testFlipVertical();
        //testFlipHorizontal();
        //testExtremeContrast();
-       testFlip();
+       //testPixelated();
    }
    
   /** Main method for testing.  Every class can have a main
@@ -190,6 +194,7 @@ public class PictureTester
     // to run
     //pictureLab3();
     //pictureLab4();
+    //quiz();
     pictureLab5();
     //testZeroBlue();
     //testKeepOnlyBlue();

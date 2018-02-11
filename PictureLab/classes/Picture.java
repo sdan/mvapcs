@@ -294,22 +294,7 @@ public class Picture extends SimplePicture
       }
     } 
   }
-   
-  public void pixelated()
-  {
-    Pixel[][] pixels = this.getPixels2D();
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-    for (int row = 0; row < pixels.length; row+=20)
-    {
-        for (int col = 0; col < pixels[0].length; col+=20)
-        {
-            double average = 0.0;
-            
-        }
-    }
-  }
-   
+  
    
   public void extremeContrast()
   {
@@ -343,8 +328,70 @@ public class Picture extends SimplePicture
         pixels[i][j].setColor(tempArray[tempArray.length-1-i][tempArray[0].length-1-j].getColor());
   }
    
-   
-   
+  
+  public void pixelated()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    //double average = 0.0;
+    double red = 0.0;
+    double green = 0.0;
+    double blue = 0.0;
+    int normal = 0;
+    for (int row = 0; row < pixels.length; row+=20)
+    {
+        for (int col = 0; col < pixels[0].length; col+=20)
+        {
+            //search within block
+            //average = 0.0;
+            blue = 0.0;
+            green = 0.0;
+            red = 0.0;
+            normal = 0;
+            for(int i = 0;i<20;i++)
+            {
+              for(int j = 0;j<20;j++)
+              {
+                 normal = row+i;
+                if((normal)>=getHeight())
+                  normal = getHeight()-1;
+                red+=pixels[normal][col+j].getRed();
+                blue+=pixels[normal][col+j].getBlue();
+                green+=pixels[normal][col+j].getGreen();
+              }
+            }
+            //System.out.println("AVERAGE: "+average);
+            //System.out.println("AV 400: "+average/400);
+            //average = average/400;
+            red = red/400;
+            green = green/400;
+            blue = blue/400;
+            normal = 0;
+            Color colur = new Color((int)red, (int)green, (int)blue);
+            for(int i = 0;i<20;i++)
+            {
+              for(int j = 0;j<20;j++)
+              {
+                normal = row+i;
+                if(normal>=getHeight())
+                  normal = getHeight()-1;
+                pixels[normal][col+j].setColor(colur);
+              }
+            }
+            
+        }
+    }
+  }
+
+  public void rotate()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] tempArray = tempPicture.getPixels2D();
+    for (int i = 0;i<pixels.length;i++)
+      for (int j = 0;j<pixels[0].length;j++)
+        pixels[i][j].setColor(tempArray[tempArray.length-1-i][tempArray[0].length-1-j].getColor());
+  }
    
    
    
