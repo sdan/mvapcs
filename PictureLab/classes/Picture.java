@@ -384,13 +384,48 @@ public class Picture extends SimplePicture
     }
   }
 
-  public void rotate()
+  public void rotate(double angle, Picture tempPicture)
   {
     Pixel[][] pixels = this.getPixels2D();
+    int xnew = 0;
+    int ynew = 0;
+    double centerx = (getWidth()-1)*0.5;
+    double centery = (getHeight()-1)*0.5;
+    angle = Math.toRadians(angle);
+    double cos = Math.cos(angle);
+    double sin = Math.sin(angle);
+
     Pixel[][] tempArray = tempPicture.getPixels2D();
-    for (int i = 0;i<pixels.length;i++)
-      for (int j = 0;j<pixels[0].length;j++)
-        pixels[i][j].setColor(tempArray[tempArray.length-1-i][tempArray[0].length-1-j].getColor());
+    System.out.println("TEMP ARR ROW: "+tempArray.length);
+    System.out.println("TEMP ARR COL: "+tempArray[0].length);
+    System.out.println("WID: "+getWidth());
+    System.out.println("HGI: "+getHeight());
+
+
+
+    for (int x = 0;x<pixels.length;x++)
+    {
+      for (int y = 0;y<pixels[0].length;y++)
+      {
+        xnew = (int)(Math.abs(x-centerx)*cos-(y-centery)*sin+centerx);
+                   
+        ynew = (int)(Math.abs(x-centerx)*sin+(y-centery)*cos+centery);
+
+        if (xnew >= 0 && xnew < getWidth() && ynew >= 0 && ynew < getHeight())
+        {
+          System.out.println("XNEW: "+xnew);
+          System.out.println("YNEW: "+ynew);
+          pixels[x][y].setColor(tempArray[xnew][ynew].getColor());
+        }
+        else
+        {
+          Color blk = new Color(0,0,0);
+          pixels[x][y].setColor(blk);
+        }
+
+      }
+    }
+      
   }
    
    

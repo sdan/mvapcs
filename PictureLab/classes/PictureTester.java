@@ -155,6 +155,15 @@ public class PictureTester
         jedi.pixelated();
         jedi.explore();
    }
+
+   public static void testRotate()
+   {
+        Picture jedi = new Picture("jedi.jpg");
+        Picture temp = new Picture(jedi.height(),jedi.width());
+        jedi.explore();
+        temp.rotate(90.0,jedi);
+        temp.explore();
+   }
     
     
    public static void pictureLab3()
@@ -183,6 +192,7 @@ public class PictureTester
        //testFlipHorizontal();
        //testExtremeContrast();
        //testPixelated();
+       testRotate();
    }
    
   /** Main method for testing.  Every class can have a main

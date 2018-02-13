@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class SudokuSolver 
 {
 	private int[][] board;
-	private int[][] originalBoard;
+	private int[][] nextBoard;
 	public static final int WIDTH = 9;
 	public static final int HEIGHT = 9;
 	private String fileName;
@@ -12,7 +12,7 @@ public class SudokuSolver
 	{
 		this.fileName = fileName;
 		board = new int[HEIGHT][WIDTH];
-		originalBoard = new int[HEIGHT][WIDTH];
+		nextBoard = new int[HEIGHT][WIDTH];
 	}
 	
 	public static void main(String[] args)
@@ -42,7 +42,7 @@ public class SudokuSolver
 			{
 				int num = reader.nextInt();
 				board[i][c] = num;
-				originalBoard[i][c] = num;
+				nextBoard[i][c] = num;
 			}
 		}
 	}
@@ -62,23 +62,20 @@ public class SudokuSolver
 	{
 		int nextRow = row;
 		int nextCol = col;
-		int [] toCheck = {1,2,3,4,5,6,7,8,9};
-		SudokuUtilities.shuffleArray(toCheck);
+		int [] numbers = {1,2,3,4,5,6,7,8,9};
+		SudokuUtilities.shuffleArray(numbers);
 		
-		if(originalBoard[row][col] == 0)
-		{
-			for(int i = 0; i < toCheck.length; i++)
+		if(nextBoard[row][col] == 0)
+			for(int i = 0; i < numbers.length; i++)
 			{
-				if(SudokuUtilities.legalMove(board, row, col, toCheck[i]))
+				if(SudokuUtilities.legalMove(board, row, col, numbers[i]))
 				{
-					board[row][col] = toCheck[i];
-					SudokuUtilities.printInfo(board, row, col, toCheck, i);
+					board[row][col] = numbers[i];
+					SudokuUtilities.printInfo(board, row, col, numbers, i);
 					if(col == WIDTH-1)
 					{
 						if(row == HEIGHT-1)
-						{
 							return true;
-						}
 						else
 						{
 							nextCol = 0;
@@ -86,25 +83,17 @@ public class SudokuSolver
 						}
 					}
 					else
-					{
-						nextCol = col + 1;
-					}
-				
+						nextCol = col + 1;				
 					if(nextCell(nextRow, nextCol))
-					{
 						return true;
-					}
 				}
 			}
-		}
 		else
 		{
 			if(col == 8)
 			{
 				if(row == 8)
-				{
 					return true;
-				}
 				else
 				{
 					nextCol = 0;
@@ -112,21 +101,17 @@ public class SudokuSolver
 				}
 			}
 			else
-			{
 				nextCol = col + 1;
-			}
 			if(nextCell(nextRow, nextCol))
-			{
 				return true;
-			}
 			else
 			{
-				SudokuUtilities.printInfo(board, row, col, toCheck, -1);
+				SudokuUtilities.printInfo(board, row, col, numbers, -1);
 				return false;
 			}
 		}
 		board[row][col] = 0;
-		SudokuUtilities.printInfo(board, row, col, toCheck, -1);
+		SudokuUtilities.printInfo(board, row, col, numbers, -1);
 		return false;
 	}
 }
