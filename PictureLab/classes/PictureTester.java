@@ -161,8 +161,26 @@ public class PictureTester
         Picture jedi = new Picture("jedi.jpg");
         Picture temp = new Picture(jedi.height(),jedi.width());
         jedi.explore();
-        temp.rotate(90.0,jedi);
+        temp.rotate(30.0,jedi);
         temp.explore();
+   }
+
+   public static void testGreenScreen()
+   {
+        Picture man = new Picture("weatherman.jpg");
+        Picture hill = new Picture("mountains.jpg");
+        man.explore();
+        man.greenScreen(hill);
+        man.explore();
+   }
+
+   public static void  testBlur()
+   {
+      Picture jedi = new Picture("jedi.jpg");
+      Picture temp = new Picture(jedi.height(),jedi.width());
+      jedi.explore();
+      jedi.blur(temp,2);
+      jedi.explore();
    }
     
     
@@ -184,7 +202,7 @@ public class PictureTester
   
    public static void quiz()
    {
-      testFlip();
+      //testFlip();
    }
    public static void pictureLab5()
    {
@@ -192,7 +210,14 @@ public class PictureTester
        //testFlipHorizontal();
        //testExtremeContrast();
        //testPixelated();
-       testRotate();
+       //testRotate();
+   }
+
+   public static void pictureLab6()
+   {
+      //testGreenScreen();
+      //testEdgeDetection();
+      testBlur();
    }
    
   /** Main method for testing.  Every class can have a main
@@ -205,7 +230,8 @@ public class PictureTester
     //pictureLab3();
     //pictureLab4();
     //quiz();
-    pictureLab5();
+    //pictureLab5();
+    pictureLab6();
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();

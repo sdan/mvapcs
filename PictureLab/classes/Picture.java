@@ -384,49 +384,96 @@ public class Picture extends SimplePicture
     }
   }
 
-  public void rotate(double angle, Picture tempPicture)
+  public void rotate(double degree, Picture tempPicture)
   {
     Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] tempArray = tempPicture.getPixels2D();
+    double angle = Math.toRadians(degree);
+    angle = -angle;
     int xnew = 0;
     int ynew = 0;
-    double centerx = (getWidth()-1)*0.5;
-    double centery = (getHeight()-1)*0.5;
-    angle = Math.toRadians(angle);
-    double cos = Math.cos(angle);
-    double sin = Math.sin(angle);
+    double yCenter = (getWidth()  - 1)/2.0 ;
+    double xCenter = (getHeight() - 1)/2.0;
 
-    Pixel[][] tempArray = tempPicture.getPixels2D();
-    System.out.println("TEMP ARR ROW: "+tempArray.length);
-    System.out.println("TEMP ARR COL: "+tempArray[0].length);
-    System.out.println("WID: "+getWidth());
-    System.out.println("HGI: "+getHeight());
-
-
-
-    for (int x = 0;x<pixels.length;x++)
-    {
-      for (int y = 0;y<pixels[0].length;y++)
+    for (int i = 0; i < getWidth(); i++) 
       {
-        xnew = (int)(Math.abs(x-centerx)*cos-(y-centery)*sin+centerx);
-                   
-        ynew = (int)(Math.abs(x-centerx)*sin+(y-centery)*cos+centery);
+        for (int j = 0; j < getHeight(); j++) 
+          {
+            xnew = (int) ((i - yCenter)*Math.cos(angle)-(j - xCenter)*Math.sin(angle)+yCenter);
+            ynew = (int) ((i - yCenter)*Math.sin(angle)+(j - xCenter)*Math.cos(angle)+xCenter);
 
-        if (xnew >= 0 && xnew < getWidth() && ynew >= 0 && ynew < getHeight())
-        {
-          System.out.println("XNEW: "+xnew);
-          System.out.println("YNEW: "+ynew);
-          pixels[x][y].setColor(tempArray[xnew][ynew].getColor());
+            if (xnew >= 0 && xnew < getWidth() && ynew >= 0 && ynew < getHeight())
+            pixels[j][i].setColor(tempArray[ynew][xnew].getColor());
+            else
+            {
+            Color colur = new Color(0,0,0);
+            pixels[j][i].setColor(colur);
+            }
         }
-        else
-        {
-          Color blk = new Color(0,0,0);
-          pixels[x][y].setColor(blk);
-        }
-
-      }
-    }
-      
+    }   
   }
+
+  public void greenScreen(Picture tempPicture)
+  {
+    //weatherman
+    Pixel[][] pixels = this.getPixels2D();
+    //mountain
+    Pixel[][] tempArray = tempPicture.getPixels2D();
+    for(int i = 0;i<pixels.length;i++)
+    {
+      for(int j = 0;j<pixels[0].length;j++)
+      {
+        if(pixels[i][j].getGreen()>(pixels[i][j].getBlue()+pixels[i][j].getRed()))
+        pixels[i][j].setColor(tempArray[i][j].getColor());
+      }
+    } 
+   }
+
+   public void blur(Picture tempPicture, int range)
+   {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] tempArray = tempPicture.getPixels2D();
+    int red = 0;
+    int blue = 0;
+    int green = 0;
+    for (int i=0; i<getWidth(); i++) 
+      {
+        for (int j=0; j<getHeight(); j++)
+          {
+            red = 0;
+            blue = 0;
+            green = 0;
+            //pixel = this.getPixel(x,y);
+            //redValue = greenValue = blueValue = 0;
+            // loop through pixel numPixels before x to numPixels after x
+            for (int x = i-(range/2); x<=i+(range/2); x++) 
+              {
+                for (int y = j-(range/2);y<=j+(range/2); y++)
+                  {
+                    // check that we are in the range of acceptable pixels
+                    if (x>=0&&x<getWidth()&&y>=0&&y<getHeight())
+                    {
+                      //samplePixel = copyPict.getPixel(xSample,ySample);
+                      red+=tempArray[x][y].getRed();
+                      blue+=tempArray[x][y].getBlue();
+                      green+=tempArray[x][y].getGreen();
+                    }
+                  }
+              }
+              System.out.println("RED: "+red);
+              System.out.println("BLUE: "+blue);
+              System.out.println("GREEN: "+green);
+            red = red/step;
+            blue = blue/step;
+            green = green/step;
+            System.out.println("RED: "+red);
+              System.out.println("BLUE: "+blue);
+              System.out.println("GREEN: "+green);
+            Color colur = new Color(red,green,blue);
+            pixels[i][j].setColor(colur);
+          }
+      }
+   }
    
    
    
@@ -488,18 +535,21 @@ public class Picture extends SimplePicture
   {
     Pixel leftPixel = null;
     Pixel rightPixel = null;
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
     Pixel[][] pixels = this.getPixels2D();
-    Color rightColor = null;
-    for (int row = 0; row < pixels.length; row++)
+    for (int row = 0; row < pixels.length-1; row++)
     {
-      for (int col = 0;  
+      for (int col = 0; 
            col < pixels[0].length-1; col++)
       {
         leftPixel = pixels[row][col];
         rightPixel = pixels[row][col+1];
-        rightColor = rightPixel.getColor();
-        if (leftPixel.colorDistance(rightColor) >  
-            edgeDist)
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[row + 1][col];
+        if (leftPixel.colorDistance(rightPixel.getColor()) > edgeDist)
+          leftPixel.setColor(Color.BLACK);
+        else if(topPixel.colorDistance(bottomPixel.getColor()) > edgeDist)  
           leftPixel.setColor(Color.BLACK);
         else
           leftPixel.setColor(Color.WHITE);
