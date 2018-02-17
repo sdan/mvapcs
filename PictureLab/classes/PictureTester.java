@@ -177,10 +177,19 @@ public class PictureTester
    public static void  testBlur()
    {
       Picture jedi = new Picture("jedi.jpg");
-      Picture temp = new Picture(jedi.height(),jedi.width());
+      Picture temp = new Picture("jedi.jpg");
       jedi.explore();
-      jedi.blur(temp,2);
+      jedi.blur(temp,20);
       jedi.explore();
+   }
+
+   public static void testEnhance()
+   {
+      Picture water = new Picture("water.jpg");
+      Picture temp = new Picture("water.jpg");
+      water.explore();
+      water.enhance(temp,20);
+      water.explore();
    }
     
     
@@ -194,30 +203,35 @@ public class PictureTester
     
    public static void pictureLab4()
    {
-        //testMirrorVerticalRightToLeft();
-        //testMirrorHorizontal();
-        //testMirrorHorizontalBotToTop();
-        //testMirrorDiagonal();
+        testMirrorVerticalRightToLeft();
+        testMirrorHorizontal();
+        testMirrorHorizontalBotToTop();
+        testMirrorDiagonal();
    }
   
    public static void quiz()
    {
-      //testFlip();
+      testFlip();
    }
    public static void pictureLab5()
    {
-       //testFlipVertical();
-       //testFlipHorizontal();
-       //testExtremeContrast();
-       //testPixelated();
-       //testRotate();
+       testFlipVertical();
+       testFlipHorizontal();
+       testExtremeContrast();
+       testPixelated();
+       testRotate();
    }
 
    public static void pictureLab6()
    {
-      //testGreenScreen();
-      //testEdgeDetection();
+      testGreenScreen();
+      testEdgeDetection();
       testBlur();
+   }
+
+   public static void pictureLab7()
+   {
+      testEnhance();
    }
    
   /** Main method for testing.  Every class can have a main
@@ -227,11 +241,12 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    //pictureLab3();
-    //pictureLab4();
+    pictureLab3();
+    pictureLab4();
     //quiz();
-    //pictureLab5();
+    pictureLab5();
     pictureLab6();
+    pictureLab7();
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
