@@ -18,6 +18,7 @@ public class SimpleCalc
 	public SimpleCalc() 
 	{
 		utils = new ExprUtils();
+		//ArrayStack generalized Stack
 		valueStack = new ArrayStack<Double>();
 		operatorStack = new ArrayStack<String>();
 	}
@@ -52,7 +53,6 @@ public class SimpleCalc
 				List<String> tokens = utils.tokenizeExpression(expr);
 				double value = evaluateExpression(tokens);
 				System.out.println(value);
-				//System.out.println(tokens);
 			}
 			
 		}
