@@ -109,7 +109,7 @@ public class SimpleCalc
 	public double evaluateExpression(List<String> tokens) 
 	{
 		double value = 0;
-		
+		while(tokens)
 		return value;
 	}
 	
