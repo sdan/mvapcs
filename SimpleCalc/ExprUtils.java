@@ -1,16 +1,21 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *	Arithmetic expression utilities
  *	o Methods to tokenize an arithmetic expression.
- *	o Methods to validate the List of expression tokens
  *
  *	@author	Mr Greenstein
  *	@since	February 8, 2018
+ *
+ *	Feb 14, 2018
+ *		o Fixed bug in tokenizeExpression that erroneously tokenized ") - 18" as [")", "-18"]
+ *		o Created isBinaryOperator() method that finds operators excluding parentheses
  */
 public class ExprUtils 
-{	
+{
+
 	/*************************************************************************/
 	/****************** Expression Tokenizer methods *************************/
 	/*************************************************************************/
@@ -38,6 +43,8 @@ public class ExprUtils
 		String lastToken = "";
 		
 		int ind = 0;	// index into String expression
+		
+		// while there are characters in the expression
 		while (ind < expression.length()) 
 		{
 			char c = expression.charAt(ind++);
@@ -46,31 +53,25 @@ public class ExprUtils
 			// if character is "-" or "+"
 			if (c == '-' || c == '+') 
 			{
-				// check if there is a "-" or "+" operator preceding this character.
-				// This means:
-				// 	Expression starts with unary operator like "-4".
-				//	Expression has assignment "=" then "+" or "-"
-				// 	Expression contains consecutive operators "3+-2".
-				if (lastToken.length() == 0 || lastToken.equals("=") ||
-							//lastToken.equals("+") || lastToken.equals("-")) {
-							isOperator(lastToken.charAt(0))) 
+				// check if this operator is a unary operator "+" or "-"
+				//	o the expression starts with this operator like "- 4 + 5"
+				//	o the last token was a binary operator like "8 * - 2"
+				//	o the last token was a left parenthesis like "( - 4 / 5 )"
+				if (lastToken.length() == 0 || isBinaryOperator(lastToken.charAt(0)) || lastToken.equals("(") ) 
 				{
-					// precede number or variable with unary operator
 					token += c;
-					// If what follows is a digit, then input number
-					if (Character.isDigit(expression.charAt(ind))) 
+					// If what follows is a digit or decimal, then add number to
+					// unary operator, e.g. "-" + "4.3" => "-4.3"
+					if (Character.isDigit(expression.charAt(ind)) || expression.charAt(ind) == '.') 
 					{
-						// Add number to unary operator, e.g. "-" + "4.3" => "-4.3"
 						while (ind < expression.length() && 
-							( Character.isDigit(expression.charAt(ind)) ||
-								expression.charAt(ind) == '.') )
+								( Character.isDigit(expression.charAt(ind)) || expression.charAt(ind) == '.') )
 							token += expression.charAt(ind++);
 					}
 					// else what follows is a variable, input variable
 					else 
 					{
-						while (ind < expression.length() && 
-								Character.isLetter(expression.charAt(ind)))
+						while (ind < expression.length() && Character.isLetter(expression.charAt(ind)))
 							token += expression.charAt(ind++);
 					}
 					result.add(token);
@@ -86,8 +87,7 @@ public class ExprUtils
 			{
 				token += c;
 				while (ind < expression.length() && 
-					( Character.isDigit(expression.charAt(ind)) ||
-						expression.charAt(ind) == '.') )
+						( Character.isDigit(expression.charAt(ind)) || expression.charAt(ind) == '.') )
 					token += expression.charAt(ind++);
 				result.add(token);
 			}
@@ -123,7 +123,8 @@ public class ExprUtils
 	{
 		String result = "";
 		for (int a = 0; a < expr.length(); a++)
-			if (validChar(expr.charAt(a))) result += expr.charAt(a);
+			if (validChar(expr.charAt(a))) 
+				result += expr.charAt(a);
 		return result;
 	}
 	
@@ -141,21 +142,30 @@ public class ExprUtils
 	}
 	
 	
-	/**	Determine if character is valid arithmetic operator
+	/**	Determine if character is valid arithmetic operator including parentheses
 	 *	@param c	the character to check
-	 *	@return		true if the character is '+', '-', '*', '/', '(', ')', or '='
+	 *	@return		true if the character is '+', '-', '*', '/', '^', '=','(', or ')'
 	 */
 	public boolean isOperator(char c) 
+	{
+		return isBinaryOperator(c) || c == '(' || c == ')';
+	}
+	
+	/**	Determine if character is valid binary arithmetic operator excluding parentheses
+	 *	@param c	the character to check
+	 *	@return		true if the character is '+', '-', '*', '/', '^', or '='
+	 */
+	private boolean isBinaryOperator(char c) 
 	{
 		switch (c) 
 		{
 			case '+': case '-': case '*': case '/': 
-			case '(': case ')': case '%':
-			case '=': case '^':
+			case '%': case '=': case '^':
 				return true;
 		}
 		return false;
 	}
+
 	
 	
 	/******************************************************************/
@@ -186,6 +196,10 @@ public class ExprUtils
 		System.out.println("expr = \"" + expr + "\"   tokens = " + tokens + "\n");
 		
 		expr = "- 54 + - .12";
+		tokens = tokenizeExpression(expr);
+		System.out.println("expr = \"" + expr + "\"   tokens = " + tokens + "\n");
+		
+		expr = "4 * (3 + 2) - 18 / (6 * 3)";
 		tokens = tokenizeExpression(expr);
 		System.out.println("expr = \"" + expr + "\"   tokens = " + tokens + "\n");
 	}

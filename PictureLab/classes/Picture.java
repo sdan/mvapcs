@@ -501,12 +501,12 @@ public class Picture extends SimplePicture
                 red = 0.0;
                 normalR = 0;
                 normalC = 0;
-                for(int i = row-(range/2);i<row+(range/2);i++)
+                for(int i = 0;i<range;i++)
                 {
-                    for(int j = col-(range/2);j<col+(range/2);j++)
+                    for(int j = 0;j<range;j++)
                     {
-                        normalR = i;
-                        normalC = j;
+                        normalR = i+row;
+                        normalC = j+col;
                         if((normalR)>=getHeight())
                             normalR = getHeight()-1;
                         if((normalC)>=getWidth())

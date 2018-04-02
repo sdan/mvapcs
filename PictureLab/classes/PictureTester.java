@@ -224,8 +224,8 @@ public class PictureTester
 
    public static void pictureLab6()
    {
-      testGreenScreen();
-      testEdgeDetection();
+      //testGreenScreen();
+      //testEdgeDetection();
       testBlur();
    }
 
@@ -241,13 +241,13 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    pictureLab3();
-    pictureLab4();
+    //pictureLab3();
+    //pictureLab4();
     //quiz();
-    pictureLab5();
-    pictureLab6();
-    pictureLab7();
-    //testZeroBlue();
+    //pictureLab5();
+     pictureLab6();
+    // pictureLab7();
+    // //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();

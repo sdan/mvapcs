@@ -1,10 +1,12 @@
 import java.util.List;		// used by expression evaluator
 
 /**
- *	A simple calculator.
+ *	A simple calculator. Based on a stacks, the algorithm in this program evaluates infix expressions
+ *  in two different stacks containing values and operators, one stack for each type. Help on how
+ *  the calculator works is also provided at any time as well as the option to quit.
  *
  *	@Surya Dantuluri	
- *	@2/12/2018
+ *	@3/5/2018
  */
 public class SimpleCalc 
 {
@@ -47,8 +49,19 @@ public class SimpleCalc
 		{
 			String expr = Prompt.getString("-> ");
 			if(expr.equalsIgnoreCase("q"))
-			return;
-			else
+			{
+				done = true;
+			}
+			else if(expr.equalsIgnoreCase("h"))
+			{
+				System.out.println("Help:");
+				System.out.println("  h - this message\n  q - quit\n");
+				System.out.println("Expressions can contain:");
+				System.out.println("  integers or decimal numbers");
+				System.out.println("  arithmetic operators +, -, *, /, %, ^");
+				System.out.println("  parentheses '(' and ')'");
+			}
+			else if(!expr.equals(""))
 			{
 				List<String> tokens = utils.tokenizeExpression(expr);
 				double value = evaluateExpression(tokens);
@@ -57,17 +70,6 @@ public class SimpleCalc
 			
 		}
 		while(!done);
-	}
-	
-	/**	Print help */
-	public void printHelp() 
-	{
-		System.out.println("Help:");
-		System.out.println("  h - this message\n  q - quit\n");
-		System.out.println("Expressions can contain:");
-		System.out.println("  integers or decimal numbers");
-		System.out.println("  arithmetic operators +, -, *, /, %, ^");
-		System.out.println("  parentheses '(' and ')'");
 	}
 	
 	/**
@@ -109,9 +111,102 @@ public class SimpleCalc
 	public double evaluateExpression(List<String> tokens) 
 	{
 		double value = 0;
-		while()
+		int count = 0;
+		String current = "";
+		double val1 = 0.0;
+		double val2 = 0.0;
+		String op = "";
+		while(count<tokens.size())
+		{
+			current = tokens.get(count);
+
+			if(Character.isDigit(current.charAt(0)))
+			{
+				valueStack.push(Double.parseDouble(tokens.get(count)));
+			}
+			else if(utils.isOperator(current.charAt(0)))
+			{
+				switch(current)
+				{
+					case "(": operatorStack.push(current);
+						break;
+					case ")": 
+						op = "";
+						val1 = 0.0;
+						val2 = 0.0;
+						while(!operatorStack.peek().equals("("))
+						{
+							op = operatorStack.pop();
+							val2 = valueStack.pop();
+							val1 = valueStack.pop();
+							valueStack.push(solve(op,val1,val2));
+						}
+						operatorStack.pop();
+						break;
+					default: 
+						op = "";
+						val1 = 0.0;
+						val2 = 0.0;
+						while(!operatorStack.isEmpty()&&hasPrecedence(current, operatorStack.peek()))
+						{
+							op = operatorStack.pop();
+							val2 = valueStack.pop();
+							val1 = valueStack.pop();
+							valueStack.push(solve(op,val1,val2));
+						}
+						operatorStack.push(current);
+						break;
+				}
+			}
+			count++;
+		}
+
+		op = "";
+		val1 = 0.0;
+		val2 = 0.0;
+		while(!operatorStack.isEmpty())
+		{
+			op = operatorStack.pop();
+			val2 = valueStack.pop();
+			if(!valueStack.isEmpty())
+			val1 = valueStack.pop();
+			valueStack.push(solve(op,val1,val2));
+		}
+		
+		value = valueStack.peek();
+
+		valueStack.pop();
+		
 		return value;
 	}
+
+	/**
+	*	Evaluates arithmetic between two double values given the operator as a String
+	*/
+	public double solve( String op, double val1, double val2)
+	{
+		double value = 0;
+		switch(op)
+		{
+			case "+": value = val1+val2;
+				break; 
+			case "-": value = val1-val2;
+				break;
+			case "/": value = val1/val2;
+				break;
+			case "*": value = val1*val2;
+				break;
+			case "^": value = Math.pow(val1,val2);
+				break;
+			case "%": value = val1%val2;
+				break;
+			default: value = 0;
+				break;
+		}
+		return value;
+	}
+
+
 	
 	/**
 	 *	Precedence of operators
