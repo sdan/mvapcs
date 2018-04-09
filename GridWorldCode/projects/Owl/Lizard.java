@@ -62,28 +62,28 @@ public class Lizard extends Actor
     */
     public void makeMove(Location loc)
     {
-		Grid<Actor> gr = getGrid();
-
-		if(getDirection()!=getLocation().getDirectionToward(loc))
-		{
-			setColor(Color.BLUE);
+			Grid<Actor> gr = getGrid();
+			if (gr == null) {
+            return;
+        	}
 			Location initialLoc = getLocation();
-			setDirection(getLocation().getDirectionToward(loc));
-			moveTo(loc);
-
-
-			int random = (int)(Math.random()*(pDrop+1));
-			if(random==0)
+			if(!getLocation().equals(loc))
 			{
-				ArrayList<Location> eggMoveLocations = getMoveLocations();
-				if(eggMoveLocations.size()>0)
+				setDirection(getLocation().getDirectionToward(loc));
+				moveTo(loc);
+				int random = (int)(Math.random()*(pDrop+1));
+				if(random==0)
 				{
-					Egg rawEgg = new Egg(pDrop, pEgg);
-					rawEgg.putSelfInGrid(gr,initialLoc);
+					ArrayList<Location> eggMoveLocations = getMoveLocations();
+					if(eggMoveLocations.size()>0)
+					{
+						setColor(Color.BLUE);
+						Egg rawEgg = new Egg(pDrop, pEgg);
+						rawEgg.putSelfInGrid(gr,initialLoc);
+					}
 				}
 			}
 			
-		}
     }
 
     public Location selectMoveLocation(ArrayList<Location> locs)
@@ -94,9 +94,5 @@ public class Lizard extends Actor
         int r = (int) (Math.random() * n);
         return locs.get(r);
     }
-
-    
-
-
 
 }

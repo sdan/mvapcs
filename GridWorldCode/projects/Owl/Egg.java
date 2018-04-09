@@ -51,14 +51,15 @@ public class Egg extends Flower
     */
     public void act()
     {
+        Grid<Actor> gr = getGrid();
         darken();
         pEgg--;
-        if(pEgg==0)
+        if(pEgg<=0)
         {
             Location loc = getLocation();
             removeSelfFromGrid();
             Lizard sneaky = new Lizard(pDrop,pEgg);
-            sneaky.putSelfInGrid(getGrid(),loc); 
+            sneaky.putSelfInGrid(gr,loc); 
         }
     }
     

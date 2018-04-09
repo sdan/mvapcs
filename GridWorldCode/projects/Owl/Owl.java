@@ -26,11 +26,19 @@ public class Owl extends Actor
      * getting locations to move to, selecting one of them, and moving to the
      * selected location.
      */
+
+    public Owl()
+    {
+        setColor(null);
+    }
+
+
     public void act()
     {
+        
         if (getGrid() == null)
             return;
-
+        boolean twoSteps = false;
         ArrayList<Location> moveLocs = new ArrayList<Location>();
         moveLocs = getNearMoveLocations(false);
         if(moveLocs.size()==0)
@@ -39,19 +47,31 @@ public class Owl extends Actor
             if(moveLocs.size()==0)
             {
                 moveLocs = getNearMoveLocations(true);
+                if(moveLocs.size()!=0)
+                        System.out.println("1 away");
                 if(moveLocs.size()==0)
                 {
                     moveLocs = getFarMoveLocations(true);
+                    if(moveLocs.size()!=0)
+                        System.out.println("2 away");
                     if(moveLocs.size()==0)
                     {
                         moveLocs = getFarFarAwayMoveLocations();
+                        if(moveLocs.size()!=0)
+                        {
+                            System.out.println("farfar away");
+                            twoSteps = true;
+                        }
                     }
                 }
             }
         }
 
         Location loc = selectMoveLocation(moveLocs);
-        makeMove(loc);
+        if(twoSteps)
+            makeMoveToward(loc);
+        else
+            makeMove(loc);
     }
 
     public ArrayList<Location> getNearMoveLocations(boolean noEgg)
@@ -61,9 +81,9 @@ public class Owl extends Actor
         for(Location loc : occ)
         {
             Actor a = getGrid().get(loc);
-            if((noEgg)&&(a!=null)&&(a instanceof Lizard))
+            if((noEgg)&&(a!=null)&&(a instanceof Lizard) && !(a instanceof Owl))
                 locs.add(a.getLocation());
-            else if((!noEgg)&&(a!=null)&&(a instanceof Egg))
+            else if((!noEgg)&&(a!=null)&&(a instanceof Egg) && !(a instanceof Owl))
                 locs.add(a.getLocation());
         }
         return locs;
@@ -82,9 +102,9 @@ public class Owl extends Actor
                 if(getGrid().isValid(tempLoc))
                 {
                     Actor a = getGrid().get(tempLoc);
-                    if(a != null && a != this && !noEgg && a instanceof Egg)
+                    if(a != null && a != this && !noEgg && a instanceof Egg && !(a instanceof Owl))
                         locs.add(a.getLocation());
-                    else if(a != null && a != this && noEgg && a instanceof Lizard)
+                    else if(a != null && a != this && noEgg && a instanceof Lizard && !(a instanceof Owl))
                         locs.add(a.getLocation());
                 }
             }
@@ -93,31 +113,52 @@ public class Owl extends Actor
     
     public ArrayList<Location> getFarFarAwayMoveLocations()
     {
+        Grid<Actor> gr = getGrid();
         ArrayList<Location> locs = getGrid().getOccupiedLocations();
+        //System.out.println("in getffmove");
         ArrayList<Integer> distances = new ArrayList<Integer>();
         ArrayList<Integer> indexes = new ArrayList<Integer>();
-        ArrayList<Location> result = new ArrayList<Integer>();
-        Location loc = getLocation();
-        for(Location loc: locs)
+        ArrayList<Location> result = new ArrayList<Location>();
+        ArrayList<Location> refined = new ArrayList<Location>();
+
+        for(Location loc : locs)
         {
-            distances.add(distanceFrom(this.getLocation(),loc));
+            
+            if((gr.get(loc) instanceof Lizard || gr.get(loc) instanceof Egg) && !(gr.get(loc) instanceof Owl))
+            {
+                distances.add(distanceFrom(this.getLocation(),loc));
+                refined.add(loc);
+                //if(gr.get(loc) instanceof Owl)
+                //System.out.println("it's Like MEEE");
+            }
         }
-        int smallest = distances.get(0);
-        for(Integer a: distances)
+
+        System.out.println(refined);
+
+        if(distances.size()!=0)
         {
-            if(a<smallest)
-            smallest = a;
+            int smallest = distances.get(0);
+            for(Integer a : distances)
+            {
+                if(a<smallest)
+                smallest = a;
+            }
+
+            for(int i = 0;i<distances.size();i++)
+            {
+                if(distances.get(i)==smallest)
+                indexes.add(i);
+            }
+
+            for(int i = 0;i<indexes.size();i++)
+            {
+                result.add(refined.get(indexes.get(i)));
+            }
         }
-        for(int i = 0;i<distances.size();i++)
-        {
-            if(distances.get(i)==smallest)
-            indexes.add(i);
-        }
-        for(int i = 0;i<indexes.size();i++)
-        {
-            result.add(distances.get(indexes.get(i)));s
-        }
-        return locs;
+        // System.out.println("Result start");
+        // System.out.println(result);
+        // System.out.println("Result end");
+        return result;
     }
     
     /** 
@@ -139,11 +180,36 @@ public class Owl extends Actor
      */
     public void makeMove(Location loc)
     {
-        setDirection(getLocation().getDirectionToward(loc));
-        if (loc == null)
-            removeSelfFromGrid();
-        else
+        Grid<Actor> gr = getGrid();
+        if (gr == null) {
+            return;
+        } 
+        if(!getLocation().equals(loc))
+        {
+            setDirection(getLocation().getDirectionToward(loc));
             moveTo(loc);
+        }
+        //else if(getLocation().equals(loc))
+                //System.out.println("equals in owl");
+    }
+
+    public void makeMoveToward(Location destination)
+    {
+        Grid<Actor> gr = getGrid(); 
+        if (gr == null) {
+            return;
+        }
+        Location loc = getLocation();
+        if(!getLocation().equals(destination))
+        {
+            setDirection(loc.getDirectionToward(destination));
+            Location next = loc.getAdjacentLocation(getDirection());
+            Location nextNext = next.getAdjacentLocation(getDirection());
+            // System.out.println("nextNext "+nextNext);
+            if(!(gr.get(nextNext) instanceof Owl) && !(gr.get(nextNext) instanceof Rock))
+            moveTo(nextNext);
+        }
+        
     }
 
     public Location selectMoveLocation(ArrayList<Location> locs)
