@@ -1,12 +1,12 @@
 /**
  * Owl.java
- * A Student is a subclass of Actor. It does not change its direction but it does change color.
- * It changes color depending on if it is happy or not. It is happy when it has no homework, which
- * is assigned by a Teacher. When a Student is happy, it drops a HappyStar. A Student will not accept
- * more than 5 homeworks. When a Student cannot place a HappyStar, it does not.
+ * An Owl is an Actor. An Owl primarily wants to eat Eggs. If it finds an Egg in the radius of the 16 cells around it,
+ * it eats it. Owls eat Eggs near to it before deciding to eat Eggs further away. This same preference is true for Lizards.
+ * Lizards are eaten only if the Owl cannot find Eggs nearby. If Lizards aren't nearby either, the Owl moves toward the
+ * nearest Lizard or Egg, in hopes to find food to eat.
  * @author Surya Dantuluri
  * @version 1.0
- * @since 3/28/2018
+ * @since 4/8/2018
  */
 
 import info.gridworld.grid.Grid;
@@ -22,20 +22,19 @@ import java.util.ArrayList;
 public class Owl extends Actor
 {
     /**
-     * A critter acts by getting a list of other actors, processing that list,
-     * getting locations to move to, selecting one of them, and moving to the
-     * selected location.
+     * An Owl's only Color is null
      */
-
     public Owl()
     {
         setColor(null);
     }
 
-
+    /**
+    * Everytime an Owl acts, it finds the locations it needs to move to in order to either eat a Lizard or Egg
+    * , or move toward a Lizard or Egg.
+    */
     public void act()
     {
-        
         if (getGrid() == null)
             return;
         boolean twoSteps = false;
@@ -47,26 +46,18 @@ public class Owl extends Actor
             if(moveLocs.size()==0)
             {
                 moveLocs = getNearMoveLocations(true);
-                if(moveLocs.size()!=0)
-                        System.out.println("1 away");
                 if(moveLocs.size()==0)
                 {
                     moveLocs = getFarMoveLocations(true);
-                    if(moveLocs.size()!=0)
-                        System.out.println("2 away");
                     if(moveLocs.size()==0)
                     {
                         moveLocs = getFarFarAwayMoveLocations();
                         if(moveLocs.size()!=0)
-                        {
-                            System.out.println("farfar away");
                             twoSteps = true;
-                        }
                     }
                 }
             }
         }
-
         Location loc = selectMoveLocation(moveLocs);
         if(twoSteps)
             makeMoveToward(loc);
@@ -74,6 +65,9 @@ public class Owl extends Actor
             makeMove(loc);
     }
 
+    /**
+    * Finds Lizards or Eggs one step away from the Owl.
+    */
     public ArrayList<Location> getNearMoveLocations(boolean noEgg)
     {
         ArrayList<Location> occ = getGrid().getOccupiedAdjacentLocations(getLocation());
@@ -87,9 +81,11 @@ public class Owl extends Actor
                 locs.add(a.getLocation());
         }
         return locs;
-
     }
 
+    /**
+    * Finds Lizards or Eggs two steps away from the Owl.
+    */
     public ArrayList<Location> getFarMoveLocations(boolean noEgg)
     {
         ArrayList<Location> locs = new ArrayList<Location>();
@@ -111,11 +107,13 @@ public class Owl extends Actor
         return locs;
     }
     
+    /**
+    * Finds Lizards or Eggs more than two steps away from the Owl.
+    */
     public ArrayList<Location> getFarFarAwayMoveLocations()
     {
         Grid<Actor> gr = getGrid();
         ArrayList<Location> locs = getGrid().getOccupiedLocations();
-        //System.out.println("in getffmove");
         ArrayList<Integer> distances = new ArrayList<Integer>();
         ArrayList<Integer> indexes = new ArrayList<Integer>();
         ArrayList<Location> result = new ArrayList<Location>();
@@ -123,41 +121,25 @@ public class Owl extends Actor
 
         for(Location loc : locs)
         {
-            
             if((gr.get(loc) instanceof Lizard || gr.get(loc) instanceof Egg) && !(gr.get(loc) instanceof Owl))
             {
                 distances.add(distanceFrom(this.getLocation(),loc));
                 refined.add(loc);
-                //if(gr.get(loc) instanceof Owl)
-                //System.out.println("it's Like MEEE");
             }
         }
-
-        System.out.println(refined);
 
         if(distances.size()!=0)
         {
             int smallest = distances.get(0);
             for(Integer a : distances)
-            {
                 if(a<smallest)
-                smallest = a;
-            }
-
+                    smallest = a;
             for(int i = 0;i<distances.size();i++)
-            {
                 if(distances.get(i)==smallest)
-                indexes.add(i);
-            }
-
+                    indexes.add(i);
             for(int i = 0;i<indexes.size();i++)
-            {
                 result.add(refined.get(indexes.get(i)));
-            }
         }
-        // System.out.println("Result start");
-        // System.out.println(result);
-        // System.out.println("Result end");
         return result;
     }
     
@@ -174,7 +156,6 @@ public class Owl extends Actor
         return (int)Math.floor(dist); 
     }  
 
-
     /**
      * Turns towards the new location as it moves.
      */
@@ -189,10 +170,11 @@ public class Owl extends Actor
             setDirection(getLocation().getDirectionToward(loc));
             moveTo(loc);
         }
-        //else if(getLocation().equals(loc))
-                //System.out.println("equals in owl");
     }
 
+    /**
+     * Moves two steps toward Location destination and turns in the direction that it moves.
+     */
     public void makeMoveToward(Location destination)
     {
         Grid<Actor> gr = getGrid(); 
@@ -200,18 +182,21 @@ public class Owl extends Actor
             return;
         }
         Location loc = getLocation();
+
         if(!getLocation().equals(destination))
         {
             setDirection(loc.getDirectionToward(destination));
             Location next = loc.getAdjacentLocation(getDirection());
             Location nextNext = next.getAdjacentLocation(getDirection());
-            // System.out.println("nextNext "+nextNext);
             if(!(gr.get(nextNext) instanceof Owl) && !(gr.get(nextNext) instanceof Rock))
-            moveTo(nextNext);
+                moveTo(nextNext);
         }
         
     }
 
+    /**
+    * Randomly selects a Location from the ArrayList of Locations.
+    */
     public Location selectMoveLocation(ArrayList<Location> locs)
     {
         int n = locs.size();
@@ -220,6 +205,5 @@ public class Owl extends Actor
         int r = (int) (Math.random() * n);
         return locs.get(r);
     }
-
 
 }

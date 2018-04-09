@@ -1,12 +1,10 @@
 /**
- * Student.java
- * A Student is a subclass of Actor. It does not change its direction but it does change color.
- * It changes color depending on if it is happy or not. It is happy when it has no homework, which
- * is assigned by a Teacher. When a Student is happy, it drops a HappyStar. A Student will not accept
- * more than 5 homeworks. When a Student cannot place a HappyStar, it does not.
+ * Lizard.java
+ * A Lizard is an Actor. A Lizard turns blue when it drops an Egg. It drops an Egg randomly according to preset parameters.
+ * A Lizard turns in the direction that it moves and is green when it doesn't move.
  * @author Surya Dantuluri
  * @version 1.0
- * @since 3/28/2018
+ * @since 4/8/2018
  */
 
 import info.gridworld.grid.Grid;
@@ -24,8 +22,9 @@ public class Lizard extends Actor
 
 	private int pDrop;
 	private int pEgg;
+
 	/**
-	* Sets initial homework count to 0 and sets the initial color to 0
+	* Sets initial probability of dropping an Egg and time for the Egg hatching to 5 and 6 respectively.
 	*/
 	public Lizard()
 	{
@@ -34,6 +33,10 @@ public class Lizard extends Actor
 		this.pEgg = 6;
 	}
 
+	/**
+	* Sets initial probability of dropping an Egg and time for the Egg hatching to pDrop parameter
+	* and pEgg parameter respectively.
+	*/
 	public Lizard(int pDrop, int pEgg)
 	{
 		setColor(null);
@@ -42,7 +45,7 @@ public class Lizard extends Actor
 	}
 
 	/**
-	* Act method of Student which extends Actor. Finds possible locations and tries to make move toward the empty space.
+	* Act method of Lizard which extends Actor. Finds possible locations and tries to make move toward the empty space.
 	*/
 	public void act()
     {
@@ -52,13 +55,16 @@ public class Lizard extends Actor
         makeMove(loc);
     }
 
+    /**
+    * Gets all empty adjacent locations around the current location.
+    */
     public ArrayList<Location> getMoveLocations()
     {
         return getGrid().getEmptyAdjacentLocations(getLocation());
     }
 
     /**
-    * Makes moves toward location. Drops a happy star after moving to that location.
+    * Makes moves toward location. Randomly drops an Egg after moving (probability of not dropping Egg after moving).
     */
     public void makeMove(Location loc)
     {
@@ -86,6 +92,9 @@ public class Lizard extends Actor
 			
     }
 
+    /**
+    * Randomly selects a Location from the ArrayList of Locations.
+    */
     public Location selectMoveLocation(ArrayList<Location> locs)
     {
         int n = locs.size();
