@@ -183,7 +183,7 @@ public class Owl extends Actor
         }
         Location loc = getLocation();
 
-        if(!getLocation().equals(destination))
+        if(!(getLocation().equals(destination)))
         {
             setDirection(loc.getDirectionToward(destination));
             Location next = loc.getAdjacentLocation(getDirection());
