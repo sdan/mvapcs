@@ -1,0 +1,105 @@
+District,           Name,                   Birth Date      Party           Year First Elected
+Arizona 1,          Tom O'Halleran,         01/24/1946      Democrat        2016
+Arizona 2,          Martha McSally,         03/22/1966      Republican      2014
+Arizona 9,          Kyrsten Sinema,         07/12/1976      Democrat        2012
+Arkansas 2,         French Hill,            12/05/1956      Republican      2014
+California 4,       Tom McClintock,         07/10/1956      Republican      2008
+California 7,       Ami Bera,               03/02/1965      Democrat        2012
+California 10,      Jeff Denham,            07/29/1967      Republican      2010
+California 21,      David Valadao,          04/14/1977      Republican      2012
+California 24,      Salud Carbajal,         11/18/1964      Democrat        2016
+California 25,      Steve Knight,           12/17/1966      Republican      2014
+California 39,      Ed Royce,               10/12/1951      Republican      1992
+California 45,      Mimi Walters,           05/14/1962      Republican      2014
+California 48,      Dana Rohrabacher,       06/21/1947      Republican      1988
+California 49,      Darrell Issa,           11/01/1953      Republican      2000
+California 50,      Duncan D. Hunter,       11/07/1976      Republican      2008
+Colorado 6,         Mike Coffman,           03/19/1955      Republican      2008
+Connecticut 5,      Elizabeth Esty,         08/25/1959      Democrat        2012
+Florida 6,          Ron DeSantis,           09/14/1978      Republican      2012
+Florida 7,          Stephanie Murphy,       09/16/1978      Democrat        2016
+Florida 13,         Charlie Crist,          07/24/1956      Democrat        2016
+Florida 15,         Dennis A. Ross,         10/18/1959      Republican      2010
+Florida 16,         Vern Buchanan,          05/08/1951      Republican      2006
+Florida 18,         Brian Mast,             07/10/1980      Republican      2016
+Florida 26,         Carlos Curbelo,         03/01/1980      Republican      2014
+Florida 27,         Ileana Ros-Lehtinen,    07/15/1952      Republican      1989
+Georgia 6,          Karen Handel,           04/18/1962      Republican      2017
+Georgia 7,          Rob Woodall,            02/11/1970      Republican      2010
+Illinois 6,         Peter Roskam,           09/13/1961      Republican      2006
+Illinois 12,        Mike Bost,              12/30/1960      Republican      2014
+Illinois 13,        Rodney Davis,           01/05/1970      Republican      2014
+Illinois 14,        Randy Hultgren,         03/01/1966      Republican      2010
+Indiana 2,          Jackie Walorski,        08/13/1963      Republican      2012
+Iowa 1,             Rod Blum,               04/26/1955      Republican      2014
+Iowa 2,             Dave Loebsack,          12/23/1952      Democrat        2006
+Iowa 3,             David Young,            05/11/1968      Republican      2014
+Kansas 2,           Lynn Jenkins,           06/10/1963      Republican      2008
+Kansas 3,           Kevin Yoder,            01/08/1976      Republican      2010
+Kentucky 6,         Andy Barr,              07/24/1973      Republican      2012
+Maine 2,            Bruce Poliquin,         11/01/1953      Republican      2014
+Michigan 1,         Jack Bergman,           02/02/1947      Republican      2016
+Michigan 6,         Fred Upton,             04/23/1953      Republican      1986
+Michigan 7,         Tim Walberg,            04/12/1951      Republican      2010
+Michigan 8,         Mike Bishop,            03/18/1967      Republican      2014
+Michigan 11,        Dave Trott,             10/16/1960      Republican      2014
+Minnesota 1,        Tim Walz,               04/06/1964      Democrat        2006
+Minnesota 2,        Jason Lewis,            09/23/1955      Republican      2016
+Minnesota 3,        Erik Paulsen,           05/14/1965      Republican      2008
+Minnesota 7,        Collin Peterson,        06/29/1944      Democrat        1990
+Minnesota 8,        Rick Nolan,             12/17/1943      Democrat        2012
+Missouri 2,         Ann Wagner,             09/13/1962      Republican      2012
+Nebraska 2,         Don Bacon,              08/16/1963      Republican      2016
+Nevada 3,           Jacky Rosen,            08/02/1957      Democrat        2016
+Nevada 4,           Ruben Kihuen,           04/25/1980      Democrat        2016
+New Hampshire 1,    Carol Shea-Porter,      12/02/1952      Democrat        2016
+New Hampshire 2,    Ann McLane Kuster,      09/05/1956      Democrat        2012
+New Jersey 2,       Frank LoBiondo,         05/12/1946      Republican      1994
+New Jersey 3,       Tom MacArthur,          10/16/1960      Republican      2014
+New Jersey 5,       Josh Gottheimer,        03/08/1975      Democrat        2016
+New Jersey 7,       Leonard Lance,          06/25/1952      Republican      2008
+New Jersey 11,      Rodney Frelinghuysen,   04/29/1946      Republican      1994
+New Mexico 2,       Steve Pearce,           08/24/1947      Republican      2010
+New York 1,         Lee Zeldin,             01/30/1980      Republican      2016
+New York 11,        Dan Donovan,            11/06/1956      Republican      2015
+New York 18,        Sean Patrick Maloney,   07/30/1966      Democrat        2012
+New York 19,        John Faso,              08/25/1952      Republican      2016
+New York 22,        Claudia Tenney,         02/04/1961      Republican      2016
+New York 23,        Tom Reed,               11/18/1971      Republican      2010
+New York 24,        John Katko,             11/09/1962      Republican      2014
+North Carolina 2,   George Holding,         04/17/1968      Republican      2012
+North Carolina 9,   Robert Pittenger,       08/15/1948      Republican      2012
+North Carolina 13,  Ted Budd,               10/21/1971      Republican      2016
+Ohio 1,             Steve Chabot,           01/22/1953      Republican      2010
+Ohio 10,            Mike Turner,            01/11/1960      Republican      2002
+Ohio 14,            David Joyce,            03/17/1957      Republican      2012
+Ohio 15,            Steve Stivers,          03/24/1965      Republican      2010
+Ohio 16,            Jim Renacci,            12/03/1958      Republican      2010
+Oklahoma 5,         Steve Russell,          05/25/1963      Republican      2014
+Pennsylvania 1,     Brian Fitzpatrick,      12/17/1973      Republican      2016
+Pennsylvania 5,     Pat Meehan,             10/20/1955      Republican      2010
+Pennsylvania 6,     Ryan Costello,          09/07/1976      Republican      2014
+Pennsylvania 7,     Charlie Dent,           05/24/1960      Republican      2004
+Pennsylvania 8,     Matt Cartwright,        05/01/1961      Democrat        2012
+Pennsylvania 10,    Scott Perry,            05/27/1962      Republican      2012
+Pennsylvania 16,    Mike Kelly,             05/10/1948      Republican      2010
+Pennsylvania 17,    Keith Rothfus,          05/25/1962      Republican      2012
+South Carolina 1,   Mark Sanford,           05/28/1960      Republican      2013
+South Carolina 5,   Ralph Norman,           06/20/1953      Republican      2017
+Texas 7,            John Culberson,         08/24/1956      Republican      2000
+Texas 21,           Lamar Smith,            11/19/1947      Republican      1986
+Texas 23,           Will Hurd,              08/19/1977      Republican      2014
+Texas 32,           Pete Sessions,          03/22/1955      Republican      1996
+Utah 4,             Mia Love,               12/06/1975      Republican      2014
+Virginia 2,         Scott Taylor,           06/27/1979      Republican      2016
+Virginia 5,         Tom Garrett,            03/27/1972      Republican      2016
+Virginia 7,         Dave Brat,              07/27/1964      Republican      2014
+Virginia 10,        Barbara Comstock,       06/30/1959      Republican      2014
+Washington 3,       Jaime Herrera Beutler,  11/03/1978      Republican      2010
+Washington 5,       Cathy McMorris Rodgers, 05/22/1969      Republican      2004
+Washington 8,       Dave Reichert,          08/29/1950      Republican      2004
+West Virginia 3,    Evan Jenkins,           09/12/1960      Republican      2014
+Wisconsin 1,        Paul Ryan,              01/29/1970      Republican      1998
+Wisconsin 3,        Ron Kind,               03/16/1963      Democrat        1996
+Wisconsin 6,        Glenn Grothman,         07/03/1955      Republican      2014
+Wisconsin 7,        Sean Duffy,             10/03/1971      Republican      2010

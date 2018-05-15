@@ -1,3 +1,12 @@
+/**
+ * RepresentativeList.java
+ * Runner class that takes input, sets up and loads other classes
+ * to be used.
+ * @author Surya Dantuluri
+ * @version 1.0
+ * @since 5/14/2018
+ */
+
 import java.util.Scanner;
 
 public class RepresentativeList
@@ -46,34 +55,46 @@ public class RepresentativeList
 					case '2' :
 						System.out.println();
 						System.out.println("The list printed in order by birth day\n");
-//						list.selectionSortYear();
+						list.selectionSortYear();
 						list.printList();
 						System.out.println();
 						break;
 					case '3' :
-//						list.testFind();
+                        String name = "";
+                        boolean exit = false;
+                        do
+                        {
+                            System.out.print("Enter a Representative's last name to be searched (Q to quit): ");
+                            name = console.nextLine();
+                            if(name.equalsIgnoreCase("q"))
+                                exit = true;
+                            if(!exit)
+                               list.testFind(name);
+
+                        }
+                        while(!exit);
 						break;
 					case '4' :
-//						list.testDelete();
+						list.testDelete();
 						break;
 					case '5' :
-//						list.clear();
+						list.clear();
 						break;
 					case '6' :
-//						System.out.println("Number of nodes = " + list.size ());
+						System.out.println("Number of nodes = " + list.size ());
 						System.out.println();
 						break;
 					case '7' :
 						System.out.println();
 						System.out.println("The list printed in reverse order by birth day\n");
-//						list.selectionSortYear();
-//						list.printBackwards();
+						list.selectionSortYear();
+						list.printBackwards();
 						System.out.println();
 						break;
 					case '8' :
 						System.out.println();
 						System.out.println("The list printed in order by last name\n");
-//						list.bubbleSortName();
+						list.bubbleSortName();
 						list.printList();
 						System.out.println();
 						break;

@@ -1,3 +1,12 @@
+/**
+ * Representative.java
+ * Representative object stored in ListNode which is part of
+ * Singly Linked List.
+ * @author Surya Dantuluri
+ * @version 1.0
+ * @since 5/14/2018
+ */
+
 public class Representative implements Comparable
 {
 	private String district;
