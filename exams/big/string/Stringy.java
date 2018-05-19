@@ -32,7 +32,10 @@ public class Stringy
         // {
         //     System.out.print(x+" ");
         // }
-        System.out.println("B"+1+'A');
+
+        // System.out.println("B"+1+'A');
+        // System.out.println('B'+1+'A');
+        System.out.println("apple".substring(0,5));
 
     }
 }
