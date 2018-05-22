@@ -7,7 +7,7 @@
 
 import java.util.Scanner;
 
-public class RepresentativeList
+public class TreeTester
 {
 	public static void main ( String [] args )
 	{
@@ -47,8 +47,8 @@ public class RepresentativeList
 				{
 					case '1' :
 						System.out.print("Enter a file name: ");
-
-						list.loadData();
+						name = console.nextLine();
+						bst.loadData(name);
 						break;
 					case '2' :
 						System.out.println();
