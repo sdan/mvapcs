@@ -66,7 +66,7 @@ public class College implements Comparable
 
 	public int compareTo(Object other)
 	{
-		return 0;
+		return collegeName.compareTo((College)other.getName());
 	}
 
 

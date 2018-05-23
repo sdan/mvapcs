@@ -65,23 +65,23 @@ public class BinarySearchTree
 		if(node!=null)
 		{
 			printList(node.getLeft());
-			System.out.println(node.getValue());
+			System.out.println((College)node);
 			printList(node.getRight());
 		}
 	}
 
-	public void search(TreeNode node, String name)
+	TreeNode search(TreeNode node, String name)
 	{
-	    if (root==null || (College)node.getName().equals(name))
-	        return root;
+	    if (node==null || (College)node.getName().equals(name))
+	        return node;
 
-	    if ((College)node.getName().compareTo(name)>0)
+	    if (((College)node.getValue()).getName().compareTo(name)>0)
 	        return search(node.getLeft(), name);
 
 	    return search(node.getRight(), name);
 	}
 
-    void deleteNode(String name)
+    public void deleteNode(String name)
     {
         root = delete(root, name);
     }
@@ -91,10 +91,10 @@ public class BinarySearchTree
         if (node == null)
 			return node;
 
-		if((College)node.compareTo(name)>0)
-            root.left = delete((College)node.getLeft(), name);
+		if(((College)node.getValue()).compareTo(name)>0)
+            node.setLeft(delete((College)node.getLeft(), name));
         else if ((College)node.compareTo(name)<0)
-            root.right = delete((College)node.getRight(), name);
+            node.setRight(delete((College)node.getRight(), name));
 
         else
         {
@@ -104,9 +104,9 @@ public class BinarySearchTree
                 return node.getLeft();
 
 
-            node = lowest(College)node.getRight());
+            node = lowest(node.getRight());
 
-            (College)node.setRight(delete(node.getRight()), (College)node.getName());
+            node.setRight(delete(node.getRight()), (College)node.getName());
         }
 
         return node;
