@@ -1,10 +1,9 @@
 /**
  * College.java
- * Representative object stored in ListNode which is part of
- * Singly Linked List.
+ * College object that is a node in Binary Search Tree
  * @author Surya Dantuluri
  * @version 1.0
- * @since 5/14/2018
+ * @since 5/31/2018
  */
 
 public class College implements Comparable
@@ -58,7 +57,7 @@ public class College implements Comparable
 		return enrolled;
 	}
 
-	public Double graduationRate()
+	public Double getGraduationRate()
 	{
 		return grad;
 	}
@@ -66,12 +65,12 @@ public class College implements Comparable
 
 	public int compareTo(Object other)
 	{
-		return collegeName.compareTo((College)other.getName());
+		return collegeName.compareTo(((College)other).getName());
 	}
 
 
 	public String toString()
 	{
-		return String.format("  %-20s%-25s  %2d  %2d%6d  %-14s%58 d",collegeName,city + " " + state,tuition,year,enrolled,grad);
+		return String.format("%-20s%-20s%-10s%-10d%5d   %-10.2f",collegeName, city, state, tuition, enrolled, grad);
 	}
 }

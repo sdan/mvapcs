@@ -1,8 +1,9 @@
 /**
  * TreeTester.java
+ * User interface for College
  * @author Surya Dantuluri
  * @version 1.0
- * @since 5/14/2018
+ * @since 5/31/2018
  */
 
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class TreeTester
 {
 	public static void main ( String [] args )
 	{
-		RepresentativeList order = new RepresentativeList();
+		TreeTester order = new TreeTester();
 		order.mainMenu();
 	}
 
@@ -19,7 +20,8 @@ public class TreeTester
 	{
 		BinarySearchTree bst = new BinarySearchTree();
 
-		String name;
+		String name, choice;
+		Boolean exit = false;
 		Scanner console = new Scanner(System.in);
 
 		System.out.println("\n\n");
@@ -53,33 +55,50 @@ public class TreeTester
 					case '2' :
 						System.out.println();
 						System.out.println("The list printed in order by name\n");
-						list.selectionSortYear();
-						list.printList();
+						bst.printRun();
 						System.out.println();
 						break;
 					case '3' :
-                        String name = "";
-                        boolean exit = false;
+                        name = "";
+                        exit = false;
                         do
                         {
-                            System.out.print("Enter a Representative's last name to be searched (Q to quit): ");
+                            System.out.print("Enter a College name to be searched (Q to quit): ");
                             name = console.nextLine();
                             if(name.equalsIgnoreCase("q"))
                                 exit = true;
                             if(!exit)
-                               list.testFind(name);
+							{
+								System.out.println("");
+								bst.searchNode(name);
+								System.out.println("");
+							}
 
                         }
                         while(!exit);
+						System.out.println("");
 						break;
 					case '4' :
-						list.testDelete();
+						name = "";
+						exit = false;
+						do
+						{
+							System.out.print("Enter a College name to be removed (Q to quit): ");
+							name = console.nextLine();
+							if(name.equalsIgnoreCase("q"))
+								exit = true;
+							if(!exit)
+							   bst.deleteNode(name);
+
+						}
+						while(!exit);
 						break;
 					case '5' :
-						list.clear();
+						System.out.println("Number of nodes = " + bst.countNode());
+						System.out.println();
 						break;
 					case '6' :
-						System.out.println("Number of nodes = " + list.size ());
+						bst.clear();
 						System.out.println();
 						break;
 				}

@@ -1,0 +1,56 @@
+TreeNode delete(TreeNode node, String name)
+{
+    if (node==null)
+        return node;
+
+
+    if (((College)node.getValue()).getName().compareTo(name)>0)
+        node.setLeft(delete(node.getLeft(), name));
+    else if (name.compareTo(((College)node.getValue()).getName())>0)
+        node.setRight(delete(node.getRight(), name));
+
+
+    else
+    {
+        // node with only one child or no child
+        if (node.getLeft() == null)
+            return node.getRight();
+        else if (node.getRight() == null)
+            return node.getLeft();
+
+        // node with two children: Get the inorder successor (smallest
+        // in the right subtree)
+        node.setValue(lowest(node.getRight()));
+
+        // Delete the inorder successor
+        node.setRight(delete(node.getRight(), (((College)node.getValue()).getName())));
+    }
+
+    return node;
+}
+
+
+
+if(node == null)
+        return node;
+        int diff = name.toLowerCase().compareTo(((College)node.getValue()).getName().toLowerCase());
+        if(diff > 0) //if greater than go right
+            node.setRight(delete(node.getRight(), name));
+        else if(diff < 0) //if less than go left
+            node.setLeft(delete(node.getLeft(), name));
+        else{
+            if(node.getLeft() == null) //if only child is right
+                return node.getRight();
+            else if(node.getRight() == null) //if only child is left
+                return node.getLeft();
+
+        TreeNode tempRoot = root;
+        while(tempRoot.getLeft() != null){
+            tempRoot = tempRoot.getLeft(); //gets the most left(least) node
+        }
+        node.setValue(tempRoot.getValue()); //sets the value to least value
+        String find = ((College)(node.getValue())).getName();
+        node.setRight(delete(node.getRight(), find)); //sets the right value to the node returned by the call to deleteNode(with the string of the most left (least) node)
+    }
+
+    return node;
